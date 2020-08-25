@@ -1,0 +1,92 @@
+.button {
+	text-transform: uppercase;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	transition: all 0.2s;
+
+	&__icon {
+		height: 1.5rem;
+		width: 1.5rem;
+		fill: #000;
+		transition: all 0.2s;
+	}
+
+	&__small-circle {
+		background-color: transparent;
+		border: transparent;
+		margin-left: 5rem;
+	}
+
+	&__search {
+		position: absolute;
+		right: 1rem;
+		background-color: $color-secondary;
+		border: none;
+		//margin-left: -3.2rem;
+		padding: 0.4rem;
+	}
+
+	&__white {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 12rem;
+		padding: 1rem;
+		border: 0.2rem solid rgba(250, 250, 250, 0.6);
+		background-color: transparent;
+		color: #fff;
+		background: $color-primary-dark;
+		border-radius: 2rem;
+		box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
+
+		&:hover {
+			color: #fff; // This color needs to be thinked, hurts the eyes
+			border: 0.2rem solid #fff;
+			backface-visibility: hidden;
+		}
+	}
+
+	&__white--small-circle {
+		display: flex;
+		justify-content: center;
+		width: 4rem;
+		height: 4rem;
+		border-radius: 50%;
+	}
+
+	&__white--shop-cart {
+		width: 20rem;
+		margin-right: 3rem;
+		border-radius: 0.5rem;
+	}
+
+	&__white > &__icon {
+		fill: #fff;
+	}
+
+	&__white--small-circle > .button__icon {
+		fill: rgba(250, 250, 250, 0.7);
+	}
+
+	&__quantity {
+	}
+
+	&__white--login {
+		justify-content: center;
+		border-radius: 0.5rem 0 0 0.5rem;
+
+		& > .button__icon {
+			margin-right: 1.2rem;
+		}
+	}
+
+	&__white--signup {
+		justify-content: center;
+		border-radius: 0 0.5rem 0.5rem 0;
+
+		& > .button__icon {
+			margin-right: 1.2rem;
+		}
+	}
+}

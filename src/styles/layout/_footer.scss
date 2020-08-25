@@ -1,0 +1,55 @@
+.footer {
+	background-color: $color-primary-dark;
+
+	// temp, this obviously can't be fixed
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+
+	&__body {
+		display: relative;
+		margin: auto;
+		padding: 1.5rem;
+		width: 120rem;
+	}
+
+	&__links {
+		display: flex;
+		justify-content: space-between;
+		padding: 2rem 0;
+	}
+
+	&__links-partition {
+		& > .heading-fourtiary {
+			margin-bottom: 1.2rem;
+		}
+	}
+
+	&__icons {
+		display: flex;
+		justify-content: space-between;
+
+		// & > *:not(:first-child) {
+		// 	margin-left: 2rem;
+		// }
+	}
+
+	&__link {
+		text-decoration: none;
+		color: rgba(250, 250, 250, 0.7);
+
+		& > .paragraph {
+			font-size: 1.4rem;
+			margin-bottom: 1.2rem;
+		}
+	}
+
+	&__copyright {
+		text-align: center;
+		color: rgba(250, 250, 250, 0.7);
+
+		& > .paragraph {
+			font-size: 1rem;
+		}
+	}
+}
