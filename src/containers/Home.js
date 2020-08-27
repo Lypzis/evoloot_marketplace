@@ -9,7 +9,7 @@ const Home = props => {
 
 	return (
 		<Layout callToAction={callToAction} loged={loged}>
-			<div>Home Content</div>
+			<main className='home'>Home Content</main>
 		</Layout>
 	);
 };
