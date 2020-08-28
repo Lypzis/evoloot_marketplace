@@ -9,7 +9,9 @@ const Home = props => {
 
 	return (
 		<Layout callToAction={callToAction} loged={loged}>
-			<main className='home'>Home Content</main>
+			<section className='home'>
+				<p className='paragraph'> Home Contentttttttttttt </p>
+			</section>
 		</Layout>
 	);
 };

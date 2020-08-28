@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 
@@ -9,59 +10,59 @@ const Footer = props => (
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Who We Are</h3>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>About Us</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Our Promise</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Volunteer Application</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Contact Us</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Event Schedule</p>
-					</a>
+					</Link>
 				</div>
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>My Account</h3>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>My Profile</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>My Orders</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>My Address</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>My Password</p>
-					</a>
+					</Link>
 				</div>
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>The Details</h3>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Refunds</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Privacy</p>
-					</a>
+					</Link>
 
-					<a href='/' className='footer__link'>
+					<Link to='/' className='footer__link'>
 						<p className='paragraph'>Service</p>
-					</a>
+					</Link>
 				</div>
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Social Media Thingies</h3>
@@ -89,7 +90,7 @@ const Footer = props => (
 			</div>
 			<div className='footer__copyright'>
 				<p className='paragraph'>
-					© 2019 Evoloot Marketplace. All Rights Reserved.
+					© 2020 Evoloot Marketplace. All Rights Reserved.
 				</p>
 			</div>
 		</div>

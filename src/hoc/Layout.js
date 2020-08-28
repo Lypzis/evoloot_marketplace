@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 // turn calltoaction into context
 const Layout = props => (
-	<Fragment>
+	<div className='container__parent'>
 		<Header callToAction={props.callToAction} loged={props.loged} />
-		<div className='container'>{props.children}</div>
+		<main className='container'>{props.children}</main>
 		<Footer />
-	</Fragment>
+	</div>
 );
 
 export default Layout;

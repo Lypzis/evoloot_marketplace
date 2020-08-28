@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
@@ -22,13 +23,13 @@ const Header = props => (
 				</div>
 			)}
 			<div className='header__body'>
-				<a className='header__logo' href='/'>
+				<Link className='header__logo' to='/'>
 					<img
 						className='header__logo-image'
 						src={logo}
 						alt='Evoloot Marketplace Logo'
 					/>
-				</a>
+				</Link>
 				<div className='header__buttons'>
 					<div className='header__search'>
 						<p className='paragraph'>store@evoloot.com</p>
