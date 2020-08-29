@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
+import Navbar from './Navbar';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 
@@ -80,6 +81,7 @@ const Header = props => (
 					</div>
 				</div>
 			</div>
+			<Navbar />
 		</header>
 	</Fragment>
 );
