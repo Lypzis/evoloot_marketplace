@@ -16,14 +16,22 @@ body {
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 0.2rem;
+
+	text-shadow: 0 3px 5px rgba(#000, 0.1);
+
+	&--dark {
+		color: $color-gray-dark-3;
+	}
 }
 
 .heading-tertiary {
 	font-size: $default-font-size;
 	font-weight: 400;
-	margin-bottom: 3rem;
+	margin-bottom: 2.5rem;
 
-	//text-transform: uppercase;
+	&--dark {
+		color: $color-gray-dark-3;
+	}
 }
 
 .heading-fourtiary {

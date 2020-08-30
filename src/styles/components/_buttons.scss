@@ -12,6 +12,19 @@
 		transition: all 0.2s;
 	}
 
+	&__icon-container {
+		display: flex;
+		align-items: baseline;
+		justify-items: center;
+	}
+
+	&__icon--card {
+		margin-right: 1rem;
+		height: 0.9rem;
+		width: 0.9rem;
+		fill: #fff;
+	}
+
 	&__small-circle {
 		background-color: transparent;
 		border: transparent;
@@ -31,6 +44,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
 		width: 12rem;
 		padding: 1rem;
 		border: 0.2rem solid $color-gray-light-3;
@@ -96,8 +110,23 @@
 	}
 
 	&__price {
+		display: flex;
+		align-self: flex-end;
+		justify-content: center;
+		box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
+
+		padding: 0.5rem;
+		border: 0.2rem solid $color-primary-dark;
+		background-color: transparent;
+		color: $color-gray-dark-3;
+		background: #fff;
+		border-radius: 0.5rem;
+		width: 8rem;
+
+		font-size: 1.2rem;
 	}
 
 	&__price--card {
+		margin-top: 0.7rem;
 	}
 }
