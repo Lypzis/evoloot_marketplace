@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
@@ -8,12 +8,31 @@ const client = Client.buildClient({
 
 export const ClientContext = React.createContext({
 	client: null,
+	collections: null,
 });
 
-const ClientContextProvider = props => (
-	<ClientContext.Provider value={{ client }}>
-		{props.children}
-	</ClientContext.Provider>
-);
+const ClientContextProvider = props => {
+	const [collections, setCollections] = useState(null);
+
+	const getAllCollectionsWithProducts = useCallback(async () => {
+		try {
+			const collections = await client.collection.fetchAllWithProducts();
+
+			setCollections(collections);
+		} catch (err) {
+			console.log(err);
+		}
+	}, []);
+
+	useEffect(() => {
+		getAllCollectionsWithProducts();
+	}, [getAllCollectionsWithProducts]);
+
+	return (
+		<ClientContext.Provider value={{ client, collections }}>
+			{props.children}
+		</ClientContext.Provider>
+	);
+};
 
 export default ClientContextProvider;

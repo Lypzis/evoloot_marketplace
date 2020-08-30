@@ -5,6 +5,8 @@ import '../styles/main.scss';
 
 import Home from './Home';
 
+// needs collections handlers
+
 function App() {
 	return (
 		<Switch>

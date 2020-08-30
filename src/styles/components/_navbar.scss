@@ -1,2 +1,31 @@
 .navbar {
+	position: relative;
+	max-width: 110rem;
+	margin: 0 auto;
+
+	&__list {
+		display: flex;
+		justify-content: center;
+		list-style: none;
+		flex-wrap: wrap;
+	}
+
+	&__list-item {
+	}
+
+	&__link {
+		display: block;
+		text-decoration: none;
+		color: #fff;
+		padding: 0.5rem 1.5rem;
+		transition: all 0.3s;
+	}
+
+	&__link--active {
+		background-color: $color-primary-dark;
+	}
+}
+
+.navbar-line {
+	border-top: solid 0.2rem $color-gray-dark-2;
 }

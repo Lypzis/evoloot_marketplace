@@ -1,19 +1,55 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+	Fragment,
+	useContext,
+	useEffect,
+	useCallback,
+	useState,
+} from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { ClientContext } from '../context/clientContext';
 
 const Navbar = props => {
+	const [navTitles, setNavTitles] = useState([]);
 	const clientContext = useContext(ClientContext);
+	const { collections } = clientContext;
+
+	const getCollections = useCallback(async () => {
+		if (collections) {
+			const navTitles = collections
+				.map(col => {
+					return { title: col.title, handle: col.handle };
+				})
+				.reverse();
+
+			setNavTitles(navTitles);
+		}
+	}, [collections]);
 
 	useEffect(() => {
-		// now the magic can happen
-		console.log(clientContext.client);
-	}, []);
+		getCollections();
+	}, [clientContext, getCollections]);
 
 	return (
-		<div className='navbar'>
-			<p>My Navbar :D</p>
-		</div>
+		<Fragment>
+			<span className='navbar-line'></span>
+			{navTitles.length > 0 && (
+				<nav className='navbar'>
+					<ul className='navbar__list'>
+						{navTitles.map((navTitle, index) => (
+							<li className='navbar__list-item' key={index}>
+								<NavLink
+									to={navTitle.handle}
+									className='paragraph navbar__link'
+									activeClassName='navbar__link--active'>
+									{navTitle.title}
+								</NavLink>
+							</li>
+						))}
+					</ul>
+				</nav>
+			)}
+		</Fragment>
 	);
 };
 
