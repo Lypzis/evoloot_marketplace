@@ -6,12 +6,12 @@ import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 
 const Header = props => {
-	const [callToAction, setCallToAction] = useState(true); // set with something else later on
+	//const [callToAction, setCallToAction] = useState(true); // set with something else later on
 
 	return (
 		<Fragment>
 			<header className='header'>
-				{callToAction && (
+				{/* {callToAction && (
 					// shall it have its own component ?
 					<div className='call-to-action'>
 						<p className='paragraph paragraph--black'>
@@ -27,7 +27,7 @@ const Header = props => {
 							</svg>
 						</button>
 					</div>
-				)}
+				)} */}
 				<div className='header__body'>
 					<Link className='header__logo' to='/'>
 						<img
@@ -56,7 +56,7 @@ const Header = props => {
 							</form>
 						</div>
 						<div className='header__user'>
-							<button className='button button__white button__white--shop-cart'>
+							<button className='button button__black button__black--shop-cart'>
 								<svg className='button__icon'>
 									<use
 										xlinkHref={`${sprite}#icon-cart`}></use>
@@ -68,14 +68,14 @@ const Header = props => {
 							</button>
 							{!props.loged && (
 								<div className='header__loged-out'>
-									<button className='button button__white button__white--login'>
+									<button className='button button__black button__black--login'>
 										<svg className='button__icon'>
 											<use
 												xlinkHref={`${sprite}#icon-enter`}></use>
 										</svg>
 										<p className='paragraph'>log in</p>
 									</button>
-									<button className='button button__white button__white--signup'>
+									<button className='button button__black button__black--signup'>
 										<svg className='button__icon'>
 											<use
 												xlinkHref={`${sprite}#icon-clipboard`}></use>

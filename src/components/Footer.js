@@ -68,18 +68,18 @@ const Footer = props => (
 					<h3 className='heading-fourtiary'>Social Media Thingies</h3>
 
 					<div className='footer__icons'>
-						<button className='button button__white button__white--small-circle'>
+						<button className='button button__black button__black--small-circle'>
 							<svg className='button__icon'>
 								<use
 									xlinkHref={`${sprite}#icon-facebook`}></use>
 							</svg>
 						</button>
-						<button className='button button__white button__white--small-circle'>
+						<button className='button button__black button__black--small-circle'>
 							<svg className='button__icon'>
 								<use xlinkHref={`${sprite}#icon-twitter`}></use>
 							</svg>
 						</button>
-						<button className='button button__white button__white--small-circle'>
+						<button className='button button__black button__black--small-circle'>
 							<svg className='button__icon'>
 								<use
 									xlinkHref={`${sprite}#icon-instagram`}></use>

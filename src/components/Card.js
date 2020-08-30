@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 
-const Card = props => {
+const Card = memo(props => {
 	const [isMouseOverButton, setIsMouseOverButton] = useState(false);
 
 	return (
 		<div className='card'>
 			{/* to '/' temporarily, this obviously need to go to product details */}
-			<Link to='/'>
+			<Link className='card__link' to='/'>
 				<div className='card__image-box'>
 					<img
 						className='card__image'
@@ -28,7 +28,7 @@ const Card = props => {
 			</Link>
 			<span className='navbar-line'></span>
 			<button
-				className='button button__price button__price--card'
+				className='button button__white button__white--card'
 				onMouseOver={() => setIsMouseOverButton(true)}
 				onMouseOut={() => setIsMouseOverButton(false)}>
 				{isMouseOverButton ? (
@@ -46,6 +46,6 @@ const Card = props => {
 			</button>
 		</div>
 	);
-};
+});
 
 export default Card;

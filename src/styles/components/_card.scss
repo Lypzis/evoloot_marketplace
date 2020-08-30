@@ -5,18 +5,20 @@
 	justify-content: center;
 	align-content: space-between;
 	overflow: hidden;
-
 	margin: 1.5rem 2rem;
-
 	border: solid #000 3px;
 	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 	border-radius: 0.5rem;
-	padding: 0.5rem;
+	padding: 1rem;
 	background: $color-gray-dark-2;
 
-	&:hover > .button__price {
+	&:hover > .button__white {
 		background-color: $color-tertiary;
 		color: #fff;
+	}
+
+	&__link {
+		text-decoration: none;
 	}
 
 	&__title {

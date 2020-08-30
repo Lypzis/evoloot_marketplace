@@ -1,5 +1,6 @@
 import React, {
 	Fragment,
+	memo,
 	useContext,
 	useEffect,
 	useCallback,
@@ -9,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 
 import { ClientContext } from '../context/clientContext';
 
-const Navbar = props => {
+const Navbar = memo(props => {
 	const [navTitles, setNavTitles] = useState([]);
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
@@ -51,6 +52,6 @@ const Navbar = props => {
 			)}
 		</Fragment>
 	);
-};
+});
 
 export default Navbar;
