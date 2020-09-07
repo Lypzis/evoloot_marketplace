@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useCallback, useState } from 'react';
+import React, {
+	memo,
+	useContext,
+	useEffect,
+	useCallback,
+	useState,
+} from 'react';
 
 import Layout from '../hoc/Layout';
 import { ClientContext } from '../context/clientContext';
@@ -38,4 +44,4 @@ const Home = props => {
 	);
 };
 
-export default Home;
+export default memo(Home);

@@ -4,4 +4,52 @@
 	border-radius: 2rem;
 	box-shadow: 0 0.4rem 0.2rem #000;
 	padding: 0.7rem 1.2rem;
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+	}
+
+	&__quantity {
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		width: 50%;
+		margin-left: auto;
+		border-radius: 0;
+		background-color: #fff;
+	}
+
+	&__quantity--left {
+		width: 25%;
+		border-radius: 0.5rem 0 0 0.5rem;
+	}
+
+	&__quantity--right {
+		width: 25%;
+		border-radius: 0 0.5rem 0.5rem 0;
+	}
+
+	&__quantity-buttons {
+		display: flex;
+		width: 50%;
+	}
+
+	&__select {
+		width: 50%;
+		display: flex;
+		border-radius: 0.5rem;
+		appearance: none;
+		cursor: pointer;
+		background: url('../../assets/images/dropdownArrow.png') 96% / 15%
+			no-repeat #fff;
+
+		//font-size: 1.2rem;
+	}
+
+	&__radio-image {
+		display: none;
+	}
 }

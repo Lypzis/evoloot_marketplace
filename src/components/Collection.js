@@ -15,15 +15,27 @@ const Collection = memo(props => {
 			<div className='home__featured'>
 				{props.featured
 					? props.collection.products.slice(0, 4).map(product => {
-							return <Card key={product.id} product={product} />;
+							return (
+								<Card
+									collectionHandle={props.collection.handle}
+									key={product.id}
+									product={product}
+								/>
+							);
 					  })
 					: props.collection.products.map(product => {
-							return <Card key={product.id} product={product} />;
+							return (
+								<Card
+									collectionHandle={props.collection.handle}
+									key={product.id}
+									product={product}
+								/>
+							);
 					  })}
 			</div>
 			{props.featured && (
 				<Link
-					to={props.collection.handle}
+					to={`/collection/${props.collection.handle}`}
 					className='button button__white button__white--show-more'>
 					<p className='paragraph'>show more</p>
 				</Link>

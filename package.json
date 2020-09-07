@@ -6,15 +6,16 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
-		"node-sass": "^4.14.1",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "^3.4.3",
-		"shopify-buy": "^1.2.0",
 		"express": "^4.17.1",
 		"express-favicon": "^2.0.1",
-		"path": "^0.12.7"
+		"node-sass": "^4.14.1",
+		"path": "^0.12.7",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-image-magnify": "^2.7.4",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "^3.4.3",
+		"shopify-buy": "^1.2.0"
 	},
 	"scripts": {
 		"start": "node server.js",

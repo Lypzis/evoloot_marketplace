@@ -9,7 +9,9 @@ const Card = memo(props => {
 	return (
 		<div className='card'>
 			{/* to '/' temporarily, this obviously need to go to product details */}
-			<Link className='card__link' to='/'>
+			<Link
+				className='card__link'
+				to={`/product/${props.product.handle}`}>
 				<div className='card__image-box'>
 					<img
 						className='card__image'

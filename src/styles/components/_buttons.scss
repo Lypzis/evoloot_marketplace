@@ -18,10 +18,21 @@
 		justify-items: center;
 	}
 
+	&__icon-container--big {
+		padding: 0.5rem;
+	}
+
 	&__icon--card {
 		margin-right: 1rem;
 		height: 0.9rem;
 		width: 0.9rem;
+		fill: #fff;
+	}
+
+	&__icon--card-big {
+		margin-right: 2rem;
+		height: 1.6rem;
+		width: 1.6rem;
 		fill: #fff;
 	}
 
@@ -88,9 +99,6 @@
 		fill: $color-gray-light-4;
 	}
 
-	&__quantity {
-	}
-
 	&__black--login {
 		justify-content: center;
 		border-radius: 0.5rem 0 0 0.5rem;
@@ -135,11 +143,36 @@
 		margin-top: 1rem;
 	}
 
+	&__white--card-big {
+		background-color: $color-tertiary;
+		width: 100%;
+		color: #fff;
+
+		&:hover {
+			background-color: rgba($color-tertiary, 0.7);
+		}
+	}
+
 	&__white--show-more {
 		display: flex;
 		align-self: center;
 		font-weight: 700;
 		margin-top: 1.5rem;
 		width: 12rem;
+	}
+
+	&__white--image {
+		width: auto;
+		padding: 0.3rem;
+
+		&:hover {
+			background-color: #fff;
+		}
+
+		&-active {
+			width: auto;
+			padding: 0.3rem;
+			background-color: $color-gray-dark-3;
+		}
 	}
 }

@@ -40,7 +40,7 @@ const Navbar = memo(props => {
 						{navTitles.map((navTitle, index) => (
 							<li className='navbar__list-item' key={index}>
 								<NavLink
-									to={navTitle.handle}
+									to={`/collection/${navTitle.handle}`}
 									className='paragraph navbar__link'
 									activeClassName='navbar__link--active'>
 									{navTitle.title}
