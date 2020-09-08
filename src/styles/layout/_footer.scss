@@ -45,8 +45,14 @@
 		text-align: center;
 		color: $color-gray-light-4;
 
-		& > .paragraph {
+		& > .paragraph,
+		.footer__author {
 			font-size: 1rem;
 		}
+	}
+
+	&__author {
+		color: $color-gray-light-4;
+		text-decoration: none;
 	}
 }

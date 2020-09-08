@@ -15,12 +15,12 @@
 		position: relative;
 		border-radius: 0.5rem;
 		box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+		border: solid 1.5rem #000;
 	}
 
 	&__image {
 		flex: 1;
 		display: block;
-		border-radius: 0.5rem;
 	}
 
 	&__image--variant {
@@ -33,9 +33,12 @@
 		width: 30rem;
 		margin: 0 0 0 1.5rem;
 		padding: 2.5rem;
+		position: sticky;
+		top: 18rem;
 	}
 
 	&__card--description {
+		position: static;
 		width: auto;
 		margin: 1.5rem 0;
 	}

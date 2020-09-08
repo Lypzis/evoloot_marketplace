@@ -90,7 +90,13 @@ const Footer = props => (
 			</div>
 			<div className='footer__copyright'>
 				<p className='paragraph'>
-					© 2020 Evoloot Marketplace. All Rights Reserved.
+					© 2020 Evoloot Marketplace by{' '}
+					{
+						<Link className='paragraph footer__author' to='/'>
+							Lypzis
+						</Link>
+					}
+					. All Rights Reserved.
 				</p>
 			</div>
 		</div>
