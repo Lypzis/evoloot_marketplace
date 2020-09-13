@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 
 import { ClientContext } from '../context/clientContext';
 
-const Navbar = memo(props => {
+const Navbar = props => {
 	const [navTitles, setNavTitles] = useState([]);
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
@@ -52,6 +52,6 @@ const Navbar = memo(props => {
 			)}
 		</Fragment>
 	);
-});
+};
 
-export default Navbar;
+export default memo(Navbar);

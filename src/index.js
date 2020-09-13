@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
 
 import ClientContextProvider from './context/clientContext';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
+import checkoutReducer from './store/reducers/checkout';
+
+const rootReducers = combineReducers({
+	checkout: checkoutReducer,
+});
+
+const store = createStore(rootReducers);
+
 const app = (
-	<BrowserRouter>
-		<ClientContextProvider>
-			<App />
-		</ClientContextProvider>
-	</BrowserRouter>
+	<Provider store={store}>
+		<BrowserRouter>
+			<ClientContextProvider>
+				<App />
+			</ClientContextProvider>
+		</BrowserRouter>
+	</Provider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

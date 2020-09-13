@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { memo, useEffect, useCallback, useState } from 'react';
 
 const Description = ({ description, availability }) => {
 	const [formatedDescription, setFormatedDescription] = useState();
@@ -66,4 +66,4 @@ const Description = ({ description, availability }) => {
 	);
 };
 
-export default Description;
+export default memo(Description);

@@ -1,18 +1,19 @@
-import React, {
-	useContext,
-	useEffect,
-	useCallback,
-	useState,
-	useReducer,
-} from 'react';
+import React, { useContext, useEffect, useCallback, useReducer } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
+import { goToTop } from 'react-scrollable-anchor';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ClientContext } from '../context/clientContext';
 import sprite from '../assets/icons/sprite.svg';
 import Layout from '../hoc/Layout';
 import Thumbnail from '../components/Thumbnail';
 import Description from '../components/Description';
+import Carousel from '../components/Carousel';
+import {
+	addProductToCheckout,
+	updateProductFromCheckout,
+} from '../store/actions/checkout';
 
 const productReducer = (currentProductState, action) => {
 	switch (action.type) {
@@ -23,6 +24,8 @@ const productReducer = (currentProductState, action) => {
 				imageSrc: action.imageSrc,
 				imageId: action.imageId,
 				variant: action.variant,
+				relatedProducts: action.relatedProducts,
+				viewed: action.viewed,
 			};
 		case 'SET_PRODUCT':
 			return { ...currentProductState, product: action.product };
@@ -50,8 +53,58 @@ const ProductDetails = props => {
 	const { handle } = useParams();
 	const history = useHistory();
 	const clientContext = useContext(ClientContext);
+	const dispatch = useDispatch();
+	const checkout = useSelector(state => state.checkout);
 
 	const [productChosen, dispatchProduct] = useReducer(productReducer);
+
+	const retrieveRelatedProducts = useCallback(
+		currentProduct => {
+			let products = [];
+
+			clientContext.collections.forEach(collection => {
+				products = [...products, ...collection.products].filter(
+					product =>
+						product.productType === currentProduct.productType &&
+						product.handle !== handle
+				);
+			});
+
+			return products;
+		},
+		[handle, clientContext]
+	);
+
+	const saveViewed = product => {
+		const viewed = localStorage.getItem('viewed');
+
+		if (!viewed) {
+			localStorage.setItem('viewed', JSON.stringify([product]));
+			return;
+		}
+
+		const convertedViewed = JSON.parse(viewed);
+
+		const newViewed = convertedViewed.slice(0, 10);
+
+		const alreadyAdded = newViewed.find(
+			addedProduct => addedProduct.handle === product.handle
+		);
+
+		if (alreadyAdded === undefined) newViewed.unshift(product);
+
+		localStorage.setItem('viewed', JSON.stringify(newViewed));
+	};
+
+	const retrieveViewed = currentProduct => {
+		const viewed = localStorage.getItem('viewed');
+
+		const viewedConverted = JSON.parse(viewed);
+
+		return viewedConverted.filter(
+			product => product.handle !== currentProduct.handle
+		);
+	};
 
 	const getProduct = useCallback(async () => {
 		try {
@@ -59,12 +112,8 @@ const ProductDetails = props => {
 				handle
 			);
 
-			// TO-DO save this product to localStorage, retrive all different
-			// // and display as recent viewed
-
-			// show related products
-
-			console.log(product);
+			saveViewed(product);
+			const viewed = retrieveViewed(product);
 
 			let imageSrc, imageId;
 
@@ -76,6 +125,8 @@ const ProductDetails = props => {
 				imageId = product.images[0].id;
 			}
 
+			const relatedProducts = retrieveRelatedProducts(product);
+
 			dispatchProduct({
 				type: 'INITIALIZE',
 				product,
@@ -83,11 +134,16 @@ const ProductDetails = props => {
 				imageSrc,
 				imageId,
 				variant: product.variants[0],
+				relatedProducts,
+				viewed,
 			});
+
+			goToTop();
 		} catch (err) {
+			// console.log(err);
 			history.replace('/*');
 		}
-	}, [handle, history, clientContext]);
+	}, [handle, history, clientContext, retrieveRelatedProducts]);
 
 	const setImageSelected = (imageId, imageSrc, index = 0) => {
 		if (productChosen.product.variants.length > 1)
@@ -165,6 +221,14 @@ const ProductDetails = props => {
 			});
 	};
 
+	const addFromTextInput = event => {
+		validateNumber(event.target.value) &&
+			dispatchProduct({
+				type: 'SET_QUANTITY',
+				quantity: Math.floor(event.target.value) * 1,
+			});
+	};
+
 	const validateNumber = number => {
 		if (number.trim() === '') return true;
 
@@ -175,30 +239,30 @@ const ProductDetails = props => {
 		return true;
 	};
 
-	const retrieveRelatedProducts = useCallback(() => {
-		if (clientContext.collections && productChosen) {
-			let products = [];
+	const addToCart = () => {
+		const variant = productChosen.variant;
 
-			clientContext.collections.forEach(collection => {
-				products = [...products, ...collection.products].filter(
-					product =>
-						product.productType ===
-							productChosen.product.productType &&
-						product.handle !== handle
-				);
-			});
+		const title =
+			productChosen.product.variants.length > 1
+				? `${productChosen.product.title} - ${productChosen.variant.title}`
+				: productChosen.product.title;
 
-			console.log(products);
-		}
-	}, [clientContext.collections, productChosen, handle]);
+		const quantity = productChosen.quantity;
+
+		console.log('added');
+
+		if (
+			checkout.lineItems.findIndex(
+				productVariant => productVariant.id === variant.id
+			) !== -1
+		)
+			dispatch(updateProductFromCheckout(variant, quantity));
+		else dispatch(addProductToCheckout(variant, title, quantity));
+	};
 
 	useEffect(() => {
-		getProduct();
-	}, [getProduct]);
-
-	useEffect(() => {
-		retrieveRelatedProducts();
-	}, [retrieveRelatedProducts]);
+		if (clientContext.collections) getProduct();
+	}, [clientContext, getProduct]);
 
 	return (
 		<Layout>
@@ -247,12 +311,18 @@ const ProductDetails = props => {
 							/>
 
 							<span className='navbar-line'></span>
-							<h3 class='heading-tertiary heading-tertiary--dark'>
-								Related Products:
+							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
+								Related:
 							</h3>
+							<Carousel
+								products={productChosen.relatedProducts}
+							/>
 
-							{/* HERE */}
-							{/* carousel */}
+							<span className='navbar-line big-margin-top'></span>
+							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
+								Recently Viewed:
+							</h3>
+							<Carousel products={productChosen.viewed} />
 						</div>
 
 						{/* TO-DO needs to be a standalone component */}
@@ -289,16 +359,7 @@ const ProductDetails = props => {
 										<input
 											className='input input__quantity'
 											type='text'
-											onChange={event =>
-												validateNumber(
-													event.target.value
-												) &&
-												dispatchProduct({
-													type: 'SET_QUANTITY',
-													quantity:
-														event.target.value,
-												})
-											}
+											onChange={addFromTextInput}
 											value={productChosen.quantity}
 										/>
 										<button
@@ -321,7 +382,10 @@ const ProductDetails = props => {
 									</p>
 								</div>
 
-								<button className='button button__white button__white--card-big'>
+								<button
+									className='button button__white button__white--card-big'
+									onClick={addToCart}
+									disabled={productChosen.quantity === 0}>
 									<div className='button__icon-container button__icon-container--big'>
 										<svg className='button__icon button__icon--card-big '>
 											<use

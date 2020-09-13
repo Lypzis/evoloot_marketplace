@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Card from '../components/Card';
 
-const Collection = memo(props => {
+const Collection = props => {
 	return (
 		<div className='home__featured-section' key={props.collection.id}>
 			<h2 className='heading-secondary heading-secondary--dark'>
@@ -30,6 +30,6 @@ const Collection = memo(props => {
 			)}
 		</div>
 	);
-});
+};
 
-export default Collection;
+export default memo(Collection);

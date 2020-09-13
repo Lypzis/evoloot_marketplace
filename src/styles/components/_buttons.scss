@@ -40,6 +40,13 @@
 		background-color: transparent;
 		border: transparent;
 		margin-left: 5rem;
+
+		&--checkout {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: 2rem;
+		}
 	}
 
 	&__search {

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 
-const Card = memo(props => {
+const Card = props => {
 	const [isMouseOverButton, setIsMouseOverButton] = useState(false);
 
 	return (
-		<div className='card'>
+		<div className={props.noEffect ? 'card card--raw' : 'card'}>
 			{/* to '/' temporarily, this obviously need to go to product details */}
 			<Link
 				className='card__link'
@@ -48,6 +48,6 @@ const Card = memo(props => {
 			</button>
 		</div>
 	);
-});
+};
 
-export default Card;
+export default memo(Card);

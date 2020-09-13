@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
@@ -93,4 +93,4 @@ const Header = props => {
 	);
 };
 
-export default Header;
+export default memo(Header);

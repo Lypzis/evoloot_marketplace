@@ -12,6 +12,26 @@
 	padding: 1rem;
 	background: $color-gray-dark-2;
 
+	&--checkout {
+		flex-direction: row;
+		list-style: none;
+		height: 12rem;
+		width: auto;
+		margin: 1.5rem 0;
+	}
+
+	&__checkout-details {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 50%;
+	}
+
+	&--raw {
+		box-shadow: none;
+		margin: 0;
+	}
+
 	&:hover > .button__white {
 		background-color: $color-tertiary;
 		color: #fff;
@@ -29,11 +49,19 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		margin: 0.5rem 0 1rem 0;
+
+		&--checkout {
+			margin: 0;
+		}
 	}
 
 	&__image-box {
 		display: flex;
 		width: 100%;
+	}
+
+	&__image-box--checkout {
+		margin-right: 2rem;
 	}
 
 	&__image {

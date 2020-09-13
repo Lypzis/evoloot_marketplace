@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const Thumbnail = props => {
 	const setImage = () => {
@@ -48,4 +48,4 @@ const Thumbnail = props => {
 	);
 };
 
-export default Thumbnail;
+export default memo(Thumbnail);

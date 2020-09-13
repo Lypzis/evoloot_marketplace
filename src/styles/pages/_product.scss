@@ -83,8 +83,31 @@
 		line-height: 4rem;
 		margin-bottom: 1rem;
 	}
+
+	&__carousel {
+		z-index: 1;
+		position: relative;
+		//height: 50rem; // :/
+
+		& > .card {
+			margin: 0 !important;
+			box-shadow: none !important;
+		}
+	}
 }
 
-.small-margin {
+.small-margin-bottom {
 	margin-bottom: $margin-bottom-small;
+}
+
+.big-margin-top {
+	margin-top: $margin-big;
+}
+
+.small-margin-top {
+	margin-top: $margin-bottom-small;
+}
+
+.no-margin {
+	margin: $no-margin;
 }
