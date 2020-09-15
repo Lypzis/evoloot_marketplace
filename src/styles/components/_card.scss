@@ -15,7 +15,7 @@
 	&--checkout {
 		flex-direction: row;
 		list-style: none;
-		height: 12rem;
+		height: 13rem;
 		width: auto;
 		margin: 1.5rem 0;
 	}
@@ -62,6 +62,7 @@
 
 	&__image-box--checkout {
 		margin-right: 2rem;
+		max-width: 12rem;
 	}
 
 	&__image {

@@ -249,7 +249,7 @@ const ProductDetails = props => {
 
 		const quantity = productChosen.quantity;
 
-		console.log('added');
+		const handle = productChosen.product.handle;
 
 		if (
 			checkout.lineItems.findIndex(
@@ -257,7 +257,7 @@ const ProductDetails = props => {
 			) !== -1
 		)
 			dispatch(updateProductFromCheckout(variant, quantity));
-		else dispatch(addProductToCheckout(variant, title, quantity));
+		else dispatch(addProductToCheckout(variant, title, quantity, handle));
 	};
 
 	useEffect(() => {

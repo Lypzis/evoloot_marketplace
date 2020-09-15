@@ -1,10 +1,45 @@
 import React, { memo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import sprite from '../assets/icons/sprite.svg';
+import {
+	addProductToCheckout,
+	updateProductFromCheckout,
+} from '../store/actions/checkout';
 
 const Card = props => {
 	const [isMouseOverButton, setIsMouseOverButton] = useState(false);
+	const dispatch = useDispatch();
+	const checkout = useSelector(state => state.checkout);
+	const history = useHistory();
+
+	const addToCart = () => {
+		const variant = props.product.variants[0];
+
+		const title = props.product.title;
+
+		const quantity = 1;
+
+		const handle = props.product.handle;
+
+		if (
+			checkout.lineItems.findIndex(
+				productVariant => productVariant.id === variant.id
+			) !== -1
+		)
+			dispatch(updateProductFromCheckout(variant, quantity));
+		else dispatch(addProductToCheckout(variant, title, quantity, handle));
+	};
+
+	const goToProduct = () => {
+		history.push(`/product/${props.product.handle}`);
+	};
+
+	const onClickHandler = () => {
+		if (props.product.variants.length === 1) return addToCart();
+		goToProduct();
+	};
 
 	return (
 		<div className={props.noEffect ? 'card card--raw' : 'card'}>
@@ -32,13 +67,18 @@ const Card = props => {
 			<button
 				className='button button__white button__white--card'
 				onMouseOver={() => setIsMouseOverButton(true)}
-				onMouseOut={() => setIsMouseOverButton(false)}>
+				onMouseOut={() => setIsMouseOverButton(false)}
+				onClick={onClickHandler}>
 				{isMouseOverButton ? (
 					<div className='button__icon-container'>
 						<svg className='button__icon button__icon--card'>
 							<use xlinkHref={`${sprite}#icon-cart`}></use>
 						</svg>
-						<p className='paragraph card__price'>Add</p>
+						<p className='paragraph card__price'>
+							{props.product.variants.length === 1
+								? 'Add'
+								: 'Options'}
+						</p>
 					</div>
 				) : (
 					<p className='paragraph card__price'>

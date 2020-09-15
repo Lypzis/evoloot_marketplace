@@ -130,13 +130,13 @@
 		justify-content: center;
 		box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
 
-		padding: 0.5rem;
+		padding: 0.5rem 1rem;
 		border: 0.2rem solid $color-primary-dark;
 		background-color: transparent;
 		color: $color-gray-dark-3;
 		background: #fff;
 		border-radius: 0.5rem;
-		width: 8rem;
+		width: 9.2rem;
 
 		font-size: 1.2rem;
 	}
@@ -180,6 +180,18 @@
 			width: auto;
 			padding: 0.3rem;
 			background-color: $color-gray-dark-3;
+		}
+	}
+
+	&__arrow {
+		margin-right: 0.7rem;
+
+		padding: 0.7rem;
+		padding-top: 3px;
+		align-self: baseline;
+
+		&-text {
+			font-size: 2.5rem;
 		}
 	}
 }

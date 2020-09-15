@@ -1,16 +1,23 @@
 import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
+import { removeProductFromCheckout } from '../store/actions/checkout';
 
 const LineProducts = props => {
 	const checkout = useSelector(state => state.checkout);
+	const dispatch = useDispatch();
+
+	const removeProduct = variant => {
+		dispatch(removeProductFromCheckout(variant));
+	};
 
 	return (
 		<ul>
 			{checkout.lineItems.length > 0 &&
 				checkout.lineItems.map(item => (
-					<li className='card card--checkout'>
+					<li key={item.id} className='card card--checkout'>
 						<div className='card__image-box card__image-box--checkout'>
 							<img
 								className='card__image'
@@ -24,10 +31,13 @@ const LineProducts = props => {
 						</div>
 
 						<div className='card__checkout-details'>
-							<h3 className='heading-tertiary card__title card__title--checkout'>
-								{item.productTitle}
-							</h3>
-
+							<Link
+								className='card__link'
+								to={`/product/${item.handle}`}>
+								<h3 className='heading-tertiary card__title card__title--checkout'>
+									{item.productTitle}
+								</h3>
+							</Link>
 							<p className='paragraph'>
 								{item.quantity}x CAD${item.price}
 							</p>
@@ -35,7 +45,7 @@ const LineProducts = props => {
 
 						<button
 							className='button button__small-circle button__small-circle--checkout'
-							onClick={() => console.log('close')}>
+							onClick={() => removeProduct(item)}>
 							<svg className='button__icon button__icon--card'>
 								<use xlinkHref={`${sprite}#icon-cross`}></use>
 							</svg>

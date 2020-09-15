@@ -1,11 +1,17 @@
 import * as actionTypes from './actionTypes';
 
-export const addProductToCheckout = (variant, productTitle, quantity) => {
+export const addProductToCheckout = (
+	variant,
+	productTitle,
+	quantity,
+	handle
+) => {
 	return {
 		type: actionTypes.ADD_PRODUCT_TO_CHECKOUT,
 		variant,
 		productTitle,
 		quantity,
+		handle,
 	};
 };
 

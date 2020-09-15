@@ -9,16 +9,48 @@
 	right: 0;
 	border-left: solid 0.3rem #000;
 	background-color: $color-gray-dark-2;
+	transition: all 0.2s;
+
+	&__checkbox {
+		display: none;
+	}
+
+	&__checkbox:checked + &__button {
+		right: 0;
+	}
+
+	&__checkbox:checked ~ & {
+		right: -40rem;
+	}
+
+	&__checkbox:checked + &__button > .button__arrow {
+		rotate: 180deg;
+	}
 
 	&__panel {
 		overflow-y: auto;
 	}
 
 	&__button {
-		position: absolute;
-
+		position: fixed;
+		width: auto;
 		top: 50vh;
-		left: -8rem;
+		right: 39.8rem;
+		background-color: $color-gray-dark-2;
+
+		//color: #fff;
+
+		border: solid #000 0.3rem;
+		z-index: 6;
+
+		&:hover {
+			// This color needs to be thinked, hurts the eyes
+			border: 0.3rem solid #000;
+		}
+
+		& > .button__icon {
+			//fill: #fff;
+		}
 	}
 
 	&__total {

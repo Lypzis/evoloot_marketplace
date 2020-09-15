@@ -4,6 +4,7 @@ const initialState = {
 	lineItems: [
 		// variant
 		// quantity: 5,
+		// handle
 	],
 
 	totalPrice: 0,
@@ -23,6 +24,7 @@ const addProductToCheckout = (state, action) => {
 			...action.variant,
 			quantity: action.quantity,
 			productTitle: action.productTitle,
+			handle: action.handle,
 		});
 
 	return {
