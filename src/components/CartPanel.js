@@ -1,11 +1,38 @@
-import React, { Fragment, memo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, memo, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import sprite from '../assets/icons/sprite.svg';
 import LineProducts from './LineProducts';
+import { ClientContext } from '../context/clientContext';
+import { removeAllProductsFromCheckout } from '../store/actions/checkout';
 
 const CartPanel = props => {
 	const checkout = useSelector(state => state.checkout);
+	const dispatch = useDispatch();
+	const clientContext = useContext(ClientContext);
+
+	const createQuickCheckout = async () => {
+		try {
+			const lineItems = checkout.lineItems.map(product => {
+				return {
+					variantId: product.id,
+					quantity: product.quantity,
+				};
+			});
+
+			const newCheckout = await clientContext.client.checkout.create();
+
+			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
+				newCheckout.id,
+				lineItems
+			);
+
+			window.open(checkoutWithProducts.webUrl);
+			dispatch(removeAllProductsFromCheckout());
+		} catch (err) {
+			console.log('Something terrible happened ', err);
+		}
+	};
 
 	if (checkout.lineItems.length > 0)
 		return (
@@ -67,7 +94,9 @@ const CartPanel = props => {
 							</div>
 						</div>
 
-						<button className='button button__white button__white--card-big'>
+						<button
+							className='button button__white button__white--card-big'
+							onClick={createQuickCheckout}>
 							<p className='paragraph card__price card__price--big cart__button-text'>
 								checkout
 							</p>

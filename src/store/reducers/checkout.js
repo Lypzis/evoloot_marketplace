@@ -70,6 +70,13 @@ const removeProductFromCheckout = (state, action) => {
 	};
 };
 
+const removeAllProducts = () => {
+	return {
+		lineItems: [],
+		totalPrice: 0,
+	};
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.ADD_PRODUCT_TO_CHECKOUT:
@@ -78,6 +85,8 @@ const reducer = (state = initialState, action) => {
 			return removeProductFromCheckout(state, action);
 		case actionTypes.UPDATE_PRODUCT_FROM_CHECKOUT:
 			return updateProductFromCheckout(state, action);
+		case actionTypes.REMOVE_ALL_PRODUCTS_FROM_CHECKOUT:
+			return removeAllProducts();
 		default:
 			return state;
 	}

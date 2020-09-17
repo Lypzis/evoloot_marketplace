@@ -29,3 +29,9 @@ export const updateProductFromCheckout = (variant, quantity) => {
 		quantity,
 	};
 };
+
+export const removeAllProductsFromCheckout = () => {
+	return {
+		type: actionTypes.REMOVE_ALL_PRODUCTS_FROM_CHECKOUT,
+	};
+};
