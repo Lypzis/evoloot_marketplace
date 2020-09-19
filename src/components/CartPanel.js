@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 import LineProducts from './LineProducts';
+import BluredBackground from './BluredBackground';
 import { ClientContext } from '../context/clientContext';
 import { removeAllProductsFromCheckout } from '../store/actions/checkout';
 
@@ -64,6 +65,9 @@ const CartPanel = props => {
 						</p>
 					</div>
 				</label>
+
+				{/* TO-DO: WHEN CLICKED, ALSO CLOSE PANEL */}
+				<BluredBackground />
 
 				<div className='cart'>
 					<div className='cart__panel'>

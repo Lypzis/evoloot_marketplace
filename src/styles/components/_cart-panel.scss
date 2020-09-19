@@ -23,6 +23,10 @@
 		right: -40rem;
 	}
 
+	&__checkbox:checked ~ .blured {
+		display: none;
+	}
+
 	&__checkbox:checked + &__button > .button__arrow {
 		rotate: 180deg;
 	}

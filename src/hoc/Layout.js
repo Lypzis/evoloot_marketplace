@@ -8,6 +8,7 @@ import CartPanel from '../components/CartPanel';
 const Layout = props => (
 	<div className='container__parent'>
 		<Header callToAction={props.callToAction} loged={props.loged} />
+
 		<CartPanel />
 		<main className='container'>{props.children}</main>
 		<Footer />
