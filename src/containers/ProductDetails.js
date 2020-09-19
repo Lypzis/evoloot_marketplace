@@ -14,6 +14,7 @@ import {
 	addProductToCheckout,
 	updateProductFromCheckout,
 } from '../store/actions/checkout';
+import QuantityInput from '../components/QuantityInput';
 
 const productReducer = (currentProductState, action) => {
 	switch (action.type) {
@@ -207,36 +208,11 @@ const ProductDetails = props => {
 		));
 	};
 
-	const addToQuantity = () => {
+	const updateQuantity = quantity => {
 		dispatchProduct({
 			type: 'SET_QUANTITY',
-			quantity: ++productChosen.quantity,
+			quantity,
 		});
-	};
-	const subtractFromQuantity = () => {
-		if (productChosen.quantity > 1)
-			dispatchProduct({
-				type: 'SET_QUANTITY',
-				quantity: --productChosen.quantity,
-			});
-	};
-
-	const addFromTextInput = event => {
-		validateNumber(event.target.value) &&
-			dispatchProduct({
-				type: 'SET_QUANTITY',
-				quantity: Math.floor(event.target.value) * 1,
-			});
-	};
-
-	const validateNumber = number => {
-		if (number.trim() === '') return true;
-
-		if (isNaN(number)) return false;
-
-		if (number.trim() <= 0) return false;
-
-		return true;
 	};
 
 	const addToCart = () => {
@@ -338,7 +314,7 @@ const ProductDetails = props => {
 								</div>
 								{productChosen.product.variants.length > 1 && (
 									<div className='input__container'>
-										<p className='paragraph'>Color: </p>
+										<p className='paragraph'>Variant: </p>
 										<select
 											className='input input__select'
 											onChange={setVariantSelected}>
@@ -347,28 +323,10 @@ const ProductDetails = props => {
 									</div>
 								)}
 
-								<div className='input__container'>
-									<p className='paragraph'>Quantity:</p>
-
-									<div className='input__quantity-buttons'>
-										<button
-											className='button input input__quantity input__quantity--left'
-											onClick={subtractFromQuantity}>
-											<p className='paragraph'>-</p>
-										</button>
-										<input
-											className='input input__quantity'
-											type='text'
-											onChange={addFromTextInput}
-											value={productChosen.quantity}
-										/>
-										<button
-											className='button input input__quantity input__quantity--right'
-											onClick={addToQuantity}>
-											<p className='paragraph'>+</p>
-										</button>
-									</div>
-								</div>
+								<QuantityInput
+									productQuantity={productChosen.quantity}
+									setQuantity={updateQuantity}
+								/>
 
 								<span className='navbar-line'></span>
 

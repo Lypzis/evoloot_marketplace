@@ -18,6 +18,11 @@
 		height: 13rem;
 		width: auto;
 		margin: 1.5rem 0;
+
+		&-big {
+			height: 18rem;
+			justify-content: flex-start;
+		}
 	}
 
 	&__checkout-details {
@@ -25,6 +30,10 @@
 		flex-direction: column;
 		justify-content: space-between;
 		width: 50%;
+
+		&--big {
+			width: 65%;
+		}
 	}
 
 	&--raw {
@@ -53,6 +62,11 @@
 		&--checkout {
 			margin: 0;
 		}
+
+		&--big {
+			margin: 0;
+			font-size: 1.8rem;
+		}
 	}
 
 	&__image-box {
@@ -63,6 +77,10 @@
 	&__image-box--checkout {
 		margin-right: 2rem;
 		max-width: 12rem;
+
+		&-big {
+			max-width: 17rem;
+		}
 	}
 
 	&__image {

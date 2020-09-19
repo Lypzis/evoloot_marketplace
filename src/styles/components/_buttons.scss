@@ -29,6 +29,14 @@
 		fill: #fff;
 	}
 
+	&__icon--card-cart-big {
+		margin-right: 1rem;
+		margin-left: 2rem;
+		height: 2rem;
+		width: 2rem;
+		fill: #fff;
+	}
+
 	&__icon--card-big {
 		margin-right: 2rem;
 		height: 1.6rem;
@@ -49,12 +57,20 @@
 		}
 	}
 
+	&__big-circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent;
+		border: transparent;
+		margin-left: auto;
+	}
+
 	&__search {
 		position: absolute;
 		right: 1rem;
-		background-color: #fff; //$color-secondary;
+		background-color: #fff;
 		border: none;
-		//margin-left: -3.2rem;
 		padding: 0.4rem;
 	}
 
@@ -157,6 +173,11 @@
 
 		&:hover {
 			background-color: rgba($color-tertiary, 0.7);
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
 		}
 	}
 

@@ -42,7 +42,8 @@ const updateProductFromCheckout = (state, action) => {
 		lineItem => lineItem.id === action.variant.id
 	);
 
-	lineItemsCopy[toUpdate].quantity += action.quantity;
+	if (action.fromItself) lineItemsCopy[toUpdate].quantity = action.quantity;
+	else lineItemsCopy[toUpdate].quantity += action.quantity;
 
 	lineItemsCopy.forEach(item => (price += item.quantity * item.price));
 

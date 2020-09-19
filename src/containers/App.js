@@ -6,6 +6,7 @@ import '../styles/main.scss';
 import Home from './Home';
 import CollectionProducts from './CollectionProducts';
 import ProductDetails from './ProductDetails';
+import Cart from './Cart';
 
 import NotFound from './NotFound';
 
@@ -14,6 +15,9 @@ import NotFound from './NotFound';
 function App() {
 	return (
 		<Switch>
+			<Route path='/cart'>
+				<Cart />
+			</Route>
 			<Route path='/collection/:handle'>
 				<CollectionProducts />
 			</Route>

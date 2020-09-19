@@ -1,5 +1,6 @@
 import React, { Fragment, memo, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
 import LineProducts from './LineProducts';
@@ -10,6 +11,7 @@ const CartPanel = props => {
 	const checkout = useSelector(state => state.checkout);
 	const dispatch = useDispatch();
 	const clientContext = useContext(ClientContext);
+	const history = useHistory();
 
 	const createQuickCheckout = async () => {
 		try {
@@ -81,7 +83,7 @@ const CartPanel = props => {
 						</h3>
 
 						{/* LIST OF LINE PRODUCTS */}
-						<LineProducts />
+						<LineProducts small={true} />
 
 						<span className='navbar-line small-margin-top'></span>
 
@@ -96,9 +98,17 @@ const CartPanel = props => {
 
 						<button
 							className='button button__white button__white--card-big'
+							disabled={checkout.totalPrice === 0}
 							onClick={createQuickCheckout}>
 							<p className='paragraph card__price card__price--big cart__button-text'>
 								checkout
+							</p>
+						</button>
+						<button
+							className='button button__white button__white--card-big small-margin-top'
+							onClick={() => history.push('/cart')}>
+							<p className='paragraph card__price card__price--big cart__button-text'>
+								view cart
 							</p>
 						</button>
 						<p>&emsp;</p>

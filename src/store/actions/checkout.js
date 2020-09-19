@@ -22,11 +22,16 @@ export const removeProductFromCheckout = variant => {
 	};
 };
 
-export const updateProductFromCheckout = (variant, quantity) => {
+export const updateProductFromCheckout = (
+	variant,
+	quantity,
+	fromItself = false
+) => {
 	return {
 		type: actionTypes.UPDATE_PRODUCT_FROM_CHECKOUT,
 		variant,
 		quantity,
+		fromItself,
 	};
 };
 
