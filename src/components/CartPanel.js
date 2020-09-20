@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useContext } from 'react';
+import React, { Fragment, memo, useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ const CartPanel = props => {
 	const dispatch = useDispatch();
 	const clientContext = useContext(ClientContext);
 	const history = useHistory();
+	const [checkbox, setCheckbox] = useState(false);
 
 	const createQuickCheckout = async () => {
 		try {
@@ -67,21 +68,10 @@ const CartPanel = props => {
 				</label>
 
 				{/* TO-DO: WHEN CLICKED, ALSO CLOSE PANEL */}
-				<BluredBackground />
+				<BluredBackground for={'cart-toggle'} />
 
 				<div className='cart'>
 					<div className='cart__panel'>
-						{/* INSTEAD OF BUTTON, USE INPUT AND LABEL HERE,
-                SO THIS FUNCTIONALITY WILL ONLY NEED CSS :DDDD */}
-
-						{/* <button
-					className='button button__small-circle'
-					onClick={() => console.log('close')}>
-					<svg className='button__icon'>
-						<use xlinkHref={`${sprite}#icon-cross`}></use>
-					</svg>
-				</button> */}
-
 						<h3 className='heading-tertiary heading-tertiary no-margin'>
 							Shopping Cart:
 						</h3>

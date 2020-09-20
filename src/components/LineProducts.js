@@ -19,7 +19,7 @@ const LineProducts = props => {
 				))
 			) : (
 				<h3 className='heading-tertiary heading-tertiary--dark'>
-					-- My cart is empty. --
+					-- ...is empty. --
 				</h3>
 			)}
 		</ul>

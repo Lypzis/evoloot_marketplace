@@ -2,11 +2,22 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
+import logo from '../assets/images/logo.png';
 
 const Footer = props => (
 	<footer className='footer'>
 		<div className='footer__body'>
 			<div className='footer__links'>
+				<div className='footer__links-partition'>
+					<a className='footer__logo' href='/'>
+						<img
+							className='header__logo-image'
+							src={logo}
+							alt='Evoloot Marketplace Logo'
+						/>
+					</a>
+				</div>
+
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Who We Are</h3>
 
@@ -30,7 +41,7 @@ const Footer = props => (
 						<p className='paragraph'>Event Schedule</p>
 					</Link>
 				</div>
-				<div className='footer__links-partition'>
+				{/* <div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>My Account</h3>
 
 					<Link to='/' className='footer__link'>
@@ -48,7 +59,7 @@ const Footer = props => (
 					<Link to='/' className='footer__link'>
 						<p className='paragraph'>My Password</p>
 					</Link>
-				</div>
+				</div> */}
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>The Details</h3>
 

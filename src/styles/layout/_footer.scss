@@ -7,7 +7,12 @@
 		display: relative;
 		margin: auto;
 		padding: 1.5rem;
-		width: 120rem;
+		max-width: 120rem;
+	}
+
+	&__logo {
+		display: block;
+		width: 24rem;
 	}
 
 	&__links {

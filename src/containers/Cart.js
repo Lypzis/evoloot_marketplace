@@ -61,6 +61,17 @@ const Cart = props => {
 					rows='3'></textarea>
 				{/* /////////////////////////////// */}
 
+				<span className='navbar-line small-margin-top'></span>
+
+				<div className='cart__total'>
+					<p className='paragraph paragraph--black'>Total: </p>
+					<div className='product__price'>
+						<p className='paragraph paragraph--black'>
+							CAD${checkout.totalPrice.toFixed(2)}
+						</p>
+					</div>
+				</div>
+
 				<button
 					className='button button__white button__white--card-big'
 					disabled={checkout.totalPrice === 0}

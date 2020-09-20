@@ -1,11 +1,8 @@
 .header {
 	background-color: $color-primary-light;
-
 	box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.3);
-
 	border-top: 0.3rem solid rgba(0, 0, 0, 0.5);
 	border-bottom: 0.3rem solid rgba(0, 0, 0, 0.5);
-
 	position: fixed;
 	z-index: 2;
 	width: 100%;
@@ -14,14 +11,17 @@
 
 	&__body {
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		align-self: center;
-		width: 120rem;
-		padding: 1rem 0rem;
+		padding: 0.5rem 2rem;
+		max-width: 130rem;
 	}
 
 	&__logo {
 		display: block;
-		height: 10rem;
+		width: 32rem;
+		margin-right: 35rem;
 	}
 
 	&__logo-image {
@@ -42,15 +42,15 @@
 	}
 
 	&__search-form {
+		position: relative;
 		display: flex;
 		align-items: center;
-		margin-left: 3rem;
+		margin: 0 3rem;
 	}
 
 	&__user {
 		display: flex;
 		justify-content: space-between;
-		margin-top: 2rem;
 	}
 
 	&__loged-out {

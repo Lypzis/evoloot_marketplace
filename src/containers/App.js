@@ -7,14 +7,20 @@ import Home from './Home';
 import CollectionProducts from './CollectionProducts';
 import ProductDetails from './ProductDetails';
 import Cart from './Cart';
+import SignUp from './SignUp';
+import Login from './Login';
 
 import NotFound from './NotFound';
-
-// needs collections handlers
 
 function App() {
 	return (
 		<Switch>
+			<Route path='/signup'>
+				<SignUp />
+			</Route>
+			<Route path='/login'>
+				<Login />
+			</Route>
 			<Route path='/cart'>
 				<Cart />
 			</Route>
