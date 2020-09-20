@@ -79,18 +79,36 @@ const Footer = props => (
 					<h3 className='heading-fourtiary'>Social Media Thingies</h3>
 
 					<div className='footer__icons'>
-						<button className='button button__black button__black--small-circle'>
+						<button
+							className='button button__black button__black--small-circle'
+							onClick={() =>
+								window.open(
+									'https://www.facebook.com/evolootmarketplace'
+								)
+							}>
 							<svg className='button__icon'>
 								<use
 									xlinkHref={`${sprite}#icon-facebook`}></use>
 							</svg>
 						</button>
-						<button className='button button__black button__black--small-circle'>
+						<button
+							className='button button__black button__black--small-circle'
+							onClick={() =>
+								window.open(
+									'https://twitter.com/evolootofficial'
+								)
+							}>
 							<svg className='button__icon'>
 								<use xlinkHref={`${sprite}#icon-twitter`}></use>
 							</svg>
 						</button>
-						<button className='button button__black button__black--small-circle'>
+						<button
+							className='button button__black button__black--small-circle'
+							onClick={() =>
+								window.open(
+									'https://www.instagram.com/evolootmarketplace/'
+								)
+							}>
 							<svg className='button__icon'>
 								<use
 									xlinkHref={`${sprite}#icon-instagram`}></use>
@@ -103,9 +121,13 @@ const Footer = props => (
 				<p className='paragraph'>
 					© 2020 Evoloot Marketplace by{' '}
 					{
-						<Link className='paragraph footer__author' to='/'>
+						<a
+							className='paragraph footer__author'
+							href='https://lypzis.github.io/'
+							target='_blank'
+							rel='noopener noreferrer'>
 							Lypzis
-						</Link>
+						</a>
 					}
 					. All Rights Reserved.
 				</p>
