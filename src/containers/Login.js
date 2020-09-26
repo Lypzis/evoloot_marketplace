@@ -1,23 +1,15 @@
 import React, { useContext, useState } from 'react';
-//import { useHistory } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
 
 const Login = props => {
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const authContext = useContext(AuthContext);
-	//const history = useHistory();
 
-	const logUserIn = async event => {
-		event.preventDefault();
-
-		try {
-			await authContext.login(email, password);
-		} catch (err) {
-			console.log('Something went terribly wrong! ', err);
-		}
+	const login = async () => {
+		await authContext.login(username, password);
 	};
 
 	return (
@@ -27,22 +19,27 @@ const Login = props => {
 					Log In
 				</h2>
 
-				<form className='auth-form__form' onSubmit={logUserIn}>
+				<div className='auth-form__form'>
 					<div className='auth-form__field'>
 						<label
 							htmlFor='email'
 							className='paragraph paragraph--black'>
-							Email
+							Username
 						</label>
 						<input
-							type='email'
+							type='text'
 							id='email'
 							className='input'
 							maxLength={200}
 							required
-							value={email}
-							onChange={event => setEmail(event.target.value)}
+							value={username}
+							onChange={event => setUsername(event.target.value)}
 						/>
+						{authContext.loginError && (
+							<p className='paragraph paragraph--error'>
+								Invalid username or password.
+							</p>
+						)}
 					</div>
 					<div className='auth-form__field'>
 						<label
@@ -64,13 +61,13 @@ const Login = props => {
 					<div className='auth-form__field-button'>
 						<button
 							className='button button__white button__white--card-big'
-							onClick={() => console.log('logged in')}>
+							onClick={login}>
 							<p className='paragraph card__price card__price--big cart__button-text'>
 								Log in
 							</p>
 						</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</Layout>
 	);

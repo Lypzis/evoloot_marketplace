@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import validate from 'validate.js';
 import { useHistory } from 'react-router-dom';
 import Parse from 'parse';
 
 import axiosInstance from '../axios';
-import { createUser } from '../graphql';
+import { createUser, getCustomerToken } from '../graphql';
 import Layout from '../hoc/Layout';
+import { AuthContext } from '../context/authContext';
 
 const signupFormReducer = (currentFormState, action) => {
 	switch (action.type) {
@@ -68,6 +69,7 @@ const signupFormErrorReducer = (currentFormState, action) => {
 };
 
 const SignUp = props => {
+	const authContext = useContext(AuthContext);
 	const history = useHistory();
 
 	const [signupForm, dispatchSignupForm] = useReducer(signupFormReducer, {
@@ -141,7 +143,6 @@ const SignUp = props => {
 			user.set('password', signupForm.password);
 			await user.signUp();
 		} catch (err) {
-			console.log(err.message);
 			if (err.message === 'Account already exists for this username.')
 				return dispatchSignupFormError({
 					type: 'SET_USER_IS_TAKEN',
@@ -196,8 +197,23 @@ const SignUp = props => {
 
 				const currentUser = Parse.User.current();
 
+				const customerToken = await axiosInstance.post(
+					'/api/graphql.json',
+					getCustomerToken(signupForm.email, signupForm.password)
+				);
+
+				localStorage.setItem(
+					'shopifyCustomerToken',
+					JSON.stringify(
+						customerToken.data.data.customerAccessTokenCreate
+							.customerAccessToken
+					)
+				);
+
 				currentUser.set('shopifyId', id);
 				await currentUser.save();
+
+				authContext.userIsOnline();
 
 				history.replace('/');
 			}

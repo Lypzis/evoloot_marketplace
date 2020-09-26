@@ -11,6 +11,15 @@ const Header = props => {
 
 	const history = useHistory();
 
+	const logout = async () => {
+		try {
+			await authContext.logout();
+		} catch (err) {
+			// connection error
+			console.log('D:', err);
+		}
+	};
+
 	return (
 		<Fragment>
 			<header className='header'>
@@ -92,7 +101,7 @@ const Header = props => {
 									</button>
 									<button
 										className='button button__black button__black--logout'
-										onClick={() => console.log('logout')}>
+										onClick={logout}>
 										<svg className='button__icon'>
 											<use
 												xlinkHref={`${sprite}#icon-exit`}></use>
