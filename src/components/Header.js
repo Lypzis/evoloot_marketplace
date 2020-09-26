@@ -1,12 +1,13 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
+import { AuthContext } from '../context/authContext';
 
 const Header = props => {
-	//const [callToAction, setCallToAction] = useState(true); // set with something else later on
+	const authContext = useContext(AuthContext);
 
 	const history = useHistory();
 
@@ -55,7 +56,7 @@ const Header = props => {
 									</svg>
 								</button>
 							</form>
-							{!props.loged && (
+							{!authContext.currentUser ? (
 								<div className='header__loged-out'>
 									<button
 										className='button button__black button__black--login'
@@ -74,6 +75,29 @@ const Header = props => {
 												xlinkHref={`${sprite}#icon-clipboard`}></use>
 										</svg>
 										<p className='paragraph'>sign up</p>
+									</button>
+								</div>
+							) : (
+								<div className='header__loged-out'>
+									<button
+										className='button button__black button__black--profile'
+										onClick={() =>
+											console.log('My Profile')
+										}>
+										<svg className='button__icon'>
+											<use
+												xlinkHref={`${sprite}#icon-profile`}></use>
+										</svg>
+										<p className='paragraph'>Profile</p>
+									</button>
+									<button
+										className='button button__black button__black--logout'
+										onClick={() => console.log('logout')}>
+										<svg className='button__icon'>
+											<use
+												xlinkHref={`${sprite}#icon-exit`}></use>
+										</svg>
+										<p className='paragraph'>Log out</p>
 									</button>
 								</div>
 							)}

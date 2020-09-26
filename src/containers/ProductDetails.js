@@ -46,7 +46,7 @@ const productReducer = (currentProductState, action) => {
 				variant: action.variant,
 			};
 		default:
-			throw new Error('Something went terribly wrong! D:');
+			return currentProductState;
 	}
 };
 
@@ -343,7 +343,10 @@ const ProductDetails = props => {
 								<button
 									className='button button__white button__white--card-big'
 									onClick={addToCart}
-									disabled={productChosen.quantity === 0}>
+									disabled={
+										productChosen.quantity === 0 ||
+										!productChosen.variant.available
+									}>
 									<div className='button__icon-container button__icon-container--big'>
 										<svg className='button__icon button__icon--card-big '>
 											<use

@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+//import { useHistory } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
+import { AuthContext } from '../context/authContext';
 
 const Login = props => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const authContext = useContext(AuthContext);
+	//const history = useHistory();
+
+	const logUserIn = async event => {
+		event.preventDefault();
+
+		try {
+			await authContext.login(email, password);
+		} catch (err) {
+			console.log('Something went terribly wrong! ', err);
+		}
+	};
+
 	return (
 		<Layout>
 			<div className='auth-form'>
@@ -10,12 +27,12 @@ const Login = props => {
 					Log In
 				</h2>
 
-				<form className='auth-form__form'>
+				<form className='auth-form__form' onSubmit={logUserIn}>
 					<div className='auth-form__field'>
 						<label
 							htmlFor='email'
 							className='paragraph paragraph--black'>
-							Email *
+							Email
 						</label>
 						<input
 							type='email'
@@ -23,13 +40,15 @@ const Login = props => {
 							className='input'
 							maxLength={200}
 							required
+							value={email}
+							onChange={event => setEmail(event.target.value)}
 						/>
 					</div>
 					<div className='auth-form__field'>
 						<label
 							htmlFor='password'
 							className='paragraph paragraph--black'>
-							Password *
+							Password
 						</label>
 						<input
 							type='password'
@@ -37,6 +56,8 @@ const Login = props => {
 							className='input'
 							maxLength={100}
 							required
+							value={password}
+							onChange={event => setPassword(event.target.value)}
 						/>
 					</div>
 

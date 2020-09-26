@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 import ClientContextProvider from './context/clientContext';
+import AuthContextProvider from './context/authContext';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
+import './parse/index';
 
 import checkoutReducer from './store/reducers/checkout';
 
@@ -19,9 +21,11 @@ const store = createStore(rootReducers);
 const app = (
 	<Provider store={store}>
 		<BrowserRouter>
-			<ClientContextProvider>
-				<App />
-			</ClientContextProvider>
+			<AuthContextProvider>
+				<ClientContextProvider>
+					<App />
+				</ClientContextProvider>
+			</AuthContextProvider>
 		</BrowserRouter>
 	</Provider>
 );

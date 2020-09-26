@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useContext, useState } from 'react';
+import React, { Fragment, memo, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -13,7 +13,6 @@ const CartPanel = props => {
 	const dispatch = useDispatch();
 	const clientContext = useContext(ClientContext);
 	const history = useHistory();
-	const [checkbox, setCheckbox] = useState(false);
 
 	const createQuickCheckout = async () => {
 		try {

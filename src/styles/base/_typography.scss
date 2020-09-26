@@ -48,7 +48,7 @@ body {
 		color: rgba(0, 0, 0, 0.7);
 	}
 
-	// &:not(:last-child) {
-	// 	margin-bottom: 3rem;
-	// }
+	&--error {
+		color: rgba($color-red, 0.9);
+	}
 }
