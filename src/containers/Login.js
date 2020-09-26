@@ -9,7 +9,13 @@ const Login = props => {
 	const authContext = useContext(AuthContext);
 
 	const login = async () => {
-		await authContext.login(username, password);
+		const usernameCopy = username;
+		const passCopy = password;
+
+		// setUsername('');
+		// setPassword('');
+
+		await authContext.login(usernameCopy, passCopy);
 	};
 
 	return (
@@ -37,7 +43,7 @@ const Login = props => {
 						/>
 						{authContext.loginError && (
 							<p className='paragraph paragraph--error'>
-								Invalid username or password.
+								Incorrect username or password.
 							</p>
 						)}
 					</div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import '../styles/main.scss';
@@ -9,11 +9,13 @@ import ProductDetails from './ProductDetails';
 import Cart from './Cart';
 import SignUp from './SignUp';
 import Login from './Login';
-
 import NotFound from './NotFound';
+import { AuthContext } from '../context/authContext';
 
 function App() {
-	return (
+	const authContext = useContext(AuthContext);
+
+	let routes = (
 		<Switch>
 			<Route path='/signup'>
 				<SignUp />
@@ -38,6 +40,29 @@ function App() {
 			</Route>
 		</Switch>
 	);
+
+	if (authContext.currentUser)
+		routes = (
+			<Switch>
+				<Route path='/cart'>
+					<Cart />
+				</Route>
+				<Route path='/collection/:handle'>
+					<CollectionProducts />
+				</Route>
+				<Route path='/product/:handle'>
+					<ProductDetails />
+				</Route>
+				<Route exact path='/'>
+					<Home />
+				</Route>
+				<Route path='*'>
+					<NotFound />
+				</Route>
+			</Switch>
+		);
+
+	return routes;
 }
 
 export default App;

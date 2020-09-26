@@ -79,7 +79,10 @@ const AuthContextProvider = props => {
 
 			history.replace('/');
 		} catch (err) {
-			setLoginError(true);
+			if (err.message === 'Invalid username/password.')
+				setLoginError(true);
+
+			// else connection error
 		}
 	};
 
