@@ -65,7 +65,7 @@ const Header = props => {
 									</svg>
 								</button>
 							</form>
-							{!authContext.currentUser ? (
+							{!authContext.customerToken ? (
 								<div className='header__loged-out'>
 									<button
 										className='button button__black button__black--login'
@@ -90,14 +90,12 @@ const Header = props => {
 								<div className='header__loged-out'>
 									<button
 										className='button button__black button__black--profile'
-										onClick={() =>
-											console.log('My Profile')
-										}>
+										onClick={() => history.push('/me')}>
 										<svg className='button__icon'>
 											<use
 												xlinkHref={`${sprite}#icon-profile`}></use>
 										</svg>
-										<p className='paragraph'>Profile</p>
+										<p className='paragraph'>My Account</p>
 									</button>
 									<button
 										className='button button__black button__black--logout'

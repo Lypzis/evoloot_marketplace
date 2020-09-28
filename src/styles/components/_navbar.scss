@@ -30,3 +30,25 @@
 	border-top: solid 0.2rem $color-gray-light-5;
 	display: inherit;
 }
+
+.navbar-vertical {
+	background-color: $color-primary-light;
+
+	&__list {
+		display: flex;
+		list-style: none;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
+
+	&__list-item {
+	}
+
+	&__link {
+		display: block;
+		text-decoration: none;
+		color: #fff;
+		padding: 2rem 10rem;
+		transition: all 0.3s;
+	}
+}

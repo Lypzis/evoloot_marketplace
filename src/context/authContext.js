@@ -1,41 +1,39 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Parse from 'parse';
 import { useHistory } from 'react-router-dom';
 
 import { getCustomerToken } from '../graphql';
 import axiosInstance from '../axios';
 
 export const AuthContext = React.createContext({
-	currentUser: null,
 	customerToken: null,
 	loginError: false,
 	login: async (username, password) => {},
 	logout: async () => {},
 	userIsOnline: () => {},
+	refreshToken: customerToken => {},
 });
 
 const AuthContextProvider = props => {
-	const [user, setUser] = useState(false);
 	const [userToken, setUserToken] = useState();
 	const [loginError, setLoginError] = useState(false);
 	const history = useHistory();
 
-	const isUserOnline = useCallback(async () => {
-		const currentUser = Parse.User.current();
+	const isUserOnline = useCallback(() => {
 		let token = null;
 
 		const shopifyCustomerToken = localStorage.getItem(
 			'shopifyCustomerToken'
 		);
 
-		if (currentUser && shopifyCustomerToken) {
-			token = JSON.parse(shopifyCustomerToken);
+		if (shopifyCustomerToken) token = JSON.parse(shopifyCustomerToken);
 
+		if (token) {
 			const date = new Date();
 			const expiresAt = new Date(token.expiresAt);
 
-			if (date > expiresAt) await logoutHandler();
-			else setUser(true);
+			if (!(date > expiresAt)) {
+				setUserToken(token.accessToken);
+			}
 		}
 	}, []);
 
@@ -44,26 +42,38 @@ const AuthContextProvider = props => {
 	}, [isUserOnline]);
 
 	const logoutHandler = async () => {
-		try {
-			await Parse.User.logOut();
-			setUser(false);
-			setUserToken(null);
-			localStorage.removeItem('shopifyCustomerToken');
-		} catch (err) {
-			// connection error
-			console.log('Something weird happened! ', err);
-		}
+		setUserToken(null);
+		localStorage.removeItem('shopifyCustomerToken');
+		history.replace('/');
 	};
 
-	const loginHandler = async (username, password) => {
-		try {
-			const user = await Parse.User.logIn(username, password);
-			const userEmail = user.getEmail();
+	const refreshToken = customerToken => {
+		const {
+			customerAccessToken,
+		} = customerToken.data.data.customerAccessTokenCreate;
 
+		localStorage.setItem(
+			'shopifyCustomerToken',
+			JSON.stringify(customerAccessToken)
+		);
+
+		setUserToken(customerAccessToken.accessToken);
+	};
+
+	const loginHandler = async (email, password) => {
+		try {
 			const customerToken = await axiosInstance.post(
 				'/api/graphql.json',
-				getCustomerToken(userEmail, password)
+				getCustomerToken(email, password)
 			);
+
+			if (
+				customerToken.data.data.customerAccessTokenCreate
+					.customerUserErrors.length > 0
+			)
+				throw new Error(
+					customerToken.data.data.customerAccessTokenCreate.customerUserErrors.message
+				);
 
 			const {
 				customerAccessToken,
@@ -74,27 +84,23 @@ const AuthContextProvider = props => {
 				JSON.stringify(customerAccessToken)
 			);
 
-			setUser(true);
-			setUserToken(customerAccessToken);
+			setUserToken(customerAccessToken.accessToken);
 
 			history.replace('/');
 		} catch (err) {
-			if (err.message === 'Invalid username/password.')
-				setLoginError(true);
+			//console.log(err);
+			setLoginError(true);
 
 			// else connection error
 		}
 	};
 
-	// CONTINUE HERE
-	// LOG OUT
-
 	return (
 		<AuthContext.Provider
 			value={{
-				currentUser: user,
 				customerToken: userToken,
 				loginError,
+				refreshToken,
 				login: loginHandler,
 				logout: logoutHandler,
 				userIsOnline: isUserOnline,

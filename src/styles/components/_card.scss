@@ -41,7 +41,7 @@
 		margin: 0;
 	}
 
-	&:hover > .button__white {
+	&:hover > .button__white:not(:disabled) {
 		background-color: $color-tertiary;
 		color: #fff;
 	}
@@ -92,6 +92,10 @@
 	&__price {
 		font-size: 1.1rem;
 		font-weight: 700;
+	}
+
+	&__price--white {
+		color: #fff;
 	}
 
 	&__price--big {

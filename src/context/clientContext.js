@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Client from 'shopify-buy';
+import { useHistory } from 'react-router-dom';
 
 const client = Client.buildClient({
 	storefrontAccessToken: '22244a0434741a7f12f81ea49a794d3b',
@@ -13,6 +14,7 @@ export const ClientContext = React.createContext({
 
 const ClientContextProvider = props => {
 	const [collections, setCollections] = useState(null);
+	const history = useHistory();
 
 	const getAllCollectionsWithProducts = useCallback(async () => {
 		try {
@@ -20,9 +22,9 @@ const ClientContextProvider = props => {
 
 			setCollections(collections);
 		} catch (err) {
-			console.log(err);
+			history.replace('/*');
 		}
-	}, []);
+	}, [history]);
 
 	useEffect(() => {
 		getAllCollectionsWithProducts();

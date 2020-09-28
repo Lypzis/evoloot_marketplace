@@ -284,9 +284,13 @@ const ProductDetails = props => {
 								description={
 									productChosen.product.descriptionHtml
 								}
+								isThereADescription={
+									productChosen.product.description.trim() !==
+									''
+								}
 							/>
 
-							<span className='navbar-line'></span>
+							<span className='navbar-line big-margin-top'></span>
 							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
 								Related:
 							</h3>

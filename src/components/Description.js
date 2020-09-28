@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useCallback, useState } from 'react';
 
-const Description = ({ description, availability }) => {
+const Description = ({ description, isThereADescription }) => {
 	const [formatedDescription, setFormatedDescription] = useState();
 
 	const replaceChain = useCallback((string, replacements) => {
@@ -49,6 +49,8 @@ const Description = ({ description, availability }) => {
 	useEffect(() => {
 		formatDescription();
 	}, [formatDescription]);
+
+	if (!isThereADescription) return null;
 
 	return (
 		<div className='card product__card product__card--description'>

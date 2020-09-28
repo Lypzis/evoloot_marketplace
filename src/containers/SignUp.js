@@ -1,7 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import validate from 'validate.js';
 import { useHistory } from 'react-router-dom';
-import Parse from 'parse';
 
 import axiosInstance from '../axios';
 import { createUser, getCustomerToken } from '../graphql';
@@ -135,31 +134,6 @@ const SignUp = props => {
 		return isValid === undefined;
 	};
 
-	const sigupParse = async () => {
-		try {
-			const user = new Parse.User();
-			user.set('username', signupForm.username);
-			user.set('email', signupForm.email);
-			user.set('password', signupForm.password);
-			await user.signUp();
-		} catch (err) {
-			if (err.message === 'Account already exists for this username.')
-				return dispatchSignupFormError({
-					type: 'SET_USER_IS_TAKEN',
-				});
-
-			if (
-				err.message === 'Account already exists for this email address.'
-			)
-				return dispatchSignupFormError({
-					type: 'SET_EMAIL_IS_TAKEN',
-				});
-
-			// connection error
-			console.log('Something went terribly wrong! ', err);
-		}
-	};
-
 	const validateFields = async event => {
 		event.preventDefault();
 
@@ -179,11 +153,7 @@ const SignUp = props => {
 
 		try {
 			if (isEmailValid && isPasswordValid) {
-				//localStorage.clear();
-
-				await sigupParse();
-
-				const customer = await axiosInstance.post(
+				const createdUser = await axiosInstance.post(
 					'/api/graphql.json',
 					createUser(
 						signupForm.name,
@@ -193,9 +163,16 @@ const SignUp = props => {
 					)
 				);
 
-				const { id } = customer.data.data.customerCreate.customer;
+				if (
+					createdUser.data.data.customerCreate.customerUserErrors
+						.length > 0
+				) {
+					const errorMessage =
+						createdUser.data.data.customerCreate
+							.customerUserErrors[0].message;
 
-				const currentUser = Parse.User.current();
+					throw new Error(errorMessage);
+				}
 
 				const customerToken = await axiosInstance.post(
 					'/api/graphql.json',
@@ -210,14 +187,14 @@ const SignUp = props => {
 					)
 				);
 
-				currentUser.set('shopifyId', id);
-				await currentUser.save();
-
 				authContext.userIsOnline();
 
 				history.replace('/');
 			}
 		} catch (err) {
+			if (err.message === 'Email has already been taken')
+				dispatchSignupFormError({ type: 'SET_EMAIL_IS_TAKEN' });
+
 			// go to connection error page
 			console.log('Something went terribly wrong! ', err);
 		}
@@ -231,7 +208,7 @@ const SignUp = props => {
 				</h2>
 
 				<form className='auth-form__form' onSubmit={validateFields}>
-					<div className='auth-form__field'>
+					{/* <div className='auth-form__field'>
 						<label
 							htmlFor='username'
 							className='paragraph paragraph--black'>
@@ -256,7 +233,7 @@ const SignUp = props => {
 								{signupFormError.userNameTakenError}
 							</p>
 						)}
-					</div>
+					</div> */}
 					{/* <div className='auth-form__field'>
 						<label
 							htmlFor='first-name'

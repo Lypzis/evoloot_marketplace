@@ -30,15 +30,15 @@ export const getCustomerToken = (email, password) => {
 		query: `
 					mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
 						customerAccessTokenCreate(input: $input) {
-						customerAccessToken {
-							accessToken
-							expiresAt
-						}
-						customerUserErrors {
-							code
-							field
-							message
-						}
+							customerAccessToken {
+								accessToken
+								expiresAt
+							}
+							customerUserErrors {
+								code
+								field
+								message
+							}
 						}
 					}
                 `,
@@ -48,5 +48,84 @@ export const getCustomerToken = (email, password) => {
 				password,
 			},
 		},
+	};
+};
+
+export const updateCustomer = (
+	customerAccessToken,
+	firstName,
+	lastName,
+	email
+) => {
+	return {
+		query: `
+					mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+						customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+							customer {
+								id
+							}
+							customerAccessToken {
+								accessToken
+								expiresAt
+							}
+							customerUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			customerAccessToken,
+			customer: {
+				firstName,
+				lastName,
+				email,
+			},
+		},
+	};
+};
+
+export const updateCustomerPassword = (customerAccessToken, password) => {
+	return {
+		query: `
+					mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+						customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+							customer {
+								id
+							}
+							customerAccessToken {
+								accessToken
+								expiresAt
+							}
+							customerUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			customerAccessToken,
+			customer: {
+				password,
+			},
+		},
+	};
+};
+
+export const getUserSettings = customerAccessToken => {
+	return {
+		query: `
+					{
+						customer (customerAccessToken: "${customerAccessToken}"){
+							firstName
+							lastName
+							email
+						}
+					}
+				`,
 	};
 };

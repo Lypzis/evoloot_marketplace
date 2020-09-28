@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
 import { ClientContext } from '../context/clientContext';
@@ -8,7 +8,6 @@ import Collection from '../components/Collection';
 const CollectionProducts = props => {
 	const [collection, setCollection] = useState();
 	const { handle } = useParams();
-	const history = useHistory();
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
 
@@ -19,10 +18,8 @@ const CollectionProducts = props => {
 			);
 
 			setCollection(incomingCollection[0]);
-		} else {
-			history.replace('/*');
 		}
-	}, [collections, handle, history]);
+	}, [collections, handle]);
 
 	useEffect(() => {
 		getCollection();

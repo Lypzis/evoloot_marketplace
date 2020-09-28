@@ -8,7 +8,6 @@ import ClientContextProvider from './context/clientContext';
 import AuthContextProvider from './context/authContext';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
-import './parse/index';
 
 import checkoutReducer from './store/reducers/checkout';
 

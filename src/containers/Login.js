@@ -4,18 +4,17 @@ import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
 
 const Login = props => {
-	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const authContext = useContext(AuthContext);
 
+	// login attempts limititation functionality by account 5+3
+
 	const login = async () => {
-		const usernameCopy = username;
+		const emailCopy = email;
 		const passCopy = password;
 
-		// setUsername('');
-		// setPassword('');
-
-		await authContext.login(usernameCopy, passCopy);
+		await authContext.login(emailCopy, passCopy);
 	};
 
 	return (
@@ -30,20 +29,20 @@ const Login = props => {
 						<label
 							htmlFor='email'
 							className='paragraph paragraph--black'>
-							Username
+							email
 						</label>
 						<input
-							type='text'
+							type='email'
 							id='email'
 							className='input'
 							maxLength={200}
 							required
-							value={username}
-							onChange={event => setUsername(event.target.value)}
+							value={email}
+							onChange={event => setEmail(event.target.value)}
 						/>
 						{authContext.loginError && (
 							<p className='paragraph paragraph--error'>
-								Incorrect username or password.
+								Incorrect email or password.
 							</p>
 						)}
 					</div>

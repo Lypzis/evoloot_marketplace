@@ -142,6 +142,7 @@
 
 	&__black--profile {
 		justify-content: stretch;
+		width: 15rem;
 		border-radius: 0.5rem 0 0 0.5rem;
 
 		& > .button__icon {
@@ -182,6 +183,10 @@
 
 	&__white--card {
 		margin-top: 1rem;
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
 	}
 
 	&__white--card-big {

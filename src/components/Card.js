@@ -64,28 +64,43 @@ const Card = props => {
 				</h3>
 			</Link>
 			<span className='navbar-line'></span>
-			<button
-				className='button button__white button__white--card'
-				onMouseOver={() => setIsMouseOverButton(true)}
-				onMouseOut={() => setIsMouseOverButton(false)}
-				onClick={onClickHandler}>
-				{isMouseOverButton ? (
-					<div className='button__icon-container'>
-						<svg className='button__icon button__icon--card'>
-							<use xlinkHref={`${sprite}#icon-cart`}></use>
-						</svg>
+			{props.product.variants[0].available ? (
+				<button
+					className='button button__white button__white--card'
+					onMouseOver={() => setIsMouseOverButton(true)}
+					onMouseOut={() => setIsMouseOverButton(false)}
+					onClick={onClickHandler}>
+					{isMouseOverButton ? (
+						<div className='button__icon-container'>
+							<svg className='button__icon button__icon--card'>
+								<use xlinkHref={`${sprite}#icon-cart`}></use>
+							</svg>
+							<p className='paragraph card__price'>
+								{props.product.variants.length === 1
+									? 'Add'
+									: 'Options'}
+							</p>
+						</div>
+					) : (
 						<p className='paragraph card__price'>
-							{props.product.variants.length === 1
-								? 'Add'
-								: 'Options'}
+							CAD$ {props.product.variants[0].price}
+						</p>
+					)}
+				</button>
+			) : (
+				<button
+					className='button button__white button__white--card'
+					onMouseOver={() => setIsMouseOverButton(true)}
+					onMouseOut={() => setIsMouseOverButton(false)}
+					disabled
+					onClick={onClickHandler}>
+					<div className='button__icon-container'>
+						<p className='paragraph  card__price card__price--white'>
+							out of stock
 						</p>
 					</div>
-				) : (
-					<p className='paragraph card__price'>
-						CAD$ {props.product.variants[0].price}
-					</p>
-				)}
-			</button>
+				</button>
+			)}
 		</div>
 	);
 };

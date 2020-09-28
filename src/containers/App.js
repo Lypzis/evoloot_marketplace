@@ -10,6 +10,7 @@ import Cart from './Cart';
 import SignUp from './SignUp';
 import Login from './Login';
 import NotFound from './NotFound';
+import Profile from './Profile';
 import { AuthContext } from '../context/authContext';
 
 function App() {
@@ -41,9 +42,12 @@ function App() {
 		</Switch>
 	);
 
-	if (authContext.currentUser)
+	if (authContext.customerToken)
 		routes = (
 			<Switch>
+				<Route path='/me'>
+					<Profile />
+				</Route>
 				<Route path='/cart'>
 					<Cart />
 				</Route>
