@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
@@ -19,7 +20,7 @@ const Login = props => {
 
 	return (
 		<Layout>
-			<div className='auth-form'>
+			<div className='auth-form auth-form__box'>
 				<h2 className='heading-secondary heading-secondary--dark auth-form__title'>
 					Log In
 				</h2>
@@ -61,6 +62,13 @@ const Login = props => {
 							value={password}
 							onChange={event => setPassword(event.target.value)}
 						/>
+					</div>
+					<div className='auth-form__field'>
+						<Link to='/forget' className='auth-form__forget-link'>
+							<p className='paragraph paragraph--black'>
+								Forgot your password?
+							</p>
+						</Link>
 					</div>
 
 					<div className='auth-form__field-button'>

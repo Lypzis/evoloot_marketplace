@@ -1,6 +1,6 @@
 .navbar {
 	position: relative;
-	max-width: 110rem;
+	max-width: 130rem;
 	margin: 0 auto;
 
 	&__list {
@@ -45,10 +45,16 @@
 	}
 
 	&__link {
-		display: block;
+		display: flex;
 		text-decoration: none;
 		color: #fff;
-		padding: 2rem 10rem;
+		align-items: center;
+		padding: 2rem 6rem;
 		transition: all 0.3s;
+
+		& > svg {
+			fill: #fff;
+			margin-right: 0.7rem;
+		}
 	}
 }

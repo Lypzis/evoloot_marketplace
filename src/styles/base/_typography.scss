@@ -51,4 +51,8 @@ body {
 	&--error {
 		color: rgba($color-red, 0.9);
 	}
+
+	&--validation {
+		color: rgba($color-tertiary, 0.9);
+	}
 }

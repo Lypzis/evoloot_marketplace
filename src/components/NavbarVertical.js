@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import sprite from '../assets/icons/sprite.svg';
+
 const NavbarVertical = props => {
 	return (
 		<nav className='navbar-vertical'>
@@ -10,6 +12,9 @@ const NavbarVertical = props => {
 						to={`/me/settings`}
 						className='paragraph navbar-vertical__link'
 						activeClassName='navbar__link--active'>
+						<svg className='button__icon '>
+							<use xlinkHref={`${sprite}#icon-cog`}></use>
+						</svg>
 						Settings
 					</NavLink>
 				</li>
@@ -18,6 +23,9 @@ const NavbarVertical = props => {
 						to={`/me/orders`}
 						className='paragraph navbar-vertical__link'
 						activeClassName='navbar__link--active'>
+						<svg className='button__icon '>
+							<use xlinkHref={`${sprite}#icon-dropbox`}></use>
+						</svg>
 						My Orders
 					</NavLink>
 				</li>
@@ -26,6 +34,9 @@ const NavbarVertical = props => {
 						to={`/me/address`}
 						className='paragraph navbar-vertical__link'
 						activeClassName='navbar__link--active'>
+						<svg className='button__icon '>
+							<use xlinkHref={`${sprite}#icon-location2`}></use>
+						</svg>
 						My Address
 					</NavLink>
 				</li>

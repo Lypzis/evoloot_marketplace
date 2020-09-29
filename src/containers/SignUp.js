@@ -55,12 +55,21 @@ const signupFormErrorReducer = (currentFormState, action) => {
 				...currentFormState,
 				usernameTaken: false,
 				emailIsTaken: true,
+				emailPending: false,
 			};
 		case 'SET_USER_IS_TAKEN':
 			return {
 				...currentFormState,
 				usernameTaken: true,
 				emailIsTaken: false,
+				emailPending: false,
+			};
+		case 'SET_EMAIL_IS_PENDING':
+			return {
+				...currentFormState,
+				usernameTaken: false,
+				emailIsTaken: false,
+				emailPending: true,
 			};
 		default:
 			return currentFormState;
@@ -86,11 +95,14 @@ const SignUp = props => {
 			passwordError: "Passwords don't match.",
 			emailError: 'This email format is invalid.',
 			emailTakenError: 'This email is already in use.',
+			emailPendingError:
+				'A verification link was already sent to your email.',
 			userNameTakenError: 'This username already exists.',
 			passwordIsWithError: false,
 			emailIsWithError: false,
 			emailIsTaken: false,
 			usernameTaken: false,
+			emailPending: false,
 		}
 	);
 
@@ -195,6 +207,21 @@ const SignUp = props => {
 			if (err.message === 'Email has already been taken')
 				dispatchSignupFormError({ type: 'SET_EMAIL_IS_TAKEN' });
 
+			let error = err.message;
+			error = error.split(',');
+
+			if (
+				error.length > 1 &&
+				error[1] ===
+					' please click the link included to verify your email address.'
+			) {
+				dispatchSignupFormError({ type: 'SET_EMAIL_IS_PENDING' });
+			}
+
+			// TO-DO
+			// If user order something and then try to create account with the same email
+			//	We have sent an email to test07@test.com, please click the link included to verify your email address.
+
 			// go to connection error page
 			console.log('Something went terribly wrong! ', err);
 		}
@@ -202,78 +229,12 @@ const SignUp = props => {
 
 	return (
 		<Layout>
-			<div className='auth-form'>
+			<div className='auth-form auth-form__box'>
 				<h2 className='heading-secondary heading-secondary--dark auth-form__title'>
 					Create My Account
 				</h2>
 
 				<form className='auth-form__form' onSubmit={validateFields}>
-					{/* <div className='auth-form__field'>
-						<label
-							htmlFor='username'
-							className='paragraph paragraph--black'>
-							Username
-						</label>
-						<input
-							type='text'
-							id='username'
-							className='input'
-							maxLength={100}
-							value={signupForm.username}
-							required
-							onChange={event =>
-								dispatchSignupForm({
-									type: 'SET_USERNAME',
-									username: event.target.value,
-								})
-							}
-						/>
-						{signupFormError.usernameTaken && (
-							<p className='paragraph paragraph--error'>
-								{signupFormError.userNameTakenError}
-							</p>
-						)}
-					</div> */}
-					{/* <div className='auth-form__field'>
-						<label
-							htmlFor='first-name'
-							className='paragraph paragraph--black'>
-							First Name
-						</label>
-						<input
-							type='text'
-							id='first-name'
-							className='input'
-							maxLength={100}
-							value={signupForm.name}
-							onChange={event =>
-								dispatchSignupForm({
-									type: 'SET_FIRST_NAME',
-									name: event.target.value,
-								})
-							}
-						/>
-					</div>
-					<div className='auth-form__field'>
-						<label
-							htmlFor='last-name'
-							className='paragraph paragraph--black'>
-							Last Name
-						</label>
-						<input
-							type='text'
-							id='last-name'
-							className='input'
-							maxLength={100}
-							value={signupForm.lastName}
-							onChange={event =>
-								dispatchSignupForm({
-									type: 'SET_LAST_NAME',
-									lastName: event.target.value,
-								})
-							}
-						/>
-					</div> */}
 					<div className='auth-form__field'>
 						<label
 							htmlFor='email'
@@ -302,6 +263,11 @@ const SignUp = props => {
 						{signupFormError.emailIsTaken && (
 							<p className='paragraph paragraph--error'>
 								{signupFormError.emailTakenError}
+							</p>
+						)}
+						{signupFormError.emailPending && (
+							<p className='paragraph paragraph--validation'>
+								{signupFormError.emailPendingError}
 							</p>
 						)}
 					</div>

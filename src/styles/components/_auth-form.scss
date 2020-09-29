@@ -2,6 +2,14 @@
 	&__form {
 	}
 
+	&__box {
+		background-color: #fff;
+		padding: 3rem;
+		border-radius: 0.5rem;
+		border: solid #000 5px;
+		box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+	}
+
 	&__field {
 		display: flex;
 		flex-direction: column;
@@ -31,5 +39,16 @@
 
 	&__field-button {
 		margin-top: 3rem;
+	}
+
+	&__forget-link {
+		text-decoration: none;
+		text-align: center;
+		font-size: 1.2rem;
+		margin-top: -1rem;
+
+		& > p {
+			font-size: 1.4rem;
+		}
 	}
 }
