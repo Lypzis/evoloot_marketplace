@@ -116,6 +116,25 @@ export const updateCustomerPassword = (customerAccessToken, password) => {
 	};
 };
 
+export const recoverCustomerPassword = email => {
+	return {
+		query: `
+					mutation customerRecover($email: String!) {
+						customerRecover(email: $email) {
+						customerUserErrors {
+							code
+							field
+							message
+						}
+						}
+					}
+                `,
+		variables: {
+			email,
+		},
+	};
+};
+
 export const getUserSettings = customerAccessToken => {
 	return {
 		query: `
@@ -124,6 +143,31 @@ export const getUserSettings = customerAccessToken => {
 							firstName
 							lastName
 							email
+						}
+					}
+				`,
+	};
+};
+
+export const getUserSettingsAndAddress = customerAccessToken => {
+	return {
+		query: `
+					{
+						customer (customerAccessToken: "${customerAccessToken}"){
+							firstName
+							lastName
+							email
+							defaultAddress{
+								firstName
+								lastName
+								company
+								address1
+								address2
+								city
+								country
+								province
+								zip
+							}
 						}
 					}
 				`,

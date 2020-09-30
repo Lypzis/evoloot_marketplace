@@ -10,9 +10,11 @@ import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
 import checkoutReducer from './store/reducers/checkout';
+import userReducer from './store/reducers/user';
 
 const rootReducers = combineReducers({
 	checkout: checkoutReducer,
+	user: userReducer,
 });
 
 const store = createStore(rootReducers);

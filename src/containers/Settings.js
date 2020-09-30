@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import validate from 'validate.js';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '../hoc/Layout';
 import NavbarVertical from '../components/NavbarVertical';
-import {
-	updateCustomer,
-	updateCustomerPassword,
-	getUserSettings,
-} from '../graphql';
+import { updateCustomer, updateCustomerPassword } from '../graphql';
 import axiosInstace from '../axios';
 import { AuthContext } from '../context/authContext';
+import { updateUserDetails } from '../store/actions/user';
 
 const Settings = props => {
 	const authContext = useContext(AuthContext);
+	const user = useSelector(state => state.user);
+	const distpatch = useDispatch();
 
 	const [lastName, setLastName] = useState('');
 	const [firstName, setFirstName] = useState('');
@@ -23,26 +23,11 @@ const Settings = props => {
 	const [emailNotValid, setEmailNotValid] = useState(false);
 	const [emailTaken, setEmailTaken] = useState(false);
 
-	const retrieveCustomerData = useCallback(async () => {
-		try {
-			const customerSettings = await axiosInstace.post(
-				'/api/graphql.json',
-				getUserSettings(authContext.customerToken)
-			);
-
-			const {
-				firstName,
-				lastName,
-				email,
-			} = customerSettings.data.data.customer;
-
-			setLastName(lastName);
-			setFirstName(firstName);
-			setEmail(email);
-		} catch (err) {
-			console.log(err);
-		}
-	}, [authContext]);
+	const retrieveCustomerData = useCallback(() => {
+		setLastName(user.lastName);
+		setFirstName(user.firstName);
+		setEmail(user.email);
+	}, [user]);
 
 	useEffect(() => {
 		retrieveCustomerData();
@@ -141,6 +126,10 @@ const Settings = props => {
 
 				throw new Error(errorMessage);
 			}
+
+			distpatch(
+				updateUserDetails(firstName.trim(), lastName.trim(), email)
+			);
 		} catch (err) {
 			setEmailTaken(true);
 		}

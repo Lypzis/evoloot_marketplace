@@ -19,6 +19,16 @@
 		}
 	}
 
+	&__field--address {
+		display: flex;
+		flex-direction: column;
+		width: 25.5rem;
+
+		&:not(:first-child) {
+			margin-top: 2rem;
+		}
+	}
+
 	&__field--side-by-side {
 		display: flex;
 		flex-direction: row;

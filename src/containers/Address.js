@@ -1,10 +1,13 @@
-import React from 'react';
-//import Parse from 'parse';
+import React, { useState } from 'react';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 import Layout from '../hoc/Layout';
 import NavbarVertical from '../components/NavbarVertical';
 
 const Address = props => {
+	const [country, setCountry] = useState('');
+	const [region, setRegion] = useState('');
+
 	return (
 		<Layout>
 			<div className='profile'>
@@ -115,13 +118,39 @@ const Address = props => {
 
 						{/* COUNTRY */}
 						{/* STATE/PROVINCE */}
-						{/* PROVINCE */}
+						<div className='auth-form__field auth-form__field--side-by-side'>
+							<div className='auth-form__field auth-form__field--address'>
+								<label
+									htmlFor='city'
+									className='paragraph paragraph--black'>
+									Country
+								</label>
+								<CountryDropdown
+									classes='input input__select input__select--address'
+									value={country}
+									onChange={val => setCountry(val)}
+								/>
+							</div>
+							<div className='auth-form__field auth-form__field--address'>
+								<label
+									htmlFor='city'
+									className='paragraph paragraph--black'>
+									Province/State
+								</label>
+								<RegionDropdown
+									classes='input input__select input__select--address'
+									country={country}
+									value={region}
+									onChange={val => setRegion(val)}
+								/>
+							</div>
+						</div>
 
 						<div className='auth-form__field'>
 							<label
 								htmlFor='zip'
 								className='paragraph paragraph--black'>
-								ZIP code
+								Postal/ZIP code
 							</label>
 							<input
 								type='text'

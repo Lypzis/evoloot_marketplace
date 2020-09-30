@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { getCustomerToken } from '../graphql';
+import { getCustomerToken, getUserSettingsAndAddress } from '../graphql';
 import axiosInstance from '../axios';
+import { initializeUserDetails } from '../store/actions/user';
 
 export const AuthContext = React.createContext({
 	customerToken: null,
@@ -17,8 +19,34 @@ const AuthContextProvider = props => {
 	const [userToken, setUserToken] = useState();
 	const [loginError, setLoginError] = useState(false);
 	const history = useHistory();
+	const dispatch = useDispatch();
 
-	const isUserOnline = useCallback(() => {
+	const getUserInformation = useCallback(
+		async accessToken => {
+			try {
+				const userInfo = await axiosInstance.post(
+					'/api/graphql.json',
+					getUserSettingsAndAddress(accessToken)
+				);
+
+				const { customer } = userInfo.data.data;
+
+				dispatch(
+					initializeUserDetails(
+						customer.firstName,
+						customer.lastName,
+						customer.email,
+						customer.defaultAddress
+					)
+				);
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		[dispatch]
+	);
+
+	const isUserOnline = useCallback(async () => {
 		let token = null;
 
 		const shopifyCustomerToken = localStorage.getItem(
@@ -33,9 +61,12 @@ const AuthContextProvider = props => {
 
 			if (!(date > expiresAt)) {
 				setUserToken(token.accessToken);
+
+				// ALSO GET AND FILL REDUCER WITH CUSTOMER ADDRESS AND DETAILS
+				await getUserInformation(token.accessToken);
 			}
 		}
-	}, []);
+	}, [getUserInformation]);
 
 	useEffect(() => {
 		isUserOnline();

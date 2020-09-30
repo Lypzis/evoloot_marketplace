@@ -67,10 +67,15 @@
 		border-radius: 0.5rem;
 		appearance: none;
 		cursor: pointer;
-		background: url('../../assets/images/dropdownArrow.png') 96% / 15%
-			no-repeat #fff;
+		font-family: inherit;
+		background: url('../../assets/images/dropdownArrow.png') 96% /15% no-repeat
+			#fff;
 
 		//font-size: 1.2rem;
+	}
+
+	&__select--address {
+		width: 100%;
 	}
 
 	&__radio-image {

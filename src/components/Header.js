@@ -1,5 +1,6 @@
 import React, { Fragment, memo, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Navbar from './Navbar';
 import sprite from '../assets/icons/sprite.svg';
@@ -8,6 +9,7 @@ import { AuthContext } from '../context/authContext';
 
 const Header = props => {
 	const authContext = useContext(AuthContext);
+	const checkout = useSelector(state => state.checkout);
 
 	const history = useHistory();
 
@@ -65,6 +67,25 @@ const Header = props => {
 									</svg>
 								</button>
 							</form>
+							<div className='header__loged-out'>
+								<button
+									className='button button__black button__black--cart'
+									onClick={() => history.push('/cart')}>
+									<svg className='button__icon'>
+										<use
+											xlinkHref={`${sprite}#icon-cart`}></use>
+									</svg>
+									<div className='button__quantity'>
+										<p className='paragraph'>
+											{checkout.lineItems.length > 0
+												? checkout.lineItems
+														.map(el => el.quantity)
+														.reduce((a, b) => a + b)
+												: 0}
+										</p>
+									</div>
+								</button>
+							</div>
 							{!authContext.customerToken ? (
 								<div className='header__loged-out'>
 									<button

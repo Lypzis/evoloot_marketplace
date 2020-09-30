@@ -11,11 +11,16 @@ const Login = props => {
 
 	// login attempts limititation functionality by account 5+3
 
-	const login = async () => {
-		const emailCopy = email;
-		const passCopy = password;
+	const login = async event => {
+		event.preventDefault();
+		try {
+			const emailCopy = email;
+			const passCopy = password;
 
-		await authContext.login(emailCopy, passCopy);
+			await authContext.login(emailCopy, passCopy);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -25,7 +30,7 @@ const Login = props => {
 					Log In
 				</h2>
 
-				<div className='auth-form__form'>
+				<form className='auth-form__form' onSubmit={login}>
 					<div className='auth-form__field'>
 						<label
 							htmlFor='email'
@@ -74,13 +79,13 @@ const Login = props => {
 					<div className='auth-form__field-button'>
 						<button
 							className='button button__white button__white--card-big'
-							onClick={login}>
+							onClick={() => {}}>
 							<p className='paragraph card__price card__price--big cart__button-text'>
 								Log in
 							</p>
 						</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</Layout>
 	);

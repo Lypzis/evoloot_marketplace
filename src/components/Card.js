@@ -96,7 +96,7 @@ const Card = props => {
 					onClick={onClickHandler}>
 					<div className='button__icon-container'>
 						<p className='paragraph  card__price card__price--white'>
-							out of stock
+							sold out
 						</p>
 					</div>
 				</button>
