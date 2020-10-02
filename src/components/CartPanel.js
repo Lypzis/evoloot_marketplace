@@ -7,9 +7,24 @@ import LineProducts from './LineProducts';
 import BluredBackground from './BluredBackground';
 import { ClientContext } from '../context/clientContext';
 import { removeAllProductsFromCheckout } from '../store/actions/checkout';
+import { updateCheckoutShippingAddress, updateCheckoutEmail } from '../graphql';
+import axiosInstace from '../axios';
+
+const addressFields = {
+	firstName: '',
+	lastName: '',
+	company: '',
+	address1: '',
+	address2: '',
+	city: '',
+	country: '',
+	province: '',
+	zip: '',
+};
 
 const CartPanel = props => {
 	const checkout = useSelector(state => state.checkout);
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const clientContext = useContext(ClientContext);
 	const history = useHistory();
@@ -24,6 +39,34 @@ const CartPanel = props => {
 			});
 
 			const newCheckout = await clientContext.client.checkout.create();
+
+			if (user.email)
+				await axiosInstace.post(
+					'/api/graphql.json',
+					updateCheckoutEmail(user.email, newCheckout.id)
+				);
+
+			if (user.mainAddress) {
+				const addressWithoutId = { ...addressFields };
+
+				for (let key in user.mainAddress)
+					if (key !== 'id')
+						addressWithoutId[key] = user.mainAddress[key];
+
+				const checkoutWithAddress = await axiosInstace.post(
+					'/api/graphql.json',
+					updateCheckoutShippingAddress(
+						addressWithoutId,
+						newCheckout.id
+					)
+				);
+
+				const errors =
+					checkoutWithAddress.data.data
+						.checkoutShippingAddressUpdateV2.checkoutUserErrors;
+
+				if (errors.length > 0) throw new Error(errors[0].message);
+			}
 
 			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
 				newCheckout.id,

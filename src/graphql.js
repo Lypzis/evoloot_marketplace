@@ -225,3 +225,49 @@ export const updateCustomerAddress = (
 		},
 	};
 };
+
+export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
+	return {
+		query: `
+					mutation checkoutShippingAddressUpdateV2($shippingAddress: MailingAddressInput!, $checkoutId: ID!) {
+						checkoutShippingAddressUpdateV2(shippingAddress: $shippingAddress, checkoutId: $checkoutId) {
+							checkout {
+								id
+							}
+							checkoutUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			shippingAddress,
+			checkoutId,
+		},
+	};
+};
+
+export const updateCheckoutEmail = (email, checkoutId) => {
+	return {
+		query: `
+					mutation checkoutEmailUpdateV2($checkoutId: ID!, $email: String!) {
+						checkoutEmailUpdateV2(checkoutId: $checkoutId, email: $email) {
+							checkout {
+								id
+							}
+							checkoutUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			email,
+			checkoutId,
+		},
+	};
+};
