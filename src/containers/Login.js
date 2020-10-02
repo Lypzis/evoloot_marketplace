@@ -19,7 +19,7 @@ const Login = props => {
 
 			await authContext.login(emailCopy, passCopy);
 		} catch (err) {
-			console.log(err);
+			console.log('Fucking error: ', err);
 		}
 	};
 

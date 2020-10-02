@@ -115,7 +115,9 @@ const AuthContextProvider = props => {
 				JSON.stringify(customerAccessToken)
 			);
 
+			setLoginError(false);
 			setUserToken(customerAccessToken.accessToken);
+			await getUserInformation(customerAccessToken.accessToken);
 
 			history.replace('/');
 		} catch (err) {

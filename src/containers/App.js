@@ -37,11 +37,11 @@ function App() {
 			<Route path='/product/:handle'>
 				<ProductDetails />
 			</Route>
+			<Route path='/404'>
+				<NotFound />
+			</Route>
 			<Route exact path='/'>
 				<Home />
-			</Route>
-			<Route path='*'>
-				<NotFound />
 			</Route>
 		</Switch>
 	);
@@ -61,11 +61,11 @@ function App() {
 				<Route path='/product/:handle'>
 					<ProductDetails />
 				</Route>
+				<Route path='/404'>
+					<NotFound />
+				</Route>
 				<Route exact path='/'>
 					<Home />
-				</Route>
-				<Route path='*'>
-					<NotFound />
 				</Route>
 			</Switch>
 		);

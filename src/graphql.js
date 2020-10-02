@@ -158,6 +158,7 @@ export const getUserSettingsAndAddress = customerAccessToken => {
 							lastName
 							email
 							defaultAddress{
+								id
 								firstName
 								lastName
 								company
@@ -171,5 +172,56 @@ export const getUserSettingsAndAddress = customerAccessToken => {
 						}
 					}
 				`,
+	};
+};
+
+export const createCustomerAddress = (customerAccessToken, address) => {
+	return {
+		query: `
+					mutation customerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
+						customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
+							customerAddress {
+								id
+							}
+							customerUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			customerAccessToken,
+			address,
+		},
+	};
+};
+
+export const updateCustomerAddress = (
+	customerAccessToken,
+	addressId,
+	address
+) => {
+	return {
+		query: `
+					mutation customerAddressUpdate($customerAccessToken: String!, $id: ID!, $address: MailingAddressInput!) {
+						customerAddressUpdate(customerAccessToken: $customerAccessToken, id: $id, address: $address) {
+							customerAddress {
+								id
+							}
+							customerUserErrors {
+								code
+								field
+								message
+							}
+						}
+					}
+                `,
+		variables: {
+			customerAccessToken,
+			id: addressId,
+			address,
+		},
 	};
 };

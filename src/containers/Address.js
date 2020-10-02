@@ -1,12 +1,118 @@
-import React, { useState } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Layout from '../hoc/Layout';
 import NavbarVertical from '../components/NavbarVertical';
+import { createCustomerAddress, updateCustomerAddress } from '../graphql';
+import axiosInstance from '../axios';
+import { AuthContext } from '../context/authContext';
+import { updateUserAddress } from '../store/actions/user';
+
+const addressFormReducer = (currentFormState, action) => {
+	switch (action.type) {
+		case 'INITIALIZE':
+			return {
+				...action.address,
+			};
+		case 'SET_FIELD':
+			return {
+				...currentFormState,
+				[action.field]: action.value,
+			};
+		default:
+			return currentFormState;
+	}
+};
+
+const addressFields = {
+	firstName: '',
+	lastName: '',
+	company: '',
+	address1: '',
+	address2: '',
+	city: '',
+	country: '',
+	province: '',
+	zip: '',
+};
 
 const Address = props => {
-	const [country, setCountry] = useState('');
-	const [region, setRegion] = useState('');
+	const authContext = useContext(AuthContext);
+	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
+
+	const [addressForm, dispatchAddressForm] = useReducer(addressFormReducer, {
+		...addressFields,
+	});
+
+	useEffect(() => {
+		if (user.mainAddress)
+			dispatchAddressForm({
+				type: 'INITIALIZE',
+				address: user.mainAddress,
+			});
+	}, [user.mainAddress]);
+
+	const updateAddress = async event => {
+		event.preventDefault();
+
+		try {
+			if (!user.mainAddress) {
+				const customerAddress = await axiosInstance.post(
+					'/api/graphql.json',
+					createCustomerAddress(
+						authContext.customerToken,
+						addressForm
+					)
+				);
+
+				const {
+					id,
+				} = customerAddress.data.data.customerAddressCreate.customerAddress;
+
+				dispatch(updateUserAddress({ ...addressForm, id }));
+				return;
+			}
+
+			// ELSE UPDATE
+			const addressId = addressForm.id;
+			let addressWithoutId = {
+				...addressFields,
+			};
+
+			for (let key in addressForm)
+				if (key !== 'id') addressWithoutId[key] = addressForm[key];
+
+			await axiosInstance.post(
+				'/api/graphql.json',
+				updateCustomerAddress(
+					authContext.customerToken,
+					addressId,
+					addressWithoutId
+				)
+			);
+
+			dispatch(updateUserAddress({ ...addressWithoutId, id: addressId }));
+		} catch (err) {
+			// certainly a connection error
+			console.log('Err: ', err);
+		}
+	};
+
+	// IF ADDRESS EXISTS, FILL ADDRESS FIELDS
+
+	const setField = (event, field) => {
+		dispatchAddressForm({
+			type: 'SET_FIELD',
+			field,
+			value: event.target.value,
+		});
+	};
+
+	const setFieldDropdown = (value, field) => {
+		dispatchAddressForm({ type: 'SET_FIELD', field, value });
+	};
 
 	return (
 		<Layout>
@@ -17,7 +123,7 @@ const Address = props => {
 						My Address
 					</h2>
 
-					<div className='auth-form__form'>
+					<form className='auth-form__form' onSubmit={updateAddress}>
 						<div className='auth-form__field auth-form__field--side-by-side'>
 							<div className='auth-form__field'>
 								<label
@@ -30,10 +136,10 @@ const Address = props => {
 									id='first-name'
 									className='input'
 									maxLength={100}
-									// value={firstName}
-									// onChange={event =>
-									// 	setFirstName(event.target.value)
-									// }
+									value={addressForm.firstName}
+									onChange={event =>
+										setField(event, 'firstName')
+									}
 								/>
 							</div>
 							<div className='auth-form__field'>
@@ -47,10 +153,10 @@ const Address = props => {
 									id='last-name'
 									className='input'
 									maxLength={100}
-									// value={lastName}
-									// onChange={event =>
-									// 	setLastName(event.target.value)
-									// }
+									value={addressForm.lastName}
+									onChange={event =>
+										setField(event, 'lastName')
+									}
 								/>
 							</div>
 						</div>
@@ -66,8 +172,8 @@ const Address = props => {
 								id='company'
 								className='input'
 								maxLength={200}
-								// value={email}
-								// onChange={event => setEmail(event.target.value)}
+								value={addressForm.company}
+								onChange={event => setField(event, 'company')}
 							/>
 						</div>
 						<div className='auth-form__field'>
@@ -81,8 +187,8 @@ const Address = props => {
 								id='address'
 								className='input'
 								maxLength={200}
-								// value={email}
-								// onChange={event => setEmail(event.target.value)}
+								value={addressForm.address1}
+								onChange={event => setField(event, 'address1')}
 							/>
 						</div>
 						<div className='auth-form__field'>
@@ -96,8 +202,8 @@ const Address = props => {
 								id='additional'
 								className='input'
 								maxLength={200}
-								// value={email}
-								// onChange={event => setEmail(event.target.value)}
+								value={addressForm.address2}
+								onChange={event => setField(event, 'address2')}
 							/>
 						</div>
 						<div className='auth-form__field'>
@@ -111,8 +217,8 @@ const Address = props => {
 								id='city'
 								className='input'
 								maxLength={200}
-								// value={email}
-								// onChange={event => setEmail(event.target.value)}
+								value={addressForm.city}
+								onChange={event => setField(event, 'city')}
 							/>
 						</div>
 
@@ -127,8 +233,11 @@ const Address = props => {
 								</label>
 								<CountryDropdown
 									classes='input input__select input__select--address'
-									value={country}
-									onChange={val => setCountry(val)}
+									value={addressForm.country}
+									defaultOptionLabel={addressForm.country}
+									onChange={val =>
+										setFieldDropdown(val, 'country')
+									}
 								/>
 							</div>
 							<div className='auth-form__field auth-form__field--address'>
@@ -139,9 +248,12 @@ const Address = props => {
 								</label>
 								<RegionDropdown
 									classes='input input__select input__select--address'
-									country={country}
-									value={region}
-									onChange={val => setRegion(val)}
+									country={addressForm.country}
+									defaultOptionLabel={addressForm.province}
+									value={addressForm.province}
+									onChange={val =>
+										setFieldDropdown(val, 'province')
+									}
 								/>
 							</div>
 						</div>
@@ -157,8 +269,8 @@ const Address = props => {
 								id='zip'
 								className='input'
 								maxLength={20}
-								// value={email}
-								// onChange={event => setEmail(event.target.value)}
+								value={addressForm.zip}
+								onChange={event => setField(event, 'zip')}
 							/>
 						</div>
 
@@ -171,7 +283,7 @@ const Address = props => {
 								</p>
 							</button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</Layout>
