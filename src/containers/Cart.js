@@ -8,6 +8,7 @@ import { ClientContext } from '../context/clientContext';
 import { removeAllProductsFromCheckout } from '../store/actions/checkout';
 import { updateCheckoutShippingAddress, updateCheckoutEmail } from '../graphql';
 import axiosInstace from '../axios';
+import LoadingBar from '../components/LoadingBar';
 
 const addressFields = {
 	firstName: '',
@@ -28,9 +29,11 @@ const Cart = props => {
 	const clientContext = useContext(ClientContext);
 	const history = useHistory();
 	const [textAreaValue, setTextAreaValue] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	const createCheckout = async () => {
 		try {
+			setLoading(true);
 			const lineItems = checkout.lineItems.map(product => {
 				return {
 					variantId: product.id,
@@ -89,8 +92,11 @@ const Cart = props => {
 
 			window.open(checkoutWithProducts.webUrl);
 			dispatch(removeAllProductsFromCheckout());
+			setLoading(false);
+
 			history.push('/');
 		} catch (err) {
+			setLoading(false);
 			console.log('Something terrible happened ', err);
 		}
 	};
@@ -129,14 +135,18 @@ const Cart = props => {
 					</div>
 				</div>
 
-				<button
-					className='button button__white button__white--card-big'
-					disabled={checkout.totalPrice === 0}
-					onClick={createCheckout}>
-					<p className='paragraph card__price card__price--big cart__button-text'>
-						proceed to checkout
-					</p>
-				</button>
+				{!loading ? (
+					<button
+						className='button button__white button__white--card-big'
+						disabled={checkout.totalPrice === 0}
+						onClick={createCheckout}>
+						<p className='paragraph card__price card__price--big cart__button-text'>
+							proceed to checkout
+						</p>
+					</button>
+				) : (
+					<LoadingBar marginTop='3rem' width={400} />
+				)}
 			</div>
 		</Layout>
 	);

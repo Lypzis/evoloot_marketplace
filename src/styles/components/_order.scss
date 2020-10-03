@@ -1,0 +1,50 @@
+.order {
+	margin-bottom: 3rem;
+	border: solid #000 2px;
+	padding: 3rem;
+	border-radius: 0.5rem;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+
+	&__status {
+		padding: 0.3rem 1rem;
+		border-radius: 2rem;
+		color: #fff;
+
+		&--pending {
+			background-color: #535c62;
+		}
+	}
+
+	&__content {
+		margin-top: 2.5rem;
+	}
+
+	&__link {
+		display: block;
+	}
+
+	&__product-title {
+		text-align: right;
+		width: 22rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__line {
+		margin: 1.5rem 0;
+	}
+
+	&__table-data {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+
+		padding: 0.5rem 0;
+	}
+}

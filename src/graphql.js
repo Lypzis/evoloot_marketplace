@@ -308,6 +308,7 @@ export const getCustomerOrders = (
 														}
 														priceV2{
 															amount
+															currencyCode
 														}
 													}
 													quantity
@@ -317,18 +318,23 @@ export const getCustomerOrders = (
 										}
 										subtotalPriceV2{
 											amount
+											currencyCode
 										}
 										totalShippingPriceV2 {
 											amount
+											currencyCode
 										}
 										totalPriceV2{
 											amount
+											currencyCode
 										}
 										totalRefundedV2 {
 											amount
+											currencyCode
 										}
 										totalTaxV2 {
 											amount
+											currencyCode
 										}
 									}
 								}

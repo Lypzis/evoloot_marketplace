@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useContext } from 'react';
+import React, { Fragment, memo, useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import { ClientContext } from '../context/clientContext';
 import { removeAllProductsFromCheckout } from '../store/actions/checkout';
 import { updateCheckoutShippingAddress, updateCheckoutEmail } from '../graphql';
 import axiosInstace from '../axios';
+import LoadingBar from './LoadingBar';
 
 const addressFields = {
 	firstName: '',
@@ -28,9 +29,11 @@ const CartPanel = props => {
 	const dispatch = useDispatch();
 	const clientContext = useContext(ClientContext);
 	const history = useHistory();
+	const [loading, setLoading] = useState(false);
 
 	const createQuickCheckout = async () => {
 		try {
+			setLoading(true);
 			const lineItems = checkout.lineItems.map(product => {
 				return {
 					variantId: product.id,
@@ -75,8 +78,11 @@ const CartPanel = props => {
 			);
 
 			window.open(checkoutWithProducts.webUrl);
+			setLoading(false);
+
 			dispatch(removeAllProductsFromCheckout());
 		} catch (err) {
+			setLoading(false);
 			console.log('Something terrible happened ', err);
 		}
 	};
@@ -133,21 +139,27 @@ const CartPanel = props => {
 							</div>
 						</div>
 
-						<button
-							className='button button__white button__white--card-big'
-							disabled={checkout.totalPrice === 0}
-							onClick={createQuickCheckout}>
-							<p className='paragraph card__price card__price--big cart__button-text'>
-								checkout
-							</p>
-						</button>
-						<button
-							className='button button__white button__white--card-big small-margin-top'
-							onClick={() => history.push('/cart')}>
-							<p className='paragraph card__price card__price--big cart__button-text'>
-								view cart
-							</p>
-						</button>
+						{!loading ? (
+							<>
+								<button
+									className='button button__white button__white--card-big'
+									disabled={checkout.totalPrice === 0}
+									onClick={createQuickCheckout}>
+									<p className='paragraph card__price card__price--big cart__button-text'>
+										checkout
+									</p>
+								</button>
+								<button
+									className='button button__white button__white--card-big small-margin-top'
+									onClick={() => history.push('/cart')}>
+									<p className='paragraph card__price card__price--big cart__button-text'>
+										view cart
+									</p>
+								</button>
+							</>
+						) : (
+							<LoadingBar marginTop='3rem' />
+						)}
 						<p>&emsp;</p>
 					</div>
 				</div>

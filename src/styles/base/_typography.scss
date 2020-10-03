@@ -39,6 +39,10 @@ body {
 	font-weight: 700;
 	color: rgba(250, 250, 250, 0.7);
 	text-transform: uppercase;
+
+	&--dark {
+		color: $color-gray-dark-3;
+	}
 }
 
 .paragraph {
