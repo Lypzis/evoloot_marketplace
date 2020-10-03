@@ -351,15 +351,24 @@ const ProductDetails = props => {
 										productChosen.quantity === 0 ||
 										!productChosen.variant.available
 									}>
-									<div className='button__icon-container button__icon-container--big'>
-										<svg className='button__icon button__icon--card-big '>
-											<use
-												xlinkHref={`${sprite}#icon-cart`}></use>
-										</svg>
-										<p className='paragraph card__price card__price--big'>
-											Add To Cart
-										</p>
-									</div>
+									{productChosen.quantity === 0 ||
+									!productChosen.variant.available ? (
+										<div className='button__icon-container button__icon-container--big'>
+											<p className='paragraph card__price card__price--big'>
+												Sold Out
+											</p>
+										</div>
+									) : (
+										<div className='button__icon-container button__icon-container--big'>
+											<svg className='button__icon button__icon--card-big '>
+												<use
+													xlinkHref={`${sprite}#icon-cart`}></use>
+											</svg>
+											<p className='paragraph card__price card__price--big'>
+												Add To Cart
+											</p>
+										</div>
+									)}
 								</button>
 							</div>
 						</div>

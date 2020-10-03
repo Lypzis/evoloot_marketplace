@@ -52,11 +52,11 @@ const Header = props => {
 					</Link>
 					<div className='header__buttons'>
 						<div className='header__user'>
-							<form className='header__search-form'>
+							<div className='header__search-form'>
 								<input
 									type='search'
 									placeholder='Search'
-									className='input'
+									className='input input__search'
 								/>
 								<button
 									type='submit'
@@ -66,7 +66,7 @@ const Header = props => {
 											xlinkHref={`${sprite}#icon-search`}></use>
 									</svg>
 								</button>
-							</form>
+							</div>
 							<div className='header__loged-out'>
 								<button
 									className='button button__black button__black--cart'

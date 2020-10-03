@@ -53,7 +53,8 @@ const CartPanel = props => {
 					if (key !== 'id')
 						addressWithoutId[key] = user.mainAddress[key];
 
-				const checkoutWithAddress = await axiosInstace.post(
+				//const checkoutWithAddress =
+				await axiosInstace.post(
 					'/api/graphql.json',
 					updateCheckoutShippingAddress(
 						addressWithoutId,
@@ -61,11 +62,11 @@ const CartPanel = props => {
 					)
 				);
 
-				const errors =
-					checkoutWithAddress.data.data
-						.checkoutShippingAddressUpdateV2.checkoutUserErrors;
+				// const errors =
+				// 	checkoutWithAddress.data.data
+				// 		.checkoutShippingAddressUpdateV2.checkoutUserErrors;
 
-				if (errors.length > 0) throw new Error(errors[0].message);
+				// if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
 			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(

@@ -271,3 +271,70 @@ export const updateCheckoutEmail = (email, checkoutId) => {
 		},
 	};
 };
+
+export const getCustomerOrders = (
+	customerAccessToken,
+	groupBy = 'first: 10'
+) => {
+	// PART OF ORDERS
+	// customerUrl
+	// statusUrl
+	return {
+		query: `
+					{
+						customer (customerAccessToken: "${customerAccessToken}"){
+							orders(${groupBy}) {
+								edges {
+									node {
+										name
+										processedAt
+										successfulFulfillments{
+											trackingInfo{
+												number
+												url
+											}
+										}
+										lineItems(first: 100) {
+											edges {
+												node {
+													variant{
+														sku	
+														product{
+															handle
+														}
+														image {
+															originalSrc
+															altText
+														}
+														priceV2{
+															amount
+														}
+													}
+													quantity
+													title
+												}
+											}
+										}
+										subtotalPriceV2{
+											amount
+										}
+										totalShippingPriceV2 {
+											amount
+										}
+										totalPriceV2{
+											amount
+										}
+										totalRefundedV2 {
+											amount
+										}
+										totalTaxV2 {
+											amount
+										}
+									}
+								}
+							}
+						}
+					}
+			`,
+	};
+};

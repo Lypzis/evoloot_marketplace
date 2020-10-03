@@ -60,13 +60,12 @@ const Cart = props => {
 			if (user.mainAddress) {
 				const addressWithoutId = { ...addressFields };
 
-				console.log(addressWithoutId);
-
 				for (let key in user.mainAddress)
 					if (key !== 'id')
 						addressWithoutId[key] = user.mainAddress[key];
 
-				const checkoutWithAddress = await axiosInstace.post(
+				// const checkoutWithAddress =
+				await axiosInstace.post(
 					'/api/graphql.json',
 					updateCheckoutShippingAddress(
 						addressWithoutId,
@@ -74,11 +73,13 @@ const Cart = props => {
 					)
 				);
 
-				const errors =
-					checkoutWithAddress.data.data
-						.checkoutShippingAddressUpdateV2.checkoutUserErrors;
+				// TO-DO: needs proper treatment, or trust that user will know
+				// that his info is not getting grabbed because of wrong address information
+				// const errors =
+				// 	checkoutWithAddress.data.data
+				// 		.checkoutShippingAddressUpdateV2.checkoutUserErrors;
 
-				if (errors.length > 0) throw new Error(errors[0].message);
+				//if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
 			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(

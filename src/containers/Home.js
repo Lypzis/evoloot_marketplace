@@ -9,14 +9,19 @@ import React, {
 import Layout from '../hoc/Layout';
 import { ClientContext } from '../context/clientContext';
 import Collection from '../components/Collection';
+import LoadingBar from '../components/LoadingBar';
 
 const Home = props => {
 	const [homeCollections, setHomeCollections] = useState();
+	const [loading, setLoading] = useState(true);
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
 
 	const getFeaturedProducts = useCallback(() => {
-		if (collections) setHomeCollections([...collections]);
+		if (collections) {
+			setHomeCollections([...collections]);
+			setLoading(false);
+		}
 	}, [collections]);
 
 	useEffect(() => {
@@ -37,8 +42,10 @@ const Home = props => {
 
 	return (
 		<Layout>
-			{homeCollections && (
+			{homeCollections ? (
 				<section className='home'>{renderHomeCollections()}</section>
+			) : (
+				<LoadingBar loading={loading} marginTop={'18rem'} />
 			)}
 		</Layout>
 	);
