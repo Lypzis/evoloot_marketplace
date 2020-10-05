@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, useReducer, useEffect, useState } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { createCustomerAddress, updateCustomerAddress } from '../graphql';
 import axiosInstance from '../axios';
 import { AuthContext } from '../context/authContext';
 import { updateUserAddress } from '../store/actions/user';
+import LoadingBar from '../components/LoadingBar';
 
 const addressFormReducer = (currentFormState, action) => {
 	switch (action.type) {
@@ -45,6 +46,7 @@ const Address = props => {
 	const [addressForm, dispatchAddressForm] = useReducer(addressFormReducer, {
 		...addressFields,
 	});
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (user.mainAddress)
@@ -58,6 +60,7 @@ const Address = props => {
 		event.preventDefault();
 
 		try {
+			setLoading(true);
 			if (!user.mainAddress) {
 				const customerAddress = await axiosInstance.post(
 					'/api/graphql.json',
@@ -71,6 +74,7 @@ const Address = props => {
 					id,
 				} = customerAddress.data.data.customerAddressCreate.customerAddress;
 
+				setLoading(false);
 				dispatch(updateUserAddress({ ...addressForm, id }));
 				return;
 			}
@@ -93,14 +97,14 @@ const Address = props => {
 				)
 			);
 
+			setLoading(false);
 			dispatch(updateUserAddress({ ...addressWithoutId, id: addressId }));
 		} catch (err) {
 			// certainly a connection error
+			setLoading(false);
 			console.log('Err: ', err);
 		}
 	};
-
-	// IF ADDRESS EXISTS, FILL ADDRESS FIELDS
 
 	const setField = (event, field) => {
 		dispatchAddressForm({
@@ -275,13 +279,17 @@ const Address = props => {
 						</div>
 
 						<div className='auth-form__field-button'>
-							<button
-								className='button button__white button__white--card-big'
-								onClick={() => console.log('address updated')}>
-								<p className='paragraph card__price card__price--big cart__button-text'>
-									Update My Address
-								</p>
-							</button>
+							{!loading ? (
+								<button
+									className='button button__white button__white--card-big'
+									onClick={() => {}}>
+									<p className='paragraph card__price card__price--big cart__button-text'>
+										Update My Address
+									</p>
+								</button>
+							) : (
+								<LoadingBar width={350} loading={loading} />
+							)}
 						</div>
 					</form>
 				</div>

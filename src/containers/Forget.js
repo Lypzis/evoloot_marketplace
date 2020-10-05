@@ -5,12 +5,14 @@ import validate from 'validate.js';
 import axiosInstance from '../axios';
 import { recoverCustomerPassword } from '../graphql';
 import Layout from '../hoc/Layout';
+import LoadingBar from '../components/LoadingBar';
 
 const Forget = props => {
 	const history = useHistory();
 
 	const [email, setEmail] = useState('');
 	const [invalidEmailMessage, setInvalidEmailMessage] = useState();
+	const [loading, setLoading] = useState(false);
 
 	const validEmail = () => {
 		const constraints = {
@@ -30,13 +32,21 @@ const Forget = props => {
 
 			setInvalidEmailMessage(null);
 
-			await axiosInstance.post(
+			setLoading(true);
+
+			const user = await axiosInstance.post(
 				'/api/graphql.json',
 				recoverCustomerPassword(email)
 			);
 
+			if (user.data.data.customerRecover.customerUserErrors.length > 0)
+				throw new Error(
+					'Sorry, there is something wrong with that email.'
+				);
+
 			history.replace('/');
 		} catch (err) {
+			setLoading(false);
 			setInvalidEmailMessage(err.message);
 			//console.log('Something went terribly wrong! ', err);
 		}
@@ -73,13 +83,17 @@ const Forget = props => {
 					</div>
 
 					<div className='auth-form__field-button'>
-						<button
-							className='button button__white button__white--card-big'
-							onClick={() => {}}>
-							<p className='paragraph card__price card__price--big cart__button-text'>
-								Reset
-							</p>
-						</button>
+						{!loading ? (
+							<button
+								className='button button__white button__white--card-big'
+								onClick={() => {}}>
+								<p className='paragraph card__price card__price--big cart__button-text'>
+									Reset
+								</p>
+							</button>
+						) : (
+							<LoadingBar loading={loading} />
+						)}
 					</div>
 				</form>
 			</div>

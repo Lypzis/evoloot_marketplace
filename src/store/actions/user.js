@@ -30,3 +30,17 @@ export const updateUserAddress = mainAddress => {
 		mainAddress,
 	};
 };
+
+export const setUserOrders = orders => {
+	return {
+		type: actionTypes.SET_USER_ORDERS,
+		orders,
+	};
+};
+
+export const updateUserOrders = orders => {
+	return {
+		type: actionTypes.UPDATE_USER_ORDERS,
+		orders,
+	};
+};

@@ -16,7 +16,15 @@
 		color: #fff;
 
 		&--pending {
-			background-color: #535c62;
+			background-color: $color-gray-dark-4;
+		}
+
+		&--complete {
+			background-color: $color-tertiary;
+		}
+
+		&--canceled {
+			background-color: $color-red;
 		}
 	}
 

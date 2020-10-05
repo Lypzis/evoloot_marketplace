@@ -49,6 +49,12 @@
 
 	&__field-button {
 		margin-top: 3rem;
+
+		&--with-title {
+			margin-top: 0;
+			display: flex;
+			justify-content: space-between;
+		}
 	}
 
 	&__forget-link {

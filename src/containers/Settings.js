@@ -8,6 +8,7 @@ import { updateCustomer, updateCustomerPassword } from '../graphql';
 import axiosInstace from '../axios';
 import { AuthContext } from '../context/authContext';
 import { updateUserDetails } from '../store/actions/user';
+import LoadingBar from '../components/LoadingBar';
 
 const Settings = props => {
 	const authContext = useContext(AuthContext);
@@ -22,6 +23,8 @@ const Settings = props => {
 	const [passwordNotEqual, setPasswordNotEqual] = useState(false);
 	const [emailNotValid, setEmailNotValid] = useState(false);
 	const [emailTaken, setEmailTaken] = useState(false);
+	const [loadingSettings, setLoadingSettings] = useState(false);
+	const [loadingPassword, setLoadingPassword] = useState(false);
 
 	const retrieveCustomerData = useCallback(() => {
 		setLastName(user.lastName);
@@ -76,6 +79,7 @@ const Settings = props => {
 			}
 
 			setPasswordNotEqual(false);
+			setLoadingPassword(true);
 
 			const res = await axiosInstace.post(
 				'/api/graphql.json',
@@ -88,10 +92,12 @@ const Settings = props => {
 
 				throw new Error(errorMessage);
 			}
+			setLoadingPassword(false);
 
 			authContext.logout();
 		} catch (err) {
 			// CONNECTION ERROR
+			setLoadingPassword(false);
 			console.log(err);
 		}
 	};
@@ -109,6 +115,7 @@ const Settings = props => {
 
 			setEmailNotValid(false);
 			setEmailTaken(false);
+			setLoadingSettings(true);
 
 			const res = await axiosInstace.post(
 				'/api/graphql.json',
@@ -127,11 +134,13 @@ const Settings = props => {
 				throw new Error(errorMessage);
 			}
 
+			setLoadingSettings(false);
 			distpatch(
 				updateUserDetails(firstName.trim(), lastName.trim(), email)
 			);
 		} catch (err) {
 			setEmailTaken(true);
+			setLoadingSettings(false);
 		}
 	};
 
@@ -212,13 +221,20 @@ const Settings = props => {
 						</div>
 
 						<div className='auth-form__field-button'>
-							<button
-								className='button button__white button__white--card-big'
-								onClick={updateSettings}>
-								<p className='paragraph card__price card__price--big cart__button-text'>
-									Update My Settings
-								</p>
-							</button>
+							{!loadingSettings ? (
+								<button
+									className='button button__white button__white--card-big'
+									onClick={updateSettings}>
+									<p className='paragraph card__price card__price--big cart__button-text'>
+										Update My Settings
+									</p>
+								</button>
+							) : (
+								<LoadingBar
+									width={350}
+									loading={loadingSettings}
+								/>
+							)}
 						</div>
 
 						<h3 className='heading-tertiary heading-tertiary--dark big-margin-top'>
@@ -271,13 +287,20 @@ const Settings = props => {
 							</div>
 
 							<div className='auth-form__field-button'>
-								<button
-									className='button button__white button__white--card-big'
-									onClick={updatePassword}>
-									<p className='paragraph card__price card__price--big cart__button-text'>
-										Update My Password
-									</p>
-								</button>
+								{!loadingPassword ? (
+									<button
+										className='button button__white button__white--card-big'
+										onClick={updatePassword}>
+										<p className='paragraph card__price card__price--big cart__button-text'>
+											Update My Password
+										</p>
+									</button>
+								) : (
+									<LoadingBar
+										width={350}
+										loading={loadingPassword}
+									/>
+								)}
 							</div>
 						</div>
 					</div>

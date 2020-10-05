@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useState } from 'react';
 import validate from 'validate.js';
 import { useHistory } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import axiosInstance from '../axios';
 import { createUser, getCustomerToken } from '../graphql';
 import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
+import LoadingBar from '../components/LoadingBar';
 
 const signupFormReducer = (currentFormState, action) => {
 	switch (action.type) {
@@ -79,6 +80,7 @@ const signupFormErrorReducer = (currentFormState, action) => {
 const SignUp = props => {
 	const authContext = useContext(AuthContext);
 	const history = useHistory();
+	const [loading, setLoading] = useState(false);
 
 	const [signupForm, dispatchSignupForm] = useReducer(signupFormReducer, {
 		username: '',
@@ -165,6 +167,7 @@ const SignUp = props => {
 
 		try {
 			if (isEmailValid && isPasswordValid) {
+				setLoading(true);
 				const createdUser = await axiosInstance.post(
 					'/api/graphql.json',
 					createUser(
@@ -199,11 +202,13 @@ const SignUp = props => {
 					)
 				);
 
+				setLoading(false);
 				authContext.userIsOnline();
 
 				history.replace('/');
 			}
 		} catch (err) {
+			setLoading(false);
 			if (err.message === 'Email has already been taken')
 				dispatchSignupFormError({ type: 'SET_EMAIL_IS_TAKEN' });
 
@@ -322,13 +327,17 @@ const SignUp = props => {
 					</div>
 
 					<div className='auth-form__field-button'>
-						<button
-							className='button button__white button__white--card-big'
-							onClick={() => {}}>
-							<p className='paragraph card__price card__price--big cart__button-text'>
-								Sign up
-							</p>
-						</button>
+						{!loading ? (
+							<button
+								className='button button__white button__white--card-big'
+								onClick={() => {}}>
+								<p className='paragraph card__price card__price--big cart__button-text'>
+									Sign up
+								</p>
+							</button>
+						) : (
+							<LoadingBar loading={loading} />
+						)}
 					</div>
 				</form>
 			</div>

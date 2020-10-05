@@ -1,17 +1,21 @@
 import React, { Fragment, memo, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Navbar from './Navbar';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
+import { setSearchText } from '../store/actions/search';
 
 const Header = props => {
 	const authContext = useContext(AuthContext);
 	const checkout = useSelector(state => state.checkout);
+	const search = useSelector(state => state.search);
+	const dispatch = useDispatch();
 
 	const history = useHistory();
+	const { pathname } = useLocation();
 
 	const logout = async () => {
 		try {
@@ -20,6 +24,20 @@ const Header = props => {
 			// connection error
 			console.log('D:', err);
 		}
+	};
+
+	/**
+	 * On text change, set the current value to 'searchInput'
+	 * @param {String} text text input value
+	 */
+	const handleSearchTextChanged = event => {
+		event.preventDefault();
+		dispatch(setSearchText(event.target.value));
+
+		// or go to home?
+		if (event.target.value.trim() === '') history.goBack();
+		else if (pathname === '/search') history.replace('/search');
+		else history.push('/search');
 	};
 
 	return (
@@ -54,9 +72,12 @@ const Header = props => {
 						<div className='header__user'>
 							<div className='header__search-form'>
 								<input
+									autoFocus={pathname === '/search'}
 									type='search'
 									placeholder='Search'
 									className='input input__search'
+									value={search.searchText}
+									onChange={handleSearchTextChanged}
 								/>
 								<button
 									type='submit'

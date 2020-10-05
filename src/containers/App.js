@@ -12,6 +12,7 @@ import Login from './Login';
 import NotFound from './NotFound';
 import Profile from './Profile';
 import Forget from './Forget';
+import Search from './Search';
 import { AuthContext } from '../context/authContext';
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
 			</Route>
 			<Route path='/forget'>
 				<Forget />
+			</Route>
+			<Route path='/search'>
+				<Search />
 			</Route>
 			<Route path='/cart'>
 				<Cart />
@@ -51,6 +55,9 @@ function App() {
 			<Switch>
 				<Route path='/me'>
 					<Profile />
+				</Route>
+				<Route path='/search'>
+					<Search />
 				</Route>
 				<Route path='/cart'>
 					<Cart />

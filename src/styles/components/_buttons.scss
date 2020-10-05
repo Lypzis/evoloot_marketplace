@@ -216,6 +216,23 @@
 		}
 	}
 
+	&__white--card-small {
+		background-color: $color-tertiary;
+		width: 40%;
+		color: #fff;
+		align-self: baseline;
+		margin-top: 1.2rem;
+
+		&:hover {
+			background-color: rgba($color-tertiary, 0.7);
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
+	}
+
 	&__white--show-more {
 		display: flex;
 		align-self: center;

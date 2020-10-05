@@ -3,22 +3,26 @@ import { Link } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
+import LoadingBar from '../components/LoadingBar';
 
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const authContext = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 
 	// login attempts limititation functionality by account 5+3
 
 	const login = async event => {
 		event.preventDefault();
 		try {
+			setLoading(true);
 			const emailCopy = email;
 			const passCopy = password;
 
 			await authContext.login(emailCopy, passCopy);
 		} catch (err) {
+			setLoading(false);
 			console.log('Fucking error: ', err);
 		}
 	};
@@ -77,13 +81,17 @@ const Login = props => {
 					</div>
 
 					<div className='auth-form__field-button'>
-						<button
-							className='button button__white button__white--card-big'
-							onClick={() => {}}>
-							<p className='paragraph card__price card__price--big cart__button-text'>
-								Log in
-							</p>
-						</button>
+						{!loading ? (
+							<button
+								className='button button__white button__white--card-big'
+								onClick={() => {}}>
+								<p className='paragraph card__price card__price--big cart__button-text'>
+									Log in
+								</p>
+							</button>
+						) : (
+							<LoadingBar loading={loading} width={200} />
+						)}
 					</div>
 				</form>
 			</div>

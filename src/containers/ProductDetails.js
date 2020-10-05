@@ -299,6 +299,7 @@ const ProductDetails = props => {
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
+
 							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
 								Recently Viewed:
 							</h3>

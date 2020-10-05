@@ -45,7 +45,13 @@ const Cart = props => {
 
 			const input = {
 				customAttributes: [
-					{ key: 'note', value: `Customer Note: ${textAreaValue}` },
+					{
+						key: 'note',
+						value:
+							textAreaValue.trim() !== ''
+								? `Customer Note: ${textAreaValue}`
+								: '',
+					},
 				],
 			};
 

@@ -4,17 +4,53 @@ import { Link } from 'react-router-dom';
 const OrderCard = props => {
 	const { order } = props;
 
+	// REMOVED: TOO COMPLEX, NEED MORE DETAILS IN ORDER TO GIVE THE CORRECT STATUS
+	// const switchOrderStatus = () => {
+	// 	let accumulator = (a, b) => a + b;
+	// 	let fulfilledQuantity = 0;
+
+	// 	console.log(order);
+
+	// 	const lineItemsQuantity = order.lineItems
+	// 		.map(item => item.quantity)
+	// 		.reduce(accumulator);
+
+	// 	if (order.successfulFulfillments.length > 0)
+	// 		fulfilledQuantity = order.successfulFulfillments[0].fulfillmentLineItems.edges
+	// 			.map(item => item.node.quantity)
+	// 			.reduce(accumulator);
+
+	// 	if (
+	// 		parseFloat(order.totalRefundedV2.amount) ===
+	// 		parseFloat(order.totalPriceV2.amount)
+	// 	)
+	// 		return (
+	// 			<p className='paragraph paragraph--black order__status order__status--canceled'>
+	// 				Canceled
+	// 			</p>
+	// 		);
+
+	// 	if (lineItemsQuantity === fulfilledQuantity)
+	// 		return (
+	// 			<p className='paragraph paragraph--black order__status order__status--complete'>
+	// 				Completed
+	// 			</p>
+	// 		);
+
+	// 	return (
+	// 		<p className='paragraph paragraph--black order__status order__status--pending'>
+	// 			Pending
+	// 		</p>
+	// 	);
+	// };
+
 	return (
 		<div className='order'>
 			<div className='order__header'>
 				<h3 className='heading-tertiary heading-tertiary--dark'>
 					Order {order.name}
 				</h3>
-				<span>
-					<p className='paragraph paragraph--black order__status order__status--pending'>
-						Pending
-					</p>
-				</span>
+				{/* <span>{switchOrderStatus()}</span> */}
 			</div>
 			<p className='paragraph paragraph--black'>
 				Placed on{' '}
@@ -39,21 +75,6 @@ const OrderCard = props => {
 								<Link
 									className='card__link order__link'
 									to={`/product/${lineItem.variant.product.handle}`}>
-									{/* <div className='card__image-box '>
-										<img
-											className='card__image'
-											src={
-												lineItem.variant.image
-													.originalSrc
-											}
-											alt={
-												lineItem.variant.image.altText
-													? lineItem.variant.image
-															.altText
-													: lineItem.title
-											}
-										/>
-									</div> */}
 									<p className='paragraph paragraph--black order__product-title'>
 										{lineItem.title}
 									</p>
@@ -117,6 +138,24 @@ const OrderCard = props => {
 						<p className='paragraph paragraph--black'>
 							{order.totalShippingPriceV2.currencyCode}${' '}
 							{order.totalShippingPriceV2.amount}
+						</p>
+					</div>
+					<div className='order__table-data'>
+						<h4 className='heading-fourtiary heading-fourtiary--dark'>
+							Taxes
+						</h4>
+						<p className='paragraph paragraph--black'>
+							{order.totalTaxV2.currencyCode}${' '}
+							{order.totalTaxV2.amount}
+						</p>
+					</div>
+					<div className='order__table-data'>
+						<h4 className='heading-fourtiary heading-fourtiary--dark'>
+							Refund
+						</h4>
+						<p className='paragraph paragraph--black'>
+							{order.totalRefundedV2.currencyCode}${' '}
+							{order.totalRefundedV2.amount}
 						</p>
 					</div>
 					<div className='order__table-data'>

@@ -274,7 +274,7 @@ export const updateCheckoutEmail = (email, checkoutId) => {
 
 export const getCustomerOrders = (
 	customerAccessToken,
-	groupBy = 'first: 10'
+	groupBy = 'first: 5'
 ) => {
 	// PART OF ORDERS
 	// customerUrl
@@ -284,11 +284,23 @@ export const getCustomerOrders = (
 					{
 						customer (customerAccessToken: "${customerAccessToken}"){
 							orders(${groupBy}) {
+								pageInfo { 
+									hasNextPage 
+									hasPreviousPage
+								}
 								edges {
+									cursor
 									node {
 										name
 										processedAt
 										successfulFulfillments{
+											fulfillmentLineItems(first:100){
+										        edges {
+										            node {
+										                quantity
+										            }
+										        }
+										    }
 											trackingInfo{
 												number
 												url

@@ -5,6 +5,7 @@ const initialState = {
 	lastName: '',
 	email: '',
 	mainAddress: null,
+	orders: null,
 };
 
 const initializeUserDetails = action => {
@@ -32,6 +33,30 @@ const updateUserDetails = (state, action) => {
 	};
 };
 
+const setUserOrders = (state, action) => {
+	return {
+		...state,
+		orders: action.orders.sort((a, b) => {
+			const dateA = new Date(a.processedAt);
+			const dateB = new Date(b.processedAt);
+
+			return dateA < dateB;
+		}),
+	};
+};
+
+const updateUserOrders = (state, action) => {
+	return {
+		...state,
+		orders: state.orders.concat(action.orders).sort((a, b) => {
+			const dateA = new Date(a.processedAt);
+			const dateB = new Date(b.processedAt);
+
+			return dateA < dateB;
+		}),
+	};
+};
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.INITIALIZE_USER_DETAILS:
@@ -40,6 +65,10 @@ const reducer = (state = initialState, action) => {
 			return updateUserAddress(state, action);
 		case actionTypes.UPDATE_USER_DETAILS:
 			return updateUserDetails(state, action);
+		case actionTypes.SET_USER_ORDERS:
+			return setUserOrders(state, action);
+		case actionTypes.UPDATE_USER_ORDERS:
+			return updateUserOrders(state, action);
 		default:
 			return state;
 	}
