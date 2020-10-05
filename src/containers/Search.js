@@ -12,9 +12,7 @@ const Search = props => {
 	const { collections } = clientContext;
 
 	const getCollection = useCallback(() => {
-		if (collections) {
-			//search.searchText
-
+		if (collections && search.searchText !== '') {
 			const collectionProducts = collections.map(
 				collection => collection.products
 			);
@@ -25,12 +23,16 @@ const Search = props => {
 				allProducts = allProducts.concat(products);
 			});
 
+			let restructure = search.searchText.split(' ');
+			restructure = restructure.join('-');
+
 			const result = [];
 			allProducts.forEach(product => {
-				search.searchText.split(' ').forEach(word => {
+				restructure.split(' ').forEach(word => {
 					//  If typed word is different than -1, it matches.
 					if (
-						product.title
+						product.handle
+
 							.toLowerCase()
 							.indexOf(word.toLowerCase()) !== -1
 					) {
@@ -38,6 +40,7 @@ const Search = props => {
 					}
 				});
 			});
+
 			setProducts(result);
 		}
 	}, [collections, search.searchText]);

@@ -32,6 +32,7 @@ const Header = props => {
 	 */
 	const handleSearchTextChanged = event => {
 		event.preventDefault();
+
 		dispatch(setSearchText(event.target.value));
 
 		// or go to home?
