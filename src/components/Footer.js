@@ -21,57 +21,40 @@ const Footer = props => (
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Who We Are</h3>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/about' className='footer__link'>
 						<p className='paragraph'>About Us</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link
+						to='/our-promise-to-our-customers'
+						className='footer__link'>
 						<p className='paragraph'>Our Promise</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/volunteer-application' className='footer__link'>
 						<p className='paragraph'>Volunteer Application</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/contact-us' className='footer__link'>
 						<p className='paragraph'>Contact Us</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/event-schedule' className='footer__link'>
 						<p className='paragraph'>Event Schedule</p>
 					</Link>
 				</div>
-				{/* <div className='footer__links-partition'>
-					<h3 className='heading-fourtiary'>My Account</h3>
-
-					<Link to='/' className='footer__link'>
-						<p className='paragraph'>My Profile</p>
-					</Link>
-
-					<Link to='/' className='footer__link'>
-						<p className='paragraph'>My Orders</p>
-					</Link>
-
-					<Link to='/' className='footer__link'>
-						<p className='paragraph'>My Address</p>
-					</Link>
-
-					<Link to='/' className='footer__link'>
-						<p className='paragraph'>My Password</p>
-					</Link>
-				</div> */}
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>The Details</h3>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/refund-policy' className='footer__link'>
 						<p className='paragraph'>Refunds</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/privacy-policy' className='footer__link'>
 						<p className='paragraph'>Privacy</p>
 					</Link>
 
-					<Link to='/' className='footer__link'>
+					<Link to='/terms-of-service' className='footer__link'>
 						<p className='paragraph'>Service</p>
 					</Link>
 				</div>

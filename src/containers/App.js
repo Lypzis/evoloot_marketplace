@@ -15,11 +15,46 @@ import Forget from './Forget';
 import Search from './Search';
 import { AuthContext } from '../context/authContext';
 
+import VolunteerApplication from '../containers/Identity/VolunteerApplication';
+import Promise from '../containers/Identity/Promise';
+import EventSchedule from '../containers/Identity/EventSchedule';
+import ContactUs from '../containers/Identity/ContactUs';
+import About from '../containers/Identity/About';
+
+import Service from '../containers/Policies/Service';
+import Refunds from '../containers/Policies/Refunds';
+import Privacy from '../containers/Policies/Privacy';
+
 function App() {
 	const authContext = useContext(AuthContext);
 
 	let routes = (
 		<Switch>
+			<Route path='/volunteer-application'>
+				<VolunteerApplication />
+			</Route>
+			<Route path='/our-promise-to-our-customers'>
+				<Promise />
+			</Route>
+			<Route path='/event-schedule'>
+				<EventSchedule />
+			</Route>
+			<Route path='/contact-us'>
+				<ContactUs />
+			</Route>
+			<Route path='/about'>
+				<About />
+			</Route>
+			<Route path='/terms-of-service'>
+				<Service />
+			</Route>
+			<Route path='/refund-policy'>
+				<Refunds />
+			</Route>
+			<Route path='/privacy-policy'>
+				<Privacy />
+			</Route>
+
 			<Route path='/signup'>
 				<SignUp />
 			</Route>
@@ -53,6 +88,31 @@ function App() {
 	if (authContext.customerToken)
 		routes = (
 			<Switch>
+				<Route path='/volunteer-application'>
+					<VolunteerApplication />
+				</Route>
+				<Route path='/our-promise-to-our-customers'>
+					<Promise />
+				</Route>
+				<Route path='/event-schedule'>
+					<EventSchedule />
+				</Route>
+				<Route path='/contact-us'>
+					<ContactUs />
+				</Route>
+				<Route path='/about'>
+					<About />
+				</Route>
+				<Route path='/terms-of-service'>
+					<Service />
+				</Route>
+				<Route path='/refund-policy'>
+					<Refunds />
+				</Route>
+				<Route path='/privacy-policy'>
+					<Privacy />
+				</Route>
+
 				<Route path='/me'>
 					<Profile />
 				</Route>
