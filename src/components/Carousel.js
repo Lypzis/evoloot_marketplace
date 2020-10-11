@@ -1,7 +1,10 @@
 import React, { Fragment, memo } from 'react';
 import Flicking from '@egjs/react-flicking';
+import { Fade } from '@egjs/flicking-plugins';
 
 import Card from './Card';
+
+const plugins = [new Fade()];
 
 const Carousel = props => (
 	<Fragment>
@@ -13,9 +16,10 @@ const Carousel = props => (
 				cameraTag='div'
 				deceleration={0.0075}
 				horizontal={true}
+				infinite={true}
 				lastIndex={Infinity}
 				threshold={40}
-				duration={100}
+				plugins={plugins}
 				panelEffect={x => 1 - Math.pow(1 - x, 3)}
 				defaultIndex={1}
 				inputType={['touch', 'mouse']}

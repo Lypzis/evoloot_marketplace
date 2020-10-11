@@ -4,6 +4,10 @@
 	align-items: center;
 	max-width: 120rem;
 
+	&--terms {
+		max-width: 65rem;
+	}
+
 	&__featured-section {
 		display: flex;
 		flex-direction: column;
@@ -19,5 +23,11 @@
 		justify-content: center;
 		align-items: flex-start;
 		flex-wrap: wrap;
+
+		&--terms {
+			display: block;
+			justify-content: flex-start;
+			text-align: left;
+		}
 	}
 }

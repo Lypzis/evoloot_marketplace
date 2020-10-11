@@ -116,7 +116,6 @@ const CartPanel = props => {
 					</div>
 				</label>
 
-				{/* TO-DO: WHEN CLICKED, ALSO CLOSE PANEL */}
 				<BluredBackground for={'cart-toggle'} />
 
 				<div className='cart'>

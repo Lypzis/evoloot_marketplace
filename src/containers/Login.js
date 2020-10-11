@@ -1,29 +1,58 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Layout from '../hoc/Layout';
 import { AuthContext } from '../context/authContext';
 import LoadingBar from '../components/LoadingBar';
+import { getCustomerToken } from '../graphql';
+import axiosInstance from '../axios';
 
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const authContext = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
+	const [loginError, setLoginError] = useState(false);
+	const history = useHistory();
 
 	// login attempts limititation functionality by account 5+3
 
 	const login = async event => {
 		event.preventDefault();
+
 		try {
 			setLoading(true);
-			const emailCopy = email;
-			const passCopy = password;
+			const customerToken = await axiosInstance.post(
+				'/api/graphql.json',
+				getCustomerToken(email, password)
+			);
 
-			await authContext.login(emailCopy, passCopy);
-		} catch (err) {
+			if (
+				customerToken.data.data.customerAccessTokenCreate
+					.customerUserErrors.length > 0
+			)
+				throw new Error(
+					customerToken.data.data.customerAccessTokenCreate.customerUserErrors.message
+				);
+
+			const {
+				customerAccessToken,
+			} = customerToken.data.data.customerAccessTokenCreate;
+
+			localStorage.setItem(
+				'shopifyCustomerToken',
+				JSON.stringify(customerAccessToken)
+			);
+
+			setLoginError(false);
 			setLoading(false);
-			console.log('Fucking error: ', err);
+			await authContext.login(customerAccessToken.accessToken);
+
+			history.replace('/');
+		} catch (err) {
+			setLoginError(true);
+			setLoading(false);
+			// else connection error
 		}
 	};
 
@@ -50,7 +79,7 @@ const Login = props => {
 							value={email}
 							onChange={event => setEmail(event.target.value)}
 						/>
-						{authContext.loginError && (
+						{loginError && (
 							<p className='paragraph paragraph--error'>
 								Incorrect email or password.
 							</p>

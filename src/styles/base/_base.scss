@@ -3,41 +3,32 @@
 *::before {
 	margin: 0;
 	padding: 0;
-	box-sizing: inherit; /* now everything inherits  the 'body' box-sizing */
+	box-sizing: inherit;
 }
 
-/* The root for 'rem' to use... INHERITANCE!! \m/ */
 html {
-	// Defines what a 1rem is.
-	/* the default font-size of the browser is 16px; */
-	font-size: 62.5%; /* now it is 10px, and by being a percentage,
-    it won't trouble the user if he wants to increase his font-size thus
-    it is now easy to modify the size of everything else at once */
+	font-size: 62.5%;
 
-	/*
-    @include respond-phone {
-        font-size: 50%;
-    } 
-    */
+	@include respond(tab-land) {
+		font-size: 56.25%; // 1rem = 9px, 9/16 = 56.25%
+	}
 
-	// // REMEMBER: cascade, always the large ones first in desktop first
-	// @include respond(tab-land) {
-	// 	font-size: 56.25%; // 1rem = 9px, 9/16 = 56.25%
-	// 	padding: 0; /* 30px; gives a nice white margin around body of the web-page :D */
-	// }
+	@include respond(tab-port) {
+		font-size: 50%; // 1rem = 8px, 8/16 = 50%
+	}
 
-	// @include respond(tab-port) {
-	// 	font-size: 50%; // 1rem = 8px, 8/16 = 50%
-	// }
+	@include respond(phone) {
+		// Things get weird at this point - drastic change of design required
+		font-size: 43.75%; // 1rem = 7px, 7/16 = 43.75%
+	}
 
-	// @include respond(phone) {
-	// 	font-size: 30%; // 1rem = 4.8px, 8/16 = 30%
-	// }
-	// /////////////////////////////////////////////////////////////////////
+	@media only screen and (max-width: $custom-media-query-5) {
+		font-size: 31.25%; // 1rem = 7px, 5/16 = 31.25%
+	}
 
-	// @include respond(big-desktop) {
-	// 	font-size: 75%; // 1rem = 12, 12/16 = 75
-	// }
+	@include respond(big-desktop) {
+		font-size: 75%; // 1rem = 12, 12/16 = 75
+	}
 }
 
 body {

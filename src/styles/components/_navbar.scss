@@ -8,6 +8,11 @@
 		justify-content: center;
 		list-style: none;
 		flex-wrap: wrap;
+
+		&--vertical {
+			flex-direction: column;
+			align-items: center;
+		}
 	}
 
 	&__list-item {
@@ -29,10 +34,18 @@
 .navbar-line {
 	border-top: solid 0.2rem $color-gray-light-5;
 	display: inherit;
+
+	&--thicc {
+		border-top: solid 0.3rem $color-gray-light-5;
+	}
 }
 
 .navbar-vertical {
 	background-color: $color-primary-light;
+
+	&--no-background {
+		background-color: transparent;
+	}
 
 	&__list {
 		display: flex;
@@ -42,6 +55,10 @@
 	}
 
 	&__list-item {
+		&--menu {
+			align-self: center;
+			margin-top: 2rem;
+		}
 	}
 
 	&__link {
@@ -51,6 +68,10 @@
 		align-items: center;
 		padding: 2rem 6rem;
 		transition: all 0.3s;
+
+		&--menu {
+			padding: 1.5rem 2rem;
+		}
 
 		& > svg {
 			fill: #fff;

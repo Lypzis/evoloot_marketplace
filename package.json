@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@egjs/flicking-plugins": "^3.3.0",
 		"@egjs/react-flicking": "^3.3.0",
 		"@reduxjs/toolkit": "^1.4.0",
 		"@testing-library/jest-dom": "^4.2.4",

@@ -1192,6 +1192,22 @@
   resolved "https://registry.yarnpkg.com/@egjs/component/-/component-2.1.2.tgz#c466a0a6fc6ba2d479814dcbe6ee4643c25a2e5b"
   integrity sha512-7tnPiqxbSZ0porzlm0+/O3qZdanMj0zOq0sb17wQXuaRG49XKKKJaO+SacGnZDqf308N5hzJ0m9fZ4+j+VBvXA==
 
+"@egjs/flicking-plugins@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@egjs/flicking-plugins/-/flicking-plugins-3.3.0.tgz#e7721ecf98a3c626b5a9611ce130df449031607c"
+  integrity sha512-FUpqsqRQgmBgOTCs1STnDDVOTr1FynAcKrMo+MDD9JAjTD6Gv+MJgYJdu0oZTSt15lJfJhFizlEFKXLNW1eCWA==
+  dependencies:
+    "@egjs/flicking" "^3.1.1"
+
+"@egjs/flicking@^3.1.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-3.5.1.tgz#1b300bdb473b9bc17776904bc7a46f8cec95e3e0"
+  integrity sha512-YrXX/CPSK0D8nRsRtLPZ7LN6/iYpjClpQYJwHwlY7kf3KYf1R4nJUyLOTNhZRds/DY5ZEP82MxJ/hD2ikrV8eQ==
+  dependencies:
+    "@egjs/axes" "^2.7.0"
+    "@egjs/component" "^2.1.2"
+    "@egjs/list-differ" "^1.0.0"
+
 "@egjs/flicking@^3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-3.5.0.tgz#72a0cba61d385859ef451984f193fa6d90279514"

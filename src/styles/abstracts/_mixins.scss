@@ -1,0 +1,43 @@
+// MEDIA QUERY MANAGER
+/*
+$breakpoint argument choices:
+- phone 
+- tab-port  
+- tab-land
+- big-desktop
+1em = 16px
+*/
+@mixin respond($breakpoint) {
+	// 'rem' fails in media queries, so instead use 'em'
+	@if $breakpoint == phone {
+		// 600px
+		@media only screen and (max-width: 37.5em) {
+			@content;
+		}
+	}
+	@if $breakpoint == phone-secondary {
+		// 800px
+		@media only screen and (max-width: 50em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-port {
+		// 950px;
+		@media only screen and (max-width: 59.375em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-land {
+		// 1200px;
+		@media only screen and (max-width: 75em) {
+			@content;
+		}
+	}
+	@if $breakpoint == big-desktop {
+		// min: from 1800 and beyond
+		// 1800px;
+		@media only screen and (min-width: 112.5em) {
+			@content;
+		}
+	}
+}

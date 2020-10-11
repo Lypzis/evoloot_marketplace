@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { getCustomerToken, getUserSettingsAndAddress } from '../graphql';
+import { getUserSettingsAndAddress } from '../graphql';
 import axiosInstance from '../axios';
 import { initializeUserDetails } from '../store/actions/user';
 
 export const AuthContext = React.createContext({
 	customerToken: null,
 	loginError: false,
-	login: async (username, password) => {},
+	login: async token => {},
 	logout: async () => {},
 	userIsOnline: () => {},
 	refreshToken: customerToken => {},
@@ -17,7 +17,7 @@ export const AuthContext = React.createContext({
 
 const AuthContextProvider = props => {
 	const [userToken, setUserToken] = useState();
-	const [loginError, setLoginError] = useState(false);
+
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -91,39 +91,12 @@ const AuthContextProvider = props => {
 		setUserToken(customerAccessToken.accessToken);
 	};
 
-	const loginHandler = async (email, password) => {
+	const loginHandler = async token => {
 		try {
-			const customerToken = await axiosInstance.post(
-				'/api/graphql.json',
-				getCustomerToken(email, password)
-			);
-
-			if (
-				customerToken.data.data.customerAccessTokenCreate
-					.customerUserErrors.length > 0
-			)
-				throw new Error(
-					customerToken.data.data.customerAccessTokenCreate.customerUserErrors.message
-				);
-
-			const {
-				customerAccessToken,
-			} = customerToken.data.data.customerAccessTokenCreate;
-
-			localStorage.setItem(
-				'shopifyCustomerToken',
-				JSON.stringify(customerAccessToken)
-			);
-
-			setLoginError(false);
-			setUserToken(customerAccessToken.accessToken);
-			await getUserInformation(customerAccessToken.accessToken);
-
-			history.replace('/');
+			setUserToken(token);
+			await getUserInformation(token);
 		} catch (err) {
 			//console.log(err);
-			setLoginError(true);
-
 			// else connection error
 		}
 	};
@@ -132,7 +105,6 @@ const AuthContextProvider = props => {
 		<AuthContext.Provider
 			value={{
 				customerToken: userToken,
-				loginError,
 				refreshToken,
 				login: loginHandler,
 				logout: logoutHandler,

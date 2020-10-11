@@ -47,6 +47,7 @@ body {
 
 .paragraph {
 	font-size: $default-font-size;
+	hyphens: auto;
 
 	&--black {
 		color: rgba(0, 0, 0, 0.7);

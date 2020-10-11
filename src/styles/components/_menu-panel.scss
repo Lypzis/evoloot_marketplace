@@ -1,0 +1,67 @@
+.menu {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	height: 100vh;
+	width: 40rem;
+	z-index: 7;
+	left: 0;
+	border-right: solid 0.3rem #000;
+	background-color: $color-gray-dark-2;
+	transition: all 0.2s;
+
+	&__checkbox {
+		display: none;
+	}
+
+	&__checkbox:checked + &__button {
+		left: 0;
+	}
+
+	&__checkbox:checked ~ & {
+		left: -40rem;
+	}
+
+	&__checkbox:checked ~ .blured--menu {
+		display: none;
+	}
+
+	&__checkbox:checked + &__button > .button__arrow {
+		rotate: 180deg;
+	}
+
+	&__panel {
+		overflow-y: auto;
+	}
+
+	&__button {
+		position: fixed;
+		width: auto;
+		top: 10rem;
+		left: 39.8rem;
+		background-color: $color-gray-dark-2;
+
+		//color: #fff;
+
+		border: solid #000 0.3rem;
+		z-index: 8;
+
+		& > .button__icon {
+			margin-left: 1rem;
+		}
+
+		&:hover {
+			border: 0.3rem solid #000;
+		}
+	}
+
+	&__button-icon {
+		height: 5.4rem;
+		width: 5.4rem;
+	}
+}
+
+.menu--page {
+	max-width: 65rem;
+}
