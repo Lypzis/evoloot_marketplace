@@ -32,6 +32,10 @@ body {
 	&--dark {
 		color: $color-gray-dark-3;
 	}
+
+	@include respond(tab-port) {
+		margin-bottom: 1rem;
+	}
 }
 
 .heading-fourtiary {

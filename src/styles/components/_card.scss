@@ -1,7 +1,7 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	width: 20rem;
+	width: 29.3rem;
 	justify-content: center;
 	align-content: space-between;
 	overflow: hidden;
@@ -11,6 +11,15 @@
 	border-radius: 0.5rem;
 	padding: 1rem;
 	background: $color-gray-dark-2;
+
+	&--collection {
+		width: auto;
+		align-self: center;
+		margin: 0 2.1rem;
+		margin-top: 0;
+		padding: 0.5rem 1.6rem;
+		margin-bottom: 1rem;
+	}
 
 	&--checkout {
 		flex-direction: row;

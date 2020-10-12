@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 
+// TO-DO: ALTERNATIVE FOOTER AT ~730 WINDOW WIDTH
+
 const Footer = props => (
 	<footer className='footer'>
 		<div className='footer__body'>
@@ -100,21 +102,27 @@ const Footer = props => (
 					</div>
 				</div>
 			</div>
-			<div className='footer__copyright'>
-				<p className='paragraph'>
-					© 2020 Evoloot Marketplace by{' '}
-					{
-						<a
-							className='paragraph footer__author'
-							href='https://lypzis.tk'
-							target='_blank'
-							rel='noopener noreferrer'>
-							Lypzis
-						</a>
-					}
-					. All Rights Reserved.
-				</p>
-			</div>
+		</div>
+		<span className='navbar-line'></span>
+		<div className='footer__copyright'>
+			<p className='paragraph'>
+				Created with{' '}
+				<span role='img' aria-label={'heart'}>
+					&#128150;
+				</span>{' '}
+				by{' '}
+				<a
+					className='paragraph footer__author'
+					href='https://lypzis.tk'
+					target='_blank'
+					rel='noopener noreferrer'>
+					Lypzis
+				</a>
+				.
+			</p>
+			<p className='paragraph'>
+				© Evoloot Marketplace 2020. All rights reserved.
+			</p>
 		</div>
 	</footer>
 );

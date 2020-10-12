@@ -5,12 +5,20 @@
 	padding: 1rem 1.2rem;
 	box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
 
+	//TEST
+	font-size: 1.6rem;
+	font-family: inherit;
+
 	&--small {
 		padding: 0.2rem 0.7rem;
 	}
 
 	&__search {
 		width: 45rem;
+
+		&--mobile {
+			width: 100%;
+		}
 	}
 
 	&__text-area {
@@ -28,6 +36,11 @@
 		&--small {
 			margin-bottom: 0;
 			justify-content: flex-start;
+		}
+
+		&--collection {
+			align-self: flex-end;
+			margin-bottom: 0;
 		}
 	}
 
@@ -75,6 +88,18 @@
 		background: url('../../assets/images/dropdownArrow.png') 96% /15% no-repeat
 			#fff;
 
+		&--collection {
+			width: auto;
+			margin-left: 1rem;
+
+			@include respond(phone-secondary) {
+				padding: 0.5rem 1rem;
+			}
+
+			@include respond(phone-small) {
+				padding: 0 0.5rem;
+			}
+		}
 		//font-size: 1.2rem;
 	}
 

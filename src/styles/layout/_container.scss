@@ -11,4 +11,12 @@
 	margin: 0 auto;
 	max-width: 100rem;
 	padding: 19rem 0 10rem 0;
+
+	@include respond(tab-port-2) {
+		padding: 10rem 0 3rem 0;
+	}
+
+	@include respond(tab-port) {
+		padding: 8rem 0 1.4rem 0;
+	}
 }

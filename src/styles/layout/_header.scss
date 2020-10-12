@@ -16,6 +16,15 @@
 		align-self: center;
 		padding: 0.5rem 2rem;
 		max-width: 130rem;
+
+		&--mobile {
+			max-width: none;
+			align-self: stretch;
+		}
+
+		@include respond(phone-secondary) {
+			padding: 0.8rem 1rem;
+		}
 	}
 
 	&__logo {
@@ -32,6 +41,10 @@
 		position: relative;
 		display: block;
 		margin-left: auto;
+
+		&--mobile {
+			width: 100%;
+		}
 	}
 
 	&__search {
@@ -45,6 +58,14 @@
 		display: flex;
 		align-items: center;
 		margin: 0 3rem;
+
+		&--mobile {
+			width: 100%;
+		}
+
+		@include respond(phone) {
+			margin-right: 1.5rem;
+		}
 	}
 
 	&__user {

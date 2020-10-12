@@ -50,7 +50,7 @@ const HeaderMobile = props => {
 						</button>
 					</div>
 				)} */}
-				<div className='header__body'>
+				<div className='header__body header__body--mobile'>
 					<Link className='header__logo' to='/'>
 						<img
 							className='header__logo-image'
@@ -58,14 +58,14 @@ const HeaderMobile = props => {
 							alt='Evoloot Marketplace Logo'
 						/>
 					</Link>
-					<div className='header__buttons'>
+					<div className='header__buttons header__buttons--mobile'>
 						<div className='header__user'>
-							<div className='header__search-form'>
+							<div className='header__search-form  header__search-form--mobile'>
 								<input
 									autoFocus={pathname === '/search'}
 									type='search'
 									placeholder='Search'
-									className='input input__search'
+									className='input input__search  input__search--mobile'
 									value={search.searchText}
 									onChange={handleSearchTextChanged}
 								/>
