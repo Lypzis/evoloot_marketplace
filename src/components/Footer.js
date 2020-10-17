@@ -23,6 +23,7 @@ const Footer = props => (
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Who We Are</h3>
 
+<div className='footer__links-partition-content footer__links-partition-content--always-column'>
 					<Link to='/about' className='footer__link'>
 						<p className='paragraph'>About Us</p>
 					</Link>
@@ -44,10 +45,13 @@ const Footer = props => (
 					<Link to='/event-schedule' className='footer__link'>
 						<p className='paragraph'>Event Schedule</p>
 					</Link>
+					</div>
 				</div>
+
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>The Details</h3>
 
+					<div className='footer__links-partition-content'>
 					<Link to='/refund-policy' className='footer__link'>
 						<p className='paragraph'>Refunds</p>
 					</Link>
@@ -59,6 +63,7 @@ const Footer = props => (
 					<Link to='/terms-of-service' className='footer__link'>
 						<p className='paragraph'>Service</p>
 					</Link>
+					</div>
 				</div>
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Social Media Thingies</h3>
@@ -103,6 +108,7 @@ const Footer = props => (
 				</div>
 			</div>
 		</div>
+
 		<span className='navbar-line'></span>
 		<div className='footer__copyright'>
 			<p className='paragraph'>

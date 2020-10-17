@@ -28,7 +28,7 @@ html {
 	}
 
 	@include respond(phone-really-small) {
-		font-size: 31.25%; // 1rem = 5px, 5/16 = 31.25%
+		font-size: 34.375%; // 1rem = 5.5px, 5/16 = 34.375%
 	}
 
 	@include respond(big-desktop) {

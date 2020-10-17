@@ -1,7 +1,7 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	width: 29.3rem;
+	width: 20rem;
 	justify-content: center;
 	align-content: space-between;
 	overflow: hidden;
@@ -12,13 +12,21 @@
 	padding: 1rem;
 	background: $color-gray-dark-2;
 
+	@include respond(phone-secondary) {
+		width: 30rem; // 1rem = 9px, 9/16 = 56.25%
+	}
+
 	&--collection {
-		width: auto;
+		width: 92rem;
 		align-self: center;
 		margin: 0 2.1rem;
 		margin-top: 0;
 		padding: 0.5rem 1.6rem;
 		margin-bottom: 1rem;
+
+		@include respond(phone-secondary) {
+			width: 64.5rem; // 1rem = 9px, 9/16 = 56.25%
+		}
 	}
 
 	&--checkout {
@@ -50,7 +58,8 @@
 		margin: 0;
 	}
 
-	&:hover > .button__white:not(:disabled) {
+	&:hover > .button__white:not(:disabled),
+	&:focus > .button__white:not(:disabled) {
 		background-color: $color-tertiary;
 		color: #fff;
 	}
@@ -101,6 +110,10 @@
 	&__price {
 		font-size: 1.1rem;
 		font-weight: 700;
+
+		@include respond(phone-really-small) {
+			font-size: 1.3rem;
+		}
 	}
 
 	&__price--white {

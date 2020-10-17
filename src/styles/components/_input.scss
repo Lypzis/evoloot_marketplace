@@ -18,6 +18,15 @@
 
 		&--mobile {
 			width: 100%;
+			background: transparent;
+			color: #fff;
+			border: none;
+			border-bottom: 1px solid;
+			border-radius: 0;
+			overflow: hidden;
+			box-shadow: none;
+			padding: 0.5rem 0.5rem;
+			font-size: 1.8rem;
 		}
 	}
 
@@ -91,14 +100,7 @@
 		&--collection {
 			width: auto;
 			margin-left: 1rem;
-
-			@include respond(phone-secondary) {
-				padding: 0.5rem 1rem;
-			}
-
-			@include respond(phone-small) {
-				padding: 0 0.5rem;
-			}
+			padding: 0.3rem 0.9rem;
 		}
 		//font-size: 1.2rem;
 	}

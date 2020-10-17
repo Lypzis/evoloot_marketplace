@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '../components/Card';
@@ -8,7 +8,7 @@ const Collection = props => {
 
 	const [displayedProducts, setDisplayedProducts] = useState(
 		props.featured
-			? products.slice(0, 3).map(product => {
+			? products.slice(0, 4).map(product => {
 					return <Card key={product.id} product={product} />;
 			  })
 			: products.map(product => {
@@ -86,7 +86,7 @@ const Collection = props => {
 								new Date(a.publishedAt) <
 								new Date(b.publishedAt)
 						)
-						.slice(0, 3)
+						.slice(0, 4)
 						.map(product => {
 							return <Card key={product.id} product={product} />;
 						})

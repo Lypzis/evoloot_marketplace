@@ -79,7 +79,7 @@ function App() {
 			<Route path='/404'>
 				<NotFound />
 			</Route>
-			<Route exact path='/'>
+			<Route path='/'>
 				<Home />
 			</Route>
 		</Switch>
@@ -131,7 +131,7 @@ function App() {
 				<Route path='/404'>
 					<NotFound />
 				</Route>
-				<Route exact path='/'>
+				<Route path='/'>
 					<Home />
 				</Route>
 			</Switch>
