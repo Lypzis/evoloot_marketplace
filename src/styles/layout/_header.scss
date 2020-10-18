@@ -34,6 +34,10 @@
 	&__logo {
 		display: block;
 		width: 32rem;
+
+		@include respond(tab-port-2) {
+			width: 50rem;
+		}
 	}
 
 	&__logo-image {

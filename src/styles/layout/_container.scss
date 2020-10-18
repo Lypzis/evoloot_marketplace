@@ -14,9 +14,10 @@
 
 	@include respond(tab-port-2) {
 		padding: 10rem 0 3rem 0;
+		//height: 100%;
 	}
 
 	@include respond(tab-port) {
-		padding: 8rem 0 1.4rem 0;
+		padding: 9rem 0 1.8rem 0;
 	}
 }

@@ -28,7 +28,7 @@ html {
 	}
 
 	@include respond(phone-really-small) {
-		font-size: 34.375%; // 1rem = 5.5px, 5/16 = 34.375%
+		font-size: 31.25%; // 1rem = 5.5px, 5/16 = 34.375%
 	}
 
 	@include respond(big-desktop) {
@@ -42,6 +42,10 @@ body {
 
 	//background-color: $color-gray-light-2;
 	background-color: $color-gray-light-2;
+
+	& > * {
+		overflow-x: hidden;
+	}
 
 	// @include respond(tab-port) {
 	// 	padding: 0; /* 30px; gives a nice white margin around body of the web-page :D */

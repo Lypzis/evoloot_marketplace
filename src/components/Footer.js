@@ -23,28 +23,24 @@ const Footer = props => (
 				<div className='footer__links-partition'>
 					<h3 className='heading-fourtiary'>Who We Are</h3>
 
-<div className='footer__links-partition-content footer__links-partition-content--always-column'>
-					<Link to='/about' className='footer__link'>
-						<p className='paragraph'>About Us</p>
-					</Link>
+					<div className='footer__links-partition-content footer__links-partition-content--always-column'>
+						<Link to='/about' className='footer__link'>
+							<p className='paragraph'>About Us</p>
+						</Link>
 
-					<Link
-						to='/our-promise-to-our-customers'
-						className='footer__link'>
-						<p className='paragraph'>Our Promise</p>
-					</Link>
+						<Link
+							to='/our-promise-to-our-customers'
+							className='footer__link'>
+							<p className='paragraph'>Our Promise</p>
+						</Link>
 
-					<Link to='/volunteer-application' className='footer__link'>
-						<p className='paragraph'>Volunteer Application</p>
-					</Link>
+						<Link to='/contact-us' className='footer__link'>
+							<p className='paragraph'>Contact Us</p>
+						</Link>
 
-					<Link to='/contact-us' className='footer__link'>
-						<p className='paragraph'>Contact Us</p>
-					</Link>
-
-					<Link to='/event-schedule' className='footer__link'>
-						<p className='paragraph'>Event Schedule</p>
-					</Link>
+						<Link to='/event-schedule' className='footer__link'>
+							<p className='paragraph'>Event Schedule</p>
+						</Link>
 					</div>
 				</div>
 
@@ -52,17 +48,17 @@ const Footer = props => (
 					<h3 className='heading-fourtiary'>The Details</h3>
 
 					<div className='footer__links-partition-content'>
-					<Link to='/refund-policy' className='footer__link'>
-						<p className='paragraph'>Refunds</p>
-					</Link>
+						<Link to='/refund-policy' className='footer__link'>
+							<p className='paragraph'>Refunds</p>
+						</Link>
 
-					<Link to='/privacy-policy' className='footer__link'>
-						<p className='paragraph'>Privacy</p>
-					</Link>
+						<Link to='/privacy-policy' className='footer__link'>
+							<p className='paragraph'>Privacy</p>
+						</Link>
 
-					<Link to='/terms-of-service' className='footer__link'>
-						<p className='paragraph'>Service</p>
-					</Link>
+						<Link to='/terms-of-service' className='footer__link'>
+							<p className='paragraph'>Service</p>
+						</Link>
 					</div>
 				</div>
 				<div className='footer__links-partition'>

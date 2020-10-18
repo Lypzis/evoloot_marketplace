@@ -57,6 +57,10 @@
 		justify-content: space-between;
 		align-items: baseline;
 		margin: 0.3rem 0;
+
+		@include respond(phone-secondary) {
+			justify-content: center;
+		}
 	}
 
 	&__button-text {
@@ -66,4 +70,11 @@
 
 .cart--page {
 	max-width: 65rem;
+
+	@include respond(tab-port-2) {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: space-between;
+	}
 }

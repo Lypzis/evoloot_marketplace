@@ -9,10 +9,6 @@
 	font-size: 1.6rem;
 	font-family: inherit;
 
-	&--small {
-		padding: 0.2rem 0.7rem;
-	}
-
 	&__search {
 		width: 45rem;
 
@@ -70,21 +66,38 @@
 		margin-left: auto;
 		border-radius: 0;
 		background-color: #fff;
+
+		@include respond(tab-port-2) {
+			width: 9rem;
+			margin: 0;
+		}
 	}
 
 	&__quantity--left {
 		width: 25%;
 		border-radius: 0.5rem 0 0 0.5rem;
+
+		@include respond(tab-port-2) {
+			width: 6rem;
+		}
 	}
 
 	&__quantity--right {
 		width: 25%;
 		border-radius: 0 0.5rem 0.5rem 0;
+
+		@include respond(tab-port-2) {
+			width: 6rem;
+		}
 	}
 
 	&__quantity-buttons {
 		display: flex;
 		width: 50%;
+
+		@include respond(tab-port-2) {
+			width: auto;
+		}
 	}
 
 	&__select {
@@ -101,8 +114,17 @@
 			width: auto;
 			margin-left: 1rem;
 			padding: 0.3rem 0.9rem;
+
+			@include respond(tab-port-2) {
+				width: 21rem;
+			}
 		}
 		//font-size: 1.2rem;
+	}
+
+	&--small {
+		padding: 0.2rem 0.7rem;
+		width: 3.5rem;
 	}
 
 	&__select--address {

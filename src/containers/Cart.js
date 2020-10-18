@@ -110,15 +110,19 @@ const Cart = props => {
 	return (
 		<Layout>
 			<div className='cart--page'>
+				<div>
 				<h2 className='heading-secondary heading-secondary--dark'>
 					My Cart
 				</h2>
 				<LineProducts big={true} />
-
-				{/* NOTE: THIS IS USELESS RIGHT NOW */}
+				</div>
+				
+				<div>
+				{/* NOTE: THIS PLACES COMENTS SOMEWHAT INTO THE WRONG PLACE  */}
 				<p className='paragraph paragraph--black'>
 					Additional Comments:
 				</p>
+				
 				<textarea
 					className='input input__text-area'
 					name='notes'
@@ -130,6 +134,8 @@ const Cart = props => {
 					rows='3'></textarea>
 				{/* /////////////////////////////// */}
 
+				
+				
 				<span className='navbar-line small-margin-top'></span>
 
 				<div className='cart__total'>
@@ -153,6 +159,7 @@ const Cart = props => {
 				) : (
 					<LoadingBar marginTop='3rem' width={400} />
 				)}
+				</div>
 			</div>
 		</Layout>
 	);

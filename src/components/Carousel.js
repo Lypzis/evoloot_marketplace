@@ -30,7 +30,7 @@ const Carousel = props => (
 				zIndex={2000}
 				hanger={'50%'}
 				anchor={'50%'}
-				gap={50}
+				gap={15} //50
 				moveType={{ type: 'snap', count: 1 }}
 				collectStatistics={false}>
 				{props.products.map(product => {

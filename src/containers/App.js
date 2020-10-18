@@ -6,6 +6,7 @@ import '../styles/main.scss';
 import Home from './Home';
 import CollectionProducts from './CollectionProducts';
 import ProductDetails from './ProductDetails';
+import ProductDetailsMobile from './ProductDetailsMobile';
 import Cart from './Cart';
 import SignUp from './SignUp';
 import Login from './Login';
@@ -15,7 +16,6 @@ import Forget from './Forget';
 import Search from './Search';
 import { AuthContext } from '../context/authContext';
 
-import VolunteerApplication from '../containers/Identity/VolunteerApplication';
 import Promise from '../containers/Identity/Promise';
 import EventSchedule from '../containers/Identity/EventSchedule';
 import ContactUs from '../containers/Identity/ContactUs';
@@ -30,9 +30,6 @@ function App() {
 
 	let routes = (
 		<Switch>
-			<Route path='/volunteer-application'>
-				<VolunteerApplication />
-			</Route>
 			<Route path='/our-promise-to-our-customers'>
 				<Promise />
 			</Route>
@@ -74,7 +71,11 @@ function App() {
 				<CollectionProducts />
 			</Route>
 			<Route path='/product/:handle'>
-				<ProductDetails />
+				{window.innerWidth > 1140 ? (
+					<ProductDetails />
+				) : (
+					<ProductDetailsMobile />
+				)}
 			</Route>
 			<Route path='/404'>
 				<NotFound />
@@ -88,9 +89,6 @@ function App() {
 	if (authContext.customerToken)
 		routes = (
 			<Switch>
-				<Route path='/volunteer-application'>
-					<VolunteerApplication />
-				</Route>
 				<Route path='/our-promise-to-our-customers'>
 					<Promise />
 				</Route>
@@ -126,7 +124,11 @@ function App() {
 					<CollectionProducts />
 				</Route>
 				<Route path='/product/:handle'>
-					<ProductDetails />
+					{window.innerWidth > 1140 ? (
+						<ProductDetails />
+					) : (
+						<ProductDetailsMobile />
+					)}
 				</Route>
 				<Route path='/404'>
 					<NotFound />
