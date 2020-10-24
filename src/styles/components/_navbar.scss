@@ -54,10 +54,20 @@
 		flex-direction: column;
 	}
 
+	&__list--profile {
+		@include respond(tab-port) {
+			flex-direction: row;
+		}
+	}
+
 	&__list-item {
 		&--menu {
 			align-self: center;
 			margin-top: 2rem;
+		}
+
+		@include respond(tab-port) {
+			flex: 1;
 		}
 	}
 
@@ -69,8 +79,20 @@
 		padding: 2rem 6rem;
 		transition: all 0.3s;
 
+		@include respond(tab-port) {
+			justify-content: center;
+		}
+
+		@include respond(phone-secondary) {
+			padding: 2rem 4rem;
+		}
+
 		&--menu {
 			padding: 1.5rem 2rem;
+
+			@include respond(tab-port) {
+				justify-content: flex-start;
+			}
 		}
 
 		& > svg {

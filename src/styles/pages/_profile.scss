@@ -8,8 +8,30 @@
 	border: solid #000 5px;
 	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 
+	
+
+	@include respond(tab-port) {
+		display: block;
+		margin-top: 2rem;
+		width: 80rem;
+	}
+
+	@include respond(phone-secondary) {
+		width: 70rem;
+	}
+
+	@include respond(phone) {
+		margin-top: 1rem;
+	}
+
+
 	& > .auth-form {
 		padding: 3rem 0;
 		margin: 0 5rem;
+
+		@include respond(phone) {
+			padding: 1.5rem 0;
+			margin: 0 3rem;
+		}
 	}
 }

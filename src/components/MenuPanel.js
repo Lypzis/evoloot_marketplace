@@ -18,7 +18,7 @@ const MenuPanel = props => {
 
 			<label
 				htmlFor='menu-toggle'
-				className='button button__black button__black--signup menu__button'>
+				className='button button__black button__black--login menu__button'>
 				<svg className='button__icon menu__button-icon'>
 					<use xlinkHref={`${sprite}#icon-menu`}></use>
 				</svg>

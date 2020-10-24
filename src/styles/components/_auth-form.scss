@@ -25,6 +25,7 @@
 	&__field {
 		display: flex;
 		flex-direction: column;
+		flex: 1;
 
 		&:not(:first-child) {
 			margin-top: 2rem;

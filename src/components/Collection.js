@@ -77,7 +77,6 @@ const Collection = props => {
 	};
 
 	useEffect(() => {
-		console.log('getting heehee');
 		setDisplayedProducts(
 			props.featured
 				? products

@@ -6,7 +6,7 @@ import sprite from '../assets/icons/sprite.svg';
 const NavbarVertical = props => {
 	return (
 		<nav className='navbar-vertical'>
-			<ul className='navbar-vertical__list'>
+			<ul className='navbar-vertical__list navbar-vertical__list--profile'>
 				<li className='navbar-vertical__list-item'>
 					<NavLink
 						to={`/me/settings`}
