@@ -1,8 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { NavLink } from 'react-router-dom';
 
 import sprite from '../assets/icons/sprite.svg';
-import LineProducts from './LineProducts';
 import BluredBackground from './BluredBackground';
 import Navbar from './Navbar';
 

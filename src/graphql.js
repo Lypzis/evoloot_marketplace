@@ -356,3 +356,47 @@ export const getCustomerOrders = (
 			`,
 	};
 };
+
+export const getShopPolicies = () => {
+	return {
+		query: `
+					{
+						shop {
+							privacyPolicy {
+								title
+								body
+								handle
+							}
+							refundPolicy {
+								title
+								body
+								handle
+							}
+							termsOfService{
+								title
+								body
+								handle
+							}
+						}
+					}
+			`,
+	};
+};
+
+export const getShopPages = () => {
+	return {
+		query: `	 
+					{
+						pages(first:100) {
+							edges {
+								node {
+									title
+									handle
+									body
+								}
+							}
+						}
+					}
+			`,
+	};
+};

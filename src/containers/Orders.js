@@ -130,17 +130,25 @@ const Orders = props => {
 						)}
 					</div>
 
-					{/* TO-DO: FORGOT TO TREAT WHEN USER HAS NO ORDERS HAVE YAH >:() */}
-					{user.orders ? (
-						user.orders.map((order, index) => (
-							<OrderCard key={index} order={order} />
-						))
-					) : (
+					{loading ? (
 						<LoadingBar
 							loading={loading}
 							marginTop='5rem'
 							width={150}
 						/>
+					) : (
+						<>
+							{user.orders ? (
+								user.orders.map((order, index) => (
+									<OrderCard key={index} order={order} />
+								))
+							) : (
+								<h3 className='heading-tertiary heading-tertiary--dark'>
+									-- ...you haven't ordered anything yet :(.
+									--
+								</h3>
+							)}
+						</>
 					)}
 				</div>
 			</div>

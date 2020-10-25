@@ -26,12 +26,10 @@
 
 
 	& > .auth-form {
-		padding: 3rem 0;
-		margin: 0 5rem;
+		padding: 3rem 3rem;
 
 		@include respond(phone) {
-			padding: 1.5rem 0;
-			margin: 0 3rem;
+			padding: 1.5rem 3rem;
 		}
 	}
 }

@@ -14,23 +14,16 @@ import NotFound from './NotFound';
 import Profile from './Profile';
 import Forget from './Forget';
 import Search from './Search';
+import Policies from '../containers/Policies';
+import Pages from '../containers/Pages';
 import { AuthContext } from '../context/authContext';
-
-import Promise from '../containers/Identity/Promise';
-import EventSchedule from '../containers/Identity/EventSchedule';
-import ContactUs from '../containers/Identity/ContactUs';
-import About from '../containers/Identity/About';
-
-import Service from '../containers/Policies/Service';
-import Refunds from '../containers/Policies/Refunds';
-import Privacy from '../containers/Policies/Privacy';
 
 function App() {
 	const authContext = useContext(AuthContext);
 
 	let routes = (
 		<Switch>
-			<Route path='/our-promise-to-our-customers'>
+			{/* <Route path='/our-promise-to-our-customers'>
 				<Promise />
 			</Route>
 			<Route path='/event-schedule'>
@@ -41,15 +34,12 @@ function App() {
 			</Route>
 			<Route path='/about'>
 				<About />
+			</Route> */}
+			<Route path='/pages/:handle'>
+				<Pages />
 			</Route>
-			<Route path='/terms-of-service'>
-				<Service />
-			</Route>
-			<Route path='/refund-policy'>
-				<Refunds />
-			</Route>
-			<Route path='/privacy-policy'>
-				<Privacy />
+			<Route path='/policy/:handle'>
+				<Policies />
 			</Route>
 
 			<Route path='/signup'>
@@ -77,11 +67,11 @@ function App() {
 					<ProductDetailsMobile />
 				)}
 			</Route>
-			<Route path='/404'>
-				<NotFound />
-			</Route>
 			<Route path='/'>
 				<Home />
+			</Route>
+			<Route path='/404'>
+				<NotFound />
 			</Route>
 		</Switch>
 	);
@@ -89,26 +79,11 @@ function App() {
 	if (authContext.customerToken)
 		routes = (
 			<Switch>
-				<Route path='/our-promise-to-our-customers'>
-					<Promise />
+				<Route path='/pages/:handle'>
+					<Pages />
 				</Route>
-				<Route path='/event-schedule'>
-					<EventSchedule />
-				</Route>
-				<Route path='/contact-us'>
-					<ContactUs />
-				</Route>
-				<Route path='/about'>
-					<About />
-				</Route>
-				<Route path='/terms-of-service'>
-					<Service />
-				</Route>
-				<Route path='/refund-policy'>
-					<Refunds />
-				</Route>
-				<Route path='/privacy-policy'>
-					<Privacy />
+				<Route path='/policy/:handle'>
+					<Policies />
 				</Route>
 
 				<Route path='/me'>
@@ -130,11 +105,11 @@ function App() {
 						<ProductDetailsMobile />
 					)}
 				</Route>
-				<Route path='/404'>
-					<NotFound />
-				</Route>
 				<Route path='/'>
 					<Home />
+				</Route>
+				<Route path='/404'>
+					<NotFound />
 				</Route>
 			</Switch>
 		);

@@ -32,9 +32,6 @@
 			padding-top: 0;
 		}
 
-		@include respond(phone) {
-			justify-content: space-between;
-		}
 	}
 
 	&__links-partition {

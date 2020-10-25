@@ -6,6 +6,10 @@
 
 	&--terms {
 		max-width: 65rem;
+
+		@include respond(phone-secondary) {
+			max-width: 50rem;
+		}
 	}
 
 	&__featured-section {
