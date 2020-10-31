@@ -50,11 +50,13 @@ const Card = props => {
 				<div className='card__image-box'>
 					<img
 						className='card__image'
-						src={props.product.images[0].src}
+						src={
+							props.product.images[0] &&
+							props.product.images[0].src
+						}
 						alt={
+							props.product.images[0] &&
 							props.product.images[0].altText
-								? props.product.images[0].altText
-								: props.product.title
 						}
 					/>
 				</div>

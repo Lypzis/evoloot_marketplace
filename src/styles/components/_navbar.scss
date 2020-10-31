@@ -42,6 +42,11 @@
 
 .navbar-vertical {
 	background-color: $color-primary-light;
+	width: 20vw;
+
+	@include respond(tab-port) {
+		width: auto;
+	}
 
 	&--no-background {
 		background-color: transparent;

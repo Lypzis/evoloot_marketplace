@@ -92,7 +92,7 @@ const Orders = props => {
 			setLoading(false);
 		} catch (err) {
 			setLoading(false);
-			console.log(err);
+			//console.log(err);
 		}
 	}, [authContext.customerToken, dispatch]);
 

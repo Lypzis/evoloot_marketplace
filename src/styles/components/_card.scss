@@ -104,7 +104,12 @@
 	&__image {
 		border-radius: 0.3rem;
 		width: 100%;
-		height: 100%;
+		height: 18rem; // height: 100%
+
+		// this might also be temp
+		@include respond(phone-secondary) {
+			height: 24rem;
+		}
 	}
 
 	&__price {

@@ -1,0 +1,11 @@
+.shipping {
+	margin: 1rem 0 2rem 0;
+
+	& > .auth-form__field {
+		margin-top: 1rem;
+	}
+
+	& > .auth-form__field-button {
+		margin-top: 2rem;
+	}
+}

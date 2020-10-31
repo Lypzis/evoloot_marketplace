@@ -125,7 +125,8 @@ const Footer = props => {
 					.
 				</p>
 				<p className='paragraph'>
-					© Evoloot Marketplace 2020. All rights reserved.
+					© Kumoneko - Evoloot Marketplace {new Date().getFullYear()}.
+					All rights reserved.
 				</p>
 			</div>
 		</footer>

@@ -239,6 +239,7 @@ const Address = props => {
 									classes='input input__select input__select--address'
 									value={addressForm.country}
 									defaultOptionLabel={addressForm.country}
+									priorityOptions={['US', 'CA', 'GB', 'AU']}
 									onChange={val =>
 										setFieldDropdown(val, 'country')
 									}

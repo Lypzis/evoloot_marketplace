@@ -226,6 +226,56 @@ export const updateCustomerAddress = (
 	};
 };
 
+export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
+	return {
+		query: `	 
+				mutation checkoutCreate($input: CheckoutCreateInput!) {
+					checkoutCreate(input: $input) {
+					checkout {
+						id
+					}
+					checkoutUserErrors {
+						code
+						field
+						message
+					}
+					}
+				}
+			`,
+		variables: {
+			input: {
+				allowPartialAddresses: true,
+				email,
+				lineItems,
+				shippingAddress,
+			},
+		},
+	};
+};
+
+export const getAvailableShippingRates = customerAccessToken => {
+	return {
+		query: `	 
+				{
+					customer (customerAccessToken: "${customerAccessToken}"){
+						lastIncompleteCheckout {
+							availableShippingRates {
+								ready
+								shippingRates {
+									title
+									priceV2 {
+										amount
+										currencyCode
+									}
+								}
+							}
+						}
+					}
+				}
+			`,
+	};
+};
+
 export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
 	return {
 		query: `

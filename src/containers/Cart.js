@@ -9,6 +9,7 @@ import { removeAllProductsFromCheckout } from '../store/actions/checkout';
 import { updateCheckoutShippingAddress, updateCheckoutEmail } from '../graphql';
 import axiosInstace from '../axios';
 import LoadingBar from '../components/LoadingBar';
+import ShippingCalculator from '../components/ShippingCalculator';
 
 const addressFields = {
 	firstName: '',
@@ -111,54 +112,54 @@ const Cart = props => {
 		<Layout>
 			<div className='cart--page'>
 				<div>
-				<h2 className='heading-secondary heading-secondary--dark'>
-					My Cart
-				</h2>
-				<LineProducts big={true} />
+					<h2 className='heading-secondary heading-secondary--dark'>
+						My Cart
+					</h2>
+					<LineProducts big={true} />
 				</div>
-				
+
 				<div>
-				{/* NOTE: THIS PLACES COMENTS SOMEWHAT INTO THE WRONG PLACE  */}
-				<p className='paragraph paragraph--black'>
-					Additional Comments:
-				</p>
-				
-				<textarea
-					className='input input__text-area'
-					name='notes'
-					id='notes'
-					cols='50'
-					maxLength={300}
-					value={textAreaValue}
-					onChange={event => setTextAreaValue(event.target.value)}
-					rows='3'></textarea>
-				{/* /////////////////////////////// */}
+					<ShippingCalculator />
 
-				
-				
-				<span className='navbar-line small-margin-top'></span>
+					{/* NOTE: THIS PLACES COMENTS SOMEWHAT INTO THE WRONG PLACE  */}
+					<p className='paragraph paragraph--black'>
+						Additional Comments:
+					</p>
 
-				<div className='cart__total'>
-					<p className='paragraph paragraph--black'>Total: </p>
-					<div className='product__price'>
-						<p className='paragraph paragraph--black'>
-							CAD${checkout.totalPrice.toFixed(2)}
-						</p>
+					<textarea
+						className='input input__text-area'
+						name='notes'
+						id='notes'
+						cols='50'
+						maxLength={300}
+						value={textAreaValue}
+						onChange={event => setTextAreaValue(event.target.value)}
+						rows='3'></textarea>
+					{/* /////////////////////////////// */}
+
+					<span className='navbar-line small-margin-top'></span>
+
+					<div className='cart__total'>
+						<p className='paragraph paragraph--black'>Total: </p>
+						<div className='product__price'>
+							<p className='paragraph paragraph--black'>
+								CAD${checkout.totalPrice.toFixed(2)}
+							</p>
+						</div>
 					</div>
-				</div>
 
-				{!loading ? (
-					<button
-						className='button button__white button__white--card-big'
-						disabled={checkout.totalPrice === 0}
-						onClick={createCheckout}>
-						<p className='paragraph card__price card__price--big cart__button-text'>
-							proceed to checkout
-						</p>
-					</button>
-				) : (
-					<LoadingBar marginTop='3rem' width={400} />
-				)}
+					{!loading ? (
+						<button
+							className='button button__white button__white--card-big'
+							disabled={checkout.totalPrice === 0}
+							onClick={createCheckout}>
+							<p className='paragraph card__price card__price--big cart__button-text'>
+								proceed to checkout
+							</p>
+						</button>
+					) : (
+						<LoadingBar marginTop='3rem' width={400} />
+					)}
 				</div>
 			</div>
 		</Layout>
