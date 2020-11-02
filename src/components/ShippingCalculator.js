@@ -229,7 +229,7 @@ const ShippingCalculator = props => {
 								Here are the available shipping rates to that
 								location:
 							</p>
-							<ul>
+							<ul className='shipping__rate-list'>
 								{shippingForm.availableShippingRates.map(
 									rate => {
 										const {
@@ -241,7 +241,10 @@ const ShippingCalculator = props => {
 											<li key={rate.title}>
 												<p className='paragraph paragraph--black'>
 													{rate.title} at{' '}
-													{currencyCode}${amount}
+													{currencyCode}$
+													{parseFloat(amount).toFixed(
+														2
+													)}
 												</p>
 											</li>
 										);

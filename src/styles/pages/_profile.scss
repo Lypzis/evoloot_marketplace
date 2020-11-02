@@ -18,13 +18,9 @@
 		width: 70rem;
 	}
 
-	@include respond(phone) {
-		margin-top: 1rem;
-	}
-
 	& > .auth-form {
 		padding: 3rem 3rem;
-		width: 60vw;
+		width: 70rem;
 
 		@include respond(tab-port) {
 			width: auto;

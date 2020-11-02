@@ -2,7 +2,7 @@ body {
 	font-family: 'Mitr', sans-serif;
 	font-weight: 400;
 	line-height: 1.7;
-	color: #fff; /* all text will be of this color */
+	color: $color-gray-dark-3; /* all text will be of this color */
 }
 
 .heading-primary {
@@ -54,7 +54,7 @@ body {
 	hyphens: auto;
 
 	&--black {
-		color: rgba(0, 0, 0, 0.7);
+		color: $color-gray-dark-3;
 	}
 
 	&--error {

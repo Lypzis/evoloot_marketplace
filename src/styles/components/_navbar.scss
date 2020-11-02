@@ -1,7 +1,8 @@
 .navbar {
 	position: relative;
-	max-width: 130rem;
-	margin: 0 auto;
+	//max-width: 130rem;
+	background-color: $color-secondary;
+	//margin: 0 auto;
 
 	&__list {
 		display: flex;
@@ -21,28 +22,35 @@
 	&__link {
 		display: block;
 		text-decoration: none;
-		color: #fff;
-		padding: 0.5rem 1.5rem;
+		color: $color-gray-dark-1;
+		padding: 0.35rem 1.5rem;
 		transition: all 0.3s;
+
+		&:hover {
+			background-color: $color-tertiary;
+			color: #fff;
+		}
 	}
 
 	&__link--active {
-		background-color: $color-primary-dark;
+		background-color: $color-tertiary;
+		color: #fff;
 	}
 }
 
 .navbar-line {
-	border-top: solid 0.2rem $color-gray-light-5;
+	border-top: solid 0.2rem $color-gray-medium;
 	display: inherit;
 
 	&--thicc {
-		border-top: solid 0.3rem $color-gray-light-5;
+		border-top: solid 0.3rem $color-gray-medium;
 	}
 }
 
 .navbar-vertical {
-	background-color: $color-primary-light;
-	width: 20vw;
+	background-color: $color-secondary;
+
+	//    width: 100%;
 
 	@include respond(tab-port) {
 		width: auto;
@@ -79,7 +87,7 @@
 	&__link {
 		display: flex;
 		text-decoration: none;
-		color: #fff;
+		color: $color-gray-dark-1;
 		align-items: center;
 		padding: 2rem 6rem;
 		transition: all 0.3s;
@@ -101,8 +109,18 @@
 		}
 
 		& > svg {
-			fill: #fff;
+			fill: $color-gray-dark-1;
 			margin-right: 0.7rem;
+		}
+
+		&--active,
+		&:hover {
+			background-color: $color-tertiary;
+			color: #fff;
+
+			& > svg {
+				fill: #fff;
+			}
 		}
 	}
 }

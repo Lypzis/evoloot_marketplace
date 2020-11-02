@@ -70,7 +70,11 @@ const Navbar = props => {
 											? ' navbar-vertical__link navbar-vertical__link--menu'
 											: ' navbar__link '
 									}`}
-									activeClassName='navbar__link--active'>
+									activeClassName={
+										props.vertical
+											? ' navbar-vertical__link--active'
+											: ' navbar__link--active '
+									}>
 									{navTitle.title}
 								</NavLink>
 							</li>

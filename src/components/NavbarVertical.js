@@ -11,7 +11,7 @@ const NavbarVertical = props => {
 					<NavLink
 						to={`/me/settings`}
 						className='paragraph navbar-vertical__link'
-						activeClassName='navbar__link--active'>
+						activeClassName='navbar-vertical__link--active'>
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-cog`}></use>
 						</svg>
@@ -22,7 +22,7 @@ const NavbarVertical = props => {
 					<NavLink
 						to={`/me/orders`}
 						className='paragraph navbar-vertical__link'
-						activeClassName='navbar__link--active'>
+						activeClassName='navbar-vertical__link--active'>
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-dropbox`}></use>
 						</svg>
@@ -33,7 +33,7 @@ const NavbarVertical = props => {
 					<NavLink
 						to={`/me/address`}
 						className='paragraph navbar-vertical__link'
-						activeClassName='navbar__link--active'>
+						activeClassName='navbar-vertical__link--active'>
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-location2`}></use>
 						</svg>

@@ -291,7 +291,7 @@ const ProductDetails = props => {
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
-							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
+							<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
 								You may also like:
 							</h3>
 							<Carousel
@@ -300,7 +300,7 @@ const ProductDetails = props => {
 
 							<span className='navbar-line big-margin-top'></span>
 
-							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
+							<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
 								Recently Viewed:
 							</h3>
 							<Carousel products={productChosen.viewed} />
@@ -310,7 +310,7 @@ const ProductDetails = props => {
 						<div className='card product__card'>
 							<div className='card__details'>
 								<div className='input__container'>
-									<p className='paragraph'>
+									<p className='paragraph paragraph--black'>
 										Availability:{' '}
 										{productChosen.variant.available
 											? 'in stock'
@@ -319,7 +319,9 @@ const ProductDetails = props => {
 								</div>
 								{productChosen.product.variants.length > 1 && (
 									<div className='input__container'>
-										<p className='paragraph'>Variant: </p>
+										<p className='paragraph paragraph--black'>
+											Variant:{' '}
+										</p>
 										<select
 											className='input input__select'
 											onChange={setVariantSelected}>
@@ -336,7 +338,7 @@ const ProductDetails = props => {
 								<span className='navbar-line'></span>
 
 								<div className='product__price'>
-									<p className='paragraph'>
+									<p className='paragraph paragraph--black'>
 										CAD$
 										{(
 											productChosen.variant.price *

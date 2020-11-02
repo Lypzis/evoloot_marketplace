@@ -33,7 +33,8 @@ const Thumbnail = props => {
 						: 'button button__white button__white--image'
 				}
 				htmlFor={props.image.id}
-				onClick={setImage}>
+				onClick={setImage}
+				onMouseOver={setImage}>
 				<img
 					className='product__image product__image--variant'
 					src={props.image.src}

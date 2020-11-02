@@ -6,14 +6,14 @@
 	transition: all 0.2s;
 
 	&__icon {
-		height: 1.5rem;
-		width: 1.5rem;
+		height: 1.4rem;
+		width: 1.4rem;
 		fill: #000;
 		transition: all 0.2s;
 
-		@include respond(phone-really-small) {
-			height: 1.4rem;
-			width: 1.4rem;
+		@include respond(phone-small) {
+			height: 1.3rem;
+			width: 1.3rem;
 		}
 	}
 
@@ -39,7 +39,7 @@
 		margin-left: 2rem;
 		height: 2rem;
 		width: 2rem;
-		fill: #fff;
+		fill: $color-gray-dark-1;
 	}
 
 	&__icon--card-big {
@@ -81,14 +81,13 @@
 		background-color: $color-gray-light-2;
 		border: none;
 		padding: 0.4rem;
-
-		@include respond(tab-port-2) {
-			background-color: transparent;
-		}
+		background-color: transparent;
 
 		& > .button__icon {
+			fill: $color-gray-dark-1;
+
 			@include respond(tab-port-2) {
-				fill: #fff;
+				//fill: #fff;
 				margin-bottom: 0.3rem;
 				height: 1.6rem;
 				width: 1.6rem;
@@ -102,11 +101,11 @@
 		align-items: center;
 
 		width: 12rem;
-		padding: 1rem;
-		border: 0.2rem solid $color-gray-light-3;
+		padding: 0.7rem 1rem;
+		border: 0.2rem solid #fff;
 		background-color: transparent;
-		color: $color-gray-light-3;
-		background: $color-primary-dark;
+		color: #fff;
+		background: $color-tertiary;
 		border-radius: 2rem;
 		box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
 
@@ -115,7 +114,8 @@
 		}
 
 		& .button__icon {
-			fill: $color-gray-light-3;
+			fill: #fff;
+			margin-bottom: 1px;
 		}
 
 		&:hover,
@@ -123,6 +123,7 @@
 			color: #fff; // This color needs to be thinked, hurts the eyes
 			border: 0.2rem solid #fff;
 			backface-visibility: hidden;
+			background-color: rgba($color-tertiary, 0.75);
 		}
 
 		&:hover,
@@ -159,7 +160,7 @@
 	}
 
 	&__black--small-circle > .button__icon {
-		fill: $color-gray-light-4;
+		fill: #fff;
 
 		@include respond(phone-really-small) {
 			padding: 0;
@@ -247,19 +248,18 @@
 		}
 
 		font-size: 1.2rem;
-	}
 
-	&__white:hover,
-	&__white:focus {
-		color: #fff;
-		background-color: $color-gray-dark-3;
+		&:hover,
+		&:focus {
+			color: #fff;
+			background-color: rgba($color-green, 0.7);
+		}
 	}
 
 	&__white--card {
 		margin-top: 1rem;
 
 		@include respond(tab-port-2) {
-			background-color: $color-tertiary;
 			color: #fff;
 		}
 
@@ -270,14 +270,9 @@
 	}
 
 	&__white--card-big {
-		background-color: $color-tertiary;
+		background-color: $color-green;
 		width: 100%;
 		color: #fff;
-
-		&:hover,
-		&:focus {
-			background-color: rgba($color-tertiary, 0.7);
-		}
 
 		&:disabled {
 			cursor: not-allowed;
@@ -291,11 +286,6 @@
 		color: #fff;
 		align-self: baseline;
 		margin-top: 1.2rem;
-
-		&:hover,
-		&:focus {
-			background-color: rgba($color-tertiary, 0.7);
-		}
 
 		&:disabled {
 			cursor: not-allowed;

@@ -25,11 +25,11 @@ const Description = ({ description, isThereADescription }) => {
 			},
 			{
 				searchValue: /<p>/gi,
-				replaceValue: '<p class="paragraph">',
+				replaceValue: '<p class="paragraph paragraph--black">',
 			},
 			{
 				searchValue: /<b>/gi,
-				replaceValue: '<p class="paragraph">',
+				replaceValue: '<p class="paragraph paragraph--black">',
 			},
 			{
 				searchValue: /strong/gi,

@@ -10,7 +10,7 @@
 	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 	border-radius: 0.5rem;
 	padding: 1rem;
-	background: $color-gray-dark-2;
+	background: $color-secondary;
 
 	@include respond(phone-secondary) {
 		width: 30rem; // 1rem = 9px, 9/16 = 56.25%
@@ -35,10 +35,16 @@
 		height: 13rem;
 		width: auto;
 		margin: 1.5rem 0;
+		background-color: $color-primary;
+
+		& > .button__small-circle--checkout > .button__icon--card {
+			fill: $color-gray-dark-1;
+		}
 
 		&-big {
 			height: 18rem;
 			justify-content: flex-start;
+			background-color: $color-secondary;
 		}
 	}
 
@@ -54,14 +60,21 @@
 	}
 
 	&--raw {
-		box-shadow: none;
 		margin: 0;
+		margin-left: 0.4rem;
+		margin-right: 1rem;
 	}
 
-	&:hover > .button__white:not(:disabled),
-	&:focus > .button__white:not(:disabled) {
-		background-color: $color-tertiary;
+	& .button__white:not(:disabled),
+	& .button__white:not(:disabled) {
+		background-color: $color-green;
 		color: #fff;
+
+		&:hover,
+		&:focus {
+			color: #fff;
+			background-color: rgba($color-green, 0.7);
+		}
 	}
 
 	&__link {
@@ -70,7 +83,7 @@
 
 	&__title {
 		text-decoration: none;
-		color: #fff;
+		color: $color-gray-dark-1;
 		font-size: 1.2rem;
 		overflow: hidden;
 		white-space: nowrap;
@@ -96,15 +109,24 @@
 		margin-right: 2rem;
 		max-width: 12rem;
 
+		& > .card__image {
+			height: 10rem;
+		}
+
 		&-big {
 			max-width: 17rem;
+		}
+
+		&-big > .card__image {
+			height: 15.5rem;
 		}
 	}
 
 	&__image {
 		border-radius: 0.3rem;
 		width: 100%;
-		height: 18rem; // height: 100%
+		height: 15rem; // height: 100%
+		border: solid 2px #000;
 
 		// this might also be temp
 		@include respond(phone-secondary) {
@@ -137,7 +159,7 @@
 
 	&__description-box {
 		padding: 1.7rem;
-		border: solid 2px #999;
+		border: solid 2px $color-gray-medium;
 		border-radius: 0.5rem;
 	}
 

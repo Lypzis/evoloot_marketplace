@@ -1,7 +1,17 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+	CarouselProvider,
+	Slider,
+	Slide,
+	ButtonBack,
+	ButtonNext,
+} from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 import Card from '../components/Card';
+import Carousel from '../components/Carousel';
 
 const Collection = props => {
 	const { products } = props.collection;
@@ -77,28 +87,16 @@ const Collection = props => {
 	};
 
 	useEffect(() => {
-		setDisplayedProducts(
-			props.featured
-				? products
-						.sort(
-							(a, b) =>
-								new Date(a.publishedAt) <
-								new Date(b.publishedAt)
-						)
-						.slice(0, 4)
-						.map(product => {
-							return <Card key={product.id} product={product} />;
-						})
-				: products
-						.sort(
-							(a, b) =>
-								new Date(a.publishedAt) <
-								new Date(b.publishedAt)
-						)
-						.map(product => {
-							return <Card key={product.id} product={product} />;
-						})
-		);
+		const productsFormated = products
+			.sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
+			.map(product => {
+				return <Card key={product.id} product={product} />;
+			});
+
+		// if (props.featured)
+		// 	setDisplayedProducts(<Carousel products={products} />);
+		// else
+		setDisplayedProducts(productsFormated);
 	}, [products, props.featured]);
 
 	return (
@@ -139,7 +137,42 @@ const Collection = props => {
 					</div>
 				</div>
 			)}
-			<div className='home__featured'>{displayedProducts}</div>
+			<div className='home__featured'>
+				{props.featured ? (
+					<div className='home__container'>
+						<CarouselProvider
+							naturalSlideWidth={100}
+							naturalSlideHeight={120}
+							totalSlides={products.length}
+							orientation='horizontal'
+							visibleSlides={4}
+							infinite={true}
+							isPlaying={true}>
+							<div>
+								<ButtonBack>Back</ButtonBack>
+								<ButtonNext>Next</ButtonNext>
+							</div>
+							<Slider>
+								{products.map((product, index) => {
+									return (
+										<Slide
+											key={product.id}
+											index={index}
+											innerClassName='product__carousel-container product__carousel-container--home'>
+											<Card
+												product={product}
+												noEffect={true}
+											/>
+										</Slide>
+									);
+								})}
+							</Slider>
+						</CarouselProvider>
+					</div>
+				) : (
+					displayedProducts
+				)}
+			</div>
 			{props.featured && (
 				<Link
 					to={`/collection/${props.collection.handle}`}

@@ -1,5 +1,5 @@
 .footer {
-	background-color: $color-primary-dark;
+	background-color: $color-fourtiary;
 	width: 100%;
 
 	& > .navbar-line {
@@ -12,31 +12,31 @@
 		margin: auto;
 		padding: 1.5rem;
 		padding-bottom: 0;
-		max-width: 110rem;
+		max-width: 97rem;
 	}
 
 	&__logo {
 		display: block;
-		width: 24rem;
+		width: 10rem;
 	}
 
 	&__links {
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		padding: 2rem 0;
+		padding: 1rem 0;
 
 		@include respond(phone-secondary) {
 			justify-content: center;
 			align-items: flex-start;
 			padding-top: 0;
 		}
-
 	}
 
 	&__links-partition {
 		& > .heading-fourtiary {
 			margin-bottom: 1.2rem;
+			color: $color-gray-dark-3;
 		}
 
 		@include respond(phone-secondary) {
@@ -78,6 +78,8 @@
 		// }
 
 		& > .button__black--small-circle {
+			border-color: #fff;
+
 			@include respond(phone-secondary) {
 				&:not(:last-child) {
 					margin-right: 2rem;
@@ -99,6 +101,7 @@
 		& > .paragraph {
 			margin-bottom: 1.2rem;
 			font-size: 1.4rem;
+			color: $color-gray-dark-3;
 
 			@include respond(phone-secondary) {
 				margin-bottom: 0;
@@ -108,7 +111,7 @@
 
 	&__copyright {
 		text-align: center;
-		color: $color-gray-light-4;
+		color: $color-gray-dark-3;
 		padding: 0.6rem 0;
 
 		& > .paragraph,
@@ -118,7 +121,7 @@
 	}
 
 	&__author {
-		color: $color-gray-light-4;
+		color: $color-gray-dark-3;
 		text-decoration: none;
 	}
 }

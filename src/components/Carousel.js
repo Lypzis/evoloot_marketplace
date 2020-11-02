@@ -1,48 +1,44 @@
 import React, { Fragment, memo } from 'react';
-import Flicking from '@egjs/react-flicking';
-import { Fade } from '@egjs/flicking-plugins';
+import {
+	CarouselProvider,
+	Slider,
+	Slide,
+	ButtonBack,
+	ButtonNext,
+} from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Card from './Card';
-
-const plugins = [new Fade()];
 
 const Carousel = props => (
 	<Fragment>
 		{props.products.length > 0 && (
-			<Flicking
-				className='product__carousel'
-				tag='div'
-				viewportTag='div'
-				cameraTag='div'
-				deceleration={0.0075}
-				horizontal={true}
+			<CarouselProvider
+				naturalSlideWidth={100}
+				naturalSlideHeight={180}
+				totalSlides={props.products.length}
+				orientation='horizontal'
+				visibleSlides={3}
 				infinite={true}
-				lastIndex={Infinity}
-				threshold={40}
-				plugins={plugins}
-				panelEffect={x => 1 - Math.pow(1 - x, 3)}
-				defaultIndex={1}
-				inputType={['touch', 'mouse']}
-				thresholdAngle={45}
-				bounce={10}
-				autoResize={true}
-				adaptive={true}
-				zIndex={2000}
-				hanger={'50%'}
-				anchor={'50%'}
-				gap={15} //50
-				moveType={{ type: 'snap', count: 1 }}
-				collectStatistics={false}>
-				{props.products.map(product => {
-					return (
-						<Card
-							key={product.id}
-							product={product}
-							noEffect={true}
-						/>
-					);
-				})}
-			</Flicking>
+				//isPlaying={true}
+			>
+				<div>
+					<ButtonBack>Back</ButtonBack>
+					<ButtonNext>Next</ButtonNext>
+				</div>
+				<Slider>
+					{props.products.map((product, index) => {
+						return (
+							<Slide
+								key={product.id}
+								index={index}
+								innerClassName='product__carousel-container'>
+								<Card product={product} noEffect={true} />
+							</Slide>
+						);
+					})}
+				</Slider>
+			</CarouselProvider>
 		)}
 	</Fragment>
 );

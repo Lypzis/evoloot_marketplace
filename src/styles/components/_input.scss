@@ -10,19 +10,19 @@
 	font-family: inherit;
 
 	&__search {
-		width: 45rem;
+		width: auto;
+		background: transparent;
+		color: $color-gray-dark-1;
+		border: none;
+		border-bottom: 2px solid $color-gray-light-4;
+		border-radius: 0;
+		overflow: hidden;
+		box-shadow: none;
+		padding: 0.2rem 0.5rem;
+		font-size: $default-font-size-2;
 
 		&--mobile {
 			width: 100%;
-			background: transparent;
-			color: #fff;
-			border: none;
-			border-bottom: 1px solid;
-			border-radius: 0;
-			overflow: hidden;
-			box-shadow: none;
-			padding: 0.5rem 0.5rem;
-			font-size: 1.8rem;
 		}
 	}
 

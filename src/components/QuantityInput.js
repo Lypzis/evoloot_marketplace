@@ -5,8 +5,8 @@ const QuantityInput = props => {
 
 	const inputSize = props.small ? 'input input--small' : 'input';
 	const labelSize = props.small
-		? 'paragraph input__container-paragraph-small'
-		: 'paragraph';
+		? 'paragraph paragraph--black input__container-paragraph-small'
+		: 'paragraph paragraph--black';
 
 	const inputContainer = props.small
 		? 'input__container input__container--small'
