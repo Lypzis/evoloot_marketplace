@@ -15,7 +15,7 @@ const Carousel = props => (
 		{props.products.length > 0 && (
 			<CarouselProvider
 				naturalSlideWidth={100}
-				naturalSlideHeight={180}
+				naturalSlideHeight={140}
 				totalSlides={props.products.length}
 				orientation='horizontal'
 				visibleSlides={3}

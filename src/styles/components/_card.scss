@@ -12,9 +12,9 @@
 	padding: 1rem;
 	background: $color-secondary;
 
-	@include respond(phone-secondary) {
-		width: 30rem; // 1rem = 9px, 9/16 = 56.25%
-	}
+	// @include respond(phone-secondary) {
+	// 	width: 30rem; // 1rem = 9px, 9/16 = 56.25%
+	// }
 
 	&--collection {
 		width: 92rem;
@@ -24,9 +24,9 @@
 		padding: 0.5rem 1.6rem;
 		margin-bottom: 1rem;
 
-		@include respond(phone-secondary) {
-			width: 64.5rem; // 1rem = 9px, 9/16 = 56.25%
-		}
+		// @include respond(phone-secondary) {
+		// 	width: 64.5rem; // 1rem = 9px, 9/16 = 56.25%
+		// }
 	}
 
 	&--checkout {
@@ -129,18 +129,18 @@
 		border: solid 2px #000;
 
 		// this might also be temp
-		@include respond(phone-secondary) {
-			height: 24rem;
-		}
+		// @include respond(phone-secondary) {
+		// 	height: 24rem;
+		// }
 	}
 
 	&__price {
 		font-size: 1.1rem;
 		font-weight: 700;
 
-		@include respond(phone-really-small) {
-			font-size: 1.3rem;
-		}
+		// @include respond(phone-really-small) {
+		// 	font-size: 1.3rem;
+		// }
 	}
 
 	&__price--white {
@@ -161,6 +161,11 @@
 		padding: 1.7rem;
 		border: solid 2px $color-gray-medium;
 		border-radius: 0.5rem;
+	}
+
+	&__description-box-description > * {
+		font-size: $default-font-size;
+		list-style: none;
 	}
 
 	&__details {

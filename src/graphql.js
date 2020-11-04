@@ -433,6 +433,20 @@ export const getShopPolicies = () => {
 	};
 };
 
+export const getShopCurrency = () => {
+	return {
+		query: `
+					{
+						shop {
+							paymentSettings {
+								currencyCode
+							}
+						}
+					}
+			`,
+	};
+};
+
 export const getShopPages = () => {
 	return {
 		query: `	 

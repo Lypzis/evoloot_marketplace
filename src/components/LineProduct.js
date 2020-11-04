@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,9 +8,11 @@ import {
 	updateProductFromCheckout,
 } from '../store/actions/checkout';
 import QuantityInput from './QuantityInput';
+import { ClientContext } from '../context/clientContext';
 
 const LineProduct = props => {
 	const dispatch = useDispatch();
+	const clientContext = useContext(ClientContext);
 	const { product } = props;
 
 	const cardCheckout = props.big
@@ -72,7 +74,8 @@ const LineProduct = props => {
 				/>
 
 				<p className='paragraph'>
-					{product.quantity}x CAD${product.price}
+					{product.quantity}x {clientContext.shopCurrency}$
+					{product.price}
 				</p>
 			</div>
 

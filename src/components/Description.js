@@ -41,7 +41,7 @@ const Description = ({ description, isThereADescription }) => {
 			},
 		];
 
-		const newDescription = replaceChain(description, replacements);
+		const newDescription = description; //= replaceChain(description, replacements);
 
 		setFormatedDescription(newDescription);
 	}, [description, replaceChain]);
@@ -59,6 +59,7 @@ const Description = ({ description, isThereADescription }) => {
 
 				<div className='card__description-box'>
 					<div
+						className='card__description-box-description'
 						dangerouslySetInnerHTML={{
 							__html: formatedDescription,
 						}}></div>

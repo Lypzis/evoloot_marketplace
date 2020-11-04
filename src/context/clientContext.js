@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Client from 'shopify-buy';
 import { useHistory } from 'react-router-dom';
-import { getShopPolicies, getShopPages } from '../graphql';
+import { getShopPolicies, getShopPages, getShopCurrency } from '../graphql';
 import axiosInstance from '../axios';
 
 const client = Client.buildClient({
@@ -13,12 +13,14 @@ export const ClientContext = React.createContext({
 	client: null,
 	collections: null,
 	shopPolicies: null,
+	shopCurrency: null,
 	pages: null,
 });
 
 const ClientContextProvider = props => {
 	const [collections, setCollections] = useState(null);
 	const [shopPolicies, setShopPolicies] = useState(null);
+	const [shopCurrency, setShopCurrency] = useState(null);
 	const [pages, setPages] = useState(null);
 	const history = useHistory();
 
@@ -34,6 +36,21 @@ const ClientContextProvider = props => {
 			});
 
 			setPages(arr);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getShopCurrencyData = async () => {
+		try {
+			const currency = await axiosInstance.post(
+				'/api/graphql.json',
+				getShopCurrency()
+			);
+
+			setShopCurrency(
+				currency.data.data.shop.paymentSettings.currencyCode
+			);
 		} catch (err) {
 			console.log(err);
 		}
@@ -72,11 +89,12 @@ const ClientContextProvider = props => {
 		getAllCollectionsWithProducts();
 		getShopPoliciesData();
 		getShopPagesData();
+		getShopCurrencyData();
 	}, [getAllCollectionsWithProducts]);
 
 	return (
 		<ClientContext.Provider
-			value={{ client, collections, pages, shopPolicies }}>
+			value={{ client, collections, pages, shopPolicies, shopCurrency }}>
 			{props.children}
 		</ClientContext.Provider>
 	);

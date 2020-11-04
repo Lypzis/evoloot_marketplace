@@ -128,6 +128,9 @@ const ProductDetails = props => {
 
 			const relatedProducts = retrieveRelatedProducts(product);
 
+			console.log('qqqqq');
+			console.log(clientContext.shopPolicies[0].currencyCode);
+
 			dispatchProduct({
 				type: 'INITIALIZE',
 				product,
@@ -339,7 +342,7 @@ const ProductDetails = props => {
 
 								<div className='product__price'>
 									<p className='paragraph paragraph--black'>
-										CAD$
+										{clientContext.shopCurrency}$
 										{(
 											productChosen.variant.price *
 											productChosen.quantity

@@ -325,7 +325,7 @@ const ProductDetailsMobile = props => {
 
 									<div className='product__price'>
 										<p className='paragraph'>
-											CAD$
+											{clientContext.shopCurrency}$
 											{(
 												productChosen.variant.price *
 												productChosen.quantity

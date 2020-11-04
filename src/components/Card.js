@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,12 +7,14 @@ import {
 	addProductToCheckout,
 	updateProductFromCheckout,
 } from '../store/actions/checkout';
+import { ClientContext } from '../context/clientContext';
 
 const Card = props => {
 	const [isMouseOverButton, setIsMouseOverButton] = useState(false);
 	const dispatch = useDispatch();
 	const checkout = useSelector(state => state.checkout);
 	const history = useHistory();
+	const clientContext = useContext(ClientContext);
 
 	const addToCart = () => {
 		const variant = props.product.variants[0];
@@ -85,7 +87,8 @@ const Card = props => {
 						</div>
 					) : (
 						<p className='paragraph card__price'>
-							CAD$ {props.product.variants[0].price}
+							{clientContext.shopCurrency}${' '}
+							{props.product.variants[0].price}
 						</p>
 					)}
 				</button>
