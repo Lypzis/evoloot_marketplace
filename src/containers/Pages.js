@@ -24,43 +24,14 @@ const Pages = props => {
 		return string;
 	}, []);
 
-	const formatDescription = useCallback(
-		body => {
-			const replacements = [
-				{
-					searchValue: /<h2>/gi,
-					replaceValue:
-						'<h3 class="heading-tertiary heading-tertiary--dark no-margin">',
-				},
-				{
-					searchValue: /div/gi,
-					replaceValue: 'p',
-				},
-				{
-					searchValue: /<p/gi,
-					replaceValue: '<p class="paragraph paragraph--black"',
-				},
-				{
-					searchValue: /<p>/gi,
-					replaceValue: '<p class="paragraph paragraph--black">',
-				},
-			];
-
-			return replaceChain(body, replacements);
-		},
-		[replaceChain]
-	);
-
 	const setContent = useCallback(() => {
 		const curr = clientContext.pages.find(
 			policy => policy.handle === handle
 		);
 
-		const bodyFormatted = formatDescription(curr.body);
-
-		setHtmlBody(bodyFormatted);
+		setHtmlBody(curr.body);
 		setCurrPage(curr);
-	}, [clientContext.pages, handle, formatDescription]);
+	}, [clientContext.pages, handle]);
 
 	useEffect(() => {
 		if (clientContext.pages) setContent();
@@ -72,12 +43,13 @@ const Pages = props => {
 				<div className='home__featured-section'>
 					{currPage && (
 						<>
-							<h2 className='heading-secondary heading-secondary--dark small-margin-bottom'>
+							<h2 className='heading-secondary heading-secondary--dark medium-margin-bottom'>
 								{currPage.title}
 							</h2>
 
 							<div className='home__featured home__featured--terms'>
 								<div
+									className='card__description-box-description'
 									dangerouslySetInnerHTML={{
 										__html: htmlBody,
 									}}></div>

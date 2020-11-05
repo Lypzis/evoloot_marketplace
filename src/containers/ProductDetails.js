@@ -299,6 +299,10 @@ const ProductDetails = props => {
 							</h3>
 							<Carousel
 								products={productChosen.relatedProducts}
+								naturalSlideWidth={100}
+								naturalSlideHeight={140}
+								visibleSlides={3}
+								isPlaying={false}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
@@ -306,7 +310,13 @@ const ProductDetails = props => {
 							<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
 								Recently Viewed:
 							</h3>
-							<Carousel products={productChosen.viewed} />
+							<Carousel
+								products={productChosen.viewed}
+								naturalSlideWidth={100}
+								naturalSlideHeight={140}
+								visibleSlides={3}
+								isPlaying={false}
+							/>
 						</div>
 
 						{/* TO-DO needs to be a standalone component */}

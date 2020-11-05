@@ -5,6 +5,10 @@
 	max-width: 120rem;
 	width: 100rem;
 
+	@include respond(phone-secondary) {
+		width: 75rem;
+	}
+
 	&--terms {
 		max-width: 65rem;
 
@@ -15,6 +19,10 @@
 
 	&__container {
 		width: 90%;
+
+		@include respond(phone-secondary) {
+			//width: 80%;
+		}
 	}
 
 	&__featured-section {

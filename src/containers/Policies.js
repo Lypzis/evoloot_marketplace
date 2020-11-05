@@ -24,37 +24,14 @@ const Policies = props => {
 		return string;
 	}, []);
 
-	const formatDescription = useCallback(
-		body => {
-			const replacements = [
-				{
-					searchValue: /<p>/gi,
-					replaceValue: '<p class="paragraph paragraph--black">',
-				},
-				{
-					searchValue: /<b>/gi,
-					replaceValue: '<p class="paragraph paragraph--black">',
-				},
-				{
-					searchValue: /strong/gi,
-					replaceValue: 'p',
-				},
-			];
-
-			return replaceChain(body, replacements);
-		},
-		[replaceChain]
-	);
-
 	const setContent = useCallback(() => {
 		const curr = clientContext.shopPolicies.find(
 			policy => policy.handle === handle
 		);
-		const bodyFormatted = formatDescription(curr.body);
 
-		setHtmlBody(bodyFormatted);
+		setHtmlBody(curr.body);
 		setCurrPolicy(curr);
-	}, [clientContext.shopPolicies, handle, formatDescription]);
+	}, [clientContext.shopPolicies, handle]);
 
 	useEffect(() => {
 		if (clientContext.shopPolicies) setContent();
@@ -66,12 +43,13 @@ const Policies = props => {
 				<div className='home__featured-section'>
 					{currPolicy && (
 						<>
-							<h2 className='heading-secondary heading-secondary--dark small-margin-bottom'>
+							<h2 className='heading-secondary heading-secondary--dark medium-margin-bottom'>
 								{currPolicy.title}
 							</h2>
 
 							<div className='home__featured home__featured--terms'>
 								<div
+									className='card__description-box-description'
 									dangerouslySetInnerHTML={{
 										__html: htmlBody,
 									}}></div>

@@ -24,9 +24,9 @@
 		padding: 0.5rem 1.6rem;
 		margin-bottom: 1rem;
 
-		// @include respond(phone-secondary) {
-		// 	width: 64.5rem; // 1rem = 9px, 9/16 = 56.25%
-		// }
+		@include respond(phone-secondary) {
+			width: 68.5rem;
+		}
 	}
 
 	&--checkout {

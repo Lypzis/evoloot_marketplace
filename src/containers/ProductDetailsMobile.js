@@ -366,8 +366,13 @@ const ProductDetailsMobile = props => {
 							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
 								You may also like:
 							</h3>
+
 							<Carousel
 								products={productChosen.relatedProducts}
+								naturalSlideWidth={100}
+								naturalSlideHeight={140}
+								visibleSlides={window.innerWidth <= 600 ? 3 : 4}
+								isPlaying={false}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
@@ -375,7 +380,13 @@ const ProductDetailsMobile = props => {
 							<h3 className='heading-tertiary heading-tertiary--dark small-margin-bottom'>
 								Recently Viewed:
 							</h3>
-							<Carousel products={productChosen.viewed} />
+							<Carousel
+								products={productChosen.viewed}
+								naturalSlideWidth={100}
+								naturalSlideHeight={140}
+								visibleSlides={window.innerWidth <= 600 ? 3 : 4}
+								isPlaying={false}
+							/>
 						</div>
 					</div>
 				</section>

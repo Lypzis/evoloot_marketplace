@@ -14,15 +14,14 @@ const Carousel = props => (
 	<Fragment>
 		{props.products.length > 0 && (
 			<CarouselProvider
-				naturalSlideWidth={100}
-				naturalSlideHeight={140}
+				naturalSlideWidth={props.naturalSlideWidth}
+				naturalSlideHeight={props.naturalSlideHeight}
 				totalSlides={props.products.length}
+				visibleSlides={props.visibleSlides}
+				isPlaying={props.isPlaying}
 				orientation='horizontal'
-				visibleSlides={3}
-				infinite={true}
-				//isPlaying={true}
-			>
-				<div>
+				infinite={true}>
+				<div className='product__carousel-controllers'>
 					<ButtonBack>Back</ButtonBack>
 					<ButtonNext>Next</ButtonNext>
 				</div>

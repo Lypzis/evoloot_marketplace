@@ -34,7 +34,7 @@ const Footer = props => {
 								className='button button__black button__black--small-circle'
 								onClick={() =>
 									window.open(
-										'https://www.facebook.com/evoloot'
+										'https://www.facebook.com/kumonekojp'
 									)
 								}>
 								<svg className='button__icon'>
@@ -46,7 +46,7 @@ const Footer = props => {
 								className='button button__black button__black--small-circle'
 								onClick={() =>
 									window.open(
-										'https://twitter.com/evolootofficial'
+										'https://twitter.com/kumonekojp'
 									)
 								}>
 								<svg className='button__icon'>
@@ -58,7 +58,7 @@ const Footer = props => {
 								className='button button__black button__black--small-circle'
 								onClick={() =>
 									window.open(
-										'https://www.instagram.com/evolootmarketplace/'
+										'https://www.instagram.com/kumonekojp/'
 									)
 								}>
 								<svg className='button__icon'>

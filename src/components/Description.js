@@ -1,55 +1,6 @@
-import React, { memo, useEffect, useCallback, useState } from 'react';
+import React, { memo } from 'react';
 
 const Description = ({ description, isThereADescription }) => {
-	const [formatedDescription, setFormatedDescription] = useState();
-
-	const replaceChain = useCallback((string, replacements) => {
-		if (replacements.length > 0) {
-			return replaceChain(
-				string.replace(
-					replacements[0].searchValue,
-					replacements[0].replaceValue
-				),
-				replacements.slice(1)
-			);
-		}
-
-		return string;
-	}, []);
-
-	const formatDescription = useCallback(() => {
-		const replacements = [
-			{
-				searchValue: /<ul>/gi,
-				replaceValue: '<ul class="product__description-list">',
-			},
-			{
-				searchValue: /<p>/gi,
-				replaceValue: '<p class="paragraph paragraph--black">',
-			},
-			{
-				searchValue: /<b>/gi,
-				replaceValue: '<p class="paragraph paragraph--black">',
-			},
-			{
-				searchValue: /strong/gi,
-				replaceValue: 'p',
-			},
-			{
-				searchValue: /<li>/gi,
-				replaceValue: '<li class="product__description-list-item">',
-			},
-		];
-
-		const newDescription = description; //= replaceChain(description, replacements);
-
-		setFormatedDescription(newDescription);
-	}, [description, replaceChain]);
-
-	useEffect(() => {
-		formatDescription();
-	}, [formatDescription]);
-
 	if (!isThereADescription) return null;
 
 	return (
@@ -61,7 +12,7 @@ const Description = ({ description, isThereADescription }) => {
 					<div
 						className='card__description-box-description'
 						dangerouslySetInnerHTML={{
-							__html: formatedDescription,
+							__html: description,
 						}}></div>
 				</div>
 			</div>

@@ -1,13 +1,6 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-	CarouselProvider,
-	Slider,
-	Slide,
-	ButtonBack,
-	ButtonNext,
-} from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Card from '../components/Card';
@@ -140,34 +133,17 @@ const Collection = props => {
 			<div className='home__featured'>
 				{props.featured ? (
 					<div className='home__container'>
-						<CarouselProvider
-							naturalSlideWidth={100}
-							naturalSlideHeight={120}
-							totalSlides={products.length}
-							orientation='horizontal'
-							visibleSlides={4}
-							infinite={true}
-							isPlaying={true}>
-							<div>
-								<ButtonBack>Back</ButtonBack>
-								<ButtonNext>Next</ButtonNext>
-							</div>
-							<Slider>
-								{products.map((product, index) => {
-									return (
-										<Slide
-											key={product.id}
-											index={index}
-											innerClassName='product__carousel-container product__carousel-container--home'>
-											<Card
-												product={product}
-												noEffect={true}
-											/>
-										</Slide>
-									);
-								})}
-							</Slider>
-						</CarouselProvider>
+						<Carousel
+							products={products}
+							naturalSlideWidth={
+								window.innerWidth <= 800 ? 60 : 100
+							}
+							naturalSlideHeight={
+								window.innerWidth <= 800 ? 75 : 120
+							}
+							visibleSlides={window.innerWidth <= 800 ? 3 : 4}
+							isPlaying={true}
+						/>
 					</div>
 				) : (
 					displayedProducts
