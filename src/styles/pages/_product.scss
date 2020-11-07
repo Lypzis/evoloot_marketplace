@@ -25,6 +25,15 @@
 	&__image {
 		flex: 1;
 		display: block;
+		width: 80rem;
+
+		@include respond(tab-port-2) {
+			width: 100rem;
+		}
+
+		@include respond(phone-secondary) {
+			width: 67rem;
+		}
 	}
 
 	&__image--variant {
@@ -118,6 +127,7 @@
 	&__carousel-container {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 
 	&__carousel-container--home {
@@ -133,6 +143,37 @@
 			margin: 0 !important;
 			box-shadow: none !important;
 		}
+	}
+
+	&__carousel-controllers {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		margin-bottom: 0.8rem;
+		margin-top: 1.2rem;
+		margin-right: 1.1rem;
+		margin-left: 0.6rem;
+
+		@include respond(tab-port-2) {
+			margin-right: 3rem;
+		}
+
+		@include respond(phone) {
+			margin-right: 2rem;
+		}
+
+		@include respond(phone-really-small) {
+			margin-right: 3.5rem;
+		}
+	}
+
+	&__carousel-controllers--home {
+		margin-top: 0;
+		margin-bottom: 0.4rem;
+	}
+
+	&__carousel-controllers-header {
+		margin-right: auto;
 	}
 }
 

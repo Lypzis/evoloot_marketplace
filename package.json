@@ -29,6 +29,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects ",
+		"deploy": "netlify deploy --prod --dir=build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

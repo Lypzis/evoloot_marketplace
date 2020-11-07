@@ -128,9 +128,6 @@ const ProductDetails = props => {
 
 			const relatedProducts = retrieveRelatedProducts(product);
 
-			console.log('qqqqq');
-			console.log(clientContext.shopPolicies[0].currencyCode);
-
 			dispatchProduct({
 				type: 'INITIALIZE',
 				product,
@@ -294,28 +291,35 @@ const ProductDetails = props => {
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
-							<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-								You may also like:
-							</h3>
+
 							<Carousel
+								header={
+									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
+										You may also like:
+									</h3>
+								}
 								products={productChosen.relatedProducts}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
 								isPlaying={false}
+								productDetails={true}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
 
-							<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-								Recently Viewed:
-							</h3>
 							<Carousel
+								header={
+									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
+										Recently Viewed:
+									</h3>
+								}
 								products={productChosen.viewed}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
 								isPlaying={false}
+								productDetails={true}
 							/>
 						</div>
 

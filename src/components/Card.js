@@ -44,7 +44,13 @@ const Card = props => {
 	};
 
 	return (
-		<div className={props.noEffect ? 'card card--raw' : 'card'}>
+		<div
+			className={[
+				props.noEffect ? 'card card--raw' : 'card',
+				props.productDetails
+					? 'card card--raw card--raw-product-details'
+					: '',
+			].join(' ')}>
 			{/* to '/' temporarily, this obviously need to go to product details */}
 			<Link
 				className='card__link'

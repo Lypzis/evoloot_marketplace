@@ -85,7 +85,7 @@ const ShippingCalculator = props => {
 					city: 'any',
 				};
 
-				const newCheckout = await axiosInstace.post(
+				await axiosInstace.post(
 					'/api/graphql.json',
 					createCustomerCheckout(
 						lineItems,
@@ -93,8 +93,6 @@ const ShippingCalculator = props => {
 						user.email
 					)
 				);
-
-				console.log('last checkout: ', newCheckout.data);
 
 				const shippingRates = await axiosInstace.post(
 					'/api/graphql.json',
@@ -110,8 +108,6 @@ const ShippingCalculator = props => {
 				if (!wasItLoaded && shippingForm.trialsCount < 10)
 					return calculateShipping(wasItLoaded);
 
-				console.log(shippingRates.data.data);
-
 				dispatchShippingForm({
 					type: 'SET_AVAILABLE_SHIPPING_RATES',
 					availableShippingRates:
@@ -123,7 +119,6 @@ const ShippingCalculator = props => {
 					type: 'SET_LOADING',
 					calcLoading: false,
 				});
-				// console.log('Something terrible happened ', err);
 			}
 		else {
 			dispatchShippingForm({ type: 'SET_ERROR' });

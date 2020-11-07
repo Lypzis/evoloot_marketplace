@@ -21,9 +21,21 @@ const Carousel = props => (
 				isPlaying={props.isPlaying}
 				orientation='horizontal'
 				infinite={true}>
-				<div className='product__carousel-controllers'>
-					<ButtonBack>Back</ButtonBack>
-					<ButtonNext>Next</ButtonNext>
+				<div
+					className={`product__carousel-controllers ${
+						!props.productDetails
+							? 'product__carousel-controllers--home'
+							: ''
+					}`}>
+					<did className='product__carousel-controllers-header'>
+						{props.header}
+					</did>
+					<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
+						&lt;
+					</ButtonBack>
+					<ButtonNext className='button button__black button__black--arrow'>
+						&gt;
+					</ButtonNext>
 				</div>
 				<Slider>
 					{props.products.map((product, index) => {
@@ -32,7 +44,11 @@ const Carousel = props => (
 								key={product.id}
 								index={index}
 								innerClassName='product__carousel-container'>
-								<Card product={product} noEffect={true} />
+								<Card
+									product={product}
+									noEffect={true}
+									productDetails={props.productDetails}
+								/>
 							</Slide>
 						);
 					})}

@@ -229,6 +229,18 @@
 		}
 	}
 
+	&__black--arrow {
+		border-radius: 1rem;
+		width: auto;
+		padding: 0.7rem 1.7rem;
+		font-weight: 700;
+		font-size: $default-font-size-2;
+	}
+
+	&__black--arrow-right {
+		margin-right: 0.7rem;
+	}
+
 	&__white {
 		display: flex;
 		align-self: flex-end;
