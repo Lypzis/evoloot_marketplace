@@ -55,7 +55,7 @@
 		width: 50%;
 
 		&--big {
-			width: 65%;
+			width: 55%;
 		}
 	}
 
@@ -117,11 +117,16 @@
 		}
 
 		&-big {
-			max-width: 17rem;
+			max-width: 30%;
 		}
 
 		&-big > .card__image {
 			height: 15.5rem;
+			width: 18rem;
+
+			@include respond(phone) {
+				height: 15rem;
+			}
 		}
 	}
 

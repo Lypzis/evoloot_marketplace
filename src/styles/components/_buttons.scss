@@ -212,6 +212,16 @@
 		}
 	}
 
+	&__black--show-more {
+		display: flex;
+		align-self: center;
+		justify-content: center;
+		font-weight: 700;
+		border-radius: 0.5rem;
+		margin-top: 1.5rem;
+		width: 12rem;
+	}
+
 	&__black--logout {
 		justify-content: stretch;
 		border-radius: 0 0.5rem 0.5rem 0;

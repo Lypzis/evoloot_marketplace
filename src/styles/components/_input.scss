@@ -2,7 +2,7 @@
 	background-color: $color-gray-light-2;
 	border: 0.25rem solid #000;
 	border-radius: 0.5rem;
-	padding: 1rem 1.2rem;
+	padding: 0.7rem 1.2rem;
 	box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
 
 	//TEST
@@ -62,10 +62,18 @@
 		display: flex;
 		text-align: center;
 		justify-content: center;
+		align-items: center;
 		width: 50%;
 		margin-left: auto;
 		border-radius: 0;
-		background-color: #fff;
+
+		border: 0.2rem solid #000;
+		border-left: none;
+		border-right: none;
+
+		& > .paragraph {
+			font-size: $default-font-size-2;
+		}
 
 		@include respond(tab-port-2) {
 			width: 9rem;
@@ -77,6 +85,16 @@
 		width: 25%;
 		border-radius: 0.5rem 0 0 0.5rem;
 
+		color: #fff; // This color needs to be thinked, hurts the eyes
+		border: 0.2rem solid #000;
+		backface-visibility: hidden;
+		background-color: $color-tertiary;
+
+		&:hover,
+		&:focus {
+			background-color: rgba($color-tertiary, 0.75);
+		}
+
 		@include respond(tab-port-2) {
 			width: 6rem;
 		}
@@ -85,6 +103,16 @@
 	&__quantity--right {
 		width: 25%;
 		border-radius: 0 0.5rem 0.5rem 0;
+
+		color: #fff; // This color needs to be thinked, hurts the eyes
+		border: 0.2rem solid #000;
+		backface-visibility: hidden;
+		background-color: $color-tertiary;
+
+		&:hover,
+		&:focus {
+			background-color: rgba($color-tertiary, 0.75);
+		}
 
 		@include respond(tab-port-2) {
 			width: 6rem;

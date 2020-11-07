@@ -48,7 +48,7 @@ const QuantityInput = props => {
 
 			<div className='input__quantity-buttons'>
 				<button
-					className={`button ${inputSize} input__quantity input__quantity--left`}
+					className={`button ${inputSize}  input__quantity input__quantity--left`}
 					onClick={subtractFromQuantity}>
 					<p className='paragraph'>-</p>
 				</button>

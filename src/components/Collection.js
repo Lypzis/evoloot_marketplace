@@ -152,7 +152,7 @@ const Collection = props => {
 			{props.featured && (
 				<Link
 					to={`/collection/${props.collection.handle}`}
-					className='button button__white button__white--show-more'>
+					className='button button__black button__black--show-more'>
 					<p className='paragraph'>show more</p>
 				</Link>
 			)}
