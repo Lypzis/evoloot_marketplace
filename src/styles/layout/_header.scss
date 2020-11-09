@@ -31,8 +31,8 @@
 			align-self: stretch;
 		}
 
-		@include respond(phone-secondary) {
-			padding: 0.8rem 1rem;
+		@include respond(tab-port-2) {
+			padding: 1rem 2.5rem;
 		}
 	}
 
@@ -42,6 +42,7 @@
 
 		@include respond(tab-port-2) {
 			width: 8rem;
+			margin-right: 1.5rem;
 		}
 	}
 
@@ -70,14 +71,14 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		margin: 0 3rem;
+		margin-right: 2.5rem;
 
 		&--mobile {
 			width: 100%;
 		}
 
-		@include respond(phone) {
-			margin-right: 1.5rem;
+		@include respond(tab-port-2) {
+			margin: 0 3rem;
 		}
 	}
 

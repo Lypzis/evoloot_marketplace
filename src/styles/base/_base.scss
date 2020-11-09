@@ -24,11 +24,15 @@ html {
 
 	@include respond(phone-small) {
 		// Things get weird at this point - drastic change of design required
-		font-size: 37.5%; // 1rem = 6px, 6/16 = 43.75%
+		font-size: 37.5%; // 1rem = 6px, 6/16 = 37.5%
 	}
 
 	@include respond(phone-really-small) {
-		font-size: 31.25%; // 1rem = 5.5px, 5/16 = 34.375%
+		font-size: 31.25%; // 1rem = 5px, 5/16 = 31.25%
+	}
+
+	@include respond(phone-really-really-small) {
+		font-size: 29.37%; // 1rem = 4.7px, 4.5/16 = 28.125%
 	}
 
 	@include respond(big-desktop) {

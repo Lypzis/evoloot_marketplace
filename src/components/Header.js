@@ -8,6 +8,11 @@ import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
 import { setSearchText } from '../store/actions/search';
 
+import cadFlag from '../assets/images/cad.png';
+import euaFlag from '../assets/images/eua.png';
+import eurFlag from '../assets/images/eur.png';
+import gbFlag from '../assets/images/gb.png';
+
 const Header = props => {
 	const authContext = useContext(AuthContext);
 	const checkout = useSelector(state => state.checkout);
@@ -108,9 +113,37 @@ const Header = props => {
 									</div>
 								</button>
 							</div>
+							<div className='header__loged-out'>
+								<select
+									className='input input--black input__select input__select--header'
+									onChange={() => console.log('changed')}
+									>
+									<option className='paragraph' value='USD'>
+										USD
+									</option>
+									<option className='paragraph' value='CAD'>
+										CAD
+									</option>
+									<option className='paragraph' value='EUR'>
+										EUR
+									</option>
+									<option className='paragraph' value='GBP'>
+										GBP
+									</option>
+								</select>
+							</div>
 							{!authContext.customerToken ? (
 								<div className='header__loged-out'>
 									<button
+										className='button button__black button__black--account'
+										onClick={() => history.push('/login')}>
+										<svg className='button__icon'>
+											<use
+												xlinkHref={`${sprite}#icon-profile`}></use>
+										</svg>
+										<p className='paragraph'>Account</p>
+									</button>
+									{/* <button
 										className='button button__black button__black--login'
 										onClick={() => history.push('/login')}>
 										<svg className='button__icon'>
@@ -127,7 +160,7 @@ const Header = props => {
 												xlinkHref={`${sprite}#icon-clipboard`}></use>
 										</svg>
 										<p className='paragraph'>sign up</p>
-									</button>
+									</button> */}
 								</div>
 							) : (
 								<div className='header__loged-out'>

@@ -9,6 +9,13 @@ $breakpoint argument choices:
 */
 @mixin respond($breakpoint) {
 	// 'rem' fails in media queries, so instead use 'em'
+	@if $breakpoint == phone-really-really-small {
+		// 370px
+		@media only screen and (max-width: 23.125em) {
+			@content;
+		}
+	}
+
 	@if $breakpoint == phone-really-small {
 		// 420px
 		@media only screen and (max-width: 26.25em) {

@@ -124,6 +124,23 @@ const Login = props => {
 					</div>
 				</form>
 			</div>
+			<div className='login__footer'>
+				{/* or h4 ??? */}
+				<h4 className='heading-fourtiary heading-fourtiary--dark'>
+					Don't have an account?
+				</h4>
+				<p className='paragraph paragraph--black'>
+					Register with us for a faster checkout, to track the status
+					of your order and more.
+				</p>
+				<button
+					className='button button__black button__black--account  button__black--account-big'
+					onClick={() => history.push('/signup')}>
+					<p className='paragraph card__price card__price--big cart__button-text'>
+						create my account
+					</p>
+				</button>
+			</div>
 		</Layout>
 	);
 };

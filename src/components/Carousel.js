@@ -27,9 +27,9 @@ const Carousel = props => (
 							? 'product__carousel-controllers--home'
 							: ''
 					}`}>
-					<did className='product__carousel-controllers-header'>
+					<div className='product__carousel-controllers-header'>
 						{props.header}
-					</did>
+					</div>
 					<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
 						&lt;
 					</ButtonBack>

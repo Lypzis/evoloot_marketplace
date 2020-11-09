@@ -85,6 +85,17 @@ const Navbar = props => {
 								{!authContext.customerToken ? (
 									<div className='header__loged-out'>
 										<button
+											className='button button__black button__black--account button__black--account button__black--account-menu-panel '
+											onClick={() =>
+												history.push('/login')
+											}>
+											<svg className='button__icon'>
+												<use
+													xlinkHref={`${sprite}#icon-profile`}></use>
+											</svg>
+											<p className='paragraph'>Account</p>
+										</button>
+										{/* <button
 											className='button button__black button__black--login'
 											onClick={() =>
 												history.push('/login')
@@ -105,7 +116,7 @@ const Navbar = props => {
 													xlinkHref={`${sprite}#icon-clipboard`}></use>
 											</svg>
 											<p className='paragraph'>sign up</p>
-										</button>
+										</button> */}
 									</div>
 								) : (
 									<div className='header__loged-out'>

@@ -134,7 +134,7 @@
 
 	&__black--cart {
 		border-radius: 0.5rem;
-		margin-right: 2.5rem;
+		margin-right: 1.5rem;
 		width: 9rem;
 		justify-content: center;
 		align-items: baseline;
@@ -165,6 +165,29 @@
 		@include respond(phone-really-small) {
 			padding: 0;
 		}
+	}
+
+	&__black--account {
+		justify-content: center;
+		border-radius: 0.5rem;
+
+		& > .button__icon {
+			margin-right: 1.2rem;
+
+			@include respond(tab-port-2) {
+				margin-right: 1.6rem;
+			}
+		}
+	}
+
+	&__black--account-menu-panel {
+		width: 35rem;
+	}
+
+	&__black--account-big {
+		width: 100%;
+		padding: 0.5rem 1rem;
+		margin-top: 2rem;
 	}
 
 	&__black--login {

@@ -150,6 +150,23 @@
 		//font-size: 1.2rem;
 	}
 
+	&__select--header {
+		display: flex;
+		justify-content: center;
+		width: 6.2rem; // temp
+		padding: 0.7rem 1rem;
+		margin-right: 1.5rem;
+		line-height: 1.1;
+		background: none;
+	}
+
+	&--black {
+		border: 0.2rem solid #fff;
+		background-color: transparent;
+		color: #fff;
+		background: $color-tertiary;
+	}
+
 	&--small {
 		padding: 0.2rem 0.7rem;
 		width: 3.5rem;

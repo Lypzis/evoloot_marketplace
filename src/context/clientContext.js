@@ -3,6 +3,7 @@ import Client from 'shopify-buy';
 import { useHistory } from 'react-router-dom';
 import { getShopPolicies, getShopPages, getShopCurrency } from '../graphql';
 import axiosInstance from '../axios';
+import Axios from 'axios';
 
 const client = Client.buildClient({
 	storefrontAccessToken: '22244a0434741a7f12f81ea49a794d3b',
@@ -14,6 +15,7 @@ export const ClientContext = React.createContext({
 	collections: null,
 	shopPolicies: null,
 	shopCurrency: null,
+	currencyRates: null,
 	pages: null,
 });
 
@@ -22,6 +24,7 @@ const ClientContextProvider = props => {
 	const [shopPolicies, setShopPolicies] = useState(null);
 	const [shopCurrency, setShopCurrency] = useState(null);
 	const [pages, setPages] = useState(null);
+	const [currencyRates, setCurrencyRates] = useState(null);
 	const history = useHistory();
 
 	const getShopPagesData = async () => {
@@ -36,6 +39,52 @@ const ClientContextProvider = props => {
 			});
 
 			setPages(arr);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getCurrencyRate = async () => {
+		try {
+			let localCurrencyRate = null;
+			let rates;
+
+			const savedCurrencyRates = localStorage.getItem('currencyRates');
+
+			const dateNow = Math.round(new Date().getTime() / 1000);
+			const dateYesterday = dateNow - 24 * 3600;
+
+			if (savedCurrencyRates)
+				localCurrencyRate = JSON.parse(savedCurrencyRates);
+
+			if (
+				localCurrencyRate &&
+				localCurrencyRate.dateAtTime >= dateYesterday
+			) {
+				console.log('currency up to date');
+
+				setCurrencyRates(localCurrencyRate.rates);
+			} else {
+				rates = await axiosInstance.get(
+					'https://cors-anywhere.herokuapp.com/https://open.exchangerate-api.com/v6/latest'
+				);
+
+				console.log('currency expired or does not exist');
+
+				console.log(rates.data.rates);
+
+				localCurrencyRate = {
+					dateAtTime: dateNow,
+					rates: rates.data.rates,
+				};
+
+				localStorage.setItem(
+					'currencyRates',
+					JSON.stringify(localCurrencyRate)
+				);
+
+				setCurrencyRates(rates.data.rates);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -90,11 +139,19 @@ const ClientContextProvider = props => {
 		getShopPoliciesData();
 		getShopPagesData();
 		getShopCurrencyData();
+		getCurrencyRate();
 	}, [getAllCollectionsWithProducts]);
 
 	return (
 		<ClientContext.Provider
-			value={{ client, collections, pages, shopPolicies, shopCurrency }}>
+			value={{
+				client,
+				collections,
+				pages,
+				shopPolicies,
+				shopCurrency,
+				currencyRates,
+			}}>
 			{props.children}
 		</ClientContext.Provider>
 	);
