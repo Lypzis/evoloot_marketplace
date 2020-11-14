@@ -144,7 +144,10 @@ const Cart = props => {
 						<div className='product__price'>
 							<p className='paragraph paragraph--black'>
 								{clientContext.shopCurrency}$
-								{checkout.totalPrice.toFixed(2)}
+								{(
+									checkout.totalPrice *
+									clientContext.currencyRate.value
+								).toFixed(2)}
 							</p>
 						</div>
 					</div>

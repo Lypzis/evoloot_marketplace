@@ -133,8 +133,11 @@ const CartPanel = props => {
 							<p className='paragraph'>Total: </p>
 							<div className='product__price'>
 								<p className='paragraph'>
-									{clientContext.shopCurrency}$
-									{checkout.totalPrice.toFixed(2)}
+									{clientContext.currencyRate.code}$
+									{(
+										checkout.totalPrice *
+										clientContext.currencyRate.value
+									).toFixed(2)}
 								</p>
 							</div>
 						</div>

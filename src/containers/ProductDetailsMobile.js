@@ -328,7 +328,8 @@ const ProductDetailsMobile = props => {
 											{clientContext.shopCurrency}$
 											{(
 												productChosen.variant.price *
-												productChosen.quantity
+												productChosen.quantity *
+												clientContext.currencyRate.value
 											).toFixed(2)}
 										</p>
 									</div>

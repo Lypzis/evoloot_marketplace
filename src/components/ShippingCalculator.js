@@ -6,6 +6,7 @@ import { AuthContext } from '../context/authContext';
 import { createCustomerCheckout, getAvailableShippingRates } from '../graphql';
 import axiosInstace from '../axios';
 import LoadingBar from '../components/LoadingBar';
+import { ClientContext } from '../context/clientContext';
 
 const shippingFormReducer = (currentFormState, action) => {
 	switch (action.type) {
@@ -47,6 +48,7 @@ const ShippingCalculator = props => {
 	const checkout = useSelector(state => state.checkout);
 	const user = useSelector(state => state.user);
 	const authContext = useContext(AuthContext);
+	const clientContext = useContext(ClientContext);
 
 	const [shippingForm, dispatchShippingForm] = useReducer(
 		shippingFormReducer,
@@ -229,17 +231,24 @@ const ShippingCalculator = props => {
 									rate => {
 										const {
 											amount,
-											currencyCode,
+											//currencyCode,
 										} = rate.priceV2;
 
 										return (
 											<li key={rate.title}>
 												<p className='paragraph paragraph--black'>
 													{rate.title} at{' '}
-													{currencyCode}$
-													{parseFloat(amount).toFixed(
-														2
-													)}
+													{
+														clientContext
+															.currencyRate.code
+													}
+													$
+													{parseFloat(
+														amount *
+															clientContext
+																.currencyRate
+																.value
+													).toFixed(2)}
 												</p>
 											</li>
 										);

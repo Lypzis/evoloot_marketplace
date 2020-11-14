@@ -4,46 +4,6 @@ import { Link } from 'react-router-dom';
 const OrderCard = props => {
 	const { order } = props;
 
-	// REMOVED: TOO COMPLEX, NEED MORE DETAILS IN ORDER TO GIVE THE CORRECT STATUS
-	// const switchOrderStatus = () => {
-	// 	let accumulator = (a, b) => a + b;
-	// 	let fulfilledQuantity = 0;
-
-	// 	console.log(order);
-
-	// 	const lineItemsQuantity = order.lineItems
-	// 		.map(item => item.quantity)
-	// 		.reduce(accumulator);
-
-	// 	if (order.successfulFulfillments.length > 0)
-	// 		fulfilledQuantity = order.successfulFulfillments[0].fulfillmentLineItems.edges
-	// 			.map(item => item.node.quantity)
-	// 			.reduce(accumulator);
-
-	// 	if (
-	// 		parseFloat(order.totalRefundedV2.amount) ===
-	// 		parseFloat(order.totalPriceV2.amount)
-	// 	)
-	// 		return (
-	// 			<p className='paragraph paragraph--black order__status order__status--canceled'>
-	// 				Canceled
-	// 			</p>
-	// 		);
-
-	// 	if (lineItemsQuantity === fulfilledQuantity)
-	// 		return (
-	// 			<p className='paragraph paragraph--black order__status order__status--complete'>
-	// 				Completed
-	// 			</p>
-	// 		);
-
-	// 	return (
-	// 		<p className='paragraph paragraph--black order__status order__status--pending'>
-	// 			Pending
-	// 		</p>
-	// 	);
-	// };
-
 	return (
 		<div className='order'>
 			<div className='order__header'>

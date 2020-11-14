@@ -29,15 +29,13 @@ const Home = props => {
 	}, [getFeaturedProducts]);
 
 	const renderHomeCollections = useCallback(() => {
-		return homeCollections
-			.reverse()
-			.map(collection => (
-				<Collection
-					key={collection.id}
-					collection={collection}
-					featured={true}
-				/>
-			));
+		return homeCollections.map(collection => (
+			<Collection
+				key={collection.id}
+				collection={collection}
+				featured={true}
+			/>
+		));
 	}, [homeCollections]);
 
 	return (

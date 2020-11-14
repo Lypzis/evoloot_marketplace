@@ -3,7 +3,6 @@ import Client from 'shopify-buy';
 import { useHistory } from 'react-router-dom';
 import { getShopPolicies, getShopPages, getShopCurrency } from '../graphql';
 import axiosInstance from '../axios';
-import Axios from 'axios';
 
 const client = Client.buildClient({
 	storefrontAccessToken: '22244a0434741a7f12f81ea49a794d3b',
@@ -15,7 +14,8 @@ export const ClientContext = React.createContext({
 	collections: null,
 	shopPolicies: null,
 	shopCurrency: null,
-	currencyRates: null,
+	currencyRate: { code: 'USD', value: 1 },
+	changeCurrency: currency => {},
 	pages: null,
 });
 
@@ -25,6 +25,7 @@ const ClientContextProvider = props => {
 	const [shopCurrency, setShopCurrency] = useState(null);
 	const [pages, setPages] = useState(null);
 	const [currencyRates, setCurrencyRates] = useState(null);
+	const [currencyRate, setCurrencyRate] = useState({ code: 'USD', value: 1 });
 	const history = useHistory();
 
 	const getShopPagesData = async () => {
@@ -90,6 +91,10 @@ const ClientContextProvider = props => {
 		}
 	};
 
+	const changeCurrency = currency => {
+		setCurrencyRate({ code: currency, value: currencyRates[currency] });
+	};
+
 	const getShopCurrencyData = async () => {
 		try {
 			const currency = await axiosInstance.post(
@@ -128,7 +133,7 @@ const ClientContextProvider = props => {
 		try {
 			const collections = await client.collection.fetchAllWithProducts();
 
-			setCollections(collections);
+			setCollections(collections.reverse());
 		} catch (err) {
 			history.replace('/*');
 		}
@@ -150,7 +155,8 @@ const ClientContextProvider = props => {
 				pages,
 				shopPolicies,
 				shopCurrency,
-				currencyRates,
+				currencyRate,
+				changeCurrency,
 			}}>
 			{props.children}
 		</ClientContext.Provider>

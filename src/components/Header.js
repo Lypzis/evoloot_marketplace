@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
+import { ClientContext } from '../context/clientContext';
 import { setSearchText } from '../store/actions/search';
 
 import cadFlag from '../assets/images/cad.png';
@@ -15,6 +16,7 @@ import gbFlag from '../assets/images/gb.png';
 
 const Header = props => {
 	const authContext = useContext(AuthContext);
+	const clientContext = useContext(ClientContext);
 	const checkout = useSelector(state => state.checkout);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
@@ -44,6 +46,10 @@ const Header = props => {
 		if (event.target.value.trim() === '') history.goBack();
 		else if (pathname === '/search') history.replace('/search');
 		else history.push('/search');
+	};
+
+	const handleChangeCurrency = event => {
+		clientContext.changeCurrency(event.target.value);
 	};
 
 	return (
@@ -116,8 +122,8 @@ const Header = props => {
 							<div className='header__loged-out'>
 								<select
 									className='input input--black input__select input__select--header'
-									onChange={() => console.log('changed')}
-									>
+									onChange={handleChangeCurrency}
+									value={clientContext.currencyRate.code}>
 									<option className='paragraph' value='USD'>
 										USD
 									</option>

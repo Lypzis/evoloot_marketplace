@@ -356,10 +356,11 @@ const ProductDetails = props => {
 
 								<div className='product__price'>
 									<p className='paragraph paragraph--black'>
-										{clientContext.shopCurrency}$
+										{clientContext.currencyRate.code}$
 										{(
 											productChosen.variant.price *
-											productChosen.quantity
+											productChosen.quantity *
+											clientContext.currencyRate.value
 										).toFixed(2)}
 									</p>
 								</div>

@@ -20,11 +20,9 @@ const Navbar = props => {
 
 	const getCollections = useCallback(async () => {
 		if (collections) {
-			const navTitles = collections
-				.map(col => {
-					return { title: col.title, handle: col.handle };
-				})
-				.reverse();
+			const navTitles = collections.map(col => {
+				return { title: col.title, handle: col.handle };
+			});
 
 			setNavTitles(navTitles);
 		}

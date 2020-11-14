@@ -93,8 +93,11 @@ const Card = props => {
 						</div>
 					) : (
 						<p className='paragraph card__price'>
-							{clientContext.shopCurrency}${' '}
-							{props.product.variants[0].price}
+							{clientContext.currencyRate.code}${' '}
+							{(
+								props.product.variants[0].price *
+								clientContext.currencyRate.value
+							).toFixed(2)}
 						</p>
 					)}
 				</button>
