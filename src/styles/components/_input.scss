@@ -153,11 +153,15 @@
 	&__select--header {
 		display: flex;
 		justify-content: center;
-		width: 6.2rem; // temp
+		width: 8.2rem;
 		padding: 0.7rem 1rem;
 		margin-right: 1.5rem;
 		line-height: 1.1;
 		background: none;
+
+		@include respond(phone) {
+			width: 9rem;
+		}
 	}
 
 	&--black {

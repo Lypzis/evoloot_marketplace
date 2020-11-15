@@ -9,11 +9,17 @@ const Collection = props => {
 				Searched Results
 			</h2>
 
-			<div className='home__featured'>
-				{props.products.map(product => (
-					<Card key={product.id} product={product} />
-				))}
-			</div>
+			{props.products.length > 0 ? (
+				<div className='home__featured'>
+					{props.products.map(product => (
+						<Card key={product.id} product={product} />
+					))}
+				</div>
+			) : (
+				<h3 className='heading-tertiary heading-tertiary--dark'>
+					-- ...nothing was found :(, please try something else. --
+				</h3>
+			)}
 		</div>
 	);
 };

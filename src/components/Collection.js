@@ -79,6 +79,20 @@ const Collection = props => {
 		);
 	};
 
+	const changeCarouselWidth = () => {
+		return window.innerWidth <= 800 ? 60 : 100;
+	};
+
+	const changeCarouselHeight = () => {
+		return window.innerWidth <= 800 ? 75 : 120;
+	};
+
+	const changeNumberOfSlides = () => {
+		if (window.innerWidth <= 475) return 2;
+		else if (window.innerWidth <= 800) return 3;
+		else return 4;
+	};
+
 	useEffect(() => {
 		const productsFormated = products
 			.sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
@@ -86,9 +100,6 @@ const Collection = props => {
 				return <Card key={product.id} product={product} />;
 			});
 
-		// if (props.featured)
-		// 	setDisplayedProducts(<Carousel products={products} />);
-		// else
 		setDisplayedProducts(productsFormated);
 	}, [products, props.featured]);
 
@@ -135,13 +146,9 @@ const Collection = props => {
 					<div className='home__container'>
 						<Carousel
 							products={products}
-							naturalSlideWidth={
-								window.innerWidth <= 800 ? 60 : 100
-							}
-							naturalSlideHeight={
-								window.innerWidth <= 800 ? 75 : 120
-							}
-							visibleSlides={window.innerWidth <= 800 ? 3 : 4}
+							naturalSlideWidth={changeCarouselWidth()}
+							naturalSlideHeight={changeCarouselHeight()}
+							visibleSlides={changeNumberOfSlides()}
 							isPlaying={true}
 						/>
 					</div>

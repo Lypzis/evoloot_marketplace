@@ -1,4 +1,5 @@
-import React, { Fragment, memo, useContext } from 'react';
+/* eslint-disable jsx-a11y/accessible-emoji */
+import React, { Fragment, memo, useContext, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,17 +10,13 @@ import { AuthContext } from '../context/authContext';
 import { ClientContext } from '../context/clientContext';
 import { setSearchText } from '../store/actions/search';
 
-import cadFlag from '../assets/images/cad.png';
-import euaFlag from '../assets/images/eua.png';
-import eurFlag from '../assets/images/eur.png';
-import gbFlag from '../assets/images/gb.png';
-
 const Header = props => {
 	const authContext = useContext(AuthContext);
 	const clientContext = useContext(ClientContext);
 	const checkout = useSelector(state => state.checkout);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
+	const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
@@ -52,26 +49,42 @@ const Header = props => {
 		clientContext.changeCurrency(event.target.value);
 	};
 
+	const renderCallToAction = () => {
+		const callToAction = clientContext.pages.filter(
+			page => page.title === 'Call-To-Action'
+		);
+
+		if (callToAction !== undefined) {
+			return (
+				<Fragment>
+					{callToActionOpen && (
+						<div className='call-to-action'>
+							<div
+								className='card__description-box-description'
+								dangerouslySetInnerHTML={{
+									__html: callToAction[0].body,
+								}}></div>
+
+							<button
+								className='button button__small-circle'
+								onClick={() => setCallToActionOpen(false)}>
+								<svg className='button__icon'>
+									<use
+										xlinkHref={`${sprite}#icon-cross`}></use>
+								</svg>
+							</button>
+						</div>
+					)}
+				</Fragment>
+			);
+		}
+	};
+
 	return (
 		<Fragment>
 			<header className='header'>
-				{/* {callToAction && (
-					// shall it have its own component ?
-					<div className='call-to-action'>
-						<p className='paragraph paragraph--black'>
-							15% Off for otakuthon weekend! discount applied at
-							checkout!
-						</p>
+				{clientContext.pages && renderCallToAction()}
 
-						<button
-							className='button button__small-circle'
-							onClick={() => setCallToAction(false)}>
-							<svg className='button__icon'>
-								<use xlinkHref={`${sprite}#icon-cross`}></use>
-							</svg>
-						</button>
-					</div>
-				)} */}
 				<div className='header__body'>
 					<Link className='header__logo' to='/'>
 						<img
@@ -125,16 +138,16 @@ const Header = props => {
 									onChange={handleChangeCurrency}
 									value={clientContext.currencyRate.code}>
 									<option className='paragraph' value='USD'>
-										USD
+										🇺🇸 USD
 									</option>
 									<option className='paragraph' value='CAD'>
-										CAD
+										🇨🇦 CAD
 									</option>
 									<option className='paragraph' value='EUR'>
-										EUR
+										🇪🇺 EUR
 									</option>
 									<option className='paragraph' value='GBP'>
-										GBP
+										🇬🇧 GBP
 									</option>
 								</select>
 							</div>

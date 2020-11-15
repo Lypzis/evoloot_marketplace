@@ -47,7 +47,7 @@
 		margin: 0 0 0 1.5rem;
 		padding: 2.5rem;
 		position: sticky;
-		top: 12rem;
+		top: 15rem; // 12rem without call-to-action
 	}
 
 	&__card--mobile {
@@ -163,7 +163,7 @@
 		}
 
 		@include respond(phone-really-small) {
-			margin-right: 3.5rem;
+			margin-right: 2.6rem;
 		}
 	}
 

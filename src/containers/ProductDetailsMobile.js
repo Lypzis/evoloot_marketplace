@@ -236,6 +236,12 @@ const ProductDetailsMobile = props => {
 		else dispatch(addProductToCheckout(variant, title, quantity, handle));
 	};
 
+	const changeNumberOfSlides = () => {
+		if (window.innerWidth <= 475) return 2;
+		else if (window.innerWidth <= 700) return 3;
+		else return 4;
+	};
+
 	useEffect(() => {
 		if (clientContext.collections) getProduct();
 	}, [clientContext, getProduct]);
@@ -325,7 +331,7 @@ const ProductDetailsMobile = props => {
 
 									<div className='product__price'>
 										<p className='paragraph'>
-											{clientContext.shopCurrency}$
+											{clientContext.currencyRate.code}$
 											{(
 												productChosen.variant.price *
 												productChosen.quantity *
@@ -365,6 +371,7 @@ const ProductDetailsMobile = props => {
 
 							<span className='navbar-line big-margin-top'></span>
 
+							{/* HERE */}
 							<Carousel
 								header={
 									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
@@ -376,13 +383,14 @@ const ProductDetailsMobile = props => {
 								naturalSlideHeight={
 									window.innerWidth <= 1140 ? 120 : 140
 								}
-								visibleSlides={window.innerWidth <= 700 ? 3 : 4}
+								visibleSlides={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
 
+							{/* HERE */}
 							<Carousel
 								header={
 									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
@@ -394,7 +402,7 @@ const ProductDetailsMobile = props => {
 								naturalSlideHeight={
 									window.innerWidth <= 1140 ? 120 : 140
 								}
-								visibleSlides={window.innerWidth <= 700 ? 3 : 4}
+								visibleSlides={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>

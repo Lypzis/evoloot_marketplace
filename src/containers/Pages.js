@@ -10,20 +10,6 @@ const Pages = props => {
 	const { handle } = useParams();
 	const clientContext = useContext(ClientContext);
 
-	const replaceChain = useCallback((string, replacements) => {
-		if (replacements.length > 0) {
-			return replaceChain(
-				string.replace(
-					replacements[0].searchValue,
-					replacements[0].replaceValue
-				),
-				replacements.slice(1)
-			);
-		}
-
-		return string;
-	}, []);
-
 	const setContent = useCallback(() => {
 		const curr = clientContext.pages.find(
 			policy => policy.handle === handle

@@ -74,16 +74,20 @@ const Footer = props => {
 
 						<div className='footer__links-partition-content footer__links-partition-content--always-column'>
 							{clientContext.pages &&
-								clientContext.pages.map(page => (
-									<Link
-										key={page.handle}
-										to={`/pages/${page.handle}`}
-										className='footer__link'>
-										<p className='paragraph'>
-											{page.title}
-										</p>
-									</Link>
-								))}
+								clientContext.pages
+									.filter(
+										page => page.title !== 'Call-To-Action'
+									)
+									.map(page => (
+										<Link
+											key={page.handle}
+											to={`/pages/${page.handle}`}
+											className='footer__link'>
+											<p className='paragraph'>
+												{page.title}
+											</p>
+										</Link>
+									))}
 						</div>
 					</div>
 

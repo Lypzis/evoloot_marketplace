@@ -37,10 +37,10 @@
 			@include respond(tab-port) {
 				margin-top: 4rem;
 			}
+		}
 
-			@include respond(phone-secondary) {
-				margin-top: 2rem;
-			}
+		@include respond(phone-secondary) {
+			margin-top: 2rem;
 		}
 	}
 

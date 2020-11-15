@@ -61,6 +61,11 @@
 
 	&--raw {
 		margin: 0;
+
+		@include respond(phone-small) {
+			height: auto;
+			width: 30rem;
+		}
 	}
 
 	&--raw-product-details {
@@ -136,10 +141,9 @@
 		height: 15rem; // height: 100%
 		border: solid 2px #000;
 
-		// this might also be temp
-		// @include respond(phone-secondary) {
-		// 	height: 24rem;
-		// }
+		@include respond(phone-small) {
+			height: 28rem;
+		}
 	}
 
 	&__price {

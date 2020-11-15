@@ -1,14 +1,18 @@
-import React, { Fragment, memo } from 'react';
+/* eslint-disable jsx-a11y/accessible-emoji */
+import React, { Fragment, memo, useContext, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 import { setSearchText } from '../store/actions/search';
+import { ClientContext } from '../context/clientContext';
 
 const HeaderMobile = props => {
+	const clientContext = useContext(ClientContext);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
+	const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
@@ -28,28 +32,47 @@ const HeaderMobile = props => {
 		else history.push('/search');
 	};
 
+	const handleChangeCurrency = event => {
+		clientContext.changeCurrency(event.target.value);
+	};
+
+	const renderCallToAction = () => {
+		const callToAction = clientContext.pages.filter(
+			page => page.title === 'Call-To-Action'
+		);
+
+		if (callToAction !== undefined) {
+			return (
+				<Fragment>
+					{callToActionOpen && (
+						<div className='call-to-action'>
+							<div
+								className='card__description-box-description'
+								dangerouslySetInnerHTML={{
+									__html: callToAction[0].body,
+								}}></div>
+
+							<button
+								className='button button__small-circle'
+								onClick={() => setCallToActionOpen(false)}>
+								<svg className='button__icon'>
+									<use
+										xlinkHref={`${sprite}#icon-cross`}></use>
+								</svg>
+							</button>
+						</div>
+					)}
+				</Fragment>
+			);
+		}
+	};
+
 	return (
 		<Fragment>
 			{/* <BluredBackground for={'menu-toggle'} /> */}
 
 			<header className='header'>
-				{/* {callToAction && (
-					// shall it have its own component ?
-					<div className='call-to-action'>
-						<p className='paragraph paragraph--black'>
-							15% Off for otakuthon weekend! discount applied at
-							checkout!
-						</p>
-
-						<button
-							className='button button__small-circle'
-							onClick={() => setCallToAction(false)}>
-							<svg className='button__icon'>
-								<use xlinkHref={`${sprite}#icon-cross`}></use>
-							</svg>
-						</button>
-					</div>
-				)} */}
+				{clientContext.pages && renderCallToAction()}
 				<div className='header__body header__body--mobile'>
 					<Link className='header__logo' to='/'>
 						<img
@@ -82,6 +105,26 @@ const HeaderMobile = props => {
 					</div>
 				</div>
 			</header>
+
+			<div className='header__mobile-currency-button'>
+				<select
+					className='input input--black input__select input__select--header'
+					onChange={handleChangeCurrency}
+					value={clientContext.currencyRate.code}>
+					<option className='paragraph' value='USD'>
+						🇺🇸 USD
+					</option>
+					<option className='paragraph' value='CAD'>
+						🇨🇦 CAD
+					</option>
+					<option className='paragraph' value='EUR'>
+						🇪🇺 EUR
+					</option>
+					<option className='paragraph' value='GBP'>
+						🇬🇧 GBP
+					</option>
+				</select>
+			</div>
 		</Fragment>
 	);
 };

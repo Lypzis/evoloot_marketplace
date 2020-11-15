@@ -22,7 +22,7 @@
 		align-items: center;
 		justify-content: space-between;
 		align-self: center;
-		padding: 0.8rem 2rem 0.5rem 2rem;
+		padding: 0.6rem 2rem 0.5rem 2rem;
 		max-width: 98rem;
 		width: 100%;
 
@@ -33,6 +33,17 @@
 
 		@include respond(tab-port-2) {
 			padding: 1rem 2.5rem;
+		}
+	}
+
+	&__mobile-currency-button {
+		position: fixed;
+		bottom: 0.6rem;
+		right: 1rem;
+		z-index: 2;
+
+		& > * {
+			margin: 0;
 		}
 	}
 
