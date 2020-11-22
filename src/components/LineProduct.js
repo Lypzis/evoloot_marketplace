@@ -74,7 +74,7 @@ const LineProduct = props => {
 				/>
 
 				<p className='paragraph'>
-					{product.quantity}x {clientContext.currencyRate.code}$
+					{product.quantity}x $
 					{(product.price * clientContext.currencyRate.value).toFixed(
 						2
 					)}

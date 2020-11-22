@@ -130,6 +130,10 @@
 		justify-content: center;
 	}
 
+	&__carousel-slider {
+		padding: 0.9rem 0;
+	}
+
 	&__carousel-container--home {
 		justify-content: center;
 	}
@@ -145,12 +149,20 @@
 		}
 	}
 
+	&__carousel-body {
+		position: relative;
+
+		&--product-detail {
+			width: 85%;
+			margin: 0 auto;
+		}
+	}
+
 	&__carousel-controllers {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
 		margin-bottom: 0.8rem;
-		margin-top: 1.2rem;
 		margin-right: 1.1rem;
 		margin-left: 0.6rem;
 
@@ -195,4 +207,9 @@
 
 .no-margin {
 	margin: $no-margin;
+}
+
+.medium-margin-top-no-bottom {
+	margin-bottom: 0;
+	margin-top: 1rem;
 }

@@ -149,7 +149,8 @@ const Collection = props => {
 							naturalSlideWidth={changeCarouselWidth()}
 							naturalSlideHeight={changeCarouselHeight()}
 							visibleSlides={changeNumberOfSlides()}
-							isPlaying={true}
+							isPlaying={false}
+							step={4}
 						/>
 					</div>
 				) : (

@@ -113,7 +113,7 @@ const Orders = props => {
 							<>
 								{!loadingMoreOrders ? (
 									<button
-										className='button button__white button__white--card-small'
+										className='button button__black button__black--card-small'
 										onClick={loadNewerOrders}>
 										<p className='paragraph card__price card__price cart__button-text'>
 											Load Newer Orders

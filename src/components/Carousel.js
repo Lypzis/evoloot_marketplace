@@ -20,7 +20,14 @@ const Carousel = props => (
 				visibleSlides={props.visibleSlides}
 				isPlaying={props.isPlaying}
 				orientation='horizontal'
-				infinite={true}>
+				className={
+					props.productDetails
+						? 'product__carousel-body product__carousel-body--product-detail '
+						: 'product__carousel-body'
+				}
+				infinite={true}
+				step={props.step} // needs to be dinamic
+			>
 				<div
 					className={`product__carousel-controllers ${
 						!props.productDetails
@@ -30,14 +37,11 @@ const Carousel = props => (
 					<div className='product__carousel-controllers-header'>
 						{props.header}
 					</div>
-					<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
-						&lt;
-					</ButtonBack>
-					<ButtonNext className='button button__black button__black--arrow'>
-						&gt;
-					</ButtonNext>
 				</div>
-				<Slider>
+				<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
+					&lt;
+				</ButtonBack>
+				<Slider className='product__carousel-slider'>
 					{props.products.map((product, index) => {
 						return (
 							<Slide
@@ -53,6 +57,9 @@ const Carousel = props => (
 						);
 					})}
 				</Slider>
+				<ButtonNext className='button button__black button__black--arrow button__black--arrow-left'>
+					&gt;
+				</ButtonNext>
 			</CarouselProvider>
 		)}
 	</Fragment>

@@ -55,9 +55,18 @@ const Card = props => {
 			<Link
 				className='card__link'
 				to={`/product/${props.product.handle}`}>
-				<div className='card__image-box'>
+				<div
+					className={
+						props.productDetails
+							? 'card__image-box card__image-box--product-details'
+							: 'card__image-box'
+					}>
 					<img
-						className='card__image'
+						className={
+							props.productDetails
+								? 'card__image card__image--product-details'
+								: 'card__image'
+						}
 						src={
 							props.product.images[0] &&
 							props.product.images[0].src
@@ -76,7 +85,7 @@ const Card = props => {
 			<span className='navbar-line'></span>
 			{props.product.variants[0].available ? (
 				<button
-					className='button button__white button__white--card'
+					className='button button__black button__black--card'
 					onMouseOver={() => setIsMouseOverButton(true)}
 					onMouseOut={() => setIsMouseOverButton(false)}
 					onClick={onClickHandler}>
@@ -93,7 +102,7 @@ const Card = props => {
 						</div>
 					) : (
 						<p className='paragraph card__price'>
-							{clientContext.currencyRate.code}${' '}
+							$
 							{(
 								props.product.variants[0].price *
 								clientContext.currencyRate.value

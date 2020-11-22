@@ -36,7 +36,7 @@
 	&__links-partition {
 		& > .heading-fourtiary {
 			margin-bottom: 1.2rem;
-			color: $color-gray-dark-3;
+			color: #000; //$color-gray-dark-3;
 		}
 
 		@include respond(phone-secondary) {
@@ -101,7 +101,7 @@
 		& > .paragraph {
 			margin-bottom: 1.2rem;
 			font-size: 1.4rem;
-			color: $color-gray-dark-3;
+			color: #000; //$color-gray-dark-3;
 
 			@include respond(phone-secondary) {
 				margin-bottom: 0;
@@ -111,7 +111,7 @@
 
 	&__copyright {
 		text-align: center;
-		color: $color-gray-dark-3;
+		color: #000; //$color-gray-dark-3;
 		padding: 0.6rem 0;
 
 		& > .paragraph,
@@ -121,7 +121,7 @@
 	}
 
 	&__author {
-		color: $color-gray-dark-3;
+		color: #000; //$color-gray-dark-3;
 		text-decoration: none;
 	}
 }

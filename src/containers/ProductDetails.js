@@ -292,32 +292,30 @@ const ProductDetails = props => {
 
 							<span className='navbar-line big-margin-top'></span>
 
+							<h3 className='heading-tertiary heading-tertiary--dark  medium-margin-top-no-bottom'>
+								You may also like:
+							</h3>
 							<Carousel
-								header={
-									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-										You may also like:
-									</h3>
-								}
 								products={productChosen.relatedProducts}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
+								step={3}
 								isPlaying={false}
 								productDetails={true}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
 
+							<h3 className='heading-tertiary heading-tertiary--dark  medium-margin-top-no-bottom'>
+								Recently Viewed:
+							</h3>
 							<Carousel
-								header={
-									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-										Recently Viewed:
-									</h3>
-								}
 								products={productChosen.viewed}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
+								step={3}
 								isPlaying={false}
 								productDetails={true}
 							/>
@@ -356,7 +354,7 @@ const ProductDetails = props => {
 
 								<div className='product__price'>
 									<p className='paragraph paragraph--black'>
-										{clientContext.currencyRate.code}$
+										$
 										{(
 											productChosen.variant.price *
 											productChosen.quantity *

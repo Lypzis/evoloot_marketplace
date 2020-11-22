@@ -223,7 +223,7 @@ const Settings = props => {
 						<div className='auth-form__field-button'>
 							{!loadingSettings ? (
 								<button
-									className='button button__white button__white--card-big'
+									className='button button__black button__black--card-big'
 									onClick={updateSettings}>
 									<p className='paragraph card__price card__price--big cart__button-text'>
 										Update My Settings
@@ -289,7 +289,7 @@ const Settings = props => {
 							<div className='auth-form__field-button'>
 								{!loadingPassword ? (
 									<button
-										className='button button__white button__white--card-big'
+										className='button button__black button__black--card-big'
 										onClick={updatePassword}>
 										<p className='paragraph card__price card__price--big cart__button-text'>
 											Update My Password

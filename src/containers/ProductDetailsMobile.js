@@ -331,7 +331,7 @@ const ProductDetailsMobile = props => {
 
 									<div className='product__price'>
 										<p className='paragraph'>
-											{clientContext.currencyRate.code}$
+											$
 											{(
 												productChosen.variant.price *
 												productChosen.quantity *
@@ -384,6 +384,7 @@ const ProductDetailsMobile = props => {
 									window.innerWidth <= 1140 ? 120 : 140
 								}
 								visibleSlides={changeNumberOfSlides()}
+								step={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>
@@ -403,6 +404,7 @@ const ProductDetailsMobile = props => {
 									window.innerWidth <= 1140 ? 120 : 140
 								}
 								visibleSlides={changeNumberOfSlides()}
+								step={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>

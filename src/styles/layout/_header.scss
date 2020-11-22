@@ -49,7 +49,8 @@
 
 	&__logo {
 		display: block;
-		width: 6rem;
+		width: 12rem;
+		margin: 0.5rem 0;
 
 		@include respond(tab-port-2) {
 			width: 8rem;
@@ -66,6 +67,7 @@
 		position: relative;
 		display: block;
 		margin-left: auto;
+		height: 100%;
 
 		&--mobile {
 			width: 100%;
@@ -82,7 +84,8 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		margin-right: 2.5rem;
+		margin-bottom: 1.5rem;
+		padding: 0 1.2rem;
 
 		&--mobile {
 			width: 100%;
@@ -96,6 +99,9 @@
 	&__user {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	&__container {
 	}
 
 	&__loged-out {

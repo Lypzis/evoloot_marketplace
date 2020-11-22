@@ -2,7 +2,7 @@ body {
 	font-family: 'Mitr', sans-serif;
 	font-weight: 400;
 	line-height: 1.7;
-	color: $color-gray-dark-3; /* all text will be of this color */
+	color: #000; //$color-gray-dark-3; /* all text will be of this color */
 }
 
 .heading-primary {
@@ -20,7 +20,7 @@ body {
 	text-shadow: 0 3px 5px rgba(#000, 0.1);
 
 	&--dark {
-		color: $color-gray-dark-1;
+		color: #000; //$color-gray-dark-1;
 	}
 }
 
@@ -30,7 +30,7 @@ body {
 	margin-bottom: 2.5rem;
 
 	&--dark {
-		color: $color-gray-dark-1;
+		color: #000; //$color-gray-dark-1;
 	}
 
 	@include respond(tab-port) {
@@ -45,7 +45,7 @@ body {
 	text-transform: uppercase;
 
 	&--dark {
-		color: $color-gray-dark-1;
+		color: #000; //$color-gray-dark-1;
 	}
 }
 
@@ -54,7 +54,7 @@ body {
 	hyphens: auto;
 
 	&--black {
-		color: $color-gray-dark-3;
+		color: #000//$color-gray-dark-3;
 	}
 
 	&--error {

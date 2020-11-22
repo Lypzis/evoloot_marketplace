@@ -143,7 +143,7 @@ const Cart = props => {
 						<p className='paragraph paragraph--black'>Total: </p>
 						<div className='product__price'>
 							<p className='paragraph paragraph--black'>
-								{clientContext.currencyRate.code}$
+								$
 								{(
 									checkout.totalPrice *
 									clientContext.currencyRate.value
@@ -154,7 +154,7 @@ const Cart = props => {
 
 					{!loading ? (
 						<button
-							className='button button__white button__white--card-big'
+							className='button button__black button__black--card-big'
 							disabled={checkout.totalPrice === 0}
 							onClick={createCheckout}>
 							<p className='paragraph card__price card__price--big cart__button-text'>

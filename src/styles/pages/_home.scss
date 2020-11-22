@@ -18,7 +18,7 @@
 	}
 
 	&__container {
-		width: 90%;
+		width: 85%; //90%
 
 		@include respond(phone-secondary) {
 			//width: 80%;

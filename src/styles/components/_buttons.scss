@@ -241,7 +241,7 @@
 		justify-content: center;
 		font-weight: 700;
 		border-radius: 0.5rem;
-		margin-top: 1.5rem;
+		margin-top: 1.8rem;
 		width: 12rem;
 	}
 
@@ -275,7 +275,62 @@
 	}
 
 	&__black--arrow-right {
-		margin-right: 0.7rem;
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		left: -4.5rem;
+		//margin-right: 0.7rem;
+	}
+
+	&__black--arrow-left {
+		position: absolute;
+		top: 50%;
+		right: -4.5rem;
+		translate: 0 -50%;
+	}
+
+	&__black--card {
+		margin-top: 1rem;
+		border-radius: 0.5rem;
+		width: 9.2rem;
+		justify-content: center;
+		align-self: flex-end;
+
+		@include respond(tab-port-2) {
+			color: #fff;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
+	}
+
+	&__black--card-big {
+		width: 100%;
+		color: #fff;
+		border-radius: 0.5rem;
+		justify-content: center;
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
+	}
+
+	&__black--card-small {
+		background-color: $color-tertiary;
+		width: 40%;
+		color: #fff;
+		align-self: baseline;
+		margin-top: 0.8rem;
+		border-radius: 0.5rem;
+		justify-content: center;
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
 	}
 
 	&__white {

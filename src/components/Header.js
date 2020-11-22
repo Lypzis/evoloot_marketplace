@@ -94,7 +94,7 @@ const Header = props => {
 						/>
 					</Link>
 					<div className='header__buttons'>
-						<div className='header__user'>
+						<div className='header__container'>
 							<div className='header__search-form'>
 								<input
 									autoFocus={pathname === '/search'}
@@ -113,56 +113,73 @@ const Header = props => {
 									</svg>
 								</button>
 							</div>
-							<div className='header__loged-out'>
-								<button
-									className='button button__black button__black--cart'
-									onClick={() => history.push('/cart')}>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-cart`}></use>
-									</svg>
-									<div className='button__quantity'>
-										<p className='paragraph'>
-											{checkout.lineItems.length > 0
-												? checkout.lineItems
-														.map(el => el.quantity)
-														.reduce((a, b) => a + b)
-												: 0}
-										</p>
-									</div>
-								</button>
-							</div>
-							<div className='header__loged-out'>
-								<select
-									className='input input--black input__select input__select--header'
-									onChange={handleChangeCurrency}
-									value={clientContext.currencyRate.code}>
-									<option className='paragraph' value='USD'>
-										🇺🇸 USD
-									</option>
-									<option className='paragraph' value='CAD'>
-										🇨🇦 CAD
-									</option>
-									<option className='paragraph' value='EUR'>
-										🇪🇺 EUR
-									</option>
-									<option className='paragraph' value='GBP'>
-										🇬🇧 GBP
-									</option>
-								</select>
-							</div>
-							{!authContext.customerToken ? (
+
+							<div className='header__user'>
 								<div className='header__loged-out'>
 									<button
-										className='button button__black button__black--account'
-										onClick={() => history.push('/login')}>
+										className='button button__black button__black--cart'
+										onClick={() => history.push('/cart')}>
 										<svg className='button__icon'>
 											<use
-												xlinkHref={`${sprite}#icon-profile`}></use>
+												xlinkHref={`${sprite}#icon-cart`}></use>
 										</svg>
-										<p className='paragraph'>Account</p>
+										<div className='button__quantity'>
+											<p className='paragraph'>
+												{checkout.lineItems.length > 0
+													? checkout.lineItems
+															.map(
+																el =>
+																	el.quantity
+															)
+															.reduce(
+																(a, b) => a + b
+															)
+													: 0}
+											</p>
+										</div>
 									</button>
-									{/* <button
+								</div>
+								<div className='header__loged-out'>
+									<select
+										className='input input--black input__select input__select--header'
+										onChange={handleChangeCurrency}
+										value={clientContext.currencyRate.code}>
+										<option
+											className='paragraph'
+											value='USD'>
+											🇺🇸 USD
+										</option>
+										<option
+											className='paragraph'
+											value='CAD'>
+											🇨🇦 CAD
+										</option>
+										<option
+											className='paragraph'
+											value='EUR'>
+											🇪🇺 EUR
+										</option>
+										<option
+											className='paragraph'
+											value='GBP'>
+											🇬🇧 GBP
+										</option>
+									</select>
+								</div>
+								{!authContext.customerToken ? (
+									<div className='header__loged-out'>
+										<button
+											className='button button__black button__black--account'
+											onClick={() =>
+												history.push('/login')
+											}>
+											<svg className='button__icon'>
+												<use
+													xlinkHref={`${sprite}#icon-profile`}></use>
+											</svg>
+											<p className='paragraph'>Account</p>
+										</button>
+										{/* <button
 										className='button button__black button__black--login'
 										onClick={() => history.push('/login')}>
 										<svg className='button__icon'>
@@ -180,29 +197,32 @@ const Header = props => {
 										</svg>
 										<p className='paragraph'>sign up</p>
 									</button> */}
-								</div>
-							) : (
-								<div className='header__loged-out'>
-									<button
-										className='button button__black button__black--profile'
-										onClick={() => history.push('/me')}>
-										<svg className='button__icon'>
-											<use
-												xlinkHref={`${sprite}#icon-profile`}></use>
-										</svg>
-										<p className='paragraph'>My Account</p>
-									</button>
-									<button
-										className='button button__black button__black--logout'
-										onClick={logout}>
-										<svg className='button__icon'>
-											<use
-												xlinkHref={`${sprite}#icon-exit`}></use>
-										</svg>
-										<p className='paragraph'>Log out</p>
-									</button>
-								</div>
-							)}
+									</div>
+								) : (
+									<div className='header__loged-out'>
+										<button
+											className='button button__black button__black--profile'
+											onClick={() => history.push('/me')}>
+											<svg className='button__icon'>
+												<use
+													xlinkHref={`${sprite}#icon-profile`}></use>
+											</svg>
+											<p className='paragraph'>
+												My Account
+											</p>
+										</button>
+										<button
+											className='button button__black button__black--logout'
+											onClick={logout}>
+											<svg className='button__icon'>
+												<use
+													xlinkHref={`${sprite}#icon-exit`}></use>
+											</svg>
+											<p className='paragraph'>Log out</p>
+										</button>
+									</div>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
