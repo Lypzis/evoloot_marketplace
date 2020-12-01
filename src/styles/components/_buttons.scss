@@ -142,6 +142,10 @@
 		& > svg {
 			margin-right: 1rem;
 		}
+
+		&:hover + .cart--dropdown {
+			transform: scale(1);
+		}
 	}
 
 	&__black--small-circle {

@@ -151,13 +151,22 @@
 	}
 
 	&__select--header {
+		position: relative;
 		display: flex;
 		justify-content: center;
-		width: 8.2rem;
+		width: 8.4rem;
 		padding: 0.7rem 1rem;
 		margin-right: 1.5rem;
 		line-height: 1.1;
 		background: none;
+
+		&:hover,
+		&:focus {
+			color: #fff; // This color needs to be thinked, hurts the eyes
+			border: 0.2rem solid #fff;
+			backface-visibility: hidden;
+			background-color: rgba($color-tertiary, 0.75);
+		}
 
 		@include respond(phone) {
 			width: 9rem;
@@ -182,5 +191,43 @@
 
 	&__radio-image {
 		display: none;
+	}
+
+	&__select-header-container {
+		position: relative;
+	}
+
+	&__select-checkbox {
+		display: none;
+	}
+
+	&__selection-list {
+		position: absolute;
+		height: 0;
+		z-index: 3;
+		left: 1px;
+		width: 8.1rem;
+
+		color: #fff;
+		list-style: none;
+		transform: scaleY(0);
+		transition: all 0.2s;
+	}
+
+	&__select-checkbox:checked ~ &__selection-list {
+		//display: block;
+		background: #000;
+		transform: scaleY(1);
+	}
+
+	&__selection-list-item {
+		cursor: pointer;
+		padding: 0.7rem 1rem;
+		text-align: center;
+		background: #000;
+
+		&:last-child {
+			border-radius: 0 0 0.3rem 0.3rem;
+		}
 	}
 }

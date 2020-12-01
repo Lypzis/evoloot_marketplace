@@ -94,7 +94,7 @@
 
 	&__title {
 		text-decoration: none;
-		color: $color-gray-dark-1;
+		color: #000;
 		font-size: 1.2rem;
 		overflow: hidden;
 		white-space: nowrap;
@@ -119,6 +119,8 @@
 		height: 15rem; // height: 100%
 		width: 16rem;
 		border: solid 2px #000;
+		background-color: $color-primary;
+		border-radius: 0.3rem;
 		overflow: hidden;
 	}
 
@@ -130,19 +132,20 @@
 	&__image-box--checkout {
 		margin-right: 2rem;
 		max-width: 12rem;
-		height: auto;
+		height: 10.5rem;
 
 		& > .card__image {
-			height: 10rem;
+			//height: 10rem;
 		}
 
 		&-big {
 			max-width: 30%;
+			height: auto;
 		}
 
 		&-big > .card__image {
-			height: 15.5rem;
-			width: 18rem;
+			max-height: 15rem;
+			max-width: 15rem;
 
 			@include respond(phone) {
 				height: 15rem;
@@ -160,6 +163,16 @@
 		@include respond(phone-small) {
 			height: 28rem;
 		}
+	}
+
+	&__image--checkout {
+		max-height: 9.5rem;
+		max-width: 10rem;
+		margin: 0 auto;
+
+		// @include respond(phone-small) {
+		// 	height: 28rem;
+		// }
 	}
 
 	&__image--product-details {

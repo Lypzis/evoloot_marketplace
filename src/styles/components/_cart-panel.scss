@@ -11,6 +11,27 @@
 	background-color: $color-secondary;
 	transition: all 0.2s;
 
+	&--dropdown {
+		height: 0;
+		//display: none;
+		position: absolute;
+		top: 3.5rem;
+		left: 50%;
+		height: 40rem;
+		border: solid 0.3rem #000;
+		border-radius: 0.5rem;
+		transform-origin: top;
+		transform: scaleY(0);
+		transition: all 0.2s;
+
+		translate: -50% 0;
+
+		&:hover {
+			transform: scale(1);
+			//display: flex;
+		}
+	}
+
 	&__checkbox {
 		display: none;
 	}

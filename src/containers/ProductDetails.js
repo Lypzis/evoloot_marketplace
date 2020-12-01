@@ -73,7 +73,7 @@ const ProductDetails = props => {
 
 			return products;
 		},
-		[handle, clientContext]
+		[handle, clientContext.collections]
 	);
 
 	const saveViewed = product => {
@@ -144,7 +144,7 @@ const ProductDetails = props => {
 			// console.log(err);
 			history.replace('/*');
 		}
-	}, [handle, history, clientContext, retrieveRelatedProducts]);
+	}, [handle, history, clientContext.client, retrieveRelatedProducts]);
 
 	const setImageSelected = (imageId, imageSrc, index = 0) => {
 		if (productChosen.product.variants.length > 1)
@@ -238,7 +238,7 @@ const ProductDetails = props => {
 
 	useEffect(() => {
 		if (clientContext.collections) getProduct();
-	}, [clientContext, getProduct]);
+	}, [clientContext.collections, getProduct]);
 
 	return (
 		<Layout>

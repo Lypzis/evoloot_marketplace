@@ -15,13 +15,13 @@ const Footer = props => {
 			<div className='footer__body'>
 				<div className='footer__links'>
 					<div className='footer__links-partition'>
-						<a className='footer__logo' href='/'>
+						<Link className='footer__logo' to='/'>
 							<img
 								className='header__logo-image'
 								src={logo}
 								alt='Evoloot Marketplace Logo'
 							/>
-						</a>
+						</Link>
 					</div>
 
 					<div className='footer__links-partition'>

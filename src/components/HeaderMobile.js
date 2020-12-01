@@ -112,16 +112,16 @@ const HeaderMobile = props => {
 					onChange={handleChangeCurrency}
 					value={clientContext.currencyRate.code}>
 					<option className='paragraph' value='USD'>
-						🇺🇸 USD
+						&#127482;&#127480; USD
 					</option>
 					<option className='paragraph' value='CAD'>
-						🇨🇦 CAD
+						&#127464;&#127462; CAD
 					</option>
 					<option className='paragraph' value='EUR'>
-						🇪🇺 EUR
+						&#127466;&#127482; EUR
 					</option>
 					<option className='paragraph' value='GBP'>
-						🇬🇧 GBP
+						&#127468;&#127463; GBP
 					</option>
 				</select>
 			</div>

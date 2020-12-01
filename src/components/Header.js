@@ -9,6 +9,8 @@ import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
 import { ClientContext } from '../context/clientContext';
 import { setSearchText } from '../store/actions/search';
+import Select from '../components/Select';
+import CartDropdown from '../components/CartDropdown';
 
 const Header = props => {
 	const authContext = useContext(AuthContext);
@@ -45,8 +47,8 @@ const Header = props => {
 		else history.push('/search');
 	};
 
-	const handleChangeCurrency = event => {
-		clientContext.changeCurrency(event.target.value);
+	const handleChangeCurrency = currency => {
+		clientContext.changeCurrency(currency);
 	};
 
 	const renderCallToAction = () => {
@@ -138,33 +140,15 @@ const Header = props => {
 											</p>
 										</div>
 									</button>
+									<CartDropdown />
 								</div>
 								<div className='header__loged-out'>
-									<select
-										className='input input--black input__select input__select--header'
-										onChange={handleChangeCurrency}
-										value={clientContext.currencyRate.code}>
-										<option
-											className='paragraph'
-											value='USD'>
-											🇺🇸 USD
-										</option>
-										<option
-											className='paragraph'
-											value='CAD'>
-											🇨🇦 CAD
-										</option>
-										<option
-											className='paragraph'
-											value='EUR'>
-											🇪🇺 EUR
-										</option>
-										<option
-											className='paragraph'
-											value='GBP'>
-											🇬🇧 GBP
-										</option>
-									</select>
+									<Select
+										onOptionClick={handleChangeCurrency}
+										currentOption={
+											clientContext.currencyRate.code
+										}
+									/>
 								</div>
 								{!authContext.customerToken ? (
 									<div className='header__loged-out'>
