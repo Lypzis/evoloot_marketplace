@@ -23,18 +23,6 @@ function App() {
 
 	let routes = (
 		<Switch>
-			{/* <Route path='/our-promise-to-our-customers'>
-				<Promise />
-			</Route>
-			<Route path='/event-schedule'>
-				<EventSchedule />
-			</Route>
-			<Route path='/contact-us'>
-				<ContactUs />
-			</Route>
-			<Route path='/about'>
-				<About />
-			</Route> */}
 			<Route path='/pages/:handle'>
 				<Pages />
 			</Route>

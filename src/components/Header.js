@@ -1,9 +1,18 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { Fragment, memo, useContext, useState } from 'react';
+import React, {
+	Fragment,
+	memo,
+	useContext,
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+} from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Navbar from './Navbar';
+import NavbarSticky from './NavbarSticky';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
@@ -82,12 +91,35 @@ const Header = props => {
 		}
 	};
 
+	const [isSticky, setSticky] = useState(false);
+	const element = useRef(null);
+
+	/**
+	 * When the user scrolls, it checks whether window.scrollY is superior
+	 * or not to stickyRef.current.getBoundingClientRect().bottom and then
+	 * handles the isSticky state consequently
+	 */
+	const handleScroll = useCallback(() => {
+		if (element.current)
+			window.scrollY / 3 > element.current.getBoundingClientRect().bottom
+				? setSticky(true)
+				: setSticky(false);
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', () => handleScroll());
+		};
+	}, [handleScroll]);
+
 	return (
 		<Fragment>
 			<header className='header'>
 				{clientContext.pages && renderCallToAction()}
 
-				<div className='header__body'>
+				<div className='header__body' ref={element}>
 					<Link className='header__logo' to='/'>
 						<img
 							className='header__logo-image'
@@ -210,7 +242,7 @@ const Header = props => {
 						</div>
 					</div>
 				</div>
-				<Navbar />
+				{isSticky ? <NavbarSticky /> : <Navbar />}
 			</header>
 		</Fragment>
 	);

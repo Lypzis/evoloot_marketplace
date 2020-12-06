@@ -9,11 +9,7 @@ import MenuPanel from '../components/MenuPanel';
 // turn calltoaction into context
 const Layout = props => (
 	<div className='container__parent'>
-		{window.innerWidth > 1140 ? (
-			<Header callToAction={props.callToAction} loged={props.loged} />
-		) : (
-			<HeaderMobile />
-		)}
+		{window.innerWidth > 1140 ? <Header /> : <HeaderMobile />}
 
 		{window.innerWidth <= 1140 && <MenuPanel />}
 
