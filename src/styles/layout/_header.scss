@@ -13,6 +13,10 @@
 		//background-color: $color-tertiary;
 	}
 
+	&--mobile {
+		position: fixed;
+	}
+
 	.navbar-line {
 		border-top: solid 2px $color-gray-dark-3;
 	}
@@ -42,6 +46,10 @@
 		right: 1rem;
 		z-index: 2;
 
+		@include respond(phone-small) {
+			bottom: 3rem;
+		}
+
 		& > * {
 			margin: 0;
 		}
@@ -55,6 +63,10 @@
 		@include respond(tab-port-2) {
 			width: 8rem;
 			margin-right: 1.5rem;
+		}
+
+		@include respond(phone) {
+			width: 11rem;
 		}
 	}
 
@@ -94,6 +106,10 @@
 		@include respond(tab-port-2) {
 			margin: 0 3rem;
 		}
+
+		@include respond(phone-small) {
+			margin: auto;
+		}
 	}
 
 	&__user {
@@ -109,5 +125,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: baseline;
+
+		@include respond(phone-small) {
+			width: 100%;
+			flex-direction: column;
+			align-items: stretch;
+		}
 	}
 }

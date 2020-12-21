@@ -32,6 +32,11 @@
 		height: 0.9rem;
 		width: 0.9rem;
 		fill: #fff;
+
+		@include respond(phone-small) {
+			height: 1.2rem;
+			width: 1.2rem;
+		}
 	}
 
 	&__icon--card-cart-big {
@@ -53,6 +58,10 @@
 		background-color: transparent;
 		border: transparent;
 		margin-left: 5rem;
+
+		@include respond(phone-small) {
+			margin-left: 1rem;
+		}
 
 		&--checkout {
 			display: flex;
@@ -87,10 +96,14 @@
 			fill: $color-gray-dark-1;
 
 			@include respond(tab-port-2) {
-				//fill: #fff;
 				margin-bottom: 0.3rem;
 				height: 1.6rem;
 				width: 1.6rem;
+			}
+
+			@include respond(phone-small) {
+				height: 2.2rem;
+				width: 2.2rem;
 			}
 		}
 	}
@@ -155,6 +168,12 @@
 		height: 4rem;
 		border-radius: 50%;
 		border: 0.2rem solid $color-gray-light-4;
+
+		@include respond(phone-small) {
+			width: 5.5rem;
+			height: 5.5rem;
+			border-width: 0.3rem;
+		}
 	}
 
 	&__black--shop-cart {
@@ -165,6 +184,11 @@
 
 	&__black--small-circle > .button__icon {
 		fill: #fff;
+
+		@include respond(phone-small) {
+			width: 2rem;
+			height: 2rem;
+		}
 
 		@include respond(phone-really-small) {
 			padding: 0;
@@ -186,6 +210,10 @@
 
 	&__black--account-menu-panel {
 		width: 35rem;
+
+		@include respond(phone-really-small) {
+			width: 30rem;
+		}
 	}
 
 	&__black--account-big {
@@ -230,6 +258,16 @@
 			justify-content: center;
 		}
 
+		@include respond(phone-small) {
+			width: 34.5rem;
+			border-radius: 0.5rem;
+		}
+
+		@include respond(phone-really-small) {
+			width: 32rem;
+			align-self: center;
+		}
+
 		& > .button__icon {
 			margin-right: 1rem;
 
@@ -255,6 +293,16 @@
 
 		@include respond(tab-port-2) {
 			justify-content: center;
+		}
+		@include respond(phone-small) {
+			width: 34.5rem;
+			border-radius: 0.5rem;
+			margin-top: 2rem;
+		}
+
+		@include respond(phone-really-small) {
+			width: 32rem;
+			align-self: center;
 		}
 
 		& > .button__icon {
@@ -304,6 +352,10 @@
 			color: #fff;
 		}
 
+		@include respond(phone-small) {
+			width: 10rem;
+		}
+
 		&:disabled {
 			cursor: not-allowed;
 			background-color: $color-primary-light;
@@ -351,7 +403,7 @@
 		border-radius: 0.5rem;
 		width: 9.2rem;
 
-		@include respond(phone-really-small) {
+		@include respond(phone-small) {
 			width: 10rem;
 		}
 

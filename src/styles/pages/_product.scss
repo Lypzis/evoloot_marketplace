@@ -8,6 +8,10 @@
 		padding: 1rem 1.5rem;
 	}
 
+	@include respond(phone-small) {
+		align-items: center;
+	}
+
 	&__details {
 		display: flex;
 		align-items: flex-start;
@@ -33,6 +37,16 @@
 
 		@include respond(phone-secondary) {
 			width: 67rem;
+		}
+
+		@include respond(phone-small) {
+			max-width: 52.5rem;
+			//	width: 45rem;
+		}
+
+		@include respond(phone-really-small) {
+			max-width: 45.5rem;
+			//	width: 45rem;
 		}
 	}
 
@@ -122,6 +136,11 @@
 	&__title {
 		line-height: 4rem;
 		margin-bottom: 1rem;
+
+		@include respond(phone-small) {
+			font-size: $default-font-size-4;
+			text-align: center;
+		}
 	}
 
 	&__carousel-container {
@@ -155,6 +174,10 @@
 		&--product-detail {
 			width: 85%;
 			margin: 0 auto;
+
+			@include respond(phone-secondary) {
+				width: auto;
+			}
 		}
 	}
 

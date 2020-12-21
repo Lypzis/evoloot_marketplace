@@ -38,9 +38,11 @@ const Carousel = props => (
 						{props.header}
 					</div>
 				</div>
-				<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
-					&lt;
-				</ButtonBack>
+				{window.innerWidth > 800 && (
+					<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
+						&lt;
+					</ButtonBack>
+				)}
 				<Slider className='product__carousel-slider'>
 					{props.products.map((product, index) => {
 						return (
@@ -57,9 +59,11 @@ const Carousel = props => (
 						);
 					})}
 				</Slider>
-				<ButtonNext className='button button__black button__black--arrow button__black--arrow-left'>
-					&gt;
-				</ButtonNext>
+				{window.innerWidth > 800 && (
+					<ButtonNext className='button button__black button__black--arrow button__black--arrow-left'>
+						&gt;
+					</ButtonNext>
+				)}
 			</CarouselProvider>
 		)}
 	</Fragment>

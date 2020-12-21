@@ -22,6 +22,10 @@ body {
 	&--dark {
 		color: #000; //$color-gray-dark-1;
 	}
+
+	@include respond(phone-small) {
+		font-size: $default-font-size-5;
+	}
 }
 
 .heading-tertiary {
@@ -52,6 +56,10 @@ body {
 .paragraph {
 	font-size: $default-font-size;
 	hyphens: auto;
+
+	@include respond(phone-small) {
+		font-size: $default-font-size-2;
+	}
 
 	&--black {
 		color: #000//$color-gray-dark-3;

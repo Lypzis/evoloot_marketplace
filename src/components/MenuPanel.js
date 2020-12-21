@@ -26,7 +26,7 @@ const MenuPanel = props => {
 
 			<div className='menu'>
 				<div className='cart__panel'>
-					<h3 className='heading-tertiary heading-tertiary no-margin'>
+					<h3 className='heading-tertiary menu__header no-margin'>
 						Menu
 					</h3>
 

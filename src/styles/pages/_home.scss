@@ -9,6 +9,14 @@
 		width: 75rem;
 	}
 
+	@include respond(phone-small) {
+		width: 55rem;
+	}
+
+	@include respond(phone-really-small) {
+		width: 48rem;
+	}
+
 	&--terms {
 		max-width: 65rem;
 
@@ -21,7 +29,7 @@
 		width: 85%; //90%
 
 		@include respond(phone-secondary) {
-			//width: 80%;
+			width: 100%;
 		}
 	}
 
@@ -36,6 +44,10 @@
 
 			@include respond(tab-port) {
 				margin-top: 4rem;
+			}
+
+			@include respond(phone-small) {
+				margin-top: 1.5rem;
 			}
 		}
 

@@ -47,7 +47,7 @@ const HeaderMobile = props => {
 					{callToActionOpen && (
 						<div className='call-to-action'>
 							<div
-								className='card__description-box-description'
+								className='call-to-action__description'
 								dangerouslySetInnerHTML={{
 									__html: callToAction[0].body,
 								}}></div>
@@ -71,7 +71,7 @@ const HeaderMobile = props => {
 		<Fragment>
 			{/* <BluredBackground for={'menu-toggle'} /> */}
 
-			<header className='header'>
+			<header className='header header--mobile'>
 				{clientContext.pages && renderCallToAction()}
 				<div className='header__body header__body--mobile'>
 					<Link className='header__logo' to='/'>

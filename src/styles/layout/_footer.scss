@@ -37,6 +37,10 @@
 		& > .heading-fourtiary {
 			margin-bottom: 1.2rem;
 			color: #000; //$color-gray-dark-3;
+
+			@include respond(phone-small) {
+				font-size: $default-font-size-3;
+			}
 		}
 
 		@include respond(phone-secondary) {
@@ -51,6 +55,14 @@
 
 		@include respond(phone) {
 			width: 30rem;
+		}
+
+		@include respond(phone-small) {
+			width: 25rem;
+		}
+
+		@include respond(phone-small) {
+			width: 22rem;
 		}
 	}
 
@@ -106,6 +118,10 @@
 			@include respond(phone-secondary) {
 				margin-bottom: 0;
 			}
+
+			@include respond(phone-small) {
+				font-size: $default-font-size-2;
+			}
 		}
 	}
 
@@ -117,6 +133,10 @@
 		& > .paragraph,
 		.footer__author {
 			font-size: 1rem;
+
+			@include respond(phone-small) {
+				font-size: 1.2rem;
+			}
 		}
 	}
 

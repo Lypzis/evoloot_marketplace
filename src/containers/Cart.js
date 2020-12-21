@@ -130,7 +130,7 @@ const Cart = props => {
 						className='input input__text-area'
 						name='notes'
 						id='notes'
-						cols='50'
+						cols={window.innerWidth > 560 ? '50' : '30'}
 						maxLength={300}
 						value={textAreaValue}
 						onChange={event => setTextAreaValue(event.target.value)}

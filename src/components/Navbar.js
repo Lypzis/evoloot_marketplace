@@ -65,12 +65,12 @@ const Navbar = props => {
 									to={`/collection/${navTitle.handle}`}
 									className={`paragraph  ${
 										props.vertical
-											? ' navbar-vertical__link navbar-vertical__link--menu'
+											? ' navbar-vertical__link navbar-vertical__link--menu menu__link'
 											: ' navbar__link '
 									}`}
 									activeClassName={
 										props.vertical
-											? ' navbar-vertical__link--active'
+											? ' navbar-vertical__link--active menu__link'
 											: ' navbar__link--active '
 									}>
 									{navTitle.title}
@@ -91,7 +91,9 @@ const Navbar = props => {
 												<use
 													xlinkHref={`${sprite}#icon-profile`}></use>
 											</svg>
-											<p className='paragraph'>Account</p>
+											<p className='paragraph menu__link'>
+												Account
+											</p>
 										</button>
 										{/* <button
 											className='button button__black button__black--login'
@@ -125,7 +127,7 @@ const Navbar = props => {
 												<use
 													xlinkHref={`${sprite}#icon-profile`}></use>
 											</svg>
-											<p className='paragraph'>
+											<p className='paragraph menu__link'>
 												My Account
 											</p>
 										</button>
@@ -136,7 +138,9 @@ const Navbar = props => {
 												<use
 													xlinkHref={`${sprite}#icon-exit`}></use>
 											</svg>
-											<p className='paragraph'>Log out</p>
+											<p className='paragraph menu__link'>
+												Log out
+											</p>
 										</button>
 									</div>
 								)}

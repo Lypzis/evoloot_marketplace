@@ -98,6 +98,13 @@
 		padding: 2rem 6rem;
 		transition: all 0.3s;
 
+		& > .button__icon {
+			@include respond(phone-small) {
+				height: 2.5rem;
+				width: 2.5rem;
+			}
+		}
+
 		@include respond(tab-port) {
 			justify-content: center;
 		}
@@ -111,6 +118,10 @@
 
 			@include respond(tab-port) {
 				justify-content: flex-start;
+			}
+
+			@include respond(phone-small) {
+				padding: 0.8rem 2rem;
 			}
 		}
 

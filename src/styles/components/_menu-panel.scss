@@ -11,6 +11,18 @@
 	background-color: $color-secondary;
 	transition: all 0.2s;
 
+	@include respond(phone-really-small) {
+		width: 37rem;
+	}
+
+	&__header {
+		font-size: $default-font-size-5;
+	}
+
+	&__link {
+		font-size: $default-font-size-4;
+	}
+
 	&__checkbox {
 		display: none;
 	}
@@ -21,6 +33,10 @@
 
 	&__checkbox:checked ~ & {
 		right: -40rem;
+
+		@include respond(phone-really-small) {
+			right: -37rem;
+		}
 	}
 
 	&__checkbox:checked ~ .blured--menu {
@@ -43,6 +59,10 @@
 		background-color: $color-secondary;
 		border: solid #000 0.3rem;
 		z-index: 8;
+
+		@include respond(phone-really-small) {
+			right: 36.8rem;
+		}
 
 		& > .button__icon {
 			margin-left: 1rem;

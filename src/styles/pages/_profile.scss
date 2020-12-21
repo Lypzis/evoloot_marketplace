@@ -18,6 +18,15 @@
 		width: 70rem;
 	}
 
+	@include respond(phone-small) {
+		width: 50rem;
+	}
+
+	@include respond(phone-really-small) {
+		width: 47rem;
+		margin-top: 3rem;
+	}
+
 	& > .auth-form {
 		padding: 3rem 3rem;
 		width: 70rem;

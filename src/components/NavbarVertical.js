@@ -15,7 +15,7 @@ const NavbarVertical = props => {
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-cog`}></use>
 						</svg>
-						Settings
+						{window.innerWidth > 560 && 'Settings'}
 					</NavLink>
 				</li>
 				<li className='navbar-vertical__list-item'>
@@ -26,7 +26,7 @@ const NavbarVertical = props => {
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-dropbox`}></use>
 						</svg>
-						My Orders
+						{window.innerWidth > 560 && 'My Orders'}
 					</NavLink>
 				</li>
 				<li className='navbar-vertical__list-item'>
@@ -37,7 +37,7 @@ const NavbarVertical = props => {
 						<svg className='button__icon '>
 							<use xlinkHref={`${sprite}#icon-location2`}></use>
 						</svg>
-						My Address
+						{window.innerWidth > 560 && 'My Address'}
 					</NavLink>
 				</li>
 			</ul>

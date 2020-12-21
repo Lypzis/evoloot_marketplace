@@ -11,6 +11,10 @@
 	background-color: $color-secondary;
 	transition: all 0.2s;
 
+	@include respond(phone-really-small) {
+		width: 37rem;
+	}
+
 	&--dropdown {
 		height: 0;
 		//display: none;
@@ -23,6 +27,7 @@
 		transform-origin: top;
 		transform: scaleY(0);
 		transition: all 0.2s;
+		box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 
 		translate: -50% 0;
 
@@ -42,6 +47,10 @@
 
 	&__checkbox:checked ~ & {
 		right: -40rem;
+
+		@include respond(phone-really-small) {
+			right: -37rem;
+		}
 	}
 
 	&__checkbox:checked ~ .blured {
@@ -64,6 +73,10 @@
 		background-color: $color-secondary;
 		border: solid #000 0.3rem;
 		z-index: 6;
+
+		@include respond(phone-really-small) {
+			right: 36.8rem;
+		}
 
 		&:hover {
 			border: 0.3rem solid #000;
@@ -95,5 +108,13 @@
 		flex-direction: column;
 		height: 100%;
 		justify-content: space-between;
+	}
+
+	@include respond(phone-small) {
+		max-width: 50rem;
+	}
+
+	@include respond(phone-really-small) {
+		max-width: 44rem;
 	}
 }

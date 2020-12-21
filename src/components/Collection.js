@@ -80,15 +80,15 @@ const Collection = props => {
 	};
 
 	const changeCarouselWidth = () => {
-		return window.innerWidth <= 800 ? 60 : 100;
+		return window.innerWidth <= 800 ? 110 : 100;
 	};
 
 	const changeCarouselHeight = () => {
-		return window.innerWidth <= 800 ? 75 : 120;
+		return window.innerWidth <= 800 ? 130 : 120;
 	};
 
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 475) return 2;
+		if (window.innerWidth <= 560) return 2;
 		else if (window.innerWidth <= 800) return 3;
 		else return 4;
 	};

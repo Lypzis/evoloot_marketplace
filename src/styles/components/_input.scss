@@ -9,6 +9,10 @@
 	font-size: 1.6rem;
 	font-family: inherit;
 
+	@include respond(phone-small) {
+		font-size: $default-font-size-3;
+	}
+
 	&__search {
 		margin-left: auto;
 		background: transparent;
@@ -19,7 +23,12 @@
 		overflow: hidden;
 		box-shadow: none;
 		padding: 0.2rem 0.5rem;
+
 		font-size: $default-font-size-2;
+
+		@include respond(phone-small) {
+			font-size: $default-font-size-4;
+		}
 
 		&--mobile {
 			width: 100%;
@@ -41,6 +50,12 @@
 		&--small {
 			margin-bottom: 0;
 			justify-content: flex-start;
+
+			@include respond(phone-small) {
+				flex-direction: column;
+				align-items: flex-start;
+				margin: 1rem 0;
+			}
 		}
 
 		&--collection {
@@ -56,6 +71,10 @@
 	&__container-paragraph-small {
 		font-size: 1.2rem;
 		margin-right: 1rem;
+
+		@include respond(phone-small) {
+			font-size: $default-font-size-2;
+		}
 	}
 
 	&__quantity {
@@ -73,6 +92,10 @@
 
 		& > .paragraph {
 			font-size: $default-font-size-2;
+
+			@include respond(phone-small) {
+				font-size: $default-font-size-3;
+			}
 		}
 
 		@include respond(tab-port-2) {

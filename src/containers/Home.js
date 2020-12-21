@@ -10,6 +10,7 @@ import Layout from '../hoc/Layout';
 import { ClientContext } from '../context/clientContext';
 import Collection from '../components/Collection';
 import LoadingBar from '../components/LoadingBar';
+import BannerCarousel from '../components/BannerCarousel';
 
 const Home = props => {
 	const [homeCollections, setHomeCollections] = useState();
@@ -41,7 +42,10 @@ const Home = props => {
 	return (
 		<Layout>
 			{homeCollections ? (
-				<section className='home'>{renderHomeCollections()}</section>
+				<section className='home'>
+					{<BannerCarousel />}
+					{renderHomeCollections()}
+				</section>
 			) : (
 				<LoadingBar loading={loading} marginTop={'18rem'} />
 			)}

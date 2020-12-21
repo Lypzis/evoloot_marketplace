@@ -237,8 +237,8 @@ const ProductDetailsMobile = props => {
 	};
 
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 475) return 2;
-		else if (window.innerWidth <= 700) return 3;
+		if (window.innerWidth <= 560) return 2;
+		else if (window.innerWidth <= 800) return 3;
 		else return 4;
 	};
 
@@ -381,7 +381,7 @@ const ProductDetailsMobile = props => {
 								products={productChosen.relatedProducts}
 								naturalSlideWidth={100}
 								naturalSlideHeight={
-									window.innerWidth <= 1140 ? 120 : 140
+									window.innerWidth <= 800 ? 130 : 145
 								}
 								visibleSlides={changeNumberOfSlides()}
 								step={changeNumberOfSlides()}
@@ -401,7 +401,7 @@ const ProductDetailsMobile = props => {
 								products={productChosen.viewed}
 								naturalSlideWidth={100}
 								naturalSlideHeight={
-									window.innerWidth <= 1140 ? 120 : 140
+									window.innerWidth <= 800 ? 130 : 145
 								}
 								visibleSlides={changeNumberOfSlides()}
 								step={changeNumberOfSlides()}
