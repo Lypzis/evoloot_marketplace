@@ -24,9 +24,56 @@ const Navbar = props => {
 				return { title: col.title, handle: col.handle };
 			});
 
+			// const navTitlesFormated = nestMenus(navTitles);
+
+			// setNavTitles(navTitlesFormated);
+
 			setNavTitles(navTitles);
 		}
 	}, [collections]);
+
+	const nestMenus = (menu, currLevel = 1) => {
+		const submenus = [];
+
+		menu.forEach(el => {
+			const isASubMenu = el.title.split('-');
+
+			el.children = [];
+
+			if (isASubMenu.length > currLevel) {
+				el.parents = [];
+				el.toDelete = true;
+
+				isASubMenu.slice(0, isASubMenu.length - 1).forEach(submenu => {
+					el.parents.push(submenu.trim());
+				});
+			}
+		});
+
+		submenus.forEach(el => {
+			el.title = el.parents[el.length - 1];
+		});
+
+		menu.forEach(el => {
+			if (el.parents) {
+				submenus.push(el);
+			}
+		});
+
+		for (let i = 0; i < submenus.length; ++i) {
+			for (let j = 0; j < submenus[i].parents.length; ++j) {
+				for (let k = 0; k < menu.length; ++k) {
+					if (menu[k].title === submenus[i].parents[j]) {
+						const names = submenus[i].title.split('-');
+						submenus[i].title = names[names.length - 1].trim();
+						menu[k].children.push(submenus[i]);
+					}
+				}
+			}
+		}
+
+		return menu.filter(el => !el.toDelete);
+	};
 
 	const history = useHistory();
 
@@ -42,6 +89,40 @@ const Navbar = props => {
 	useEffect(() => {
 		getCollections();
 	}, [clientContext, getCollections]);
+
+	const showChildren = event => {
+		const { text } = event.target;
+
+		const theOne = navTitles.find(
+			el => el.title === text && el.children.length > 0
+		);
+
+		console.log(theOne);
+	};
+
+	const generateMenu = () => {
+		return navTitles.map((navTitle, index) => {
+			return (
+				<li className='navbar__list-item' key={index}>
+					{/* onMouseOver={event => showChildren(event)} */}
+					<NavLink
+						to={`/collection/${navTitle.handle}`}
+						className={`paragraph  ${
+							props.vertical
+								? ' navbar-vertical__link navbar-vertical__link--menu menu__link'
+								: ' navbar__link '
+						}`}
+						activeClassName={
+							props.vertical
+								? ' navbar-vertical__link--active menu__link'
+								: ' navbar__link--active '
+						}>
+						{navTitle.title}
+					</NavLink>
+				</li>
+			);
+		});
+	};
 
 	return (
 		<Fragment>
@@ -59,24 +140,7 @@ const Navbar = props => {
 								? 'navbar-vertical__list'
 								: 'navbar__list'
 						}`}>
-						{navTitles.map((navTitle, index) => (
-							<li className='navbar__list-item' key={index}>
-								<NavLink
-									to={`/collection/${navTitle.handle}`}
-									className={`paragraph  ${
-										props.vertical
-											? ' navbar-vertical__link navbar-vertical__link--menu menu__link'
-											: ' navbar__link '
-									}`}
-									activeClassName={
-										props.vertical
-											? ' navbar-vertical__link--active menu__link'
-											: ' navbar__link--active '
-									}>
-									{navTitle.title}
-								</NavLink>
-							</li>
-						))}
+						{generateMenu()}
 						<span className='navbar-line navbar-line--thicc'></span>
 						{props.vertical && (
 							<li className='navbar-vertical__list-item navbar-vertical__list-item--menu'>

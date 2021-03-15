@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -6,8 +6,14 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import Card from '../components/Card';
 import Carousel from '../components/Carousel';
 
+// import { getCustomerOrders } from '../graphql';
+// import axiosInstance from '../axios';
+import { ClientContext } from '../context/clientContext';
+
 const Collection = props => {
 	const { products } = props.collection;
+	const clientContext = useContext(ClientContext);
+	const { loadMoreCollectionProducts } = clientContext;
 
 	const [displayedProducts, setDisplayedProducts] = useState(
 		props.featured
@@ -18,6 +24,9 @@ const Collection = props => {
 					return <Card key={product.id} product={product} />;
 			  })
 	);
+
+	const [cursor, setCursor] = useState(products[0].cursor);
+	const [currArrLength, setCurrArrLength] = useState(products.length);
 
 	const sortBy = event => {
 		event.preventDefault();
@@ -77,6 +86,19 @@ const Collection = props => {
 				return <Card key={product.id} product={product} />;
 			})
 		);
+	};
+
+	// HERE
+	const loadMoreProducts = async () => {
+		const newCursor = await loadMoreCollectionProducts(
+			props.collection.handle,
+			`first: 20, after: "${cursor}"`
+		);
+
+		if (newCursor) {
+			setCursor(newCursor.cursor);
+			setCurrArrLength(newCursor.length);
+		}
 	};
 
 	const changeCarouselWidth = () => {
@@ -157,12 +179,22 @@ const Collection = props => {
 					displayedProducts
 				)}
 			</div>
-			{props.featured && (
+			{props.featured ? (
 				<Link
 					to={`/collection/${props.collection.handle}`}
 					className='button button__black button__black--show-more'>
 					<p className='paragraph'>show more</p>
 				</Link>
+			) : (
+				<div>
+					{currArrLength === 20 && (
+						<button
+							onClick={() => loadMoreProducts()}
+							className='button button__black button__black--show-more'>
+							<p className='paragraph'>load more</p>
+						</button>
+					)}
+				</div>
 			)}
 		</div>
 	);

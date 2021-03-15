@@ -464,3 +464,149 @@ export const getShopPages = () => {
 			`,
 	};
 };
+// after is a cursor
+// first:20, after: "eyJsYXN0X2lkIjo1ODUxODk5NDYxNzk0LCJsYXN0X3ZhbHVlIjoiMCJ9"
+export const getCollectionProducts = (handle, queryParam) => {
+	return {
+		query: `
+				{ 
+					collectionByHandle (handle: "${handle}") {
+						title
+						products(${queryParam ? queryParam : 'first: 20'}) {
+							edges {
+								cursor
+								node {
+									id
+									title
+									availableForSale
+									createdAt
+									publishedAt
+									description
+									descriptionHtml
+									handle
+									onlineStoreUrl
+									productType
+									tags
+									images(first: 100) {
+										edges {
+											node {
+												id
+												altText
+												originalSrc
+											}
+										}
+									}
+									options {
+										id
+										name
+										values
+										
+									}
+									variants(first: 100) {
+										edges {
+											node {
+												id
+												availableForSale
+												requiresShipping
+												sku
+												title
+												image {
+													id
+													altText
+													originalSrc
+												}
+												priceV2 {
+													amount
+													currencyCode
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			`,
+	};
+};
+
+export const getAllCollectionsAndProducts = () => {
+	return {
+		query: `
+				{ 
+					collections(first:100)  {
+						edges {
+							cursor
+							node {
+								id
+								description
+								descriptionHtml
+								handle
+								title
+								updatedAt
+								image{
+									id
+									altText
+									originalSrc
+								}
+								products(first: 20) {
+									edges {
+										cursor
+										node {
+											id
+											title
+											availableForSale
+											createdAt
+											publishedAt
+											description
+											descriptionHtml
+											handle
+											onlineStoreUrl
+											productType
+											tags
+											images(first: 100) {
+												edges {
+													node {
+														id
+														altText
+														originalSrc
+													}
+												}
+											}
+											options {
+												id
+												name
+												values
+												
+											}
+											variants(first: 100) {
+												edges {
+													node {
+														id
+														availableForSale
+														requiresShipping
+														sku
+														title
+														image {
+															id
+															altText
+															originalSrc
+														}
+														priceV2 {
+															amount
+															currencyCode
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			`,
+	};
+};
