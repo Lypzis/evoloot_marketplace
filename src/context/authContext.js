@@ -21,6 +21,10 @@ const AuthContextProvider = props => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	/**
+	 * Gets current user information and stores
+	 * it at the reducer.
+	 */
 	const getUserInformation = useCallback(
 		async accessToken => {
 			try {
@@ -46,6 +50,13 @@ const AuthContextProvider = props => {
 		[dispatch]
 	);
 
+	/**
+	 * Retrieve user token and get user information.
+	 * - verifies if the token is stored at the local storage.
+	 * - If there is a token, verify its expiration date.
+	 * - If both token and expiration date are ok, set user token and
+	 * retrieve his information.
+	 */
 	const isUserOnline = useCallback(async () => {
 		let token = null;
 
@@ -72,12 +83,20 @@ const AuthContextProvider = props => {
 		isUserOnline();
 	}, [isUserOnline]);
 
+	/**
+	 * Logs the user out.
+	 * - Deletes stored user token and sends user to home page.
+	 */
 	const logoutHandler = async () => {
 		setUserToken(null);
 		localStorage.removeItem('shopifyCustomerToken');
 		history.replace('/');
 	};
 
+	/**
+	 * Replace or create a new user token.
+	 * @param {Object} customerToken
+	 */
 	const refreshToken = customerToken => {
 		const {
 			customerAccessToken,
@@ -91,6 +110,11 @@ const AuthContextProvider = props => {
 		setUserToken(customerAccessToken.accessToken);
 	};
 
+	/**
+	 * Logs in user.
+	 * - set current token then retrieves user information.
+	 * @param {String} token
+	 */
 	const loginHandler = async token => {
 		try {
 			setUserToken(token);

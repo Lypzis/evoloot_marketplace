@@ -35,6 +35,9 @@ const ClientContextProvider = props => {
 	const [currencyRate, setCurrencyRate] = useState({ code: 'USD', value: 1 });
 	const history = useHistory();
 
+	/**
+	 * Get the shop pages.
+	 */
 	const getShopPagesData = async () => {
 		try {
 			const pages = await axiosInstance.post(
@@ -52,6 +55,11 @@ const ClientContextProvider = props => {
 		}
 	};
 
+	/**
+	 * Get currency rates.
+	 * - Will attempt to get from local storage first, verifying if it is not older
+	 * than 1 day, in which case, will request for the today's rates, and replace them.
+	 */
 	const getCurrencyRate = async () => {
 		try {
 			let localCurrencyRate = null;
@@ -73,7 +81,6 @@ const ClientContextProvider = props => {
 
 				setCurrencyRates(localCurrencyRate.rates);
 			} else {
-				// TO-DO: replacement for herokuapp as it is only for development
 				currencies = await axiosInstance.get(
 					'https://evoloot.herokuapp.com/api/v1/currency/currencies'
 				);
@@ -99,6 +106,10 @@ const ClientContextProvider = props => {
 		}
 	};
 
+	/**
+	 * Changes the current active currency.
+	 * @param {String} currency
+	 */
 	const changeCurrency = currency => {
 		setCurrencyRate({ code: currency, value: currencyRates[currency] });
 	};
@@ -118,6 +129,9 @@ const ClientContextProvider = props => {
 		}
 	};
 
+	/**
+	 * Gets the shop policies.
+	 */
 	const getShopPoliciesData = async () => {
 		try {
 			const arr = [];
@@ -137,6 +151,10 @@ const ClientContextProvider = props => {
 		}
 	};
 
+	/**
+	 * Get all the collections along with some of their products.
+	 * - default amount of products is 20.
+	 */
 	const getAllCollectionsWithProducts = useCallback(async () => {
 		try {
 			const collections = await axiosInstance.post(
@@ -160,6 +178,11 @@ const ClientContextProvider = props => {
 		}
 	}, [history]);
 
+	/**
+	 * Reestructures the products array data.
+	 * @param {Array} products
+	 * @returns Array of products
+	 */
 	const treatCollectionProducts = products => {
 		const newProducts = products.map((e, index) => {
 			e.node.cursor = products[products.length - 1].cursor;
@@ -202,6 +225,12 @@ const ClientContextProvider = props => {
 		return newProducts;
 	};
 
+	/**
+	 * Add more products to a collection, if available.
+	 * @param {String} handle
+	 * @param {String} queryParam
+	 * @returns cursor of the last product brought.
+	 */
 	const loadMoreCollectionProducts = async (handle, queryParam = null) => {
 		try {
 			const products = await axiosInstance.post(
@@ -219,12 +248,9 @@ const ClientContextProvider = props => {
 							.length - 1
 					].cursor;
 
-				// add each node to the current corresponding collection array
 				const collectionToAdd = collections.findIndex(
 					e => e.handle === handle
 				);
-
-				console.log(productsArr);
 
 				const productsTreated = treatCollectionProducts(productsArr);
 
@@ -237,8 +263,6 @@ const ClientContextProvider = props => {
 						collectionToAdd
 					].products.concat(productsTreated);
 
-					console.log('if');
-
 					setCollections(collectionsCopy);
 				} else {
 					collectionsCopy = Object.assign(collections);
@@ -246,14 +270,6 @@ const ClientContextProvider = props => {
 					collectionsCopy[collectionToAdd].products = collectionsCopy[
 						collectionToAdd
 					].products.concat(productsTreated);
-
-					console.log(
-						'currentProducts: ',
-						collectionsCopy[collectionToAdd].products
-					);
-					console.log('productsToAdd: ', productsTreated);
-
-					console.log('else');
 
 					setCollections(collectionsCopy);
 				}
@@ -263,7 +279,6 @@ const ClientContextProvider = props => {
 
 			return null;
 		} catch (err) {
-			console.log(err);
 			history.replace('/*');
 			return null;
 		}

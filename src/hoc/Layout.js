@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import CartPanel from '../components/CartPanel';
 import MenuPanel from '../components/MenuPanel';
 
-// turn calltoaction into context
 const Layout = props => (
 	<div className='container__parent'>
 		{window.innerWidth > 1140 ? <Header /> : <HeaderMobile />}

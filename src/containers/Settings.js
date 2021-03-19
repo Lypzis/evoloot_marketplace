@@ -26,6 +26,9 @@ const Settings = props => {
 	const [loadingSettings, setLoadingSettings] = useState(false);
 	const [loadingPassword, setLoadingPassword] = useState(false);
 
+	/**
+	 * Retrieves user data from the reducer storage.
+	 */
 	const retrieveCustomerData = useCallback(() => {
 		setLastName(user.lastName);
 		setFirstName(user.firstName);
@@ -36,6 +39,11 @@ const Settings = props => {
 		retrieveCustomerData();
 	}, [retrieveCustomerData]);
 
+	/**
+	 * Checks whether the string 'email' is in
+	 * a valid email format.
+	 * @returns boolean value
+	 */
 	const validEmail = () => {
 		const constraints = {
 			from: { email: true },
@@ -46,6 +54,10 @@ const Settings = props => {
 		return isValid === undefined;
 	};
 
+	/**
+	 * Checks whether the passwords are equal.
+	 * @returns boolean value
+	 */
 	const equalPassword = () => {
 		const constraints = {
 			confirmPassword: {
@@ -64,6 +76,12 @@ const Settings = props => {
 		return isValid === undefined;
 	};
 
+	/**
+	 * Updates user password.
+	 * - Only updates if password and its confirmation
+	 * password matches and are greater than 5 characters.
+	 * @returns null
+	 */
 	const updatePassword = async () => {
 		try {
 			const isPasswordValid = equalPassword();
@@ -102,6 +120,11 @@ const Settings = props => {
 		}
 	};
 
+	/**
+	 * Updates user settings.
+	 * - Except password.
+	 * @returns
+	 */
 	const updateSettings = async () => {
 		try {
 			const isEmailValid = validEmail();

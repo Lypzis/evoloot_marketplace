@@ -16,6 +16,9 @@ const Card = props => {
 	const history = useHistory();
 	const clientContext = useContext(ClientContext);
 
+	/**
+	 * Adds product to cart.
+	 */
 	const addToCart = () => {
 		const variant = props.product.variants[0];
 
@@ -34,10 +37,17 @@ const Card = props => {
 		else dispatch(addProductToCheckout(variant, title, quantity, handle));
 	};
 
+	/**
+	 * Redirects to the product details page.
+	 */
 	const goToProduct = () => {
 		history.push(`/product/${props.product.handle}`);
 	};
 
+	/**
+	 * On click, if product has variants, redirects to product details,
+	 * else, directly adds to cart.
+	 */
 	const onClickHandler = () => {
 		if (props.product.variants.length === 1) return addToCart();
 		goToProduct();
@@ -51,7 +61,6 @@ const Card = props => {
 					? 'card card--raw card--raw-product-details'
 					: '',
 			].join(' ')}>
-			{/* to '/' temporarily, this obviously need to go to product details */}
 			<Link
 				className='card__link'
 				to={`/product/${props.product.handle}`}>

@@ -1,3 +1,11 @@
+/**
+ * Creates a graphql query for Creating a new user.
+ * @param {String} firstName
+ * @param {String} lastName
+ * @param {String} email
+ * @param {String} password
+ * @returns graphql query body
+ */
 export const createUser = (firstName, lastName, email, password) => {
 	return {
 		query: `
@@ -25,6 +33,12 @@ export const createUser = (firstName, lastName, email, password) => {
 	};
 };
 
+/**
+ * Creates a graphql query to get the current user token.
+ * @param {String} email
+ * @param {String} password
+ * @returns graphql query body
+ */
 export const getCustomerToken = (email, password) => {
 	return {
 		query: `
@@ -51,6 +65,15 @@ export const getCustomerToken = (email, password) => {
 	};
 };
 
+/**
+ * Creates a graphql query to update the current user data.
+ * - It does not update password.
+ * @param {String} customerAccessToken
+ * @param {String} firstName
+ * @param {String} lastName
+ * @param {String} email
+ * @returns graphql query body
+ */
 export const updateCustomer = (
 	customerAccessToken,
 	firstName,
@@ -87,6 +110,12 @@ export const updateCustomer = (
 	};
 };
 
+/**
+ * Creates a graphql query to update current user password.
+ * @param {String} customerAccessToken
+ * @param {String} password
+ * @returns graphql query body
+ */
 export const updateCustomerPassword = (customerAccessToken, password) => {
 	return {
 		query: `
@@ -116,6 +145,11 @@ export const updateCustomerPassword = (customerAccessToken, password) => {
 	};
 };
 
+/**
+ * Creates a graphql query for recovering user password.
+ * @param {String} email
+ * @returns graphql query body
+ */
 export const recoverCustomerPassword = email => {
 	return {
 		query: `
@@ -135,6 +169,11 @@ export const recoverCustomerPassword = email => {
 	};
 };
 
+/**
+ * Creates a graphql query for retrieving user information.
+ * @param {String} customerAccessToken
+ * @returns graphql query body
+ */
 export const getUserSettings = customerAccessToken => {
 	return {
 		query: `
@@ -149,6 +188,12 @@ export const getUserSettings = customerAccessToken => {
 	};
 };
 
+/**
+ * Creates a graphql query for retrieving user information
+ * along with his default address.
+ * @param {String} customerAccessToken
+ * @returns graphql query body
+ */
 export const getUserSettingsAndAddress = customerAccessToken => {
 	return {
 		query: `
@@ -175,6 +220,12 @@ export const getUserSettingsAndAddress = customerAccessToken => {
 	};
 };
 
+/**
+ * Creates a graphql query to create user address.
+ * @param {String} customerAccessToken
+ * @param {Object} address
+ * @returns graphql query body
+ */
 export const createCustomerAddress = (customerAccessToken, address) => {
 	return {
 		query: `
@@ -198,6 +249,13 @@ export const createCustomerAddress = (customerAccessToken, address) => {
 	};
 };
 
+/**
+ * Creates a graphql query for updating the user default address.
+ * @param {String} customerAccessToken
+ * @param {String} addressId
+ * @param {Object} address
+ * @returns graphql query body
+ */
 export const updateCustomerAddress = (
 	customerAccessToken,
 	addressId,
@@ -226,6 +284,13 @@ export const updateCustomerAddress = (
 	};
 };
 
+/**
+ * Creates a graphql query for the checkout.
+ * @param {Array} lineItems
+ * @param {Object} shippingAddress
+ * @param {String} email
+ * @returns graphql query body
+ */
 export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
 	return {
 		query: `	 
@@ -253,6 +318,12 @@ export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
 	};
 };
 
+/**
+ * Creates a graphql query to retrieve available shipping rates
+ * for the last created checkout.
+ * @param {String} customerAccessToken
+ * @returns graphql query body
+ */
 export const getAvailableShippingRates = customerAccessToken => {
 	return {
 		query: `	 
@@ -276,6 +347,12 @@ export const getAvailableShippingRates = customerAccessToken => {
 	};
 };
 
+/**
+ * Creates a graphql query for updating a checkout shipping address.
+ * @param {Object} shippingAddress
+ * @param {String} checkoutId
+ * @returns graphql query body
+ */
 export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
 	return {
 		query: `
@@ -299,6 +376,12 @@ export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
 	};
 };
 
+/**
+ * Creates a graphql query for updating a checkout email.
+ * @param {String} email
+ * @param {String} checkoutId
+ * @returns graphql query body
+ */
 export const updateCheckoutEmail = (email, checkoutId) => {
 	return {
 		query: `
@@ -322,13 +405,16 @@ export const updateCheckoutEmail = (email, checkoutId) => {
 	};
 };
 
+/**
+ * Creates a graphql query to get the user orders.
+ * @param {String} customerAccessToken
+ * @param {String} groupBy graphql connections
+ * @returns graphql query body
+ */
 export const getCustomerOrders = (
 	customerAccessToken,
 	groupBy = 'first: 5'
 ) => {
-	// PART OF ORDERS
-	// customerUrl
-	// statusUrl
 	return {
 		query: `
 					{
@@ -407,6 +493,10 @@ export const getCustomerOrders = (
 	};
 };
 
+/**
+ * Creates a graphql query to get the shop policies.
+ * @returns graphql query body
+ */
 export const getShopPolicies = () => {
 	return {
 		query: `
@@ -433,6 +523,10 @@ export const getShopPolicies = () => {
 	};
 };
 
+/**
+ * Creates a graphql query to get the shop currency.
+ * @returns graphql query body
+ */
 export const getShopCurrency = () => {
 	return {
 		query: `
@@ -447,6 +541,10 @@ export const getShopCurrency = () => {
 	};
 };
 
+/**
+ * Creates a graphql query to get the shop pages.
+ * @returns graphql query body
+ */
 export const getShopPages = () => {
 	return {
 		query: `	 
@@ -464,8 +562,14 @@ export const getShopPages = () => {
 			`,
 	};
 };
-// after is a cursor
-// first:20, after: "eyJsYXN0X2lkIjo1ODUxODk5NDYxNzk0LCJsYXN0X3ZhbHVlIjoiMCJ9"
+
+/**
+ * Creates a graphql query to get products from a collection.
+ * @param {String} handle
+ * @param {String} queryParam e.g first:20, after: "eyJsYXN0X2lkIjo1ODUxODk5NDYxNzk0LCJsYXN0X3ZhbHVlIjoiMCJ9"
+ * default is 'first: 20'
+ * @returns graphql query body
+ */
 export const getCollectionProducts = (handle, queryParam) => {
 	return {
 		query: `
@@ -531,6 +635,10 @@ export const getCollectionProducts = (handle, queryParam) => {
 	};
 };
 
+/**
+ * Creates a graphql query to get all collection along with some of their products.
+ * @returns graphql query body
+ */
 export const getAllCollectionsAndProducts = () => {
 	return {
 		query: `

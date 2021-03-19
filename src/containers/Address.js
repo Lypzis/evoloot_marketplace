@@ -56,11 +56,21 @@ const Address = props => {
 			});
 	}, [user.mainAddress]);
 
+	/**
+	 * Updates current user address.
+	 * - If the user has not address, it will attempt to create it.
+	 * - If user has an address, then it will be updated.
+	 * - In both cases, the address is then stored in the 'user' reducer.
+	 * @param {Event} event
+	 * @returns null
+	 */
 	const updateAddress = async event => {
 		event.preventDefault();
 
 		try {
 			setLoading(true);
+
+			// CREATE ADDRESS
 			if (!user.mainAddress) {
 				const customerAddress = await axiosInstance.post(
 					'/api/graphql.json',
@@ -106,6 +116,11 @@ const Address = props => {
 		}
 	};
 
+	/**
+	 * Sets a form field value.
+	 * @param {Event} event
+	 * @param {String} field
+	 */
 	const setField = (event, field) => {
 		dispatchAddressForm({
 			type: 'SET_FIELD',
@@ -114,6 +129,11 @@ const Address = props => {
 		});
 	};
 
+	/**
+	 * Sets a form dropdown field value.
+	 * @param {String} value
+	 * @param {String} field
+	 */
 	const setFieldDropdown = (value, field) => {
 		dispatchAddressForm({ type: 'SET_FIELD', field, value });
 	};

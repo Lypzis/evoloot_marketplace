@@ -32,6 +32,16 @@ const Cart = props => {
 	const [textAreaValue, setTextAreaValue] = useState('');
 	const [loading, setLoading] = useState(false);
 
+	/**
+	 * Creates a checkout.
+	 * - Treat user products chosen.
+	 * - Creates a new shopify checkout.
+	 * - Adds custom attributes, such as, notes.
+	 * - Adds user's email to checkout(if logged in).
+	 * - Adds user's main address to chekout(if there is one).
+	 * - Finally, adds products to checkout, opening a new tab
+	 * where the user can complete or edit his checkout.
+	 */
 	const createCheckout = async () => {
 		try {
 			setLoading(true);

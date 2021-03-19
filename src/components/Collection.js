@@ -28,6 +28,10 @@ const Collection = props => {
 	const [cursor, setCursor] = useState(products[0].cursor);
 	const [currArrLength, setCurrArrLength] = useState(products.length);
 
+	/**
+	 * Sort cards filter.
+	 * @param {Event} event
+	 */
 	const sortBy = event => {
 		event.preventDefault();
 
@@ -80,6 +84,10 @@ const Collection = props => {
 		}
 	};
 
+	/**
+	 * Renders 'Card' blocks.
+	 * @param {Array} arr
+	 */
 	const renderProducts = arr => {
 		setDisplayedProducts(
 			arr.map(product => {
@@ -88,7 +96,9 @@ const Collection = props => {
 		);
 	};
 
-	// HERE
+	/**
+	 * Loads more 20 products to the page.
+	 */
 	const loadMoreProducts = async () => {
 		const newCursor = await loadMoreCollectionProducts(
 			props.collection.handle,
@@ -101,14 +111,26 @@ const Collection = props => {
 		}
 	};
 
+	/**
+	 * Changes carousel width based on window width.
+	 * @returns number
+	 */
 	const changeCarouselWidth = () => {
 		return window.innerWidth <= 800 ? 110 : 100;
 	};
 
+	/**
+	 * Changes carousel height based on window height.
+	 * @returns number
+	 */
 	const changeCarouselHeight = () => {
 		return window.innerWidth <= 800 ? 130 : 120;
 	};
 
+	/**
+	 * Changes the number of slides based on window width.
+	 * @returns number
+	 */
 	const changeNumberOfSlides = () => {
 		if (window.innerWidth <= 560) return 2;
 		else if (window.innerWidth <= 800) return 3;

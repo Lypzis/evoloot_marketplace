@@ -15,8 +15,12 @@ const Login = props => {
 	const [loginError, setLoginError] = useState(false);
 	const history = useHistory();
 
-	// login attempts limititation functionality by account 5+3
-
+	// TO-DO: login attempts limititation functionality by account 5+3
+	/**
+	 * Logs user in and stores his token.
+	 * - redirects to home page if successfully loged in.
+	 * @param {Event} event
+	 */
 	const login = async event => {
 		event.preventDefault();
 
@@ -125,7 +129,6 @@ const Login = props => {
 				</form>
 			</div>
 			<div className='login__footer'>
-				{/* or h4 ??? */}
 				<h4 className='heading-fourtiary heading-fourtiary--dark'>
 					Don't have an account?
 				</h4>

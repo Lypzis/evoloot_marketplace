@@ -18,6 +18,9 @@ const Home = props => {
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
 
+	/**
+	 * Get all collection products for display.
+	 */
 	const getFeaturedProducts = useCallback(() => {
 		if (collections) {
 			setHomeCollections([...collections]);
@@ -29,6 +32,9 @@ const Home = props => {
 		getFeaturedProducts();
 	}, [getFeaturedProducts]);
 
+	/**
+	 * Renders a 'Collection' block.
+	 */
 	const renderHomeCollections = useCallback(() => {
 		return homeCollections.map(collection => (
 			<Collection
