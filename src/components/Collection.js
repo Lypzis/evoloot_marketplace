@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
@@ -12,8 +12,11 @@ import { ClientContext } from '../context/clientContext';
 
 const Collection = props => {
 	const { products } = props.collection;
+
 	const clientContext = useContext(ClientContext);
 	const { loadMoreCollectionProducts } = clientContext;
+	const query = new URLSearchParams(useLocation().search);
+	const queryTag = query.get('tag');
 
 	const [displayedProducts, setDisplayedProducts] = useState(
 		props.featured
@@ -137,6 +140,16 @@ const Collection = props => {
 		else return 4;
 	};
 
+	const renderProductsSorted = arr => {
+		const productsFormated = arr
+			.sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
+			.map(product => {
+				return <Card key={product.id} product={product} />;
+			});
+
+		setDisplayedProducts(productsFormated);
+	};
+
 	useEffect(() => {
 		const productsFormated = products
 			.sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
@@ -146,6 +159,24 @@ const Collection = props => {
 
 		setDisplayedProducts(productsFormated);
 	}, [products, props.featured]);
+
+	useEffect(() => {
+		const filteredProducts = [];
+
+		if (queryTag && typeof queryTag !== 'undefined') {
+			for (let i = 0; i < products.length; ++i) {
+				const doesItBelong = products[i].tags.findIndex(
+					tag => tag === queryTag
+				);
+
+				if (doesItBelong !== -1) filteredProducts.push(products[i]);
+			}
+
+			renderProductsSorted(filteredProducts);
+		} else {
+			renderProductsSorted(products);
+		}
+	}, [queryTag, products]);
 
 	return (
 		<div className='home__featured-section' key={props.collection.id}>

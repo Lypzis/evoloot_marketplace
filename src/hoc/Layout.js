@@ -13,7 +13,9 @@ const Layout = props => (
 		{window.innerWidth <= 1140 && <MenuPanel />}
 
 		<CartPanel />
-		<main className='container'>{props.children}</main>
+		<div className='container__background'>
+			<main className='container'>{props.children}</main>
+		</div>
 		<Footer />
 	</div>
 );

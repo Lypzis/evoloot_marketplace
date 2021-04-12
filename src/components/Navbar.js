@@ -17,65 +17,17 @@ const Navbar = props => {
 	const [navTitles, setNavTitles] = useState([]);
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
+	const history = useHistory();
 
 	const getCollections = useCallback(async () => {
 		if (collections) {
 			const navTitles = collections.map(col => {
-				return { title: col.title, handle: col.handle };
+				return { title: col.title, handle: col.handle, tags: col.tags };
 			});
-
-			// const navTitlesFormated = nestMenus(navTitles);
-
-			// setNavTitles(navTitlesFormated);
 
 			setNavTitles(navTitles);
 		}
 	}, [collections]);
-
-	// const nestMenus = (menu, currLevel = 1) => {
-	// 	const submenus = [];
-
-	// 	menu.forEach(el => {
-	// 		const isASubMenu = el.title.split('-');
-
-	// 		el.children = [];
-
-	// 		if (isASubMenu.length > currLevel) {
-	// 			el.parents = [];
-	// 			el.toDelete = true;
-
-	// 			isASubMenu.slice(0, isASubMenu.length - 1).forEach(submenu => {
-	// 				el.parents.push(submenu.trim());
-	// 			});
-	// 		}
-	// 	});
-
-	// 	submenus.forEach(el => {
-	// 		el.title = el.parents[el.length - 1];
-	// 	});
-
-	// 	menu.forEach(el => {
-	// 		if (el.parents) {
-	// 			submenus.push(el);
-	// 		}
-	// 	});
-
-	// 	for (let i = 0; i < submenus.length; ++i) {
-	// 		for (let j = 0; j < submenus[i].parents.length; ++j) {
-	// 			for (let k = 0; k < menu.length; ++k) {
-	// 				if (menu[k].title === submenus[i].parents[j]) {
-	// 					const names = submenus[i].title.split('-');
-	// 					submenus[i].title = names[names.length - 1].trim();
-	// 					menu[k].children.push(submenus[i]);
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return menu.filter(el => !el.toDelete);
-	// };
-
-	const history = useHistory();
 
 	const logout = async () => {
 		try {
@@ -89,16 +41,6 @@ const Navbar = props => {
 	useEffect(() => {
 		getCollections();
 	}, [clientContext, getCollections]);
-
-	// const showChildren = event => {
-	// 	const { text } = event.target;
-
-	// 	const theOne = navTitles.find(
-	// 		el => el.title === text && el.children.length > 0
-	// 	);
-
-	// 	console.log(theOne);
-	// };
 
 	const generateMenu = () => {
 		return navTitles.map((navTitle, index) => {
@@ -119,6 +61,21 @@ const Navbar = props => {
 						}>
 						{navTitle.title}
 					</NavLink>
+					<ol className='navbar__link-hidden-list'>
+						{navTitle.tags.map(tag => {
+							return (
+								<li
+									key={tag}
+									className='navbar__link-hidden-list-item'>
+									<NavLink
+										to={`/collection/${navTitle.handle}?tag=${tag}`}
+										className={'paragraph navbar__link'}>
+										{tag}
+									</NavLink>
+								</li>
+							);
+						})}
+					</ol>
 				</li>
 			);
 		});

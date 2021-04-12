@@ -162,17 +162,48 @@ const ClientContextProvider = props => {
 				getAllCollectionsAndProducts()
 			);
 
-			const tratedCollections = collections.data.data.collections.edges.map(
+			const treatedCollections = collections.data.data.collections.edges.map(
 				collection => collection.node
 			);
 
-			tratedCollections.forEach(collection => {
+			treatedCollections.forEach(collection => {
 				collection.products = treatCollectionProducts(
 					collection.products.edges
 				);
 			});
 
-			setCollections(tratedCollections.reverse());
+			// Get available tags from products and place them into the collection
+			for (let i = 0; i < treatedCollections.length; ++i) {
+				treatedCollections[i].tags = [];
+
+				for (
+					let j = 0;
+					j < treatedCollections[i].products.length;
+					++j
+				) {
+					for (
+						let k = 0;
+						k < treatedCollections[i].products[j].tags.length;
+						++k
+					) {
+						const alreadyThere = treatedCollections[
+							i
+						].tags.findIndex(
+							tag =>
+								tag ===
+								treatedCollections[i].products[j].tags[k]
+						);
+
+						if (alreadyThere === -1) {
+							treatedCollections[i].tags.push(
+								treatedCollections[i].products[j].tags[k]
+							);
+						}
+					}
+				}
+			}
+
+			setCollections(treatedCollections.reverse());
 		} catch (err) {
 			history.replace('/*');
 		}

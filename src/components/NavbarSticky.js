@@ -20,7 +20,7 @@ const NavbarSticky = props => {
 	const getCollections = useCallback(async () => {
 		if (collections) {
 			const navTitles = collections.map(col => {
-				return { title: col.title, handle: col.handle };
+				return { title: col.title, handle: col.handle, tags: col.tags };
 			});
 
 			setNavTitles(navTitles);
@@ -74,6 +74,23 @@ const NavbarSticky = props => {
 									}>
 									{navTitle.title}
 								</NavLink>
+								<ol className='navbar__link-hidden-list'>
+									{navTitle.tags.map(tag => {
+										return (
+											<li
+												key={tag}
+												className='navbar__link-hidden-list-item'>
+												<NavLink
+													to={`/collection/${navTitle.handle}?tag=${tag}`}
+													className={
+														'paragraph navbar__link'
+													}>
+													{tag}
+												</NavLink>
+											</li>
+										);
+									})}
+								</ol>
 							</li>
 						))}
 						<span className='navbar-line navbar-line--thicc'></span>

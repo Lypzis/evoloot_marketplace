@@ -1,5 +1,20 @@
+@font-face {
+	font-family: 'komika';
+	src: url('../../assets/fonts/KOMIKAX_.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'jaldi-bold';
+	src: url('../../assets/fonts/Jaldi-Bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'jaldi';
+	src: url('../../assets/fonts/Jaldi-Regular.ttf') format('truetype');
+}
+
 body {
-	font-family: 'Mitr', sans-serif;
+	font-family: 'jald', 'Mitr', sans-serif;
 	font-weight: 400;
 	line-height: 1.7;
 	color: #000; //$color-gray-dark-3; /* all text will be of this color */
@@ -9,10 +24,12 @@ body {
 	text-transform: uppercase;
 	backface-visibility: hidden;
 	margin-bottom: 6rem;
+	font-family: komika;
 }
 
 .heading-secondary {
 	font-size: 3.5rem;
+	font-family: komika;
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 0.2rem;

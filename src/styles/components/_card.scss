@@ -136,6 +136,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		margin: 0.5rem 0 1rem 0;
+		padding-left: 0.6rem;
 
 		@include respond(phone-small) {
 			font-size: $default-font-size-3;
