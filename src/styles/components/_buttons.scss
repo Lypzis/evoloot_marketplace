@@ -493,3 +493,18 @@
 		}
 	}
 }
+
+.back-to-top {
+	display: block;
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
+	z-index: 1000;
+
+	&__button {
+		font-size: 2rem;
+		padding-top: 1.2rem;
+		width: 5.5rem;
+		border-radius: .5rem;
+	}
+}

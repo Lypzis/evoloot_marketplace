@@ -5,6 +5,7 @@ import HeaderMobile from '../components/HeaderMobile';
 import Footer from '../components/Footer';
 import CartPanel from '../components/CartPanel';
 import MenuPanel from '../components/MenuPanel';
+import BackToTopButton from '../components/BackToTopButton';
 
 const Layout = props => (
 	<div className='container__parent'>
@@ -13,6 +14,10 @@ const Layout = props => (
 		{window.innerWidth <= 1140 && <MenuPanel />}
 
 		<CartPanel />
+
+		{/* back to top button */}
+		<BackToTopButton />
+
 		<div className='container__background'>
 			<main className='container'>{props.children}</main>
 		</div>
