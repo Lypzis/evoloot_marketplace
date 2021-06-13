@@ -28,10 +28,10 @@ const BackToTopButton = props => {
 	// }, [handleScroll]);
 
 	return (
-		<div class='back-to-top'>
+		<div className='back-to-top'>
 			{/* {isSticky && ( */}
 			<button
-				class='button button__black button__black--login back-to-top__button'
+				className='button button__black button__black--login back-to-top__button'
 				onClick={() => goToTop()}>
 				^
 			</button>

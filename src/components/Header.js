@@ -117,85 +117,93 @@ const Header = props => {
 	return (
 		<Fragment>
 			<header className='header'>
-				{clientContext.pages && renderCallToAction()}
+				{/* NEEDS TO STAY CLOSED FOR LIFE */}
+				{/* {clientContext.pages && renderCallToAction()} */}
 
 				<div className='header__body' ref={element}>
-					<Link className='header__logo' to='/'>
-						<img
-							className='header__logo-image'
-							src={logo}
-							alt='Evoloot Marketplace Logo'
-						/>
-					</Link>
-					<div className='header__buttons'>
-						<div className='header__container'>
-							<div className='header__search-form'>
-								<input
-									autoFocus={pathname === '/search'}
-									type='search'
-									placeholder='Search'
-									className='input input__search'
-									value={search.searchText}
-									onChange={handleSearchTextChanged}
-								/>
-								<button
-									type='submit'
-									className='button button__search'>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-search`}></use>
-									</svg>
-								</button>
-							</div>
-
-							<div className='header__user'>
-								<div className='header__loged-out'>
+					<div className='header__content'>
+						<Link className='header__logo' to='/'>
+							<img
+								className='header__logo-image'
+								src={logo}
+								alt='Evoloot Marketplace Logo'
+							/>
+						</Link>
+						<div className='header__buttons'>
+							<div className='header__container'>
+								<div className='header__search-form'>
+									<input
+										autoFocus={pathname === '/search'}
+										type='search'
+										placeholder='Search'
+										className='input input__search'
+										value={search.searchText}
+										onChange={handleSearchTextChanged}
+									/>
 									<button
-										className='button button__black button__black--cart'
-										onClick={() => history.push('/cart')}>
+										type='submit'
+										className='button button__search'>
 										<svg className='button__icon'>
 											<use
-												xlinkHref={`${sprite}#icon-cart`}></use>
+												xlinkHref={`${sprite}#icon-search`}></use>
 										</svg>
-										<div className='button__quantity'>
-											<p className='paragraph'>
-												{checkout.lineItems.length > 0
-													? checkout.lineItems
-															.map(
-																el =>
-																	el.quantity
-															)
-															.reduce(
-																(a, b) => a + b
-															)
-													: 0}
-											</p>
-										</div>
 									</button>
-									<CartDropdown />
 								</div>
-								<div className='header__loged-out'>
-									<Select
-										onOptionClick={handleChangeCurrency}
-										currentOption={
-											clientContext.currencyRate.code
-										}
-									/>
-								</div>
-								{!authContext.customerToken ? (
+
+								<div className='header__user'>
 									<div className='header__loged-out'>
 										<button
-											className='button button__black button__black--account'
+											className='button button__black button__black--cart'
 											onClick={() =>
-												history.push('/login')
+												history.push('/cart')
 											}>
 											<svg className='button__icon'>
 												<use
-													xlinkHref={`${sprite}#icon-profile`}></use>
+													xlinkHref={`${sprite}#icon-cart`}></use>
 											</svg>
-											<p className='paragraph'>Account</p>
+											<div className='button__quantity'>
+												<p className='paragraph'>
+													{checkout.lineItems.length >
+													0
+														? checkout.lineItems
+																.map(
+																	el =>
+																		el.quantity
+																)
+																.reduce(
+																	(a, b) =>
+																		a + b
+																)
+														: 0}
+												</p>
+											</div>
 										</button>
-										{/* <button
+										<CartDropdown />
+									</div>
+									<div className='header__loged-out'>
+										<Select
+											onOptionClick={handleChangeCurrency}
+											currentOption={
+												clientContext.currencyRate.code
+											}
+										/>
+									</div>
+									{!authContext.customerToken ? (
+										<div className='header__loged-out'>
+											<button
+												className='button button__black button__black--account'
+												onClick={() =>
+													history.push('/login')
+												}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-profile`}></use>
+												</svg>
+												<p className='paragraph'>
+													Account
+												</p>
+											</button>
+											{/* <button
 										className='button button__black button__black--login'
 										onClick={() => history.push('/login')}>
 										<svg className='button__icon'>
@@ -213,31 +221,36 @@ const Header = props => {
 										</svg>
 										<p className='paragraph'>sign up</p>
 									</button> */}
-									</div>
-								) : (
-									<div className='header__loged-out'>
-										<button
-											className='button button__black button__black--profile'
-											onClick={() => history.push('/me')}>
-											<svg className='button__icon'>
-												<use
-													xlinkHref={`${sprite}#icon-profile`}></use>
-											</svg>
-											<p className='paragraph'>
-												My Account
-											</p>
-										</button>
-										<button
-											className='button button__black button__black--logout'
-											onClick={logout}>
-											<svg className='button__icon'>
-												<use
-													xlinkHref={`${sprite}#icon-exit`}></use>
-											</svg>
-											<p className='paragraph'>Log out</p>
-										</button>
-									</div>
-								)}
+										</div>
+									) : (
+										<div className='header__loged-out'>
+											<button
+												className='button button__black button__black--profile'
+												onClick={() =>
+													history.push('/me')
+												}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-profile`}></use>
+												</svg>
+												<p className='paragraph'>
+													My Account
+												</p>
+											</button>
+											<button
+												className='button button__black button__black--logout'
+												onClick={logout}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-exit`}></use>
+												</svg>
+												<p className='paragraph'>
+													Log out
+												</p>
+											</button>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>

@@ -501,6 +501,10 @@
 	bottom: 2rem;
 	z-index: 1000;
 
+	@include respond(tab-port-2) {
+		bottom: 5.5rem;
+	}
+
 	&__button {
 		font-size: 2rem;
 		padding-top: 1.2rem;

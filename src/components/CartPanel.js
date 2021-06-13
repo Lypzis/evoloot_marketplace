@@ -23,6 +23,8 @@ const addressFields = {
 	zip: '',
 };
 
+// OBS: NOT component, needs to be moved to container
+
 const CartPanel = props => {
 	const checkout = useSelector(state => state.checkout);
 	const user = useSelector(state => state.user);
@@ -81,10 +83,11 @@ const CartPanel = props => {
 				// if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
-			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
-				newCheckout.id,
-				lineItems
-			);
+			const checkoutWithProducts =
+				await clientContext.client.checkout.addLineItems(
+					newCheckout.id,
+					lineItems
+				);
 
 			window.open(checkoutWithProducts.webUrl);
 			setLoading(false);

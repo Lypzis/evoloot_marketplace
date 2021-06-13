@@ -2,10 +2,12 @@ import React, { memo } from 'react';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import image01 from '../assets/images/01.png';
-import image02 from '../assets/images/02.png';
+import image01 from '../assets/images/Rotating_Product_Banner_Finals_1.png';
+import image02 from '../assets/images/Rotating_Product_Banner_Finals_2.jpg';
+import image03 from '../assets/images/Rotating_Product_Banner_Finals_3.jpg';
+import image04 from '../assets/images/Rotating_Product_Banner_Finals_4.jpg';
 
-const images = [image01, image02];
+const images = [image01, image02, image03, image04];
 
 const BannerCarousel = props => {
 	const changeHeight = () => {
@@ -18,7 +20,7 @@ const BannerCarousel = props => {
 		<CarouselProvider
 			naturalSlideWidth={100}
 			naturalSlideHeight={changeHeight()}
-			totalSlides={2}
+			totalSlides={images.length}
 			visibleSlides={1}
 			isPlaying={true}
 			orientation='horizontal'

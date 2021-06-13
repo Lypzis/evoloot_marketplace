@@ -6,8 +6,8 @@
 	height: 100vh;
 	width: 40rem;
 	z-index: 7;
-	right: 0;
-	border-left: solid 0.3rem #000;
+	left: 0;
+	border-right: solid 0.3rem #000;
 	background-color: $color-secondary;
 	transition: all 0.2s;
 
@@ -27,11 +27,11 @@
 		display: none;
 	}
 
-	&__checkbox:checked + &__button {
-		right: 0;
-	}
+	// &__checkbox:checked + &__button {
+	// 	right: 0;
+	// }
 
-	&__checkbox:checked ~ & {
+	&__checkbox { //:checked ~ & {
 		right: -40rem;
 
 		@include respond(phone-really-small) {
@@ -39,26 +39,26 @@
 		}
 	}
 
-	&__checkbox:checked ~ .blured--menu {
-		display: none;
-	}
+	// &__checkbox:checked ~ .blured--menu {
+	// 	display: none;
+	// }
 
-	&__checkbox:checked + &__button > .button__arrow {
-		rotate: 180deg;
-	}
+	// &__checkbox:checked + &__button > .button__arrow {
+	// 	rotate: 180deg;
+	// }
 
 	&__panel {
 		overflow-y: auto;
 	}
 
 	&__button {
-		position: fixed;
+		//position: fixed;
 		width: auto;
-		top: 41rem;
-		right: 39.8rem;
-		background-color: $color-secondary;
-		border: solid #000 0.3rem;
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
 		z-index: 8;
+		padding: .7rem 1rem;
 
 		@include respond(phone-really-small) {
 			right: 36.8rem;
@@ -73,16 +73,27 @@
 		}
 
 		&:hover {
-			border: 0.3rem solid #000;
-			background-color: $color-secondary;
+			border: none;
+			background-color: transparent;
+		}
+
+		&--real {
+			left: 0;
+			top: 1rem;
+			//position: fixed;
+			width: 10rem;
 		}
 	}
 
 	&__button-icon {
 		height: 5.4rem;
 		width: 5.4rem;
+		fill: transparent !important;
 
-		//fill: $color-gray-dark-1 !important;
+		&--real {
+			fill: #000 !important;
+		}
+		
 	}
 }
 

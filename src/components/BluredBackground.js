@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const BluredBackground = props => (
-	<label
-		className={`blured ${props.className ? props.className : ''}`}
-		htmlFor={props.for}></label>
-);
+const BluredBackground = props => {
+	return (
+		<Fragment>
+			{props.menuState && (
+				<label className='blured' onClick={props.hide}></label>
+			)}
+		</Fragment>
+	);
+};
 
 export default BluredBackground;

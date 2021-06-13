@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
+import { toggleMenu } from '../store/actions/menu';
 import { setSearchText } from '../store/actions/search';
 import { ClientContext } from '../context/clientContext';
 
@@ -67,39 +68,54 @@ const HeaderMobile = props => {
 		}
 	};
 
+	const showMenu = () => {
+		dispatch(toggleMenu());
+	};
+
 	return (
 		<Fragment>
 			{/* <BluredBackground for={'menu-toggle'} /> */}
 
 			<header className='header header--mobile'>
-				{clientContext.pages && renderCallToAction()}
+				{/* NEEDS TO STAY CLOSED FOR LIFE */}
+				{/* {clientContext.pages && renderCallToAction()} */}
 				<div className='header__body header__body--mobile'>
-					<Link className='header__logo' to='/'>
-						<img
-							className='header__logo-image'
-							src={logo}
-							alt='Evoloot Marketplace Logo'
-						/>
-					</Link>
-					<div className='header__buttons header__buttons--mobile'>
-						<div className='header__user'>
-							<div className='header__search-form  header__search-form--mobile'>
-								<input
-									autoFocus={pathname === '/search'}
-									type='search'
-									placeholder='Search'
-									className='input input__search  input__search--mobile'
-									value={search.searchText}
-									onChange={handleSearchTextChanged}
-								/>
-								<button
-									type='submit'
-									className='button button__search'>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-search`}></use>
-									</svg>
-								</button>
+					<button
+						className='button menu__button menu__button--real'
+						onClick={showMenu}>
+						<svg className='button__icon menu__button-icon menu__button-icon--real'>
+							<use xlinkHref={`${sprite}#icon-menu`}></use>
+						</svg>
+					</button>
+
+					<div className='header__content header__content--mobile'>
+						<Link className='header__logo' to='/'>
+							<img
+								className='header__logo-image'
+								src={logo}
+								alt='Evoloot Marketplace Logo'
+							/>
+						</Link>
+						<div className='header__buttons header__buttons--mobile'>
+							<div className='header__user'>
+								<div className='header__search-form  header__search-form--mobile'>
+									<input
+										autoFocus={pathname === '/search'}
+										type='search'
+										placeholder='Search'
+										className='input input__search  input__search--mobile'
+										value={search.searchText}
+										onChange={handleSearchTextChanged}
+									/>
+									<button
+										type='submit'
+										className='button button__search'>
+										<svg className='button__icon'>
+											<use
+												xlinkHref={`${sprite}#icon-search`}></use>
+										</svg>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>

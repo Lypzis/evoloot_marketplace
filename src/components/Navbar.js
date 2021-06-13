@@ -46,36 +46,61 @@ const Navbar = props => {
 		return navTitles.map((navTitle, index) => {
 			return (
 				<li className='navbar__list-item' key={index}>
-					{/* onMouseOver={event => showChildren(event)} */}
-					<NavLink
-						to={`/collection/${navTitle.handle}`}
-						className={`paragraph  ${
-							props.vertical
-								? ' navbar-vertical__link navbar-vertical__link--menu menu__link'
-								: ' navbar__link '
-						}`}
-						activeClassName={
-							props.vertical
-								? ' navbar-vertical__link--active menu__link'
-								: ' navbar__link--active '
-						}>
-						{navTitle.title}
-					</NavLink>
-					<ol className='navbar__link-hidden-list'>
-						{navTitle.tags.map(tag => {
-							return (
-								<li
-									key={tag}
-									className='navbar__link-hidden-list-item'>
-									<NavLink
-										to={`/collection/${navTitle.handle}?tag=${tag}`}
-										className={'paragraph navbar__link'}>
-										{tag}
-									</NavLink>
-								</li>
-							);
-						})}
-					</ol>
+					{props.vertical ? (
+						<div className='navbar__title-container'>
+							<NavLink
+								to={`/collection/${navTitle.handle}`}
+								className='paragraph navbar-vertical__link navbar-vertical__link--menu menu__link'
+								activeClassName=' navbar-vertical__link--active menu__link'>
+								{navTitle.title}
+							</NavLink>
+							{/* <button>{'>'}</button> */}
+							<ol className='navbar__link-hidden-list'>
+								{navTitle.tags.map(tag => {
+									return (
+										<li
+											key={tag}
+											className='navbar__link-hidden-list-item'>
+											<NavLink
+												to={`/collection/${navTitle.handle}?tag=${tag}`}
+												className={
+													'paragraph navbar__link'
+												}>
+												{tag}
+											</NavLink>
+										</li>
+									);
+								})}
+							</ol>
+						</div>
+					) : (
+						<Fragment>
+							<NavLink
+								to={`/collection/${navTitle.handle}`}
+								className='paragraph  navbar__link '
+								activeClassName=' navbar__link--active '>
+								{navTitle.title}
+							</NavLink>
+							{/* little button on vertical to open submenus */}
+							<ol className='navbar__link-hidden-list'>
+								{navTitle.tags.map(tag => {
+									return (
+										<li
+											key={tag}
+											className='navbar__link-hidden-list-item'>
+											<NavLink
+												to={`/collection/${navTitle.handle}?tag=${tag}`}
+												className={
+													'paragraph navbar__link'
+												}>
+												{tag}
+											</NavLink>
+										</li>
+									);
+								})}
+							</ol>
+						</Fragment>
+					)}
 				</li>
 			);
 		});

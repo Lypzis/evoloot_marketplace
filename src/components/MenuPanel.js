@@ -1,40 +1,44 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import sprite from '../assets/icons/sprite.svg';
 import BluredBackground from './BluredBackground';
 import Navbar from './Navbar';
+import { toggleMenu } from '../store/actions/menu';
+
+// OBS: NOT component, needs to be moved to container
 
 const MenuPanel = props => {
+	const menuState = useSelector(state => state.menu);
+	const dispatch = useDispatch();
+
+	const hideMenu = () => {
+		dispatch(toggleMenu());
+	};
+
 	return (
 		<Fragment>
-			<input
-				defaultChecked={true}
-				type='checkbox'
-				className='menu__checkbox'
-				id='menu-toggle'
-			/>
+			{menuState.toggle && (
+				<div>
+					<BluredBackground
+						for={'menu-toggle'}
+						className='blured--menu'
+						menuState={menuState.toggle}
+						hide={hideMenu}
+					/>
 
-			<label
-				htmlFor='menu-toggle'
-				className='button button__black button__black--login menu__button'>
-				<svg className='button__icon menu__button-icon'>
-					<use xlinkHref={`${sprite}#icon-menu`}></use>
-				</svg>
-			</label>
+					<div className='menu'>
+						<div className='cart__panel'>
+							<h3 className='heading-tertiary menu__header no-margin'>
+								Menu
+							</h3>
 
-			<BluredBackground for={'menu-toggle'} className='blured--menu' />
+							<span className='navbar-line small-margin-top'></span>
 
-			<div className='menu'>
-				<div className='cart__panel'>
-					<h3 className='heading-tertiary menu__header no-margin'>
-						Menu
-					</h3>
-
-					<span className='navbar-line small-margin-top'></span>
-
-					<Navbar vertical={true} />
+							<Navbar vertical={true} />
+						</div>
+					</div>
 				</div>
-			</div>
+			)}
 		</Fragment>
 	);
 };
