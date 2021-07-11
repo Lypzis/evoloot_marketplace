@@ -4,6 +4,7 @@
 	display: inline-block;
 	cursor: pointer;
 	transition: all 0.2s;
+	font-family: 'jaldi-bold';
 
 	&__icon {
 		height: 1.4rem;
@@ -505,10 +506,15 @@
 		bottom: 5.5rem;
 	}
 
+	@include respond(phone-small) {
+		bottom: 8rem;
+	}
+
 	&__button {
-		font-size: 2rem;
-		padding-top: 1.2rem;
-		width: 5.5rem;
+		font-size: 3rem;
+		padding-top: 1.8rem;
+		width: 6rem;
+		height: 5rem;
 		border-radius: .5rem;
 	}
 }

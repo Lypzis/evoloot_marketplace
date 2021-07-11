@@ -89,4 +89,8 @@ body {
 	&--validation {
 		color: rgba($color-tertiary, 0.9);
 	}
+
+	&--capitalized {
+		text-transform: capitalize;
+	}
 }

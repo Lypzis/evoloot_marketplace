@@ -11,8 +11,8 @@ const images = [image01, image02, image03, image04];
 
 const BannerCarousel = props => {
 	const changeHeight = () => {
-		if (window.innerWidth <= 560) return 40;
-		else if (window.innerWidth <= 800) return 50;
+		if (window.innerWidth <= 600) return 40;
+		else if (window.innerWidth <= 850) return 50;
 		else return 38;
 	};
 

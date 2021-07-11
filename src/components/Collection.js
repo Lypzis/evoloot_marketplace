@@ -119,7 +119,7 @@ const Collection = props => {
 	 * @returns number
 	 */
 	const changeCarouselWidth = () => {
-		return window.innerWidth <= 800 ? 110 : 100;
+		return window.innerWidth <= 850 ? 110 : 100;
 	};
 
 	/**
@@ -127,7 +127,7 @@ const Collection = props => {
 	 * @returns number
 	 */
 	const changeCarouselHeight = () => {
-		return window.innerWidth <= 800 ? 130 : 120;
+		return window.innerWidth <= 850 ? 130 : 120;
 	};
 
 	/**
@@ -135,8 +135,8 @@ const Collection = props => {
 	 * @returns number
 	 */
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 560) return 2;
-		else if (window.innerWidth <= 800) return 3;
+		if (window.innerWidth <= 600) return 2;
+		else if (window.innerWidth <= 850) return 3;
 		else return 4;
 	};
 
@@ -191,6 +191,7 @@ const Collection = props => {
 					<div className='input__container input__container--collection'>
 						<p className='paragraph'>sort by: </p>
 						<select
+							// input--black
 							className='input input__select input__select--collection'
 							onChange={sortBy}>
 							<option value='featured'>Featured</option>

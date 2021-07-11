@@ -38,7 +38,7 @@ const Carousel = props => (
 						{props.header}
 					</div>
 				</div>
-				{window.innerWidth > 800 && (
+				{window.innerWidth > 850 && (
 					<ButtonBack className='button button__black button__black--arrow button__black--arrow-right'>
 						&lt;
 					</ButtonBack>
@@ -59,7 +59,7 @@ const Carousel = props => (
 						);
 					})}
 				</Slider>
-				{window.innerWidth > 800 && (
+				{window.innerWidth > 850 && (
 					<ButtonNext className='button button__black button__black--arrow button__black--arrow-left'>
 						&gt;
 					</ButtonNext>

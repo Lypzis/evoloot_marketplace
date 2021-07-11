@@ -342,7 +342,7 @@ const SignUp = props => {
 					<div className='auth-form__field-button'>
 						{!loading ? (
 							<button
-								className='button button__white button__white--card-big'
+								className='button button__black button__black--card-big'
 								onClick={() => {}}>
 								<p className='paragraph card__price card__price--big cart__button-text'>
 									Sign up

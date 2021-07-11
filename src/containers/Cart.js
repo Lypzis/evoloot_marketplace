@@ -102,10 +102,11 @@ const Cart = props => {
 				//if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
-			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
-				newCheckout.id,
-				lineItems
-			);
+			const checkoutWithProducts =
+				await clientContext.client.checkout.addLineItems(
+					newCheckout.id,
+					lineItems
+				);
 
 			window.open(checkoutWithProducts.webUrl);
 			dispatch(removeAllProductsFromCheckout());
@@ -140,7 +141,7 @@ const Cart = props => {
 						className='input input__text-area'
 						name='notes'
 						id='notes'
-						cols={window.innerWidth > 560 ? '50' : '30'}
+						cols={window.innerWidth > 600 ? '50' : '30'}
 						maxLength={300}
 						value={textAreaValue}
 						onChange={event => setTextAreaValue(event.target.value)}

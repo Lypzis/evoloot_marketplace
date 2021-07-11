@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import BluredBackground from './BluredBackground';

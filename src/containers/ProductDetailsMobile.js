@@ -286,7 +286,7 @@ const ProductDetailsMobile = props => {
 	};
 
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 560) return 2;
+		if (window.innerWidth <= 600) return 2;
 		else if (window.innerWidth <= 800) return 3;
 		else return 4;
 	};
@@ -350,7 +350,7 @@ const ProductDetailsMobile = props => {
 							<div className='card product__card product__card--mobile'>
 								<div className='card__details'>
 									<div className='input__container'>
-										<p className='paragraph'>
+										<p className='paragraph paragraph--capitalized'>
 											Availability:{' '}
 											{productChosen.variant.available
 												? 'in stock'
@@ -390,7 +390,7 @@ const ProductDetailsMobile = props => {
 									</div>
 
 									<button
-										className='button button__white button__white--card-big'
+										className='button button__black button__black--card-big'
 										onClick={addToCart}
 										disabled={
 											productChosen.quantity === 0 ||

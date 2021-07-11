@@ -10,6 +10,7 @@
 
 	@include respond(phone-small) {
 		align-items: center;
+		margin-top: -3rem;
 	}
 
 	&__details {
@@ -135,7 +136,12 @@
 
 	&__title {
 		line-height: 4rem;
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
+		
+
+		@include respond(phone) {
+			margin-top: 1rem;
+		}
 
 		@include respond(phone-small) {
 			font-size: $default-font-size-4;

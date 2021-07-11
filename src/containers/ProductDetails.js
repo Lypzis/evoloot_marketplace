@@ -374,7 +374,7 @@ const ProductDetails = props => {
 						<div className='card product__card'>
 							<div className='card__details'>
 								<div className='input__container'>
-									<p className='paragraph paragraph--black'>
+									<p className='paragraph paragraph--black paragraph--capitalized'>
 										Availability:{' '}
 										{productChosen.variant.available
 											? 'in stock'
@@ -413,7 +413,7 @@ const ProductDetails = props => {
 								</div>
 
 								<button
-									className='button button__white button__white--card-big'
+									className='button button__black button__black--card-big'
 									onClick={addToCart}
 									disabled={
 										productChosen.quantity === 0 ||

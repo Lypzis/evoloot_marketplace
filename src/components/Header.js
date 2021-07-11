@@ -27,7 +27,7 @@ const Header = props => {
 	const checkout = useSelector(state => state.checkout);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [callToActionOpen, setCallToActionOpen] = useState(true);
+	// const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
@@ -60,36 +60,36 @@ const Header = props => {
 		clientContext.changeCurrency(currency);
 	};
 
-	const renderCallToAction = () => {
-		const callToAction = clientContext.pages.filter(
-			page => page.title === 'Call-To-Action'
-		);
+	// const renderCallToAction = () => {
+	// 	const callToAction = clientContext.pages.filter(
+	// 		page => page.title === 'Call-To-Action'
+	// 	);
 
-		if (callToAction !== undefined) {
-			return (
-				<Fragment>
-					{callToActionOpen && (
-						<div className='call-to-action'>
-							<div
-								className='card__description-box-description'
-								dangerouslySetInnerHTML={{
-									__html: callToAction[0].body,
-								}}></div>
+	// 	if (callToAction !== undefined) {
+	// 		return (
+	// 			<Fragment>
+	// 				{callToActionOpen && (
+	// 					<div className='call-to-action'>
+	// 						<div
+	// 							className='card__description-box-description'
+	// 							dangerouslySetInnerHTML={{
+	// 								__html: callToAction[0].body,
+	// 							}}></div>
 
-							<button
-								className='button button__small-circle'
-								onClick={() => setCallToActionOpen(false)}>
-								<svg className='button__icon'>
-									<use
-										xlinkHref={`${sprite}#icon-cross`}></use>
-								</svg>
-							</button>
-						</div>
-					)}
-				</Fragment>
-			);
-		}
-	};
+	// 						<button
+	// 							className='button button__small-circle'
+	// 							onClick={() => setCallToActionOpen(false)}>
+	// 							<svg className='button__icon'>
+	// 								<use
+	// 									xlinkHref={`${sprite}#icon-cross`}></use>
+	// 							</svg>
+	// 						</button>
+	// 					</div>
+	// 				)}
+	// 			</Fragment>
+	// 		);
+	// 	}
+	// };
 
 	const [isSticky, setSticky] = useState(false);
 	const element = useRef(null);

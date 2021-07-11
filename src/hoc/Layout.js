@@ -17,7 +17,7 @@ const Layout = props => (
 		<MenuPanel />
 
 		{/* back to top button */}
-		<BackToTopButton />
+		{window.innerWidth > 1140 && <BackToTopButton />}
 
 		<div className='container__background'>
 			<main className='container'>{props.children}</main>

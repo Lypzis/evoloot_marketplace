@@ -121,7 +121,7 @@ const Card = props => {
 				</button>
 			) : (
 				<button
-					className='button button__white button__white--card'
+					className='button button__black button__black--card'
 					onMouseOver={() => setIsMouseOverButton(true)}
 					onMouseOut={() => setIsMouseOverButton(false)}
 					disabled

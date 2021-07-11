@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { Fragment, memo, useContext, useState } from 'react';
+import React, { Fragment, memo, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -13,7 +13,7 @@ const HeaderMobile = props => {
 	const clientContext = useContext(ClientContext);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [callToActionOpen, setCallToActionOpen] = useState(true);
+	// const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
@@ -37,36 +37,36 @@ const HeaderMobile = props => {
 		clientContext.changeCurrency(event.target.value);
 	};
 
-	const renderCallToAction = () => {
-		const callToAction = clientContext.pages.filter(
-			page => page.title === 'Call-To-Action'
-		);
+	// const renderCallToAction = () => {
+	// 	const callToAction = clientContext.pages.filter(
+	// 		page => page.title === 'Call-To-Action'
+	// 	);
 
-		if (callToAction !== undefined) {
-			return (
-				<Fragment>
-					{callToActionOpen && (
-						<div className='call-to-action'>
-							<div
-								className='call-to-action__description'
-								dangerouslySetInnerHTML={{
-									__html: callToAction[0].body,
-								}}></div>
+	// 	if (callToAction !== undefined) {
+	// 		return (
+	// 			<Fragment>
+	// 				{callToActionOpen && (
+	// 					<div className='call-to-action'>
+	// 						<div
+	// 							className='call-to-action__description'
+	// 							dangerouslySetInnerHTML={{
+	// 								__html: callToAction[0].body,
+	// 							}}></div>
 
-							<button
-								className='button button__small-circle'
-								onClick={() => setCallToActionOpen(false)}>
-								<svg className='button__icon'>
-									<use
-										xlinkHref={`${sprite}#icon-cross`}></use>
-								</svg>
-							</button>
-						</div>
-					)}
-				</Fragment>
-			);
-		}
-	};
+	// 						<button
+	// 							className='button button__small-circle'
+	// 							onClick={() => setCallToActionOpen(false)}>
+	// 							<svg className='button__icon'>
+	// 								<use
+	// 									xlinkHref={`${sprite}#icon-cross`}></use>
+	// 							</svg>
+	// 						</button>
+	// 					</div>
+	// 				)}
+	// 			</Fragment>
+	// 		);
+	// 	}
+	// };
 
 	const showMenu = () => {
 		dispatch(toggleMenu());
@@ -74,8 +74,6 @@ const HeaderMobile = props => {
 
 	return (
 		<Fragment>
-			{/* <BluredBackground for={'menu-toggle'} /> */}
-
 			<header className='header header--mobile'>
 				{/* NEEDS TO STAY CLOSED FOR LIFE */}
 				{/* {clientContext.pages && renderCallToAction()} */}
