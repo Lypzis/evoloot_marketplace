@@ -21,6 +21,11 @@
 
 	&__link {
 		font-size: $default-font-size-4;
+		cursor: pointer;
+	}
+
+	&__link--title {
+		width: 100%;
 	}
 
 	&__checkbox {
@@ -31,7 +36,8 @@
 	// 	right: 0;
 	// }
 
-	&__checkbox { //:checked ~ & {
+	&__checkbox {
+		//:checked ~ & {
 		right: -40rem;
 
 		@include respond(phone-really-small) {
@@ -58,7 +64,7 @@
 		border: none;
 		box-shadow: none;
 		z-index: 8;
-		padding: .7rem 1rem;
+		padding: 0.7rem 1rem;
 
 		@include respond(phone-really-small) {
 			right: 36.8rem;
@@ -93,7 +99,6 @@
 		&--real {
 			fill: #000 !important;
 		}
-		
 	}
 }
 

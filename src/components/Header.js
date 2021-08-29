@@ -32,14 +32,14 @@ const Header = props => {
 	const history = useHistory();
 	const { pathname } = useLocation();
 
-	const logout = async () => {
-		try {
-			await authContext.logout();
-		} catch (err) {
-			// connection error
-			console.log('D:', err);
-		}
-	};
+	// const logout = async () => {
+	// 	try {
+	// 		await authContext.logout();
+	// 	} catch (err) {
+	// 		// connection error
+	// 		console.log('D:', err);
+	// 	}
+	// };
 
 	/**
 	 * On text change, set the current value to 'searchInput'
@@ -237,7 +237,7 @@ const Header = props => {
 													My Account
 												</p>
 											</button>
-											<button
+											{/* <button
 												className='button button__black button__black--logout'
 												onClick={logout}>
 												<svg className='button__icon'>
@@ -247,7 +247,7 @@ const Header = props => {
 												<p className='paragraph'>
 													Log out
 												</p>
-											</button>
+											</button> */}
 										</div>
 									)}
 								</div>

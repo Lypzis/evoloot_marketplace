@@ -137,7 +137,6 @@
 	&__title {
 		line-height: 4rem;
 		margin-bottom: 2rem;
-		
 
 		@include respond(phone) {
 			margin-top: 1rem;
@@ -157,6 +156,10 @@
 
 	&__carousel-slider {
 		padding: 0.9rem 0;
+
+		@include respond(phone-small) {
+			padding: 1.2rem 0;
+		}
 	}
 
 	&__carousel-container--home {

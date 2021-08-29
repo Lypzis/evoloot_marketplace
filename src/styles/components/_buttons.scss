@@ -251,8 +251,8 @@
 
 	&__black--profile {
 		justify-content: stretch;
-		width: 15rem;
-		border-radius: 0.5rem 0 0 0.5rem;
+		width: 13.5rem;
+		border-radius: 0.5rem;
 
 		@include respond(tab-port-2) {
 			width: 19rem;
@@ -515,6 +515,10 @@
 		padding-top: 1.8rem;
 		width: 6rem;
 		height: 5rem;
-		border-radius: .5rem;
+		border-radius: 0.5rem;
+
+		&--return {
+			padding-top: 3px;
+		}
 	}
 }

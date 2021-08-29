@@ -4,8 +4,6 @@
 	border-radius: 0.5rem;
 	padding: 0.7rem 1.2rem;
 	box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.5);
-
-	//TEST
 	font-size: 1.6rem;
 	font-family: inherit;
 
@@ -107,8 +105,7 @@
 	&__quantity--left {
 		width: 25%;
 		border-radius: 0.5rem 0 0 0.5rem;
-
-		color: #fff; // This color needs to be thinked, hurts the eyes
+		color: #fff;
 		border: 0.2rem solid #000;
 		backface-visibility: hidden;
 		background-color: $color-tertiary;
@@ -126,8 +123,7 @@
 	&__quantity--right {
 		width: 25%;
 		border-radius: 0 0.5rem 0.5rem 0;
-
-		color: #fff; // This color needs to be thinked, hurts the eyes
+		color: #fff;
 		border: 0.2rem solid #000;
 		backface-visibility: hidden;
 		background-color: $color-tertiary;
@@ -160,6 +156,9 @@
 		font-family: inherit;
 		background: url('../../assets/images/dropdownArrow.png') 96% /15% no-repeat
 			#fff;
+		background-color: $color-tertiary;
+		border-color: #fff;
+		color: #fff;
 
 		&--collection {
 			width: auto;
