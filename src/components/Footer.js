@@ -121,7 +121,7 @@ const Footer = props => {
 					by{' '}
 					<a
 						className='paragraph footer__author'
-						href='https://lypzis.tk'
+						href='https://lypzistech.pro/'
 						target='_blank'
 						rel='noopener noreferrer'>
 						Lypzis
