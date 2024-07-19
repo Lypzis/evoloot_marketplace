@@ -14,6 +14,11 @@ const Forget = props => {
 	const [invalidEmailMessage, setInvalidEmailMessage] = useState();
 	const [loading, setLoading] = useState(false);
 
+	/**
+	 * Checks whether the string 'email' is in
+	 * a valid email format.
+	 * @returns boolean value
+	 */
 	const validEmail = () => {
 		const constraints = {
 			from: { email: true },
@@ -24,6 +29,16 @@ const Forget = props => {
 		return isValid === undefined;
 	};
 
+	/**
+	 * Resets current user password.
+	 * - Checks if email input is valid.
+	 * - If the email input is valid, proceeds to
+	 * requesting a recovery email message, which,
+	 * in case there is no one registered with that email,
+	 * throws an error.
+	 * - If all went correctly, redirects user to home page.
+	 * @param {Event} event
+	 */
 	const resetPassword = async event => {
 		event.preventDefault();
 
@@ -85,7 +100,7 @@ const Forget = props => {
 					<div className='auth-form__field-button'>
 						{!loading ? (
 							<button
-								className='button button__white button__white--card-big'
+								className='button button__black button__black--card-big'
 								onClick={() => {}}>
 								<p className='paragraph card__price card__price--big cart__button-text'>
 									Reset

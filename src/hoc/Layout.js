@@ -4,21 +4,24 @@ import Header from '../components/Header';
 import HeaderMobile from '../components/HeaderMobile';
 import Footer from '../components/Footer';
 import CartPanel from '../components/CartPanel';
+import BackToTopButton from '../components/BackToTopButton';
 import MenuPanel from '../components/MenuPanel';
 
-// turn calltoaction into context
 const Layout = props => (
 	<div className='container__parent'>
-		{window.innerWidth > 1140 ? (
-			<Header callToAction={props.callToAction} loged={props.loged} />
-		) : (
-			<HeaderMobile />
-		)}
-
-		{window.innerWidth <= 1140 && <MenuPanel />}
+		{window.innerWidth > 1140 ? <Header /> : <HeaderMobile />}
 
 		<CartPanel />
-		<main className='container'>{props.children}</main>
+
+		{/* access to store */}
+		<MenuPanel />
+
+		{/* back to top button */}
+		{window.innerWidth > 1140 && <BackToTopButton />}
+
+		<div className='container__background'>
+			<main className='container'>{props.children}</main>
+		</div>
 		<Footer />
 	</div>
 );

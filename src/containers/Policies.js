@@ -10,6 +10,10 @@ const Policies = props => {
 	const { handle } = useParams();
 	const clientContext = useContext(ClientContext);
 
+	/**
+	 * Sets the page content based on the current page
+	 * 'handle' param.
+	 */
 	const setContent = useCallback(() => {
 		const curr = clientContext.shopPolicies.find(
 			policy => policy.handle === handle

@@ -7,10 +7,20 @@
 
 	@include respond(phone-secondary) {
 		width: 75rem;
+		margin: 0 auto;
+	}
+
+	@include respond(phone-small) {
+		width: 55rem;
+	}
+
+	@include respond(phone-really-small) {
+		width: 48rem;
 	}
 
 	&--terms {
 		max-width: 65rem;
+		margin: 0 auto;
 
 		@include respond(phone-secondary) {
 			max-width: 50rem;
@@ -18,10 +28,10 @@
 	}
 
 	&__container {
-		width: 90%;
+		width: 85%; //90%
 
 		@include respond(phone-secondary) {
-			//width: 80%;
+			width: 100%;
 		}
 	}
 
@@ -30,17 +40,21 @@
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
-
+		
 		&:not(:first-child) {
 			margin-top: 8rem;
 
-			@include respond(tab-port) {
-				margin-top: 4rem;
+			@include respond(tab-port-2) {
+				margin-top: 4.5rem;
 			}
-		}
 
-		@include respond(phone-secondary) {
-			margin-top: 2rem;
+			@include respond(tab-port) {
+				margin-top: 3.5rem;
+			}
+
+			@include respond(phone-small) {
+				margin-top: 2rem;
+			}
 		}
 	}
 

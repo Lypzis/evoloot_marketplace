@@ -59,6 +59,12 @@ const ProductDetailsMobile = props => {
 
 	const [productChosen, dispatchProduct] = useReducer(productReducer);
 
+	/**
+	 * Retrieve related products based on the type of
+	 * the current displayed product.
+	 * - Takes care to not retrieve the same product.
+	 * @returns array of products.
+	 */
 	const retrieveRelatedProducts = useCallback(
 		currentProduct => {
 			let products = [];
@@ -76,6 +82,13 @@ const ProductDetailsMobile = props => {
 		[handle, clientContext]
 	);
 
+	/**
+	 * Saves a viewed product to the local storage
+	 * if it isn't there already.
+	 * - Default of saved products is 10.
+	 * @param {Object} product
+	 * @returns null
+	 */
 	const saveViewed = product => {
 		const viewed = localStorage.getItem('viewed');
 
@@ -97,6 +110,12 @@ const ProductDetailsMobile = props => {
 		localStorage.setItem('viewed', JSON.stringify(newViewed));
 	};
 
+	/**
+	 * Retrieves viewed products from local storage.
+	 * - Does not retrieve the current one being displayed.
+	 * @param {Object} currentProduct
+	 * @returns
+	 */
 	const retrieveViewed = currentProduct => {
 		const viewed = localStorage.getItem('viewed');
 
@@ -107,6 +126,9 @@ const ProductDetailsMobile = props => {
 		);
 	};
 
+	/**
+	 * Get a product by its handle, which will be the same as the page param.
+	 */
 	const getProduct = useCallback(async () => {
 		try {
 			const product = await clientContext.client.product.fetchByHandle(
@@ -146,6 +168,12 @@ const ProductDetailsMobile = props => {
 		}
 	}, [handle, history, clientContext, retrieveRelatedProducts]);
 
+	/**
+	 * Sets a new main image from the product to display.
+	 * @param {String} imageId
+	 * @param {String} imageSrc
+	 * @param {Number} index
+	 */
 	const setImageSelected = (imageId, imageSrc, index = 0) => {
 		if (productChosen.product.variants.length > 1)
 			dispatchProduct({
@@ -162,6 +190,10 @@ const ProductDetailsMobile = props => {
 			});
 	};
 
+	/**
+	 * Sets a variant selection.
+	 * @param {Event} event
+	 */
 	const setVariantSelected = event => {
 		const variant = JSON.parse(event.target.value);
 
@@ -173,6 +205,12 @@ const ProductDetailsMobile = props => {
 		});
 	};
 
+	/**
+	 * Render products images as side thumbnails.
+	 * - If product has variants, their image will be set.
+	 * - If product has no variants, its images will be set.
+	 * @returns Thumbnail block.
+	 */
 	const renderThumbnails = () => {
 		if (productChosen.product.variants.length > 1)
 			return productChosen.product.variants.map((variant, index) => (
@@ -200,6 +238,10 @@ const ProductDetailsMobile = props => {
 		));
 	};
 
+	/**
+	 * Render product variants names as options.
+	 * @returns option block.
+	 */
 	const renderVariants = () => {
 		return productChosen.product.variants.map(variant => (
 			<option key={variant.id} value={JSON.stringify(variant)}>
@@ -208,6 +250,10 @@ const ProductDetailsMobile = props => {
 		));
 	};
 
+	/**
+	 * Updates the quantity value.
+	 * @param {Number} quantity
+	 */
 	const updateQuantity = quantity => {
 		dispatchProduct({
 			type: 'SET_QUANTITY',
@@ -215,6 +261,9 @@ const ProductDetailsMobile = props => {
 		});
 	};
 
+	/**
+	 * Adds the current displayed product to cart.
+	 */
 	const addToCart = () => {
 		const variant = productChosen.variant;
 
@@ -237,8 +286,8 @@ const ProductDetailsMobile = props => {
 	};
 
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 475) return 2;
-		else if (window.innerWidth <= 700) return 3;
+		if (window.innerWidth <= 600) return 2;
+		else if (window.innerWidth <= 800) return 3;
 		else return 4;
 	};
 
@@ -301,7 +350,7 @@ const ProductDetailsMobile = props => {
 							<div className='card product__card product__card--mobile'>
 								<div className='card__details'>
 									<div className='input__container'>
-										<p className='paragraph'>
+										<p className='paragraph paragraph--capitalized'>
 											Availability:{' '}
 											{productChosen.variant.available
 												? 'in stock'
@@ -331,7 +380,7 @@ const ProductDetailsMobile = props => {
 
 									<div className='product__price'>
 										<p className='paragraph'>
-											{clientContext.currencyRate.code}$
+											$
 											{(
 												productChosen.variant.price *
 												productChosen.quantity *
@@ -341,7 +390,7 @@ const ProductDetailsMobile = props => {
 									</div>
 
 									<button
-										className='button button__white button__white--card-big'
+										className='button button__black button__black--card-big'
 										onClick={addToCart}
 										disabled={
 											productChosen.quantity === 0 ||
@@ -381,9 +430,10 @@ const ProductDetailsMobile = props => {
 								products={productChosen.relatedProducts}
 								naturalSlideWidth={100}
 								naturalSlideHeight={
-									window.innerWidth <= 1140 ? 120 : 140
+									window.innerWidth <= 800 ? 130 : 145
 								}
 								visibleSlides={changeNumberOfSlides()}
+								step={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>
@@ -400,9 +450,10 @@ const ProductDetailsMobile = props => {
 								products={productChosen.viewed}
 								naturalSlideWidth={100}
 								naturalSlideHeight={
-									window.innerWidth <= 1140 ? 120 : 140
+									window.innerWidth <= 800 ? 130 : 145
 								}
 								visibleSlides={changeNumberOfSlides()}
+								step={changeNumberOfSlides()}
 								isPlaying={false}
 								productDetails={true}
 							/>

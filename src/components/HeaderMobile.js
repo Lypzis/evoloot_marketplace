@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { Fragment, memo, useContext, useState } from 'react';
+import React, { Fragment, memo, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
+import { toggleMenu } from '../store/actions/menu';
 import { setSearchText } from '../store/actions/search';
 import { ClientContext } from '../context/clientContext';
 
@@ -12,7 +13,7 @@ const HeaderMobile = props => {
 	const clientContext = useContext(ClientContext);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [callToActionOpen, setCallToActionOpen] = useState(true);
+	// const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
@@ -36,70 +37,83 @@ const HeaderMobile = props => {
 		clientContext.changeCurrency(event.target.value);
 	};
 
-	const renderCallToAction = () => {
-		const callToAction = clientContext.pages.filter(
-			page => page.title === 'Call-To-Action'
-		);
+	// const renderCallToAction = () => {
+	// 	const callToAction = clientContext.pages.filter(
+	// 		page => page.title === 'Call-To-Action'
+	// 	);
 
-		if (callToAction !== undefined) {
-			return (
-				<Fragment>
-					{callToActionOpen && (
-						<div className='call-to-action'>
-							<div
-								className='card__description-box-description'
-								dangerouslySetInnerHTML={{
-									__html: callToAction[0].body,
-								}}></div>
+	// 	if (callToAction !== undefined) {
+	// 		return (
+	// 			<Fragment>
+	// 				{callToActionOpen && (
+	// 					<div className='call-to-action'>
+	// 						<div
+	// 							className='call-to-action__description'
+	// 							dangerouslySetInnerHTML={{
+	// 								__html: callToAction[0].body,
+	// 							}}></div>
 
-							<button
-								className='button button__small-circle'
-								onClick={() => setCallToActionOpen(false)}>
-								<svg className='button__icon'>
-									<use
-										xlinkHref={`${sprite}#icon-cross`}></use>
-								</svg>
-							</button>
-						</div>
-					)}
-				</Fragment>
-			);
-		}
+	// 						<button
+	// 							className='button button__small-circle'
+	// 							onClick={() => setCallToActionOpen(false)}>
+	// 							<svg className='button__icon'>
+	// 								<use
+	// 									xlinkHref={`${sprite}#icon-cross`}></use>
+	// 							</svg>
+	// 						</button>
+	// 					</div>
+	// 				)}
+	// 			</Fragment>
+	// 		);
+	// 	}
+	// };
+
+	const showMenu = () => {
+		dispatch(toggleMenu());
 	};
 
 	return (
 		<Fragment>
-			{/* <BluredBackground for={'menu-toggle'} /> */}
-
-			<header className='header'>
-				{clientContext.pages && renderCallToAction()}
+			<header className='header header--mobile'>
+				{/* NEEDS TO STAY CLOSED FOR LIFE */}
+				{/* {clientContext.pages && renderCallToAction()} */}
 				<div className='header__body header__body--mobile'>
-					<Link className='header__logo' to='/'>
-						<img
-							className='header__logo-image'
-							src={logo}
-							alt='Evoloot Marketplace Logo'
-						/>
-					</Link>
-					<div className='header__buttons header__buttons--mobile'>
-						<div className='header__user'>
-							<div className='header__search-form  header__search-form--mobile'>
-								<input
-									autoFocus={pathname === '/search'}
-									type='search'
-									placeholder='Search'
-									className='input input__search  input__search--mobile'
-									value={search.searchText}
-									onChange={handleSearchTextChanged}
-								/>
-								<button
-									type='submit'
-									className='button button__search'>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-search`}></use>
-									</svg>
-								</button>
+					<button
+						className='button menu__button menu__button--real'
+						onClick={showMenu}>
+						<svg className='button__icon menu__button-icon menu__button-icon--real'>
+							<use xlinkHref={`${sprite}#icon-menu`}></use>
+						</svg>
+					</button>
+
+					<div className='header__content header__content--mobile'>
+						<Link className='header__logo' to='/'>
+							<img
+								className='header__logo-image'
+								src={logo}
+								alt='Evoloot Marketplace Logo'
+							/>
+						</Link>
+						<div className='header__buttons header__buttons--mobile'>
+							<div className='header__user'>
+								<div className='header__search-form  header__search-form--mobile'>
+									<input
+										autoFocus={pathname === '/search'}
+										type='search'
+										placeholder='Search'
+										className='input input__search  input__search--mobile'
+										value={search.searchText}
+										onChange={handleSearchTextChanged}
+									/>
+									<button
+										type='submit'
+										className='button button__search'>
+										<svg className='button__icon'>
+											<use
+												xlinkHref={`${sprite}#icon-search`}></use>
+										</svg>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -112,16 +126,16 @@ const HeaderMobile = props => {
 					onChange={handleChangeCurrency}
 					value={clientContext.currencyRate.code}>
 					<option className='paragraph' value='USD'>
-						🇺🇸 USD
+						&#127482;&#127480; USD
 					</option>
 					<option className='paragraph' value='CAD'>
-						🇨🇦 CAD
+						&#127464;&#127462; CAD
 					</option>
 					<option className='paragraph' value='EUR'>
-						🇪🇺 EUR
+						&#127466;&#127482; EUR
 					</option>
 					<option className='paragraph' value='GBP'>
-						🇬🇧 GBP
+						&#127468;&#127463; GBP
 					</option>
 				</select>
 			</div>

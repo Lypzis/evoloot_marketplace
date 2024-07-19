@@ -8,6 +8,8 @@
 
 	@include respond(phone-small) {
 		padding: 1px;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	& > .button__small-circle > .button__icon {
@@ -17,5 +19,10 @@
 
 	& > .paragraph {
 		text-transform: uppercase;
+	}
+
+	&__description {
+		font-size: $default-font-size;
+		list-style: none;
 	}
 }

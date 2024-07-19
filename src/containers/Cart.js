@@ -32,6 +32,16 @@ const Cart = props => {
 	const [textAreaValue, setTextAreaValue] = useState('');
 	const [loading, setLoading] = useState(false);
 
+	/**
+	 * Creates a checkout.
+	 * - Treat user products chosen.
+	 * - Creates a new shopify checkout.
+	 * - Adds custom attributes, such as, notes.
+	 * - Adds user's email to checkout(if logged in).
+	 * - Adds user's main address to chekout(if there is one).
+	 * - Finally, adds products to checkout, opening a new tab
+	 * where the user can complete or edit his checkout.
+	 */
 	const createCheckout = async () => {
 		try {
 			setLoading(true);
@@ -92,10 +102,11 @@ const Cart = props => {
 				//if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
-			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
-				newCheckout.id,
-				lineItems
-			);
+			const checkoutWithProducts =
+				await clientContext.client.checkout.addLineItems(
+					newCheckout.id,
+					lineItems
+				);
 
 			window.open(checkoutWithProducts.webUrl);
 			dispatch(removeAllProductsFromCheckout());
@@ -130,7 +141,7 @@ const Cart = props => {
 						className='input input__text-area'
 						name='notes'
 						id='notes'
-						cols='50'
+						cols={window.innerWidth > 600 ? '50' : '30'}
 						maxLength={300}
 						value={textAreaValue}
 						onChange={event => setTextAreaValue(event.target.value)}
@@ -143,7 +154,7 @@ const Cart = props => {
 						<p className='paragraph paragraph--black'>Total: </p>
 						<div className='product__price'>
 							<p className='paragraph paragraph--black'>
-								{clientContext.currencyRate.code}$
+								$
 								{(
 									checkout.totalPrice *
 									clientContext.currencyRate.value
@@ -154,7 +165,7 @@ const Cart = props => {
 
 					{!loading ? (
 						<button
-							className='button button__white button__white--card-big'
+							className='button button__black button__black--card-big'
 							disabled={checkout.totalPrice === 0}
 							onClick={createCheckout}>
 							<p className='paragraph card__price card__price--big cart__button-text'>

@@ -23,6 +23,8 @@ const addressFields = {
 	zip: '',
 };
 
+// OBS: NOT component, needs to be moved to container
+
 const CartPanel = props => {
 	const checkout = useSelector(state => state.checkout);
 	const user = useSelector(state => state.user);
@@ -31,6 +33,15 @@ const CartPanel = props => {
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
 
+	/**
+	 * Creates a checkout.
+	 * - Treat user products chosen.
+	 * - Creates a new shopify checkout.
+	 * - Adds user's email to checkout(if logged in).
+	 * - Adds user's main address to chekout(if there is one).
+	 * - Finally, adds products to checkout, opening a new tab
+	 * where the user can complete or edit his checkout.
+	 */
 	const createQuickCheckout = async () => {
 		try {
 			setLoading(true);
@@ -72,10 +83,11 @@ const CartPanel = props => {
 				// if (errors.length > 0) throw new Error(errors[0].message);
 			}
 
-			const checkoutWithProducts = await clientContext.client.checkout.addLineItems(
-				newCheckout.id,
-				lineItems
-			);
+			const checkoutWithProducts =
+				await clientContext.client.checkout.addLineItems(
+					newCheckout.id,
+					lineItems
+				);
 
 			window.open(checkoutWithProducts.webUrl);
 			setLoading(false);
@@ -133,7 +145,7 @@ const CartPanel = props => {
 							<p className='paragraph'>Total: </p>
 							<div className='product__price'>
 								<p className='paragraph'>
-									{clientContext.currencyRate.code}$
+									$
 									{(
 										checkout.totalPrice *
 										clientContext.currencyRate.value
@@ -145,7 +157,7 @@ const CartPanel = props => {
 						{!loading ? (
 							<>
 								<button
-									className='button button__white button__white--card-big'
+									className='button button__black button__black--card-big'
 									disabled={checkout.totalPrice === 0}
 									onClick={createQuickCheckout}>
 									<p className='paragraph card__price card__price--big cart__button-text'>
@@ -153,7 +165,7 @@ const CartPanel = props => {
 									</p>
 								</button>
 								<button
-									className='button button__white button__white--card-big small-margin-top'
+									className='button button__black button__black--card-big small-margin-top'
 									onClick={() => history.push('/cart')}>
 									<p className='paragraph card__price card__price--big cart__button-text'>
 										view cart

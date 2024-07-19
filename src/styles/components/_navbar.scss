@@ -4,6 +4,12 @@
 	background-color: $color-secondary;
 	//margin: 0 auto;
 
+	//position: fixed;
+
+	&--stiky {
+		position: fixed;
+	}
+
 	&__list {
 		display: flex;
 		justify-content: center;
@@ -17,12 +23,13 @@
 	}
 
 	&__list-item {
+		position: relative;
 	}
 
 	&__link {
 		display: block;
 		text-decoration: none;
-		color: $color-gray-dark-1;
+		color: #000; //$color-gray-dark-1;
 		padding: 0.35rem 1.5rem;
 		transition: all 0.3s;
 
@@ -35,6 +42,48 @@
 	&__link--active {
 		background-color: $color-tertiary;
 		color: #fff;
+	}
+
+	&__link-hidden-list {
+		position: absolute;
+		top: 3.1rem;
+		left: 0;
+		height: 0;
+		list-style: none;
+		flex-direction: column;
+		transform: scaleY(0);
+		transition: all 0.3s;
+		z-index: 20;
+	}
+
+	// here
+	&__link:hover &__link-hidden-list,
+	&__list-item:hover &__link-hidden-list,
+	&__link:focus + &__link-hidden-list,
+	&__list-item:active + &__link-hidden-list {
+		transform: scaleY(1);
+		transform-origin: top;
+	}
+
+	&__link-hidden-list-item {
+		border-left: solid #000 3px;
+		border-right: solid #000 3px;
+		border-bottom: solid rgba(0, 0, 0, 0.3) 1px;
+		box-shadow: 0px 0.5rem 1.2rem rgba(0, 0, 0, 0.17);
+		position: relative;
+		text-align: left;
+		background: $color-secondary;
+		display: flex;
+		align-items: center;
+
+		&:last-child {
+			border-bottom: solid #000 3px;
+			border-radius: 0 0 0.5rem 0.5rem;
+		}
+
+		& .navbar__link {
+			width: 15rem;
+		}
 	}
 }
 
@@ -58,6 +107,10 @@
 
 	&--no-background {
 		background-color: transparent;
+	}
+
+	&__submenu-title-box {
+		display: flex;
 	}
 
 	&__list {
@@ -87,10 +140,17 @@
 	&__link {
 		display: flex;
 		text-decoration: none;
-		color: $color-gray-dark-1;
+		color: #000; //$color-gray-dark-1;
 		align-items: center;
 		padding: 2rem 6rem;
 		transition: all 0.3s;
+
+		& > .button__icon {
+			@include respond(phone-small) {
+				height: 2.5rem;
+				width: 2.5rem;
+			}
+		}
 
 		@include respond(tab-port) {
 			justify-content: center;
@@ -106,10 +166,14 @@
 			@include respond(tab-port) {
 				justify-content: flex-start;
 			}
+
+			@include respond(phone-small) {
+				padding: 0.8rem 2rem;
+			}
 		}
 
 		& > svg {
-			fill: $color-gray-dark-1;
+			fill: #000; //$color-gray-dark-1;
 			margin-right: 0.7rem;
 		}
 
@@ -123,4 +187,12 @@
 			}
 		}
 	}
+}
+
+.navbar-sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	border-bottom: solid 2px $color-gray-dark-3;
+	box-shadow: 0px 0.5rem 1.2rem rgba(0, 0, 0, 0.17);
 }

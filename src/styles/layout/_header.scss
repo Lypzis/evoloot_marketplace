@@ -1,9 +1,19 @@
 .header {
 	background-color: $color-primary;
+	background-image: linear-gradient(
+			rgba(255, 255, 255, 0.35),
+			rgba(255, 255, 255, 0.35)
+		),
+		url('../../assets/images/header.png');
+
+	background-position: top;
+	background-size: cover;
+	background-repeat: no-repeat;
+
 	box-shadow: 0px 0.5rem 1.2rem rgba(0, 0, 0, 0.17);
 	border-top: 2px solid $color-gray-dark-3;
 	border-bottom: 2px solid $color-gray-dark-3;
-	position: fixed;
+	position: absolute;
 	z-index: 2;
 	width: 100%;
 	display: flex;
@@ -13,26 +23,44 @@
 		//background-color: $color-tertiary;
 	}
 
+	&--mobile {
+		position: fixed;
+	}
+
 	.navbar-line {
 		border-top: solid 2px $color-gray-dark-3;
 	}
 
 	&__body {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 		align-self: center;
 		padding: 0.6rem 2rem 0.5rem 2rem;
 		max-width: 98rem;
 		width: 100%;
 
 		&--mobile {
-			max-width: none;
-			align-self: stretch;
+			justify-content: space-between;
 		}
 
 		@include respond(tab-port-2) {
 			padding: 1rem 2.5rem;
+			align-items: center;
+		}
+		
+	}
+
+	&__content {
+		position: relative;
+		display: flex;
+		width: 50%;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem 0;
+
+		&--mobile {
+			width: 50%;
+			padding: 0;
 		}
 	}
 
@@ -42,19 +70,27 @@
 		right: 1rem;
 		z-index: 2;
 
+		@include respond(phone-small) {
+			bottom: 3rem;
+		}
+
 		& > * {
 			margin: 0;
 		}
 	}
 
 	&__logo {
+		position: absolute;
 		display: block;
-		width: 6rem;
+		width: 12rem;
+		left: -6rem;
+		margin: 0.5rem 0;
 
 		@include respond(tab-port-2) {
 			width: 8rem;
 			margin-right: 1.5rem;
 		}
+
 	}
 
 	&__logo-image {
@@ -66,9 +102,12 @@
 		position: relative;
 		display: block;
 		margin-left: auto;
+		height: 100%;
 
 		&--mobile {
 			width: 100%;
+			margin-left: 0;
+			justify-content: center;
 		}
 	}
 
@@ -82,7 +121,8 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		margin-right: 2.5rem;
+		margin-bottom: 1.5rem;
+		padding: 0 1.2rem;
 
 		&--mobile {
 			width: 100%;
@@ -91,6 +131,10 @@
 		@include respond(tab-port-2) {
 			margin: 0 3rem;
 		}
+
+		@include respond(phone-small) {
+			margin: auto;
+		}
 	}
 
 	&__user {
@@ -98,9 +142,19 @@
 		justify-content: space-between;
 	}
 
+	&__container {
+	}
+
 	&__loged-out {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: baseline;
+
+		@include respond(phone-small) {
+			width: 100%;
+			flex-direction: column;
+			align-items: stretch;
+		}
 	}
 }

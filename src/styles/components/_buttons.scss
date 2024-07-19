@@ -4,6 +4,7 @@
 	display: inline-block;
 	cursor: pointer;
 	transition: all 0.2s;
+	font-family: 'jaldi-bold';
 
 	&__icon {
 		height: 1.4rem;
@@ -32,6 +33,11 @@
 		height: 0.9rem;
 		width: 0.9rem;
 		fill: #fff;
+
+		@include respond(phone-small) {
+			height: 1.2rem;
+			width: 1.2rem;
+		}
 	}
 
 	&__icon--card-cart-big {
@@ -53,6 +59,10 @@
 		background-color: transparent;
 		border: transparent;
 		margin-left: 5rem;
+
+		@include respond(phone-small) {
+			margin-left: 1rem;
+		}
 
 		&--checkout {
 			display: flex;
@@ -87,10 +97,14 @@
 			fill: $color-gray-dark-1;
 
 			@include respond(tab-port-2) {
-				//fill: #fff;
 				margin-bottom: 0.3rem;
 				height: 1.6rem;
 				width: 1.6rem;
+			}
+
+			@include respond(phone-small) {
+				height: 2.2rem;
+				width: 2.2rem;
 			}
 		}
 	}
@@ -142,6 +156,10 @@
 		& > svg {
 			margin-right: 1rem;
 		}
+
+		&:hover + .cart--dropdown {
+			transform: scale(1);
+		}
 	}
 
 	&__black--small-circle {
@@ -151,6 +169,12 @@
 		height: 4rem;
 		border-radius: 50%;
 		border: 0.2rem solid $color-gray-light-4;
+
+		@include respond(phone-small) {
+			width: 5.5rem;
+			height: 5.5rem;
+			border-width: 0.3rem;
+		}
 	}
 
 	&__black--shop-cart {
@@ -161,6 +185,11 @@
 
 	&__black--small-circle > .button__icon {
 		fill: #fff;
+
+		@include respond(phone-small) {
+			width: 2rem;
+			height: 2rem;
+		}
 
 		@include respond(phone-really-small) {
 			padding: 0;
@@ -182,6 +211,10 @@
 
 	&__black--account-menu-panel {
 		width: 35rem;
+
+		@include respond(phone-really-small) {
+			width: 30rem;
+		}
 	}
 
 	&__black--account-big {
@@ -218,12 +251,22 @@
 
 	&__black--profile {
 		justify-content: stretch;
-		width: 15rem;
-		border-radius: 0.5rem 0 0 0.5rem;
+		width: 13.5rem;
+		border-radius: 0.5rem;
 
 		@include respond(tab-port-2) {
 			width: 19rem;
 			justify-content: center;
+		}
+
+		@include respond(phone-small) {
+			width: 34.5rem;
+			border-radius: 0.5rem;
+		}
+
+		@include respond(phone-really-small) {
+			width: 32rem;
+			align-self: center;
 		}
 
 		& > .button__icon {
@@ -241,7 +284,7 @@
 		justify-content: center;
 		font-weight: 700;
 		border-radius: 0.5rem;
-		margin-top: 1.5rem;
+		margin-top: 1.8rem;
 		width: 12rem;
 	}
 
@@ -251,6 +294,16 @@
 
 		@include respond(tab-port-2) {
 			justify-content: center;
+		}
+		@include respond(phone-small) {
+			width: 34.5rem;
+			border-radius: 0.5rem;
+			margin-top: 2rem;
+		}
+
+		@include respond(phone-really-small) {
+			width: 32rem;
+			align-self: center;
 		}
 
 		& > .button__icon {
@@ -275,7 +328,66 @@
 	}
 
 	&__black--arrow-right {
-		margin-right: 0.7rem;
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		left: -4.5rem;
+		//margin-right: 0.7rem;
+	}
+
+	&__black--arrow-left {
+		position: absolute;
+		top: 50%;
+		right: -4.5rem;
+		translate: 0 -50%;
+	}
+
+	&__black--card {
+		margin-top: 1rem;
+		border-radius: 0.5rem;
+		width: 9.2rem;
+		justify-content: center;
+		align-self: flex-end;
+
+		@include respond(tab-port-2) {
+			color: #fff;
+		}
+
+		@include respond(phone-small) {
+			width: 10rem;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
+	}
+
+	&__black--card-big {
+		width: 100%;
+		color: #fff;
+		border-radius: 0.5rem;
+		justify-content: center;
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
+	}
+
+	&__black--card-small {
+		background-color: $color-tertiary;
+		width: 40%;
+		color: #fff;
+		align-self: baseline;
+		margin-top: 0.8rem;
+		border-radius: 0.5rem;
+		justify-content: center;
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: $color-primary-light;
+		}
 	}
 
 	&__white {
@@ -292,7 +404,7 @@
 		border-radius: 0.5rem;
 		width: 9.2rem;
 
-		@include respond(phone-really-small) {
+		@include respond(phone-small) {
 			width: 10rem;
 		}
 
@@ -379,6 +491,34 @@
 
 		&--left {
 			padding-top: 0;
+		}
+	}
+}
+
+.back-to-top {
+	display: block;
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
+	z-index: 1000;
+
+	@include respond(tab-port-2) {
+		bottom: 5.5rem;
+	}
+
+	@include respond(phone-small) {
+		bottom: 8rem;
+	}
+
+	&__button {
+		font-size: 3rem;
+		padding-top: 1.8rem;
+		width: 6rem;
+		height: 5rem;
+		border-radius: 0.5rem;
+
+		&--return {
+			padding-top: 3px;
 		}
 	}
 }

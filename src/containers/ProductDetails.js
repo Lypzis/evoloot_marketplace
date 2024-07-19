@@ -59,6 +59,12 @@ const ProductDetails = props => {
 
 	const [productChosen, dispatchProduct] = useReducer(productReducer);
 
+	/**
+	 * Retrieve related products based on the type of
+	 * the current displayed product.
+	 * - Takes care to not retrieve the same product.
+	 * @returns array of products.
+	 */
 	const retrieveRelatedProducts = useCallback(
 		currentProduct => {
 			let products = [];
@@ -73,9 +79,16 @@ const ProductDetails = props => {
 
 			return products;
 		},
-		[handle, clientContext]
+		[handle, clientContext.collections]
 	);
 
+	/**
+	 * Saves a viewed product to the local storage
+	 * if it isn't there already.
+	 * - Default of saved products is 10.
+	 * @param {Object} product
+	 * @returns null
+	 */
 	const saveViewed = product => {
 		const viewed = localStorage.getItem('viewed');
 
@@ -97,6 +110,12 @@ const ProductDetails = props => {
 		localStorage.setItem('viewed', JSON.stringify(newViewed));
 	};
 
+	/**
+	 * Retrieves viewed products from local storage.
+	 * - Does not retrieve the current one being displayed.
+	 * @param {Object} currentProduct
+	 * @returns
+	 */
 	const retrieveViewed = currentProduct => {
 		const viewed = localStorage.getItem('viewed');
 
@@ -107,6 +126,9 @@ const ProductDetails = props => {
 		);
 	};
 
+	/**
+	 * Get a product by its handle, which will be the same as the page param.
+	 */
 	const getProduct = useCallback(async () => {
 		try {
 			const product = await clientContext.client.product.fetchByHandle(
@@ -144,8 +166,14 @@ const ProductDetails = props => {
 			// console.log(err);
 			history.replace('/*');
 		}
-	}, [handle, history, clientContext, retrieveRelatedProducts]);
+	}, [handle, history, clientContext.client, retrieveRelatedProducts]);
 
+	/**
+	 * Sets a new main image from the product to display.
+	 * @param {String} imageId
+	 * @param {String} imageSrc
+	 * @param {Number} index
+	 */
 	const setImageSelected = (imageId, imageSrc, index = 0) => {
 		if (productChosen.product.variants.length > 1)
 			dispatchProduct({
@@ -162,6 +190,10 @@ const ProductDetails = props => {
 			});
 	};
 
+	/**
+	 * Sets a variant selection.
+	 * @param {Event} event
+	 */
 	const setVariantSelected = event => {
 		const variant = JSON.parse(event.target.value);
 
@@ -173,6 +205,12 @@ const ProductDetails = props => {
 		});
 	};
 
+	/**
+	 * Render products images as side thumbnails.
+	 * - If product has variants, their image will be set.
+	 * - If product has no variants, its images will be set.
+	 * @returns Thumbnail block.
+	 */
 	const renderThumbnails = () => {
 		if (productChosen.product.variants.length > 1)
 			return productChosen.product.variants.map((variant, index) => (
@@ -200,6 +238,10 @@ const ProductDetails = props => {
 		));
 	};
 
+	/**
+	 * Render product variants names as options.
+	 * @returns option block.
+	 */
 	const renderVariants = () => {
 		return productChosen.product.variants.map(variant => (
 			<option key={variant.id} value={JSON.stringify(variant)}>
@@ -208,6 +250,10 @@ const ProductDetails = props => {
 		));
 	};
 
+	/**
+	 * Updates the quantity value.
+	 * @param {Number} quantity
+	 */
 	const updateQuantity = quantity => {
 		dispatchProduct({
 			type: 'SET_QUANTITY',
@@ -215,6 +261,9 @@ const ProductDetails = props => {
 		});
 	};
 
+	/**
+	 * Adds the current displayed product to cart.
+	 */
 	const addToCart = () => {
 		const variant = productChosen.variant;
 
@@ -238,7 +287,7 @@ const ProductDetails = props => {
 
 	useEffect(() => {
 		if (clientContext.collections) getProduct();
-	}, [clientContext, getProduct]);
+	}, [clientContext.collections, getProduct]);
 
 	return (
 		<Layout>
@@ -292,32 +341,30 @@ const ProductDetails = props => {
 
 							<span className='navbar-line big-margin-top'></span>
 
+							<h3 className='heading-tertiary heading-tertiary--dark  medium-margin-top-no-bottom'>
+								You may also like:
+							</h3>
 							<Carousel
-								header={
-									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-										You may also like:
-									</h3>
-								}
 								products={productChosen.relatedProducts}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
+								step={3}
 								isPlaying={false}
 								productDetails={true}
 							/>
 
 							<span className='navbar-line big-margin-top'></span>
 
+							<h3 className='heading-tertiary heading-tertiary--dark  medium-margin-top-no-bottom'>
+								Recently Viewed:
+							</h3>
 							<Carousel
-								header={
-									<h3 className='heading-tertiary heading-tertiary--dark no-margin'>
-										Recently Viewed:
-									</h3>
-								}
 								products={productChosen.viewed}
 								naturalSlideWidth={100}
 								naturalSlideHeight={140}
 								visibleSlides={3}
+								step={3}
 								isPlaying={false}
 								productDetails={true}
 							/>
@@ -327,7 +374,7 @@ const ProductDetails = props => {
 						<div className='card product__card'>
 							<div className='card__details'>
 								<div className='input__container'>
-									<p className='paragraph paragraph--black'>
+									<p className='paragraph paragraph--black paragraph--capitalized'>
 										Availability:{' '}
 										{productChosen.variant.available
 											? 'in stock'
@@ -356,7 +403,7 @@ const ProductDetails = props => {
 
 								<div className='product__price'>
 									<p className='paragraph paragraph--black'>
-										{clientContext.currencyRate.code}$
+										$
 										{(
 											productChosen.variant.price *
 											productChosen.quantity *
@@ -366,7 +413,7 @@ const ProductDetails = props => {
 								</div>
 
 								<button
-									className='button button__white button__white--card-big'
+									className='button button__black button__black--card-big'
 									onClick={addToCart}
 									disabled={
 										productChosen.quantity === 0 ||

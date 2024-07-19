@@ -19,6 +19,12 @@ const Orders = props => {
 	const [loadingMoreOrders, setLoadingMoreOrders] = useState(false);
 	const dispatch = useDispatch();
 
+	/**
+	 * Formats an order coming from shopify to
+	 * an easier to manipulate version.
+	 * @param {Object} orders
+	 * @returns treated orders.
+	 */
 	const formatResults = orders => {
 		const ordersFormatted = orders.data.data.customer.orders.edges.map(
 			el => el.node
@@ -43,6 +49,9 @@ const Orders = props => {
 		return ordersFormatted;
 	};
 
+	/**
+	 * Loads newer orders.
+	 */
 	const loadNewerOrders = async () => {
 		try {
 			setLoadingMoreOrders(true);
@@ -71,6 +80,9 @@ const Orders = props => {
 		}
 	};
 
+	/**
+	 * Gets all user orders.
+	 */
 	const getOrders = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -113,7 +125,7 @@ const Orders = props => {
 							<>
 								{!loadingMoreOrders ? (
 									<button
-										className='button button__white button__white--card-small'
+										className='button button__black button__black--card-small'
 										onClick={loadNewerOrders}>
 										<p className='paragraph card__price card__price cart__button-text'>
 											Load Newer Orders

@@ -1,14 +1,25 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { Fragment, memo, useContext, useState } from 'react';
+import React, {
+	Fragment,
+	memo,
+	useContext,
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+} from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Navbar from './Navbar';
+import NavbarSticky from './NavbarSticky';
 import sprite from '../assets/icons/sprite.svg';
 import logo from '../assets/images/logo.png';
 import { AuthContext } from '../context/authContext';
 import { ClientContext } from '../context/clientContext';
 import { setSearchText } from '../store/actions/search';
+import Select from '../components/Select';
+import CartDropdown from '../components/CartDropdown';
 
 const Header = props => {
 	const authContext = useContext(AuthContext);
@@ -16,19 +27,19 @@ const Header = props => {
 	const checkout = useSelector(state => state.checkout);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [callToActionOpen, setCallToActionOpen] = useState(true);
+	// const [callToActionOpen, setCallToActionOpen] = useState(true);
 
 	const history = useHistory();
 	const { pathname } = useLocation();
 
-	const logout = async () => {
-		try {
-			await authContext.logout();
-		} catch (err) {
-			// connection error
-			console.log('D:', err);
-		}
-	};
+	// const logout = async () => {
+	// 	try {
+	// 		await authContext.logout();
+	// 	} catch (err) {
+	// 		// connection error
+	// 		console.log('D:', err);
+	// 	}
+	// };
 
 	/**
 	 * On text change, set the current value to 'searchInput'
@@ -45,124 +56,154 @@ const Header = props => {
 		else history.push('/search');
 	};
 
-	const handleChangeCurrency = event => {
-		clientContext.changeCurrency(event.target.value);
+	const handleChangeCurrency = currency => {
+		clientContext.changeCurrency(currency);
 	};
 
-	const renderCallToAction = () => {
-		const callToAction = clientContext.pages.filter(
-			page => page.title === 'Call-To-Action'
-		);
+	// const renderCallToAction = () => {
+	// 	const callToAction = clientContext.pages.filter(
+	// 		page => page.title === 'Call-To-Action'
+	// 	);
 
-		if (callToAction !== undefined) {
-			return (
-				<Fragment>
-					{callToActionOpen && (
-						<div className='call-to-action'>
-							<div
-								className='card__description-box-description'
-								dangerouslySetInnerHTML={{
-									__html: callToAction[0].body,
-								}}></div>
+	// 	if (callToAction !== undefined) {
+	// 		return (
+	// 			<Fragment>
+	// 				{callToActionOpen && (
+	// 					<div className='call-to-action'>
+	// 						<div
+	// 							className='card__description-box-description'
+	// 							dangerouslySetInnerHTML={{
+	// 								__html: callToAction[0].body,
+	// 							}}></div>
 
-							<button
-								className='button button__small-circle'
-								onClick={() => setCallToActionOpen(false)}>
-								<svg className='button__icon'>
-									<use
-										xlinkHref={`${sprite}#icon-cross`}></use>
-								</svg>
-							</button>
-						</div>
-					)}
-				</Fragment>
-			);
-		}
-	};
+	// 						<button
+	// 							className='button button__small-circle'
+	// 							onClick={() => setCallToActionOpen(false)}>
+	// 							<svg className='button__icon'>
+	// 								<use
+	// 									xlinkHref={`${sprite}#icon-cross`}></use>
+	// 							</svg>
+	// 						</button>
+	// 					</div>
+	// 				)}
+	// 			</Fragment>
+	// 		);
+	// 	}
+	// };
+
+	const [isSticky, setSticky] = useState(false);
+	const element = useRef(null);
+
+	/**
+	 * When the user scrolls, it checks whether window.scrollY is superior
+	 * or not to stickyRef.current.getBoundingClientRect().bottom and then
+	 * handles the isSticky state consequently
+	 */
+	const handleScroll = useCallback(() => {
+		if (element.current)
+			window.scrollY / 3 > element.current.getBoundingClientRect().bottom
+				? setSticky(true)
+				: setSticky(false);
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', () => handleScroll());
+		};
+	}, [handleScroll]);
 
 	return (
 		<Fragment>
 			<header className='header'>
-				{clientContext.pages && renderCallToAction()}
+				{/* NEEDS TO STAY CLOSED FOR LIFE */}
+				{/* {clientContext.pages && renderCallToAction()} */}
 
-				<div className='header__body'>
-					<Link className='header__logo' to='/'>
-						<img
-							className='header__logo-image'
-							src={logo}
-							alt='Evoloot Marketplace Logo'
-						/>
-					</Link>
-					<div className='header__buttons'>
-						<div className='header__user'>
-							<div className='header__search-form'>
-								<input
-									autoFocus={pathname === '/search'}
-									type='search'
-									placeholder='Search'
-									className='input input__search'
-									value={search.searchText}
-									onChange={handleSearchTextChanged}
-								/>
-								<button
-									type='submit'
-									className='button button__search'>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-search`}></use>
-									</svg>
-								</button>
-							</div>
-							<div className='header__loged-out'>
-								<button
-									className='button button__black button__black--cart'
-									onClick={() => history.push('/cart')}>
-									<svg className='button__icon'>
-										<use
-											xlinkHref={`${sprite}#icon-cart`}></use>
-									</svg>
-									<div className='button__quantity'>
-										<p className='paragraph'>
-											{checkout.lineItems.length > 0
-												? checkout.lineItems
-														.map(el => el.quantity)
-														.reduce((a, b) => a + b)
-												: 0}
-										</p>
-									</div>
-								</button>
-							</div>
-							<div className='header__loged-out'>
-								<select
-									className='input input--black input__select input__select--header'
-									onChange={handleChangeCurrency}
-									value={clientContext.currencyRate.code}>
-									<option className='paragraph' value='USD'>
-										🇺🇸 USD
-									</option>
-									<option className='paragraph' value='CAD'>
-										🇨🇦 CAD
-									</option>
-									<option className='paragraph' value='EUR'>
-										🇪🇺 EUR
-									</option>
-									<option className='paragraph' value='GBP'>
-										🇬🇧 GBP
-									</option>
-								</select>
-							</div>
-							{!authContext.customerToken ? (
-								<div className='header__loged-out'>
+				<div className='header__body' ref={element}>
+					<div className='header__content'>
+						<Link className='header__logo' to='/'>
+							<img
+								className='header__logo-image'
+								src={logo}
+								alt='Evoloot Marketplace Logo'
+							/>
+						</Link>
+						<div className='header__buttons'>
+							<div className='header__container'>
+								<div className='header__search-form'>
+									<input
+										autoFocus={pathname === '/search'}
+										type='search'
+										placeholder='Search'
+										className='input input__search'
+										value={search.searchText}
+										onChange={handleSearchTextChanged}
+									/>
 									<button
-										className='button button__black button__black--account'
-										onClick={() => history.push('/login')}>
+										type='submit'
+										className='button button__search'>
 										<svg className='button__icon'>
 											<use
-												xlinkHref={`${sprite}#icon-profile`}></use>
+												xlinkHref={`${sprite}#icon-search`}></use>
 										</svg>
-										<p className='paragraph'>Account</p>
 									</button>
-									{/* <button
+								</div>
+
+								<div className='header__user'>
+									<div className='header__loged-out'>
+										<button
+											className='button button__black button__black--cart'
+											onClick={() =>
+												history.push('/cart')
+											}>
+											<svg className='button__icon'>
+												<use
+													xlinkHref={`${sprite}#icon-cart`}></use>
+											</svg>
+											<div className='button__quantity'>
+												<p className='paragraph'>
+													{checkout.lineItems.length >
+													0
+														? checkout.lineItems
+																.map(
+																	el =>
+																		el.quantity
+																)
+																.reduce(
+																	(a, b) =>
+																		a + b
+																)
+														: 0}
+												</p>
+											</div>
+										</button>
+										<CartDropdown />
+									</div>
+									<div className='header__loged-out'>
+										<Select
+											onOptionClick={handleChangeCurrency}
+											currentOption={
+												clientContext.currencyRate.code
+											}
+										/>
+									</div>
+									{!authContext.customerToken ? (
+										<div className='header__loged-out'>
+											<button
+												className='button button__black button__black--account'
+												onClick={() =>
+													history.push('/login')
+												}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-profile`}></use>
+												</svg>
+												<p className='paragraph'>
+													Account
+												</p>
+											</button>
+											{/* <button
 										className='button button__black button__black--login'
 										onClick={() => history.push('/login')}>
 										<svg className='button__icon'>
@@ -180,33 +221,41 @@ const Header = props => {
 										</svg>
 										<p className='paragraph'>sign up</p>
 									</button> */}
+										</div>
+									) : (
+										<div className='header__loged-out'>
+											<button
+												className='button button__black button__black--profile'
+												onClick={() =>
+													history.push('/me')
+												}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-profile`}></use>
+												</svg>
+												<p className='paragraph'>
+													My Account
+												</p>
+											</button>
+											{/* <button
+												className='button button__black button__black--logout'
+												onClick={logout}>
+												<svg className='button__icon'>
+													<use
+														xlinkHref={`${sprite}#icon-exit`}></use>
+												</svg>
+												<p className='paragraph'>
+													Log out
+												</p>
+											</button> */}
+										</div>
+									)}
 								</div>
-							) : (
-								<div className='header__loged-out'>
-									<button
-										className='button button__black button__black--profile'
-										onClick={() => history.push('/me')}>
-										<svg className='button__icon'>
-											<use
-												xlinkHref={`${sprite}#icon-profile`}></use>
-										</svg>
-										<p className='paragraph'>My Account</p>
-									</button>
-									<button
-										className='button button__black button__black--logout'
-										onClick={logout}>
-										<svg className='button__icon'>
-											<use
-												xlinkHref={`${sprite}#icon-exit`}></use>
-										</svg>
-										<p className='paragraph'>Log out</p>
-									</button>
-								</div>
-							)}
+							</div>
 						</div>
 					</div>
 				</div>
-				<Navbar />
+				{isSticky ? <NavbarSticky /> : <Navbar />}
 			</header>
 		</Fragment>
 	);

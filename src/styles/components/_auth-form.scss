@@ -5,18 +5,20 @@
 		border-radius: 0.5rem;
 		border: solid #000 5px;
 		box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+		width: 50rem;
+		margin: 0 auto;
+		background-color: $color-secondary;
 
 		//margin-top: 45%;
 
 		@include respond(tab-port-2) {
 			width: 70vw;
-			margin-top: 5rem;
+			margin-top: 3rem;
 		}
 
-		// @include respond(phone-small) {
-		// 	width: 70vw;
-		// 	margin-top: 20%;
-		// }
+		@include respond(phone-really-small) {
+			width: 85vw;
+		}
 	}
 
 	&__field {
@@ -47,9 +49,21 @@
 		& > .auth-form__field {
 			margin-top: 0;
 
+			@include respond(phone-small) {
+				margin-top: 2rem;
+			}
+
 			&:not(:last-child) {
 				margin-right: 2rem;
+
+				@include respond(phone-small) {
+					margin-right: 0;
+				}
 			}
+		}
+
+		@include respond(phone-small) {
+			flex-direction: column;
 		}
 	}
 
@@ -82,13 +96,18 @@
 .login__footer {
 	display: flex;
 	width: 50rem;
+	margin: 0 auto;
 	margin-top: 2rem;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
+	
 	@include respond(tab-port-2) {
 		width: 70vw;
+	}
+
+	@include respond(phone-really-small) {
+		width: 85vw;
 	}
 
 	//padding: 0 3.5rem;

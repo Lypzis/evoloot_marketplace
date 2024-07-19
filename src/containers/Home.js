@@ -10,6 +10,7 @@ import Layout from '../hoc/Layout';
 import { ClientContext } from '../context/clientContext';
 import Collection from '../components/Collection';
 import LoadingBar from '../components/LoadingBar';
+import BannerCarousel from '../components/BannerCarousel';
 
 const Home = props => {
 	const [homeCollections, setHomeCollections] = useState();
@@ -17,6 +18,9 @@ const Home = props => {
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
 
+	/**
+	 * Get all collection products for display.
+	 */
 	const getFeaturedProducts = useCallback(() => {
 		if (collections) {
 			setHomeCollections([...collections]);
@@ -28,6 +32,9 @@ const Home = props => {
 		getFeaturedProducts();
 	}, [getFeaturedProducts]);
 
+	/**
+	 * Renders a 'Collection' block.
+	 */
 	const renderHomeCollections = useCallback(() => {
 		return homeCollections.map(collection => (
 			<Collection
@@ -41,7 +48,10 @@ const Home = props => {
 	return (
 		<Layout>
 			{homeCollections ? (
-				<section className='home'>{renderHomeCollections()}</section>
+				<section className='home'>
+					{<BannerCarousel />}
+					{renderHomeCollections()}
+				</section>
 			) : (
 				<LoadingBar loading={loading} marginTop={'18rem'} />
 			)}

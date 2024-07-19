@@ -108,6 +108,12 @@ const SignUp = props => {
 		}
 	);
 
+	/**
+	 * Checks whether the string 'email' is in
+	 * a valid email format.
+	 * - Will set an error message in case of invalidation.
+	 * @returns boolean value
+	 */
 	const validEmail = () => {
 		const constraints = {
 			from: { email: true },
@@ -124,6 +130,11 @@ const SignUp = props => {
 		return isValid === undefined;
 	};
 
+	/**
+	 * Checks whether the passwords are equal.
+	 * - Will set an error message in case of invalidation.
+	 * @returns boolean value
+	 */
 	const equalPassword = () => {
 		const constraints = {
 			confirmPassword: {
@@ -148,6 +159,12 @@ const SignUp = props => {
 		return isValid === undefined;
 	};
 
+	/**
+	 * Validates input fields and if everything
+	 * is valid, creates an user account along with
+	 * the information give.
+	 * @param {Event} event
+	 */
 	const validateFields = async event => {
 		event.preventDefault();
 
@@ -222,10 +239,6 @@ const SignUp = props => {
 			) {
 				dispatchSignupFormError({ type: 'SET_EMAIL_IS_PENDING' });
 			}
-
-			// TO-DO
-			// If user order something and then try to create account with the same email
-			//	We have sent an email to test07@test.com, please click the link included to verify your email address.
 
 			// go to connection error page
 			console.log('Something went terribly wrong! ', err);
@@ -329,7 +342,7 @@ const SignUp = props => {
 					<div className='auth-form__field-button'>
 						{!loading ? (
 							<button
-								className='button button__white button__white--card-big'
+								className='button button__black button__black--card-big'
 								onClick={() => {}}>
 								<p className='paragraph card__price card__price--big cart__button-text'>
 									Sign up

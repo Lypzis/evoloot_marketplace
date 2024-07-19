@@ -12,11 +12,13 @@ import * as serviceWorker from './serviceWorker';
 import checkoutReducer from './store/reducers/checkout';
 import userReducer from './store/reducers/user';
 import searchReducer from './store/reducers/search';
+import menuReducer from './store/reducers/menu';
 
 const rootReducers = combineReducers({
 	checkout: checkoutReducer,
 	user: userReducer,
 	search: searchReducer,
+	menu: menuReducer,
 });
 
 const store = createStore(rootReducers);

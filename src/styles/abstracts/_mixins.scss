@@ -24,22 +24,22 @@ $breakpoint argument choices:
 	}
 
 	@if $breakpoint == phone-small {
-		// 475px
-		@media only screen and (max-width: 29.6875em) {
+		// 600px
+		@media only screen and (max-width: 37.5em) {
 			@content;
 		}
 	}
 
 	@if $breakpoint == phone {
-		// 560px
-		@media only screen and (max-width: 35em) {
+		// 650px
+		@media only screen and (max-width: 40.625em) {
 			@content;
 		}
 	}
 
 	@if $breakpoint == phone-secondary {
-		// 800px
-		@media only screen and (max-width: 50em) {
+		// 850px
+		@media only screen and (max-width: 53.125em) {
 			@content;
 		}
 	}

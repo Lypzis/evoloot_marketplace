@@ -15,8 +15,12 @@ const Login = props => {
 	const [loginError, setLoginError] = useState(false);
 	const history = useHistory();
 
-	// login attempts limititation functionality by account 5+3
-
+	// TO-DO: login attempts limititation functionality by account 5+3
+	/**
+	 * Logs user in and stores his token.
+	 * - redirects to home page if successfully loged in.
+	 * @param {Event} event
+	 */
 	const login = async event => {
 		event.preventDefault();
 
@@ -35,9 +39,8 @@ const Login = props => {
 					customerToken.data.data.customerAccessTokenCreate.customerUserErrors.message
 				);
 
-			const {
-				customerAccessToken,
-			} = customerToken.data.data.customerAccessTokenCreate;
+			const { customerAccessToken } =
+				customerToken.data.data.customerAccessTokenCreate;
 
 			localStorage.setItem(
 				'shopifyCustomerToken',
@@ -67,7 +70,7 @@ const Login = props => {
 					<div className='auth-form__field'>
 						<label
 							htmlFor='email'
-							className='paragraph paragraph--black'>
+							className='paragraph paragraph--black paragraph--capitalized'>
 							email
 						</label>
 						<input
@@ -88,8 +91,8 @@ const Login = props => {
 					<div className='auth-form__field'>
 						<label
 							htmlFor='password'
-							className='paragraph paragraph--black'>
-							Password
+							className='paragraph paragraph--black paragraph--capitalized'>
+							password
 						</label>
 						<input
 							type='password'
@@ -112,7 +115,7 @@ const Login = props => {
 					<div className='auth-form__field-button'>
 						{!loading ? (
 							<button
-								className='button button__white button__white--card-big'
+								className='button button__black button__black--card-big'
 								onClick={() => {}}>
 								<p className='paragraph card__price card__price--big cart__button-text'>
 									Log in
@@ -125,7 +128,6 @@ const Login = props => {
 				</form>
 			</div>
 			<div className='login__footer'>
-				{/* or h4 ??? */}
 				<h4 className='heading-fourtiary heading-fourtiary--dark'>
 					Don't have an account?
 				</h4>

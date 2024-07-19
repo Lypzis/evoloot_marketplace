@@ -23,6 +23,10 @@ const LineProduct = props => {
 		? 'card__image-box card__image-box--checkout card__image-box--checkout-big'
 		: 'card__image-box card__image-box--checkout';
 
+	const cardCheckoutImage = props.big
+		? 'card__image'
+		: 'card__image card__image--checkout';
+
 	const cardCheckoutRemoveButton = props.big
 		? 'button button__small-circle button__big-circle'
 		: 'button button__small-circle button__small-circle--checkout';
@@ -51,7 +55,7 @@ const LineProduct = props => {
 		<li key={product.id} className={cardCheckout}>
 			<div className={cardCheckoutImageBox}>
 				<img
-					className='card__image'
+					className={cardCheckoutImage}
 					src={product.image.src}
 					alt={
 						product.image.altText
@@ -74,7 +78,7 @@ const LineProduct = props => {
 				/>
 
 				<p className='paragraph'>
-					{product.quantity}x {clientContext.currencyRate.code}$
+					{product.quantity}x $
 					{(product.price * clientContext.currencyRate.value).toFixed(
 						2
 					)}

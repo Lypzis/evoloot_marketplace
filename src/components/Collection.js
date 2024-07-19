@@ -1,13 +1,22 @@
-import React, { memo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { memo, useState, useEffect, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Card from '../components/Card';
 import Carousel from '../components/Carousel';
 
+// import { getCustomerOrders } from '../graphql';
+// import axiosInstance from '../axios';
+import { ClientContext } from '../context/clientContext';
+
 const Collection = props => {
 	const { products } = props.collection;
+
+	const clientContext = useContext(ClientContext);
+	const { loadMoreCollectionProducts } = clientContext;
+	const query = new URLSearchParams(useLocation().search);
+	const queryTag = query.get('tag');
 
 	const [displayedProducts, setDisplayedProducts] = useState(
 		props.featured
@@ -19,6 +28,13 @@ const Collection = props => {
 			  })
 	);
 
+	const [cursor, setCursor] = useState(products[0].cursor);
+	const [currArrLength, setCurrArrLength] = useState(products.length);
+
+	/**
+	 * Sort cards filter.
+	 * @param {Event} event
+	 */
 	const sortBy = event => {
 		event.preventDefault();
 
@@ -71,6 +87,10 @@ const Collection = props => {
 		}
 	};
 
+	/**
+	 * Renders 'Card' blocks.
+	 * @param {Array} arr
+	 */
 	const renderProducts = arr => {
 		setDisplayedProducts(
 			arr.map(product => {
@@ -79,18 +99,55 @@ const Collection = props => {
 		);
 	};
 
+	/**
+	 * Loads more 20 products to the page.
+	 */
+	const loadMoreProducts = async () => {
+		const newCursor = await loadMoreCollectionProducts(
+			props.collection.handle,
+			`first: 20, after: "${cursor}"`
+		);
+
+		if (newCursor) {
+			setCursor(newCursor.cursor);
+			setCurrArrLength(newCursor.length);
+		}
+	};
+
+	/**
+	 * Changes carousel width based on window width.
+	 * @returns number
+	 */
 	const changeCarouselWidth = () => {
-		return window.innerWidth <= 800 ? 60 : 100;
+		return window.innerWidth <= 850 ? 110 : 100;
 	};
 
+	/**
+	 * Changes carousel height based on window height.
+	 * @returns number
+	 */
 	const changeCarouselHeight = () => {
-		return window.innerWidth <= 800 ? 75 : 120;
+		return window.innerWidth <= 850 ? 130 : 120;
 	};
 
+	/**
+	 * Changes the number of slides based on window width.
+	 * @returns number
+	 */
 	const changeNumberOfSlides = () => {
-		if (window.innerWidth <= 475) return 2;
-		else if (window.innerWidth <= 800) return 3;
+		if (window.innerWidth <= 600) return 2;
+		else if (window.innerWidth <= 850) return 3;
 		else return 4;
+	};
+
+	const renderProductsSorted = arr => {
+		const productsFormated = arr
+			.sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
+			.map(product => {
+				return <Card key={product.id} product={product} />;
+			});
+
+		setDisplayedProducts(productsFormated);
 	};
 
 	useEffect(() => {
@@ -102,6 +159,24 @@ const Collection = props => {
 
 		setDisplayedProducts(productsFormated);
 	}, [products, props.featured]);
+
+	useEffect(() => {
+		const filteredProducts = [];
+
+		if (queryTag && typeof queryTag !== 'undefined') {
+			for (let i = 0; i < products.length; ++i) {
+				const doesItBelong = products[i].tags.findIndex(
+					tag => tag === queryTag
+				);
+
+				if (doesItBelong !== -1) filteredProducts.push(products[i]);
+			}
+
+			renderProductsSorted(filteredProducts);
+		} else {
+			renderProductsSorted(products);
+		}
+	}, [queryTag, products]);
 
 	return (
 		<div className='home__featured-section' key={props.collection.id}>
@@ -116,6 +191,7 @@ const Collection = props => {
 					<div className='input__container input__container--collection'>
 						<p className='paragraph'>sort by: </p>
 						<select
+							// input--black
 							className='input input__select input__select--collection'
 							onChange={sortBy}>
 							<option value='featured'>Featured</option>
@@ -149,19 +225,30 @@ const Collection = props => {
 							naturalSlideWidth={changeCarouselWidth()}
 							naturalSlideHeight={changeCarouselHeight()}
 							visibleSlides={changeNumberOfSlides()}
-							isPlaying={true}
+							isPlaying={false}
+							step={4}
 						/>
 					</div>
 				) : (
 					displayedProducts
 				)}
 			</div>
-			{props.featured && (
+			{props.featured ? (
 				<Link
 					to={`/collection/${props.collection.handle}`}
 					className='button button__black button__black--show-more'>
 					<p className='paragraph'>show more</p>
 				</Link>
+			) : (
+				<div>
+					{currArrLength === 20 && (
+						<button
+							onClick={() => loadMoreProducts()}
+							className='button button__black button__black--show-more'>
+							<p className='paragraph'>load more</p>
+						</button>
+					)}
+				</div>
 			)}
 		</div>
 	);

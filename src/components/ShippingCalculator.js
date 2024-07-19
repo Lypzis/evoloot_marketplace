@@ -64,6 +64,15 @@ const ShippingCalculator = props => {
 		}
 	);
 
+	/**
+	 * Recursively tries to retrieve shipping rates based
+	 * on the last user checkout, which it creates before requesting.
+	 * - For it to work, country, province and zip must be available.
+	 * - It will attemp 10 times and in case of failing, will throw
+	 * a respective error, else, the available shipping rates.
+	 * @param {Boolean} wasItLoaded is there a shipping rate already.
+	 * @returns
+	 */
 	const calculateShipping = async (wasItLoaded = null) => {
 		const { country, province, zip } = shippingForm;
 
@@ -127,6 +136,11 @@ const ShippingCalculator = props => {
 		}
 	};
 
+	/**
+	 * Sets a form field value.
+	 * @param {Event} event
+	 * @param {String} field
+	 */
 	const setField = (event, field) => {
 		dispatchShippingForm({
 			type: 'SET_FIELD',
@@ -135,6 +149,11 @@ const ShippingCalculator = props => {
 		});
 	};
 
+	/**
+	 * Sets a form dropdown field value.
+	 * @param {String} value
+	 * @param {String} field
+	 */
 	const setFieldDropdown = (value, field) => {
 		dispatchShippingForm({ type: 'SET_FIELD', field, value });
 	};
@@ -201,7 +220,7 @@ const ShippingCalculator = props => {
 					<div className='auth-form__field-button'>
 						{!shippingForm.calcLoading ? (
 							<button
-								className='button button__white button__white--card-big'
+								className='button button__black button__black--card-big'
 								onClick={calculateShipping}>
 								<p className='paragraph card__price card__price--big cart__button-text'>
 									calculate shipping

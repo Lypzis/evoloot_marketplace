@@ -9,6 +9,7 @@
 	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 
 	@include respond(tab-port) {
+		margin: 0 auto;
 		display: block;
 		margin-top: 2rem;
 		width: 80rem;
@@ -16,6 +17,15 @@
 
 	@include respond(phone-secondary) {
 		width: 70rem;
+	}
+
+	@include respond(phone-small) {
+		width: 50rem;
+	}
+
+	@include respond(phone-really-small) {
+		width: 47rem;
+		margin-top: 3rem;
 	}
 
 	& > .auth-form {

@@ -11,6 +11,11 @@ const CollectionProducts = props => {
 	const clientContext = useContext(ClientContext);
 	const { collections } = clientContext;
 
+	/**
+	 * Get a collection based on the
+	 * current page 'params' which is going
+	 * to be one of the collections 'handles'.
+	 */
 	const getCollection = useCallback(() => {
 		if (collections) {
 			const incomingCollection = collections.filter(

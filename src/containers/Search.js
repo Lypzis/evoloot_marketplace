@@ -11,7 +11,11 @@ const Search = props => {
 	const search = useSelector(state => state.search);
 	const { collections } = clientContext;
 
-	const getCollection = useCallback(() => {
+	/**
+	 * Searches through the collections for a product
+	 * handle that matches the search input.
+	 */
+	const getMatchingProducts = useCallback(() => {
 		if (collections && search.searchText !== '') {
 			const collectionProducts = collections.map(
 				collection => collection.products
@@ -46,8 +50,8 @@ const Search = props => {
 	}, [collections, search.searchText]);
 
 	useEffect(() => {
-		getCollection();
-	}, [getCollection]);
+		getMatchingProducts();
+	}, [getMatchingProducts]);
 
 	return (
 		<Layout>

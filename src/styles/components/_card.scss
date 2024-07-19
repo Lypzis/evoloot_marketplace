@@ -1,13 +1,13 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	width: 20rem;
+	width: 18.5rem;
 	justify-content: center;
 	align-content: space-between;
 	overflow: hidden;
 	margin: 1.5rem 2rem;
 	border: solid #000 3px;
-	box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
 	border-radius: 0.5rem;
 	padding: 1rem;
 	background: $color-secondary;
@@ -16,8 +16,24 @@
 	// 	width: 30rem; // 1rem = 9px, 9/16 = 56.25%
 	// }
 
+	// @include respond(phone-secondary) {
+	// 	width: 25%;
+	// }
+
+	@include respond(phone-small) {
+		width: 42%;
+	}
+
+	@include respond(phone-really-small) {
+		width: 40.5%;
+	}
+
+	// @include respond(phone-secondary) {
+	// 	width: 90%;
+	// }
+
 	&--collection {
-		width: 92rem;
+		width: 86rem;
 		align-self: center;
 		margin: 0 2.1rem;
 		margin-top: 0;
@@ -25,7 +41,15 @@
 		margin-bottom: 1rem;
 
 		@include respond(phone-secondary) {
-			width: 68.5rem;
+			width: 64.5rem;
+		}
+
+		@include respond(phone-small) {
+			width: 50rem;
+		}
+
+		@include respond(phone-really-small) {
+			width: 46rem;
 		}
 	}
 
@@ -36,6 +60,10 @@
 		width: auto;
 		margin: 1.5rem 0;
 		background-color: $color-primary;
+
+		@include respond(phone-small) {
+			height: auto;
+		}
 
 		& > .button__small-circle--checkout > .button__icon--card {
 			fill: $color-gray-dark-1;
@@ -63,14 +91,25 @@
 		margin: 0;
 
 		@include respond(phone-small) {
-			height: auto;
-			width: 30rem;
+			//height: 20rem;
+			width: 90%;
 		}
 	}
 
 	&--raw-product-details {
-		margin-left: 0.5rem;
-		margin-right: 1rem;
+		margin: 0 1rem;
+
+		& .card__link .card__image {
+			height: 11rem;
+
+			@include respond(tab-port-2) {
+				height: 20rem;
+			}
+
+			@include respond(phone-small) {
+				height: auto;
+			}
+		}
 	}
 
 	& .button__white:not(:disabled),
@@ -91,12 +130,17 @@
 
 	&__title {
 		text-decoration: none;
-		color: $color-gray-dark-1;
-		font-size: 1.2rem;
+		color: #000;
+		font-size: $default-font-size;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		margin: 0.5rem 0 1rem 0;
+		padding-left: 0.6rem;
+
+		@include respond(phone-small) {
+			font-size: $default-font-size-3;
+		}
 
 		&--checkout {
 			margin: 0;
@@ -110,39 +154,116 @@
 
 	&__image-box {
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
+		height: 15rem; // height: 100%
+		width: 16rem;
+		border: solid 2px #000;
+		background-color: $color-primary;
+		border-radius: 0.3rem;
+		overflow: hidden;
+
+		@include respond(phone-secondary) {
+			width: 100%;
+		}
+
+		@include respond(phone-small) {
+			height: 20rem;
+		}
+
+		@include respond(phone-really-small) {
+			height: 17.5rem;
+		}
+
+		@include respond(phone-really-really-small) {
+			height: 16.5rem;
+		}
+	}
+
+	&__image-box--product-details {
+		height: 11rem;
+		width: 11.5rem;
+
+		@include respond(tab-port-2) {
+			height: 100%;
+			width: 100%;
+		}
+
+		@include respond(phone-small) {
+			height: 20rem;
+		}
+
+		@include respond(phone-really-small) {
+			height: 17.5rem;
+		}
 	}
 
 	&__image-box--checkout {
 		margin-right: 2rem;
 		max-width: 12rem;
+		height: 10.5rem;
+
+		@include respond(phone-small) {
+			height: 14rem;
+		}
 
 		& > .card__image {
-			height: 10rem;
+			//height: 10rem;
 		}
 
 		&-big {
 			max-width: 30%;
+			height: auto;
 		}
 
 		&-big > .card__image {
-			height: 15.5rem;
-			width: 18rem;
+			max-height: 15rem;
+			max-width: 15rem;
 
 			@include respond(phone) {
-				height: 15rem;
+				//height: 15rem;
 			}
 		}
 	}
 
 	&__image {
 		border-radius: 0.3rem;
-		width: 100%;
-		height: 15rem; // height: 100%
-		border: solid 2px #000;
+		display: block;
+		max-height: 15rem;
+		max-width: 16rem;
+		margin: 0 auto;
 
 		@include respond(phone-small) {
-			height: 28rem;
+			height: auto;
+			max-height: 100%;
+			max-width: 100%;
+		}
+	}
+
+	&__image--checkout {
+		max-height: 9.5rem;
+		max-width: 10rem;
+		margin: 0 auto;
+
+		@include respond(phone-small) {
+			max-height: 14rem;
+		}
+	}
+
+	&__image--product-details {
+		max-height: 11rem;
+		max-width: 11.5rem;
+
+		@include respond(tab-port-2) {
+			max-height: 16rem;
+			max-width: 17rem;
+		}
+
+		@include respond(phone-small) {
+			height: auto;
+			max-height: 100%;
+			max-width: 100%;
 		}
 	}
 
@@ -150,9 +271,9 @@
 		font-size: 1.1rem;
 		font-weight: 700;
 
-		// @include respond(phone-really-small) {
-		// 	font-size: 1.3rem;
-		// }
+		@include respond(phone-small) {
+			font-size: $default-font-size;
+		}
 	}
 
 	&__price--white {
@@ -178,6 +299,10 @@
 	&__description-box-description > * {
 		font-size: $default-font-size;
 		list-style: none;
+
+		@include respond(phone-small) {
+			font-size: $default-font-size-2;
+		}
 	}
 
 	&__details {
