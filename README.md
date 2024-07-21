@@ -73,6 +73,7 @@ To configure environment variables for this project, follow these steps:
 ```env
 REACT_APP_STORE_URL=YOUR_STORE_URL
 REACT_APP_STORE_KEY=YOUR_STORE_KEY
+```
 
 # Known Issues
 
@@ -95,4 +96,7 @@ This project is licensed under the MIT License.
 # Contact
 
 For any questions or inquiries, please contact me at [victor.piccoli@lypzistech.pro].
+
+```
+
 ```
