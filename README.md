@@ -14,6 +14,7 @@ Check out the live demo: [Evoloot Marketplace](https://evoloot-marketplace.netli
 - [Installation](#installation)
 - [Usage](#usage)
 - [Environment](#environment)
+- [Node](#node)
 - [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -73,6 +74,16 @@ To configure environment variables for this project, follow these steps:
 ```env
 REACT_APP_STORE_URL=YOUR_STORE_URL
 REACT_APP_STORE_KEY=YOUR_STORE_KEY
+```
+
+# Node
+
+This project requires Node.js version 14. Make sure you have Node.js 14 installed.
+
+You can specify the Node.js version using `nvm`(if installed) by running:
+
+```sh
+nvm use 14
 ```
 
 # Known Issues
