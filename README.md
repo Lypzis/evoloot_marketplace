@@ -38,22 +38,20 @@ Check out the live demo: [Evoloot Marketplace](https://evoloot-marketplace.netli
 ## Installation
 
 1. Clone the repository:
-
-```sh
-git clone https://github.com/Lypzis/evoloot_marketplace.git
-cd evoloot_marketplace
-```
-
+   ```sh
+   git clone https://github.com/Lypzis/evoloot_marketplace.git
+   cd evoloot_marketplace
+   ```
 2. Install dependencies:
 
 ```sh
-yarn
+npm install
 ```
 
 3. Start the development server:
 
 ```sh
- yarn start
+ npm start
 ```
 
 # Usage
@@ -64,8 +62,7 @@ Browse products, add items to the cart, and proceed to checkout.
 
 # Known Issues
 
-- Due to the current Shopify API key being read-only, certain features such as product management and checkout may not function fully. The project is designed to be fully functional with appropriate API permissions.
-- **Responsive Design on Load Only:** The responsive design is applied only on page load. Resizing the browser after the page has loaded may not update the styles dynamically.
+Due to the current Shopify API key being read-only, certain features such as product management and checkout may not function fully. The project is designed to be fully functional with appropriate API permissions.
 
 # Contributing
 
