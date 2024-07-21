@@ -13,6 +13,7 @@ Check out the live demo: [Evoloot Marketplace](https://evoloot-marketplace.netli
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Environment](#environment)
 - [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -59,6 +60,20 @@ npm install
 Navigate to [http://localhost:3000](http://localhost:3000) to access the application.
 
 Browse products, add items to the cart, and proceed to checkout.
+
+# Environment
+
+To configure environment variables for this project, follow these steps:
+
+1. **Create a `.env` File**
+
+   In the root directory of the project, create a `.env` file. Ensure this file is at the same level as `package.json`.
+   Add the required environment variables to the `.env` file. Note that all variable names must start with `REACT_APP_` to be accessible in the React application.
+
+```env
+REACT_APP_STORE_URL=YOUR_STORE_URL
+REACT_APP_STORE_KEY=YOUR_STORE_KEY
+```
 
 # Known Issues
 
