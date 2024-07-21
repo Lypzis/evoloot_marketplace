@@ -14,7 +14,7 @@ Check out the live demo: [Evoloot Marketplace](https://evoloot-marketplace.netli
 - [Installation](#installation)
 - [Usage](#usage)
 - [Environment](#environment)
-- [Node.js](#node.js)
+- [Node](#node)
 - [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -76,7 +76,7 @@ REACT_APP_STORE_URL=YOUR_STORE_URL
 REACT_APP_STORE_KEY=YOUR_STORE_KEY
 ```
 
-# Node.js
+# Node
 
 This project requires Node.js version 14. Make sure you have Node.js 14 installed.
 
@@ -107,7 +107,3 @@ This project is licensed under the MIT License.
 # Contact
 
 For any questions or inquiries, please contact me at [victor.piccoli@lypzistech.pro].
-
-```
-
-```
