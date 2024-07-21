@@ -7,8 +7,8 @@
  * @returns graphql query body
  */
 export const createUser = (firstName, lastName, email, password) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerCreate($input: CustomerCreateInput!) {
 						customerCreate(input: $input) {
 							customer {
@@ -22,15 +22,15 @@ export const createUser = (firstName, lastName, email, password) => {
 						}
 					}
                 `,
-		variables: {
-			input: {
-				firstName,
-				lastName,
-				email,
-				password,
-			},
-		},
-	};
+    variables: {
+      input: {
+        firstName,
+        lastName,
+        email,
+        password,
+      },
+    },
+  };
 };
 
 /**
@@ -40,8 +40,8 @@ export const createUser = (firstName, lastName, email, password) => {
  * @returns graphql query body
  */
 export const getCustomerToken = (email, password) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
 						customerAccessTokenCreate(input: $input) {
 							customerAccessToken {
@@ -56,13 +56,13 @@ export const getCustomerToken = (email, password) => {
 						}
 					}
                 `,
-		variables: {
-			input: {
-				email,
-				password,
-			},
-		},
-	};
+    variables: {
+      input: {
+        email,
+        password,
+      },
+    },
+  };
 };
 
 /**
@@ -75,13 +75,13 @@ export const getCustomerToken = (email, password) => {
  * @returns graphql query body
  */
 export const updateCustomer = (
-	customerAccessToken,
-	firstName,
-	lastName,
-	email
+  customerAccessToken,
+  firstName,
+  lastName,
+  email
 ) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
 						customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
 							customer {
@@ -99,15 +99,15 @@ export const updateCustomer = (
 						}
 					}
                 `,
-		variables: {
-			customerAccessToken,
-			customer: {
-				firstName,
-				lastName,
-				email,
-			},
-		},
-	};
+    variables: {
+      customerAccessToken,
+      customer: {
+        firstName,
+        lastName,
+        email,
+      },
+    },
+  };
 };
 
 /**
@@ -117,8 +117,8 @@ export const updateCustomer = (
  * @returns graphql query body
  */
 export const updateCustomerPassword = (customerAccessToken, password) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
 						customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
 							customer {
@@ -136,13 +136,13 @@ export const updateCustomerPassword = (customerAccessToken, password) => {
 						}
 					}
                 `,
-		variables: {
-			customerAccessToken,
-			customer: {
-				password,
-			},
-		},
-	};
+    variables: {
+      customerAccessToken,
+      customer: {
+        password,
+      },
+    },
+  };
 };
 
 /**
@@ -151,8 +151,8 @@ export const updateCustomerPassword = (customerAccessToken, password) => {
  * @returns graphql query body
  */
 export const recoverCustomerPassword = email => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerRecover($email: String!) {
 						customerRecover(email: $email) {
 						customerUserErrors {
@@ -163,10 +163,10 @@ export const recoverCustomerPassword = email => {
 						}
 					}
                 `,
-		variables: {
-			email,
-		},
-	};
+    variables: {
+      email,
+    },
+  };
 };
 
 /**
@@ -175,8 +175,8 @@ export const recoverCustomerPassword = email => {
  * @returns graphql query body
  */
 export const getUserSettings = customerAccessToken => {
-	return {
-		query: `
+  return {
+    query: `
 					{
 						customer (customerAccessToken: "${customerAccessToken}"){
 							firstName
@@ -185,7 +185,7 @@ export const getUserSettings = customerAccessToken => {
 						}
 					}
 				`,
-	};
+  };
 };
 
 /**
@@ -195,8 +195,8 @@ export const getUserSettings = customerAccessToken => {
  * @returns graphql query body
  */
 export const getUserSettingsAndAddress = customerAccessToken => {
-	return {
-		query: `
+  return {
+    query: `
 					{
 						customer (customerAccessToken: "${customerAccessToken}"){
 							firstName
@@ -217,7 +217,7 @@ export const getUserSettingsAndAddress = customerAccessToken => {
 						}
 					}
 				`,
-	};
+  };
 };
 
 /**
@@ -227,8 +227,8 @@ export const getUserSettingsAndAddress = customerAccessToken => {
  * @returns graphql query body
  */
 export const createCustomerAddress = (customerAccessToken, address) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
 						customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
 							customerAddress {
@@ -242,11 +242,11 @@ export const createCustomerAddress = (customerAccessToken, address) => {
 						}
 					}
                 `,
-		variables: {
-			customerAccessToken,
-			address,
-		},
-	};
+    variables: {
+      customerAccessToken,
+      address,
+    },
+  };
 };
 
 /**
@@ -257,12 +257,12 @@ export const createCustomerAddress = (customerAccessToken, address) => {
  * @returns graphql query body
  */
 export const updateCustomerAddress = (
-	customerAccessToken,
-	addressId,
-	address
+  customerAccessToken,
+  addressId,
+  address
 ) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation customerAddressUpdate($customerAccessToken: String!, $id: ID!, $address: MailingAddressInput!) {
 						customerAddressUpdate(customerAccessToken: $customerAccessToken, id: $id, address: $address) {
 							customerAddress {
@@ -276,12 +276,12 @@ export const updateCustomerAddress = (
 						}
 					}
                 `,
-		variables: {
-			customerAccessToken,
-			id: addressId,
-			address,
-		},
-	};
+    variables: {
+      customerAccessToken,
+      id: addressId,
+      address,
+    },
+  };
 };
 
 /**
@@ -292,8 +292,8 @@ export const updateCustomerAddress = (
  * @returns graphql query body
  */
 export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
-	return {
-		query: `	 
+  return {
+    query: `	 
 				mutation checkoutCreate($input: CheckoutCreateInput!) {
 					checkoutCreate(input: $input) {
 					checkout {
@@ -307,15 +307,15 @@ export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
 					}
 				}
 			`,
-		variables: {
-			input: {
-				allowPartialAddresses: true,
-				email,
-				lineItems,
-				shippingAddress,
-			},
-		},
-	};
+    variables: {
+      input: {
+        allowPartialAddresses: true,
+        email,
+        lineItems,
+        shippingAddress,
+      },
+    },
+  };
 };
 
 /**
@@ -325,8 +325,8 @@ export const createCustomerCheckout = (lineItems, shippingAddress, email) => {
  * @returns graphql query body
  */
 export const getAvailableShippingRates = customerAccessToken => {
-	return {
-		query: `	 
+  return {
+    query: `	 
 				{
 					customer (customerAccessToken: "${customerAccessToken}"){
 						lastIncompleteCheckout {
@@ -344,7 +344,7 @@ export const getAvailableShippingRates = customerAccessToken => {
 					}
 				}
 			`,
-	};
+  };
 };
 
 /**
@@ -354,8 +354,8 @@ export const getAvailableShippingRates = customerAccessToken => {
  * @returns graphql query body
  */
 export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation checkoutShippingAddressUpdateV2($shippingAddress: MailingAddressInput!, $checkoutId: ID!) {
 						checkoutShippingAddressUpdateV2(shippingAddress: $shippingAddress, checkoutId: $checkoutId) {
 							checkout {
@@ -369,11 +369,11 @@ export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
 						}
 					}
                 `,
-		variables: {
-			shippingAddress,
-			checkoutId,
-		},
-	};
+    variables: {
+      shippingAddress,
+      checkoutId,
+    },
+  };
 };
 
 /**
@@ -383,8 +383,8 @@ export const updateCheckoutShippingAddress = (shippingAddress, checkoutId) => {
  * @returns graphql query body
  */
 export const updateCheckoutEmail = (email, checkoutId) => {
-	return {
-		query: `
+  return {
+    query: `
 					mutation checkoutEmailUpdateV2($checkoutId: ID!, $email: String!) {
 						checkoutEmailUpdateV2(checkoutId: $checkoutId, email: $email) {
 							checkout {
@@ -398,11 +398,11 @@ export const updateCheckoutEmail = (email, checkoutId) => {
 						}
 					}
                 `,
-		variables: {
-			email,
-			checkoutId,
-		},
-	};
+    variables: {
+      email,
+      checkoutId,
+    },
+  };
 };
 
 /**
@@ -412,11 +412,11 @@ export const updateCheckoutEmail = (email, checkoutId) => {
  * @returns graphql query body
  */
 export const getCustomerOrders = (
-	customerAccessToken,
-	groupBy = 'first: 5'
+  customerAccessToken,
+  groupBy = 'first: 5'
 ) => {
-	return {
-		query: `
+  return {
+    query: `
 					{
 						customer (customerAccessToken: "${customerAccessToken}"){
 							orders(${groupBy}) {
@@ -490,7 +490,7 @@ export const getCustomerOrders = (
 						}
 					}
 			`,
-	};
+  };
 };
 
 /**
@@ -498,8 +498,8 @@ export const getCustomerOrders = (
  * @returns graphql query body
  */
 export const getShopPolicies = () => {
-	return {
-		query: `
+  return {
+    query: `
 					{
 						shop {
 							privacyPolicy {
@@ -520,7 +520,7 @@ export const getShopPolicies = () => {
 						}
 					}
 			`,
-	};
+  };
 };
 
 /**
@@ -528,8 +528,8 @@ export const getShopPolicies = () => {
  * @returns graphql query body
  */
 export const getShopCurrency = () => {
-	return {
-		query: `
+  return {
+    query: `
 					{
 						shop {
 							paymentSettings {
@@ -538,7 +538,7 @@ export const getShopCurrency = () => {
 						}
 					}
 			`,
-	};
+  };
 };
 
 /**
@@ -546,8 +546,8 @@ export const getShopCurrency = () => {
  * @returns graphql query body
  */
 export const getShopPages = () => {
-	return {
-		query: `	 
+  return {
+    query: `	 
 					{
 						pages(first:100) {
 							edges {
@@ -560,7 +560,7 @@ export const getShopPages = () => {
 						}
 					}
 			`,
-	};
+  };
 };
 
 /**
@@ -571,8 +571,8 @@ export const getShopPages = () => {
  * @returns graphql query body
  */
 export const getCollectionProducts = (handle, queryParam) => {
-	return {
-		query: `
+  return {
+    query: `
 				{ 
 					collectionByHandle (handle: "${handle}") {
 						title
@@ -632,7 +632,7 @@ export const getCollectionProducts = (handle, queryParam) => {
 					}
 				}
 			`,
-	};
+  };
 };
 
 /**
@@ -640,8 +640,8 @@ export const getCollectionProducts = (handle, queryParam) => {
  * @returns graphql query body
  */
 export const getAllCollectionsAndProducts = () => {
-	return {
-		query: `
+  return {
+    query: `
 				{ 
 					collections(first:100)  {
 						edges {
@@ -716,5 +716,5 @@ export const getAllCollectionsAndProducts = () => {
 					}
 				}
 			`,
-	};
+  };
 };

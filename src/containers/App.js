@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import '../styles/main.scss';
@@ -20,6 +20,21 @@ import { AuthContext } from '../context/authContext';
 
 function App() {
   const authContext = useContext(AuthContext);
+
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1140);
+
+  const handleResize = useCallback(
+    () => setIsDesktop(window.innerWidth > 1140),
+    []
+  );
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
 
   let routes = (
     <Switch>
@@ -49,11 +64,7 @@ function App() {
         <CollectionProducts />
       </Route>
       <Route path='/product/:handle'>
-        {window.innerWidth > 1140 ? (
-          <ProductDetails />
-        ) : (
-          <ProductDetailsMobile />
-        )}
+        {isDesktop ? <ProductDetails /> : <ProductDetailsMobile />}
       </Route>
       <Route path='/'>
         <Home />
@@ -87,11 +98,7 @@ function App() {
           <CollectionProducts />
         </Route>
         <Route path='/product/:handle'>
-          {window.innerWidth > 1140 ? (
-            <ProductDetails />
-          ) : (
-            <ProductDetailsMobile />
-          )}
+          {isDesktop ? <ProductDetails /> : <ProductDetailsMobile />}
         </Route>
         <Route path='/'>
           <Home />
