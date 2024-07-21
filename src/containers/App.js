@@ -19,90 +19,90 @@ import Pages from '../containers/Pages';
 import { AuthContext } from '../context/authContext';
 
 function App() {
-	const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
 
-	let routes = (
-		<Switch>
-			<Route path='/pages/:handle'>
-				<Pages />
-			</Route>
-			<Route path='/policy/:handle'>
-				<Policies />
-			</Route>
+  let routes = (
+    <Switch>
+      <Route path='/pages/:handle'>
+        <Pages />
+      </Route>
+      <Route path='/policy/:handle'>
+        <Policies />
+      </Route>
 
-			<Route path='/signup'>
-				<SignUp />
-			</Route>
-			<Route path='/login'>
-				<Login />
-			</Route>
-			<Route path='/forget'>
-				<Forget />
-			</Route>
-			<Route path='/search'>
-				<Search />
-			</Route>
-			<Route path='/cart'>
-				<Cart />
-			</Route>
-			<Route path='/collection/:handle'>
-				<CollectionProducts />
-			</Route>
-			<Route path='/product/:handle'>
-				{window.innerWidth > 1140 ? (
-					<ProductDetails />
-				) : (
-					<ProductDetailsMobile />
-				)}
-			</Route>
-			<Route path='/'>
-				<Home />
-			</Route>
-			<Route path='/404'>
-				<NotFound />
-			</Route>
-		</Switch>
-	);
+      <Route path='/signup'>
+        <SignUp />
+      </Route>
+      <Route path='/login'>
+        <Login />
+      </Route>
+      <Route path='/forget'>
+        <Forget />
+      </Route>
+      <Route path='/search'>
+        <Search />
+      </Route>
+      <Route path='/cart'>
+        <Cart />
+      </Route>
+      <Route path='/collection/:handle'>
+        <CollectionProducts />
+      </Route>
+      <Route path='/product/:handle'>
+        {window.innerWidth > 1140 ? (
+          <ProductDetails />
+        ) : (
+          <ProductDetailsMobile />
+        )}
+      </Route>
+      <Route path='/'>
+        <Home />
+      </Route>
+      <Route path='/404'>
+        <NotFound />
+      </Route>
+    </Switch>
+  );
 
-	if (authContext.customerToken)
-		routes = (
-			<Switch>
-				<Route path='/pages/:handle'>
-					<Pages />
-				</Route>
-				<Route path='/policy/:handle'>
-					<Policies />
-				</Route>
+  if (authContext.customerToken)
+    routes = (
+      <Switch>
+        <Route path='/pages/:handle'>
+          <Pages />
+        </Route>
+        <Route path='/policy/:handle'>
+          <Policies />
+        </Route>
 
-				<Route path='/me'>
-					<Profile />
-				</Route>
-				<Route path='/search'>
-					<Search />
-				</Route>
-				<Route path='/cart'>
-					<Cart />
-				</Route>
-				<Route path='/collection/:handle'>
-					<CollectionProducts />
-				</Route>
-				<Route path='/product/:handle'>
-					{window.innerWidth > 1140 ? (
-						<ProductDetails />
-					) : (
-						<ProductDetailsMobile />
-					)}
-				</Route>
-				<Route path='/'>
-					<Home />
-				</Route>
-				<Route path='/404'>
-					<NotFound />
-				</Route>
-			</Switch>
-		);
+        <Route path='/me'>
+          <Profile />
+        </Route>
+        <Route path='/search'>
+          <Search />
+        </Route>
+        <Route path='/cart'>
+          <Cart />
+        </Route>
+        <Route path='/collection/:handle'>
+          <CollectionProducts />
+        </Route>
+        <Route path='/product/:handle'>
+          {window.innerWidth > 1140 ? (
+            <ProductDetails />
+          ) : (
+            <ProductDetailsMobile />
+          )}
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+        <Route path='/404'>
+          <NotFound />
+        </Route>
+      </Switch>
+    );
 
-	return routes;
+  return routes;
 }
 
 export default App;
