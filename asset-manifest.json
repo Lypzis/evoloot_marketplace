@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.631b607b.chunk.css",
-    "main.js": "/static/js/main.f41ce48a.chunk.js",
-    "main.js.map": "/static/js/main.f41ce48a.chunk.js.map",
+    "main.css": "/static/css/main.d6d2a3b0.chunk.css",
+    "main.js": "/static/js/main.a3937ea0.chunk.js",
+    "main.js.map": "/static/js/main.a3937ea0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.5f5f25a0.js",
     "runtime-main.js.map": "/static/js/runtime-main.5f5f25a0.js.map",
-    "static/css/2.1a0a2c47.chunk.css": "/static/css/2.1a0a2c47.chunk.css",
-    "static/js/2.506d218a.chunk.js": "/static/js/2.506d218a.chunk.js",
-    "static/js/2.506d218a.chunk.js.map": "/static/js/2.506d218a.chunk.js.map",
+    "static/css/2.724cf544.chunk.css": "/static/css/2.724cf544.chunk.css",
+    "static/js/2.b66eada1.chunk.js": "/static/js/2.b66eada1.chunk.js",
+    "static/js/2.b66eada1.chunk.js.map": "/static/js/2.b66eada1.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.c3b9ea87c6dfdcd41ca4e1d6d8972081.js": "/precache-manifest.c3b9ea87c6dfdcd41ca4e1d6d8972081.js",
+    "precache-manifest.9724648ac796b95fbc87736424f69c66.js": "/precache-manifest.9724648ac796b95fbc87736424f69c66.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.1a0a2c47.chunk.css.map": "/static/css/2.1a0a2c47.chunk.css.map",
-    "static/css/main.631b607b.chunk.css.map": "/static/css/main.631b607b.chunk.css.map",
-    "static/js/2.506d218a.chunk.js.LICENSE.txt": "/static/js/2.506d218a.chunk.js.LICENSE.txt",
+    "static/css/2.724cf544.chunk.css.map": "/static/css/2.724cf544.chunk.css.map",
+    "static/css/main.d6d2a3b0.chunk.css.map": "/static/css/main.d6d2a3b0.chunk.css.map",
+    "static/js/2.b66eada1.chunk.js.LICENSE.txt": "/static/js/2.b66eada1.chunk.js.LICENSE.txt",
     "static/media/main.scss": "/static/media/header.7cd30f6e.png",
     "static/media/Rotating_Product_Banner_Finals_1.png": "/static/media/Rotating_Product_Banner_Finals_1.fd5134d8.png",
     "static/media/Rotating_Product_Banner_Finals_2.jpg": "/static/media/Rotating_Product_Banner_Finals_2.27b28cc7.jpg",
@@ -24,9 +24,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5f5f25a0.js",
-    "static/css/2.1a0a2c47.chunk.css",
-    "static/js/2.506d218a.chunk.js",
-    "static/css/main.631b607b.chunk.css",
-    "static/js/main.f41ce48a.chunk.js"
+    "static/css/2.724cf544.chunk.css",
+    "static/js/2.b66eada1.chunk.js",
+    "static/css/main.d6d2a3b0.chunk.css",
+    "static/js/main.a3937ea0.chunk.js"
   ]
 }
