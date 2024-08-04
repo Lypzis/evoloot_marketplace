@@ -51,49 +51,45 @@ const Collection = props => {
 
     switch (event.target.value) {
       case 'featured':
-        sorted = products.sort(
-          (a, b) => new Date(a.publishedAt) < new Date(b.publishedAt)
+        sorted = [...products].sort(
+          (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
         );
-        renderProducts(sorted);
         break;
       case 'priceLowToHigh':
-        sorted = products.sort(
-          (a, b) => a.variants[0].price > b.variants[0].price
+        sorted = [...products].sort(
+          (a, b) =>
+            parseFloat(a.variants[0].price) - parseFloat(b.variants[0].price)
         );
-        renderProducts(sorted);
         break;
       case 'priceHighToLow':
-        sorted = products.sort(
-          (a, b) => a.variants[0].price < b.variants[0].price
+        sorted = [...products].sort(
+          (a, b) =>
+            parseFloat(b.variants[0].price) - parseFloat(a.variants[0].price)
         );
-        renderProducts(sorted);
         break;
       case 'alphabeticallyAToZ':
-        sorted = products.sort((a, b) => a.title > b.title);
-        renderProducts(sorted);
+        sorted = [...products].sort((a, b) => a.title.localeCompare(b.title));
         break;
       case 'alphabeticallyZToA':
-        sorted = products.sort((a, b) => a.title < b.title);
-        renderProducts(sorted);
+        sorted = [...products].sort((a, b) => b.title.localeCompare(a.title));
         break;
       case 'dateOldToNew':
-        sorted = products.sort(
-          (a, b) => new Date(a.publishedAt) > new Date(b.publishedAt)
+        sorted = [...products].sort(
+          (a, b) => new Date(a.publishedAt) - new Date(b.publishedAt)
         );
-        renderProducts(sorted);
         break;
       case 'dateNewToOld':
-        sorted = products.sort(
-          (a, b) => new Date(a.publishedAt) < new Date(b.publishedAt)
+        sorted = [...products].sort(
+          (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
         );
-        renderProducts(sorted);
         break;
       default:
-        sorted = products.sort(
-          (a, b) => new Date(a.publishedAt) < new Date(b.publishedAt)
+        sorted = [...products].sort(
+          (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
         );
-        renderProducts(sorted);
     }
+
+    renderProducts(sorted);
   };
 
   /**
@@ -153,7 +149,7 @@ const Collection = props => {
 
   const renderProductsSorted = arr => {
     const productsFormated = arr
-      .sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
+      .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
       .map(product => {
         return <Card key={product.id} product={product} />;
       });
@@ -163,7 +159,7 @@ const Collection = props => {
 
   useEffect(() => {
     const productsFormated = products
-      .sort((a, b) => new Date(a.publishedAt) < new Date(b.publishedAt))
+      .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
       .map(product => {
         return <Card key={product.id} product={product} />;
       });
